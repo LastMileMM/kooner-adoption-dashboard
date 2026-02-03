@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<!-- saved from url=(0068)file:///Users/brookebenkert/Downloads/kooner_adoption_dashboard.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kooner Adoption Dashboard</title>
-    <link href="./index_files/css2" rel="stylesheet">
-    <script src="./index_files/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
     <style>
         :root {
             --bg-dark: #0a0a0f;
@@ -85,19 +85,12 @@
             border-radius: 20px;
             font-weight: 600;
             font-size: 0.85rem;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4); }
-            50% { box-shadow: 0 0 0 10px rgba(0, 255, 136, 0); }
         }
 
         .header-right { text-align: right; }
         .last-updated { color: var(--text-muted); font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; }
         .data-period { color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px; }
 
-        /* Navigation */
         .nav-tabs {
             display: flex;
             gap: 8px;
@@ -126,7 +119,6 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        /* KPI Cards */
         .kpi-row {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -141,13 +133,6 @@
             padding: 24px;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .kpi-card:hover {
-            background: var(--bg-card-hover);
-            transform: translateY(-2px);
-            border-color: var(--accent-blue);
         }
 
         .kpi-card::before {
@@ -180,7 +165,6 @@
         .kpi-value.green { color: var(--accent-green); }
         .kpi-value.red { color: var(--accent-red); }
         .kpi-value.orange { color: var(--accent-orange); }
-
         .kpi-subtext { font-size: 0.8rem; color: var(--text-muted); margin-top: 8px; }
 
         .kpi-trend {
@@ -194,9 +178,7 @@
         }
 
         .kpi-trend.up { color: var(--accent-green); background: rgba(0, 255, 136, 0.1); }
-        .kpi-trend.down { color: var(--accent-red); background: rgba(255, 71, 87, 0.1); }
 
-        /* Main Grid */
         .main-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -231,7 +213,6 @@
         .badge-dsps { background: rgba(168, 85, 247, 0.2); color: var(--accent-purple); }
         .badge-trends { background: rgba(0, 212, 255, 0.2); color: var(--accent-cyan); }
 
-        /* Tables */
         .data-table { width: 100%; border-collapse: collapse; }
 
         .data-table th {
@@ -242,8 +223,6 @@
             letter-spacing: 0.05em;
             color: var(--text-muted);
             border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
             background: var(--bg-card);
         }
 
@@ -254,41 +233,7 @@
         }
 
         .data-table tr:hover td { background: rgba(55, 66, 250, 0.05); }
-        .data-table tr:last-child td { border-bottom: none; }
-
         .station-name { font-weight: 600; font-family: 'JetBrains Mono', monospace; }
-
-        .adoption-bar-container { display: flex; align-items: center; gap: 10px; }
-
-        .adoption-bar {
-            flex: 1;
-            height: 8px;
-            background: var(--border-color);
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .adoption-bar::after {
-            content: '';
-            position: absolute;
-            left: 85%;
-            top: 0;
-            width: 2px;
-            height: 100%;
-            background: var(--text-muted);
-        }
-
-        .adoption-fill { height: 100%; border-radius: 4px; transition: width 1s ease-out; }
-        .adoption-fill.on-target { background: linear-gradient(90deg, var(--accent-green), #00cc6a); }
-        .adoption-fill.below-target { background: linear-gradient(90deg, var(--accent-red), var(--accent-orange)); }
-
-        .adoption-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 600;
-            min-width: 50px;
-            text-align: right;
-        }
 
         .status-pill {
             display: inline-flex;
@@ -304,7 +249,6 @@
         .status-pill.below-target { background: rgba(255, 71, 87, 0.15); color: var(--accent-red); }
         .status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 
-        /* Priority Pills */
         .priority-pill {
             display: inline-block;
             padding: 4px 10px;
@@ -314,14 +258,12 @@
             text-transform: uppercase;
         }
 
-        .priority-critical { background: rgba(255, 71, 87, 0.2); color: var(--accent-red); animation: blink 1.5s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        .priority-critical { background: rgba(255, 71, 87, 0.2); color: var(--accent-red); }
         .priority-high { background: rgba(255, 165, 2, 0.2); color: var(--accent-orange); }
         .priority-medium { background: rgba(55, 66, 250, 0.2); color: var(--accent-blue); }
         .priority-low { background: rgba(139, 139, 154, 0.2); color: var(--text-secondary); }
         .priority-on-target { background: rgba(0, 255, 136, 0.2); color: var(--accent-green); }
 
-        /* Week cells */
         .week-cell {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.8rem;
@@ -342,7 +284,6 @@
 
         .full-width { grid-column: 1 / -1; }
 
-        /* Action cards */
         .action-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 
         .action-card {
@@ -350,10 +291,8 @@
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 20px;
-            transition: all 0.3s ease;
         }
 
-        .action-card:hover { border-color: var(--accent-blue); transform: translateY(-2px); }
         .action-card.critical { border-left: 3px solid var(--accent-red); }
         .action-card.high { border-left: 3px solid var(--accent-orange); }
 
@@ -383,7 +322,7 @@
             border-top: 1px solid var(--border-color);
         }
 
-        .chart-container { position: relative; height: 300px; }
+        .chart-container { position: relative; height: 300px; width: 100%; }
         .chart-container.tall { height: 400px; }
 
         .filter-row { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
@@ -394,7 +333,6 @@
             font-size: 0.8rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
             background: var(--bg-card-hover);
             border: 1px solid var(--border-color);
             color: var(--text-secondary);
@@ -407,16 +345,12 @@
         }
 
         .table-scroll { max-height: 400px; overflow-y: auto; }
-        .table-scroll::-webkit-scrollbar { width: 6px; }
-        .table-scroll::-webkit-scrollbar-track { background: var(--bg-dark); }
-        .table-scroll::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
 
         .wow-change { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; padding: 2px 6px; border-radius: 4px; }
         .wow-change.positive { color: var(--accent-green); background: rgba(0, 255, 136, 0.1); }
         .wow-change.negative { color: var(--accent-red); background: rgba(255, 71, 87, 0.1); }
         .wow-change.neutral { color: var(--text-muted); }
 
-        /* Responsive */
         @media (max-width: 1200px) {
             .kpi-row { grid-template-columns: repeat(3, 1fr); }
             .action-list { grid-template-columns: repeat(2, 1fr); }
@@ -432,19 +366,20 @@
             .nav-tabs { flex-wrap: wrap; }
         }
 
-        .fade-in { animation: fadeIn 0.5s ease-out forwards; opacity: 0; }
-        @keyframes fadeIn { to { opacity: 1; } }
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
+        .adoption-bar-container { display: flex; align-items: center; gap: 10px; }
+        .adoption-bar { flex: 1; height: 8px; background: var(--border-color); border-radius: 4px; overflow: hidden; position: relative; }
+        .adoption-bar::after { content: ''; position: absolute; left: 85%; top: 0; width: 2px; height: 100%; background: var(--text-muted); }
+        .adoption-fill { height: 100%; border-radius: 4px; }
+        .adoption-fill.on-target { background: linear-gradient(90deg, var(--accent-green), #00cc6a); }
+        .adoption-fill.below-target { background: linear-gradient(90deg, var(--accent-red), var(--accent-orange)); }
+        .adoption-value { font-family: 'JetBrains Mono', monospace; font-weight: 600; min-width: 50px; text-align: right; }
     </style>
 </head>
 <body>
     <div class="bg-grid"></div>
     
     <div class="container">
-        <header class="header fade-in">
+        <header class="header">
             <div class="header-left">
                 <h1>Kooner Adoption Dashboard</h1>
                 <div class="subtitle">
@@ -458,17 +393,17 @@
             </div>
         </header>
 
-        <div class="nav-tabs fade-in delay-1">
-            <button class="nav-tab active" onclick="showTab(&#39;overview&#39;)">📊 Overview</button>
-            <button class="nav-tab" onclick="showTab(&#39;trends&#39;)">📈 Week-over-Week</button>
-            <button class="nav-tab" onclick="showTab(&#39;stations&#39;)">🏢 Stations</button>
-            <button class="nav-tab" onclick="showTab(&#39;dsps&#39;)">🚛 DSPs</button>
-            <button class="nav-tab" onclick="showTab(&#39;actions&#39;)">🎯 Actions</button>
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('overview')">📊 Overview</button>
+            <button class="nav-tab" onclick="showTab('trends')">📈 Week-over-Week</button>
+            <button class="nav-tab" onclick="showTab('stations')">🏢 Stations</button>
+            <button class="nav-tab" onclick="showTab('dsps')">🚛 DSPs</button>
+            <button class="nav-tab" onclick="showTab('actions')">🎯 Actions</button>
         </div>
 
         <!-- OVERVIEW TAB -->
         <div id="overview" class="tab-content active">
-            <div class="kpi-row fade-in delay-2">
+            <div class="kpi-row">
                 <div class="kpi-card">
                     <div class="kpi-label">Total Kooner WOs</div>
                     <div class="kpi-value">1,060</div>
@@ -497,136 +432,47 @@
             </div>
 
             <div class="main-grid">
-                <div class="card fade-in delay-3">
+                <div class="card">
                     <div class="card-header">
                         <div class="card-title">Overall Adoption Trend</div>
                         <span class="card-badge badge-trends">8 WEEKS</span>
                     </div>
                     <div class="chart-container">
-                        <canvas id="overallTrendChart" width="714" height="300" style="display: block; box-sizing: border-box; height: 300px; width: 714px;"></canvas>
+                        <canvas id="overallTrendChart"></canvas>
                     </div>
                 </div>
 
-                <div class="card fade-in delay-3">
+                <div class="card">
                     <div class="card-header">
                         <div class="card-title">Weekly Performance</div>
                     </div>
                     <div class="chart-container">
-                        <canvas id="weeklyBarChart" width="714" height="300" style="display: block; box-sizing: border-box; height: 300px; width: 714px;"></canvas>
+                        <canvas id="weeklyBarChart"></canvas>
                     </div>
                 </div>
 
-                <div class="card fade-in delay-4">
+                <div class="card">
                     <div class="card-header">
                         <div class="card-title">Station Status</div>
                         <span class="card-badge badge-stations">9 STATIONS</span>
                     </div>
                     <div class="table-scroll" style="max-height: 300px;">
                         <table class="data-table">
-                            <thead>
-                                <tr><th>Station</th><th>Adoption</th><th>WoW</th><th>Status</th></tr>
-                            </thead>
-                            <tbody id="stationQuickTable"><tr>
-                    <td><span class="station-name">HTP2</span></td>
-                    <td style="color: var(--accent-green)">89.2%</td>
-                    <td><span class="trend-arrow flat">→ +1.6%</span></td>
-                    <td><span class="status-pill on-target"><span class="status-dot"></span>On Target</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HHO3</span></td>
-                    <td style="color: var(--accent-green)">87.1%</td>
-                    <td><span class="trend-arrow flat">→ -0.3%</span></td>
-                    <td><span class="status-pill on-target"><span class="status-dot"></span>On Target</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HMS2</span></td>
-                    <td style="color: var(--accent-red)">66.7%</td>
-                    <td><span class="trend-arrow flat">→ -4.1%</span></td>
-                    <td><span class="status-pill below-target"><span class="status-dot"></span>Below</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HIN3</span></td>
-                    <td style="color: var(--accent-red)">63.4%</td>
-                    <td><span class="trend-arrow down">↓ -66.7%</span></td>
-                    <td><span class="status-pill below-target"><span class="status-dot"></span>Below</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HDT3</span></td>
-                    <td style="color: var(--accent-red)">60.0%</td>
-                    <td><span class="trend-arrow up">↑ +24.7%</span></td>
-                    <td><span class="status-pill below-target"><span class="status-dot"></span>Below</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HCL2</span></td>
-                    <td style="color: var(--accent-red)">51.4%</td>
-                    <td><span class="trend-arrow up">↑ +18.1%</span></td>
-                    <td><span class="status-pill below-target"><span class="status-dot"></span>Below</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HLA2</span></td>
-                    <td style="color: var(--accent-red)">49.4%</td>
-                    <td><span class="trend-arrow up">↑ +11.8%</span></td>
-                    <td><span class="status-pill below-target"><span class="status-dot"></span>Below</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HAU1</span></td>
-                    <td style="color: var(--accent-red)">48.6%</td>
-                    <td><span class="trend-arrow down">↓ -35.8%</span></td>
-                    <td><span class="status-pill below-target"><span class="status-dot"></span>Below</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HPD1</span></td>
-                    <td style="color: var(--accent-red)">8.6%</td>
-                    <td><span class="trend-arrow up">↑ +14.3%</span></td>
-                    <td><span class="status-pill below-target"><span class="status-dot"></span>Below</span></td>
-                </tr></tbody>
+                            <thead><tr><th>Station</th><th>Adoption</th><th>WoW</th><th>Status</th></tr></thead>
+                            <tbody id="stationQuickTable"></tbody>
                         </table>
                     </div>
                 </div>
 
-                <div class="card fade-in delay-4">
+                <div class="card">
                     <div class="card-header">
                         <div class="card-title">Top Priority DSPs</div>
                         <span class="card-badge badge-dsps">ACTION NEEDED</span>
                     </div>
                     <div class="table-scroll" style="max-height: 300px;">
                         <table class="data-table">
-                            <thead>
-                                <tr><th>DSP</th><th>Station</th><th>Adoption</th><th>Trend</th></tr>
-                            </thead>
-                            <tbody id="dspQuickTable"><tr>
-                    <td><span class="station-name">DGWD</span></td>
-                    <td><span class="action-station">HCL2</span></td>
-                    <td style="color: var(--accent-red)">0.0%</td>
-                    <td><span class="trend-arrow flat">→ +0.0%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">D4DS</span></td>
-                    <td><span class="action-station">HCL2</span></td>
-                    <td style="color: var(--accent-red)">0.0%</td>
-                    <td><span class="trend-arrow flat">→ +0.0%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">ARMA</span></td>
-                    <td><span class="action-station">HLA2</span></td>
-                    <td style="color: var(--accent-red)">2.9%</td>
-                    <td><span class="trend-arrow flat">→ +0.0%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">JDTC</span></td>
-                    <td><span class="action-station">HPD1</span></td>
-                    <td style="color: var(--accent-red)">5.9%</td>
-                    <td><span class="trend-arrow up">↑ +14.3%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">SFRM</span></td>
-                    <td><span class="action-station">HDT3</span></td>
-                    <td style="color: var(--accent-red)">37.6%</td>
-                    <td><span class="trend-arrow up">↑ +29.7%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">FICL</span></td>
-                    <td><span class="action-station">HAU1</span></td>
-                    <td style="color: var(--accent-red)">46.9%</td>
-                    <td><span class="trend-arrow down">↓ -40.8%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">BORN</span></td>
-                    <td><span class="action-station">HLA2</span></td>
-                    <td style="color: var(--accent-red)">56.9%</td>
-                    <td><span class="trend-arrow up">↑ +5.3%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">MDAS</span></td>
-                    <td><span class="action-station">HLA2</span></td>
-                    <td style="color: var(--accent-red)">62.2%</td>
-                    <td><span class="trend-arrow up">↑ +27.1%</span></td>
-                </tr></tbody>
+                            <thead><tr><th>DSP</th><th>Station</th><th>Adoption</th><th>Trend</th></tr></thead>
+                            <tbody id="dspQuickTable"></tbody>
                         </table>
                     </div>
                 </div>
@@ -636,160 +482,43 @@
         <!-- TRENDS TAB -->
         <div id="trends" class="tab-content">
             <div class="main-grid">
-                <div class="card full-width fade-in">
+                <div class="card full-width">
                     <div class="card-header">
                         <div class="card-title">📈 Week-over-Week Adoption (Sunday - Saturday)</div>
                     </div>
                     <div class="chart-container tall">
-                        <canvas id="wowOverallChart" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas>
+                        <canvas id="wowOverallChart"></canvas>
                     </div>
                 </div>
 
-                <div class="card full-width fade-in">
+                <div class="card full-width">
                     <div class="card-header">
                         <div class="card-title">Weekly Performance Summary</div>
                     </div>
                     <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Week</th>
-                                <th>Dates (Sun-Sat)</th>
-                                <th>Kooner</th>
-                                <th>Leaked</th>
-                                <th>Total</th>
-                                <th>Adoption</th>
-                                <th>WoW Change</th>
-                            </tr>
-                        </thead>
-                        <tbody id="weeklyTable"><tr>
-                    <td><span class="station-name">WK51</span></td>
-                    <td>Dec 7-13</td>
-                    <td>142</td>
-                    <td>75</td>
-                    <td>217</td>
-                    <td style="color: var(--accent-red)">65.4%</td>
-                    <td><span class="wow-change neutral">—</span></td>
-                </tr><tr>
-                    <td><span class="station-name">WK52</span></td>
-                    <td>Dec 14-20</td>
-                    <td>120</td>
-                    <td>51</td>
-                    <td>171</td>
-                    <td style="color: var(--accent-red)">70.2%</td>
-                    <td><span class="wow-change positive">+4.8%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">WK53</span></td>
-                    <td>Dec 21-27</td>
-                    <td>70</td>
-                    <td>66</td>
-                    <td>136</td>
-                    <td style="color: var(--accent-red)">51.5%</td>
-                    <td><span class="wow-change negative">-18.7%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">WK1</span></td>
-                    <td>Dec 28-Jan 3</td>
-                    <td>135</td>
-                    <td>19</td>
-                    <td>154</td>
-                    <td style="color: var(--accent-green)">87.7%</td>
-                    <td><span class="wow-change positive">+36.2%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">WK2</span></td>
-                    <td>Jan 4-10</td>
-                    <td>141</td>
-                    <td>103</td>
-                    <td>244</td>
-                    <td style="color: var(--accent-red)">57.8%</td>
-                    <td><span class="wow-change negative">-29.9%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">WK3</span></td>
-                    <td>Jan 11-17</td>
-                    <td>140</td>
-                    <td>78</td>
-                    <td>218</td>
-                    <td style="color: var(--accent-red)">64.2%</td>
-                    <td><span class="wow-change positive">+6.4%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">WK4</span></td>
-                    <td>Jan 18-24</td>
-                    <td>159</td>
-                    <td>108</td>
-                    <td>267</td>
-                    <td style="color: var(--accent-red)">59.6%</td>
-                    <td><span class="wow-change negative">-4.6%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">WK5</span></td>
-                    <td>Jan 25-31</td>
-                    <td>153</td>
-                    <td>80</td>
-                    <td>233</td>
-                    <td style="color: var(--accent-red)">65.7%</td>
-                    <td><span class="wow-change positive">+6.1%</span></td>
-                </tr></tbody>
+                        <thead><tr><th>Week</th><th>Dates</th><th>Kooner</th><th>Leaked</th><th>Total</th><th>Adoption</th><th>WoW Change</th></tr></thead>
+                        <tbody id="weeklyTable"></tbody>
                     </table>
                 </div>
 
-                <div class="card full-width fade-in">
+                <div class="card full-width">
                     <div class="card-header">
                         <div class="card-title">🏢 Station Weekly Heatmap</div>
                     </div>
                     <div class="table-scroll">
                         <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Station</th>
-                                    <th>WK51</th><th>WK52</th><th>WK53</th><th>WK1</th>
-                                    <th>WK2</th><th>WK3</th><th>WK4</th><th>WK5</th>
-                                    <th>Trend</th>
-                                </tr>
-                            </thead>
-                            <tbody id="stationHeatmap"><tr>
-                    <td><span class="station-name">HTP2</span></td>
-                    <td class="week-cell high">86%</td><td class="week-cell high">92%</td><td class="week-cell high">93%</td><td class="week-cell high">100%</td><td class="week-cell high">91%</td><td class="week-cell high">89%</td><td class="week-cell medium">76%</td><td class="week-cell medium">78%</td>
-                    <td><span class="trend-arrow flat">→ +1.6%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HHO3</span></td>
-                    <td class="week-cell medium">71%</td><td class="week-cell high">90%</td><td class="week-cell medium">83%</td><td class="week-cell high">94%</td><td class="week-cell high">96%</td><td class="week-cell high">100%</td><td class="week-cell medium">79%</td><td class="week-cell medium">79%</td>
-                    <td><span class="trend-arrow flat">→ -0.3%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HMS2</span></td>
-                    <td class="week-cell medium">83%</td><td class="week-cell high">100%</td><td class="week-cell low">0%</td><td class="week-cell high">100%</td><td class="week-cell low">38%</td><td class="week-cell medium">56%</td><td class="week-cell medium">73%</td><td class="week-cell medium">69%</td>
-                    <td><span class="trend-arrow flat">→ -4.1%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HIN3</span></td>
-                    <td class="week-cell low">43%</td><td class="week-cell low">33%</td><td class="week-cell medium">55%</td><td class="week-cell high">100%</td><td class="week-cell high">100%</td><td class="week-cell medium">50%</td><td class="week-cell high">100%</td><td class="week-cell low">33%</td>
-                    <td><span class="trend-arrow down">↓ -66.7%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HDT3</span></td>
-                    <td class="week-cell medium">53%</td><td class="week-cell medium">55%</td><td class="week-cell low">32%</td><td class="week-cell medium">75%</td><td class="week-cell low">37%</td><td class="week-cell medium">57%</td><td class="week-cell medium">55%</td><td class="week-cell medium">80%</td>
-                    <td><span class="trend-arrow up">↑ +24.7%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HCL2</span></td>
-                    <td class="week-cell low">0%</td><td class="week-cell low">0%</td><td class="week-cell low">0%</td><td class="week-cell medium">67%</td><td class="week-cell low">39%</td><td class="week-cell medium">76%</td><td class="week-cell medium">53%</td><td class="week-cell medium">71%</td>
-                    <td><span class="trend-arrow up">↑ +18.1%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HLA2</span></td>
-                    <td class="week-cell medium">58%</td><td class="week-cell medium">54%</td><td class="week-cell low">38%</td><td class="week-cell medium">81%</td><td class="week-cell low">27%</td><td class="week-cell low">37%</td><td class="week-cell low">49%</td><td class="week-cell medium">61%</td>
-                    <td><span class="trend-arrow up">↑ +11.8%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HAU1</span></td>
-                    <td class="week-cell medium">71%</td><td class="week-cell low">25%</td><td class="week-cell low">22%</td><td class="week-cell high">89%</td><td class="week-cell high">92%</td><td class="week-cell medium">83%</td><td class="week-cell low">48%</td><td class="week-cell low">13%</td>
-                    <td><span class="trend-arrow down">↓ -35.8%</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HPD1</span></td>
-                    <td class="week-cell low">0%</td><td class="week-cell low">0%</td><td class="week-cell low">0%</td><td class="week-cell low">0%</td><td class="week-cell low">0%</td><td class="week-cell low">0%</td><td class="week-cell low">0%</td><td class="week-cell low">14%</td>
-                    <td><span class="trend-arrow up">↑ +14.3%</span></td>
-                </tr></tbody>
+                            <thead><tr><th>Station</th><th>WK51</th><th>WK52</th><th>WK53</th><th>WK1</th><th>WK2</th><th>WK3</th><th>WK4</th><th>WK5</th><th>Trend</th></tr></thead>
+                            <tbody id="stationHeatmap"></tbody>
                         </table>
                     </div>
                 </div>
 
-                <div class="card full-width fade-in">
+                <div class="card full-width">
                     <div class="card-header">
                         <div class="card-title">🏢 Station Trends</div>
                     </div>
                     <div class="chart-container tall">
-                        <canvas id="stationTrendChart" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas>
+                        <canvas id="stationTrendChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -798,118 +527,32 @@
         <!-- STATIONS TAB -->
         <div id="stations" class="tab-content">
             <div class="main-grid">
-                <div class="card full-width fade-in">
+                <div class="card full-width">
                     <div class="card-header">
                         <div class="card-title">Station Adoption Details</div>
                         <span class="card-badge badge-stations">9 STATIONS</span>
                     </div>
                     <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Station</th><th>Location</th><th>Adoption Rate</th>
-                                <th>Kooner</th><th>Leaked</th><th>Gap to 85%</th><th>WK4→WK5</th><th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="stationFullTable"><tr>
-                    <td><span class="station-name">HTP2</span></td>
-                    <td>Gibsonton, FL</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar"><div class="adoption-fill on-target" style="width:89.171974522293%"></div></div><span class="adoption-value" style="color:var(--accent-green)">89.2%</span></div></td>
-                    <td>140</td>
-                    <td>17</td>
-                    <td style="color:var(--accent-green)">-4.2%</td>
-                    <td><span class="trend-arrow flat">→ +1.6%</span></td>
-                    <td><span class="status-pill on-target"><span class="status-dot"></span>On Target</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HHO3</span></td>
-                    <td>Porter, TX</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar"><div class="adoption-fill on-target" style="width:87.05882352941177%"></div></div><span class="adoption-value" style="color:var(--accent-green)">87.1%</span></div></td>
-                    <td>148</td>
-                    <td>22</td>
-                    <td style="color:var(--accent-green)">-2.1%</td>
-                    <td><span class="trend-arrow flat">→ -0.3%</span></td>
-                    <td><span class="status-pill on-target"><span class="status-dot"></span>On Target</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HMS2</span></td>
-                    <td>Lakeville, MN</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar"><div class="adoption-fill below-target" style="width:66.66666666666666%"></div></div><span class="adoption-value" style="color:var(--accent-red)">66.7%</span></div></td>
-                    <td>54</td>
-                    <td>27</td>
-                    <td style="color:var(--accent-red)">+18.3%</td>
-                    <td><span class="trend-arrow flat">→ -4.1%</span></td>
-                    <td><span class="status-pill below-target"><span class="status-dot"></span>Below</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HIN3</span></td>
-                    <td>—</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar"><div class="adoption-fill below-target" style="width:63.41463414634146%"></div></div><span class="adoption-value" style="color:var(--accent-red)">63.4%</span></div></td>
-                    <td>26</td>
-                    <td>15</td>
-                    <td style="color:var(--accent-red)">+21.6%</td>
-                    <td><span class="trend-arrow down">↓ -66.7%</span></td>
-                    <td><span class="status-pill below-target"><span class="status-dot"></span>Below</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HDT3</span></td>
-                    <td>Romulus, MI</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar"><div class="adoption-fill below-target" style="width:60%"></div></div><span class="adoption-value" style="color:var(--accent-red)">60.0%</span></div></td>
-                    <td>180</td>
-                    <td>120</td>
-                    <td style="color:var(--accent-red)">+25.0%</td>
-                    <td><span class="trend-arrow up">↑ +24.7%</span></td>
-                    <td><span class="status-pill below-target"><span class="status-dot"></span>Below</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HCL2</span></td>
-                    <td>—</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar"><div class="adoption-fill below-target" style="width:51.42857142857142%"></div></div><span class="adoption-value" style="color:var(--accent-red)">51.4%</span></div></td>
-                    <td>54</td>
-                    <td>51</td>
-                    <td style="color:var(--accent-red)">+33.6%</td>
-                    <td><span class="trend-arrow up">↑ +18.1%</span></td>
-                    <td><span class="status-pill below-target"><span class="status-dot"></span>Below</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HLA2</span></td>
-                    <td>Santa Clarita, CA</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar"><div class="adoption-fill below-target" style="width:49.43820224719101%"></div></div><span class="adoption-value" style="color:var(--accent-red)">49.4%</span></div></td>
-                    <td>220</td>
-                    <td>225</td>
-                    <td style="color:var(--accent-red)">+35.6%</td>
-                    <td><span class="trend-arrow up">↑ +11.8%</span></td>
-                    <td><span class="status-pill below-target"><span class="status-dot"></span>Below</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HAU1</span></td>
-                    <td>Austin, TX</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar"><div class="adoption-fill below-target" style="width:48.55072463768116%"></div></div><span class="adoption-value" style="color:var(--accent-red)">48.6%</span></div></td>
-                    <td>67</td>
-                    <td>71</td>
-                    <td style="color:var(--accent-red)">+36.4%</td>
-                    <td><span class="trend-arrow down">↓ -35.8%</span></td>
-                    <td><span class="status-pill below-target"><span class="status-dot"></span>Below</span></td>
-                </tr><tr>
-                    <td><span class="station-name">HPD1</span></td>
-                    <td>Portland, OR</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar"><div class="adoption-fill below-target" style="width:8.571428571428571%"></div></div><span class="adoption-value" style="color:var(--accent-red)">8.6%</span></div></td>
-                    <td>3</td>
-                    <td>32</td>
-                    <td style="color:var(--accent-red)">+76.4%</td>
-                    <td><span class="trend-arrow up">↑ +14.3%</span></td>
-                    <td><span class="status-pill below-target"><span class="status-dot"></span>Below</span></td>
-                </tr></tbody>
+                        <thead><tr><th>Station</th><th>Location</th><th>Adoption Rate</th><th>Kooner</th><th>Leaked</th><th>Gap to 85%</th><th>WK4→WK5</th><th>Status</th></tr></thead>
+                        <tbody id="stationFullTable"></tbody>
                     </table>
                 </div>
 
-                <div class="card fade-in">
+                <div class="card">
                     <div class="card-header">
                         <div class="card-title">Station Adoption Comparison</div>
                     </div>
                     <div class="chart-container">
-                        <canvas id="stationBarChart" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas>
+                        <canvas id="stationBarChart"></canvas>
                     </div>
                 </div>
 
-                <div class="card fade-in">
+                <div class="card">
                     <div class="card-header">
                         <div class="card-title">Leakage by Station</div>
                     </div>
                     <div class="chart-container">
-                        <canvas id="stationLeakageChart" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas>
+                        <canvas id="stationLeakageChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -918,288 +561,23 @@
         <!-- DSPS TAB -->
         <div id="dsps" class="tab-content">
             <div class="main-grid">
-                <div class="card full-width fade-in">
+                <div class="card full-width">
                     <div class="card-header">
                         <div class="card-title">DSP Adoption Tracking</div>
                         <span class="card-badge badge-dsps">26 DSPs</span>
                     </div>
                     <div class="filter-row">
-                        <button class="filter-btn active" onclick="filterDSPs(&#39;all&#39;)">All</button>
-                        <button class="filter-btn" onclick="filterDSPs(&#39;critical&#39;)">Critical</button>
-                        <button class="filter-btn" onclick="filterDSPs(&#39;high&#39;)">High</button>
-                        <button class="filter-btn" onclick="filterDSPs(&#39;medium&#39;)">Medium</button>
-                        <button class="filter-btn" onclick="filterDSPs(&#39;low&#39;)">Low</button>
-                        <button class="filter-btn" onclick="filterDSPs(&#39;on-target&#39;)">On Target</button>
+                        <button class="filter-btn active" onclick="filterDSPs('all')">All</button>
+                        <button class="filter-btn" onclick="filterDSPs('critical')">Critical</button>
+                        <button class="filter-btn" onclick="filterDSPs('high')">High</button>
+                        <button class="filter-btn" onclick="filterDSPs('medium')">Medium</button>
+                        <button class="filter-btn" onclick="filterDSPs('low')">Low</button>
+                        <button class="filter-btn" onclick="filterDSPs('on-target')">On Target</button>
                     </div>
                     <div class="table-scroll" style="max-height: 500px;">
                         <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>DSP</th><th>Station</th><th>Location</th><th>Adoption</th>
-                                    <th>Kooner</th><th>Leaked</th><th>Gap</th><th>WK5</th><th>Priority</th>
-                                </tr>
-                            </thead>
-                            <tbody id="dspFullTable"><tr>
-                    <td><span class="station-name">DGWD</span></td>
-                    <td><span class="action-station">HCL2</span></td>
-                    <td>—</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill below-target" style="width:0%"></div></div><span class="adoption-value" style="color:var(--accent-red)">0.0%</span></div></td>
-                    <td>0</td>
-                    <td>28</td>
-                    <td style="color:var(--accent-red)">+85.0%</td>
-                    <td class="week-cell low">0%</td>
-                    <td><span class="priority-pill priority-high">high</span></td>
-                </tr><tr>
-                    <td><span class="station-name">D4DS</span></td>
-                    <td><span class="action-station">HCL2</span></td>
-                    <td>—</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill below-target" style="width:0%"></div></div><span class="adoption-value" style="color:var(--accent-red)">0.0%</span></div></td>
-                    <td>0</td>
-                    <td>23</td>
-                    <td style="color:var(--accent-red)">+85.0%</td>
-                    <td class="week-cell low">0%</td>
-                    <td><span class="priority-pill priority-high">high</span></td>
-                </tr><tr>
-                    <td><span class="station-name">JBXL</span></td>
-                    <td><span class="action-station">HIN3</span></td>
-                    <td>—</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill below-target" style="width:0%"></div></div><span class="adoption-value" style="color:var(--accent-red)">0.0%</span></div></td>
-                    <td>0</td>
-                    <td>9</td>
-                    <td style="color:var(--accent-red)">+85.0%</td>
-                    <td class="week-cell low">0%</td>
-                    <td><span class="priority-pill priority-low">low</span></td>
-                </tr><tr>
-                    <td><span class="station-name">AMVF</span></td>
-                    <td><span class="action-station">HLA2</span></td>
-                    <td>Santa Clarita, CA</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill below-target" style="width:0%"></div></div><span class="adoption-value" style="color:var(--accent-red)">0.0%</span></div></td>
-                    <td>0</td>
-                    <td>4</td>
-                    <td style="color:var(--accent-red)">+85.0%</td>
-                    <td class="week-cell low">0%</td>
-                    <td><span class="priority-pill priority-low">low</span></td>
-                </tr><tr>
-                    <td><span class="station-name">MAEP</span></td>
-                    <td><span class="action-station">HIN3</span></td>
-                    <td>—</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill below-target" style="width:0%"></div></div><span class="adoption-value" style="color:var(--accent-red)">0.0%</span></div></td>
-                    <td>0</td>
-                    <td>4</td>
-                    <td style="color:var(--accent-red)">+85.0%</td>
-                    <td class="week-cell none">—</td>
-                    <td><span class="priority-pill priority-low">low</span></td>
-                </tr><tr>
-                    <td><span class="station-name">ARMA</span></td>
-                    <td><span class="action-station">HLA2</span></td>
-                    <td>Santa Clarita, CA</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill below-target" style="width:2.9%"></div></div><span class="adoption-value" style="color:var(--accent-red)">2.9%</span></div></td>
-                    <td>3</td>
-                    <td>101</td>
-                    <td style="color:var(--accent-red)">+82.1%</td>
-                    <td class="week-cell low">0%</td>
-                    <td><span class="priority-pill priority-critical">critical</span></td>
-                </tr><tr>
-                    <td><span class="station-name">JDTC</span></td>
-                    <td><span class="action-station">HPD1</span></td>
-                    <td>Portland, OR</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill below-target" style="width:5.9%"></div></div><span class="adoption-value" style="color:var(--accent-red)">5.9%</span></div></td>
-                    <td>2</td>
-                    <td>32</td>
-                    <td style="color:var(--accent-red)">+79.1%</td>
-                    <td class="week-cell low">14%</td>
-                    <td><span class="priority-pill priority-high">high</span></td>
-                </tr><tr>
-                    <td><span class="station-name">SFRM</span></td>
-                    <td><span class="action-station">HDT3</span></td>
-                    <td>Romulus, MI</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill below-target" style="width:37.6%"></div></div><span class="adoption-value" style="color:var(--accent-red)">37.6%</span></div></td>
-                    <td>68</td>
-                    <td>113</td>
-                    <td style="color:var(--accent-red)">+47.4%</td>
-                    <td class="week-cell medium">63%</td>
-                    <td><span class="priority-pill priority-critical">critical</span></td>
-                </tr><tr>
-                    <td><span class="station-name">GMIL</span></td>
-                    <td><span class="action-station">HAU1</span></td>
-                    <td>Austin, TX</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill below-target" style="width:42.1%"></div></div><span class="adoption-value" style="color:var(--accent-red)">42.1%</span></div></td>
-                    <td>8</td>
-                    <td>11</td>
-                    <td style="color:var(--accent-red)">+42.9%</td>
-                    <td class="week-cell low">0%</td>
-                    <td><span class="priority-pill priority-low">low</span></td>
-                </tr><tr>
-                    <td><span class="station-name">FICL</span></td>
-                    <td><span class="action-station">HAU1</span></td>
-                    <td>Austin, TX</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill below-target" style="width:46.9%"></div></div><span class="adoption-value" style="color:var(--accent-red)">46.9%</span></div></td>
-                    <td>53</td>
-                    <td>60</td>
-                    <td style="color:var(--accent-red)">+38.1%</td>
-                    <td class="week-cell low">5%</td>
-                    <td><span class="priority-pill priority-critical">critical</span></td>
-                </tr><tr>
-                    <td><span class="station-name">ARVL</span></td>
-                    <td><span class="action-station">HTP2</span></td>
-                    <td>Gibsonton, FL</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill below-target" style="width:54.5%"></div></div><span class="adoption-value" style="color:var(--accent-red)">54.5%</span></div></td>
-                    <td>6</td>
-                    <td>5</td>
-                    <td style="color:var(--accent-red)">+30.5%</td>
-                    <td class="week-cell high">100%</td>
-                    <td><span class="priority-pill priority-low">low</span></td>
-                </tr><tr>
-                    <td><span class="station-name">BORN</span></td>
-                    <td><span class="action-station">HLA2</span></td>
-                    <td>Santa Clarita, CA</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill below-target" style="width:56.9%"></div></div><span class="adoption-value" style="color:var(--accent-red)">56.9%</span></div></td>
-                    <td>62</td>
-                    <td>47</td>
-                    <td style="color:var(--accent-red)">+28.1%</td>
-                    <td class="week-cell medium">52%</td>
-                    <td><span class="priority-pill priority-high">high</span></td>
-                </tr><tr>
-                    <td><span class="station-name">MDAS</span></td>
-                    <td><span class="action-station">HLA2</span></td>
-                    <td>Santa Clarita, CA</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill below-target" style="width:62.2%"></div></div><span class="adoption-value" style="color:var(--accent-red)">62.2%</span></div></td>
-                    <td>120</td>
-                    <td>73</td>
-                    <td style="color:var(--accent-red)">+22.8%</td>
-                    <td class="week-cell high">92%</td>
-                    <td><span class="priority-pill priority-high">high</span></td>
-                </tr><tr>
-                    <td><span class="station-name">LDOG</span></td>
-                    <td><span class="action-station">HMS2</span></td>
-                    <td>Lakeville, MN</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill below-target" style="width:62.5%"></div></div><span class="adoption-value" style="color:var(--accent-red)">62.5%</span></div></td>
-                    <td>45</td>
-                    <td>27</td>
-                    <td style="color:var(--accent-red)">+22.5%</td>
-                    <td class="week-cell medium">60%</td>
-                    <td><span class="priority-pill priority-high">high</span></td>
-                </tr><tr>
-                    <td><span class="station-name">NLZL</span></td>
-                    <td><span class="action-station">HHO3</span></td>
-                    <td>Porter, TX</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill below-target" style="width:70.8%"></div></div><span class="adoption-value" style="color:var(--accent-red)">70.8%</span></div></td>
-                    <td>17</td>
-                    <td>7</td>
-                    <td style="color:var(--accent-red)">+14.2%</td>
-                    <td class="week-cell none">—</td>
-                    <td><span class="priority-pill priority-medium">medium</span></td>
-                </tr><tr>
-                    <td><span class="station-name">RRTL</span></td>
-                    <td><span class="action-station">HHO3</span></td>
-                    <td>Porter, TX</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill below-target" style="width:75.9%"></div></div><span class="adoption-value" style="color:var(--accent-red)">75.9%</span></div></td>
-                    <td>41</td>
-                    <td>13</td>
-                    <td style="color:var(--accent-red)">+9.1%</td>
-                    <td class="week-cell medium">71%</td>
-                    <td><span class="priority-pill priority-high">high</span></td>
-                </tr><tr>
-                    <td><span class="station-name">DASL</span></td>
-                    <td><span class="action-station">HHO3</span></td>
-                    <td>Porter, TX</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill below-target" style="width:83.3%"></div></div><span class="adoption-value" style="color:var(--accent-red)">83.3%</span></div></td>
-                    <td>10</td>
-                    <td>2</td>
-                    <td style="color:var(--accent-red)">+1.7%</td>
-                    <td class="week-cell high">100%</td>
-                    <td><span class="priority-pill priority-low">low</span></td>
-                </tr><tr>
-                    <td><span class="station-name">ALAB</span></td>
-                    <td><span class="action-station">HDT3</span></td>
-                    <td>Romulus, MI</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill on-target" style="width:90.7%"></div></div><span class="adoption-value" style="color:var(--accent-green)">90.7%</span></div></td>
-                    <td>68</td>
-                    <td>7</td>
-                    <td style="color:var(--accent-green)">-5.7%</td>
-                    <td class="week-cell high">93%</td>
-                    <td><span class="priority-pill priority-on-target">on-target</span></td>
-                </tr><tr>
-                    <td><span class="station-name">ORMP</span></td>
-                    <td><span class="action-station">HTP2</span></td>
-                    <td>Gibsonton, FL</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill on-target" style="width:91%"></div></div><span class="adoption-value" style="color:var(--accent-green)">91.0%</span></div></td>
-                    <td>121</td>
-                    <td>12</td>
-                    <td style="color:var(--accent-green)">-6.0%</td>
-                    <td class="week-cell medium">67%</td>
-                    <td><span class="priority-pill priority-on-target">on-target</span></td>
-                </tr><tr>
-                    <td><span class="station-name">CMIL</span></td>
-                    <td><span class="action-station">HIN3</span></td>
-                    <td>—</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill on-target" style="width:92%"></div></div><span class="adoption-value" style="color:var(--accent-green)">92.0%</span></div></td>
-                    <td>23</td>
-                    <td>2</td>
-                    <td style="color:var(--accent-green)">-7.0%</td>
-                    <td class="week-cell high">100%</td>
-                    <td><span class="priority-pill priority-on-target">on-target</span></td>
-                </tr><tr>
-                    <td><span class="station-name">PERP</span></td>
-                    <td><span class="action-station">HMK4</span></td>
-                    <td>—</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill on-target" style="width:100%"></div></div><span class="adoption-value" style="color:var(--accent-green)">100.0%</span></div></td>
-                    <td>44</td>
-                    <td>0</td>
-                    <td style="color:var(--accent-green)">-15.0%</td>
-                    <td class="week-cell high">100%</td>
-                    <td><span class="priority-pill priority-on-target">on-target</span></td>
-                </tr><tr>
-                    <td><span class="station-name">PRLC</span></td>
-                    <td><span class="action-station">HSL1</span></td>
-                    <td>—</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill on-target" style="width:100%"></div></div><span class="adoption-value" style="color:var(--accent-green)">100.0%</span></div></td>
-                    <td>41</td>
-                    <td>0</td>
-                    <td style="color:var(--accent-green)">-15.0%</td>
-                    <td class="week-cell high">100%</td>
-                    <td><span class="priority-pill priority-on-target">on-target</span></td>
-                </tr><tr>
-                    <td><span class="station-name">TGLO</span></td>
-                    <td><span class="action-station">HCT2</span></td>
-                    <td>—</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill on-target" style="width:100%"></div></div><span class="adoption-value" style="color:var(--accent-green)">100.0%</span></div></td>
-                    <td>36</td>
-                    <td>0</td>
-                    <td style="color:var(--accent-green)">-15.0%</td>
-                    <td class="week-cell high">100%</td>
-                    <td><span class="priority-pill priority-on-target">on-target</span></td>
-                </tr><tr>
-                    <td><span class="station-name">TWLD</span></td>
-                    <td><span class="action-station">HDY1</span></td>
-                    <td>—</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill on-target" style="width:100%"></div></div><span class="adoption-value" style="color:var(--accent-green)">100.0%</span></div></td>
-                    <td>35</td>
-                    <td>0</td>
-                    <td style="color:var(--accent-green)">-15.0%</td>
-                    <td class="week-cell none">—</td>
-                    <td><span class="priority-pill priority-on-target">on-target</span></td>
-                </tr><tr>
-                    <td><span class="station-name">AMWT</span></td>
-                    <td><span class="action-station">HMK4</span></td>
-                    <td>—</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill on-target" style="width:100%"></div></div><span class="adoption-value" style="color:var(--accent-green)">100.0%</span></div></td>
-                    <td>34</td>
-                    <td>0</td>
-                    <td style="color:var(--accent-green)">-15.0%</td>
-                    <td class="week-cell high">100%</td>
-                    <td><span class="priority-pill priority-on-target">on-target</span></td>
-                </tr><tr>
-                    <td><span class="station-name">TLGZ</span></td>
-                    <td><span class="action-station">HDY1</span></td>
-                    <td>—</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill on-target" style="width:100%"></div></div><span class="adoption-value" style="color:var(--accent-green)">100.0%</span></div></td>
-                    <td>14</td>
-                    <td>0</td>
-                    <td style="color:var(--accent-green)">-15.0%</td>
-                    <td class="week-cell none">—</td>
-                    <td><span class="priority-pill priority-on-target">on-target</span></td>
-                </tr></tbody>
+                            <thead><tr><th>DSP</th><th>Station</th><th>Location</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>Gap</th><th>WK5</th><th>Priority</th></tr></thead>
+                            <tbody id="dspFullTable"></tbody>
                         </table>
                     </div>
                 </div>
@@ -1209,236 +587,20 @@
         <!-- ACTIONS TAB -->
         <div id="actions" class="tab-content">
             <div class="main-grid">
-                <div class="card full-width fade-in">
+                <div class="card full-width">
                     <div class="card-header">
                         <div class="card-title">🎯 Priority Action List - Where to Go</div>
                     </div>
-                    <div class="action-list" id="actionList">
-                <div class="action-card critical">
-                    <div class="action-header">
-                        <span class="action-dsp">SFRM</span>
-                        <span class="action-station">📍 HDT3</span>
-                    </div>
-                    <div class="action-stats">
-                        <div class="action-stat"><span class="action-stat-label">Adoption</span><span class="action-stat-value red">37.6%</span></div>
-                        <div class="action-stat"><span class="action-stat-label">Leaked WOs</span><span class="action-stat-value orange">113</span></div>
-                        <div class="action-stat"><span class="action-stat-label">Priority</span><span class="priority-pill priority-critical">critical</span></div>
-                    </div>
-                    <div class="action-location">📌 Romulus, MI</div>
-                </div>
-            
-                <div class="action-card critical">
-                    <div class="action-header">
-                        <span class="action-dsp">ARMA</span>
-                        <span class="action-station">📍 HLA2</span>
-                    </div>
-                    <div class="action-stats">
-                        <div class="action-stat"><span class="action-stat-label">Adoption</span><span class="action-stat-value red">2.9%</span></div>
-                        <div class="action-stat"><span class="action-stat-label">Leaked WOs</span><span class="action-stat-value orange">101</span></div>
-                        <div class="action-stat"><span class="action-stat-label">Priority</span><span class="priority-pill priority-critical">critical</span></div>
-                    </div>
-                    <div class="action-location">📌 Santa Clarita, CA</div>
-                </div>
-            
-                <div class="action-card high">
-                    <div class="action-header">
-                        <span class="action-dsp">MDAS</span>
-                        <span class="action-station">📍 HLA2</span>
-                    </div>
-                    <div class="action-stats">
-                        <div class="action-stat"><span class="action-stat-label">Adoption</span><span class="action-stat-value red">62.2%</span></div>
-                        <div class="action-stat"><span class="action-stat-label">Leaked WOs</span><span class="action-stat-value orange">73</span></div>
-                        <div class="action-stat"><span class="action-stat-label">Priority</span><span class="priority-pill priority-high">high</span></div>
-                    </div>
-                    <div class="action-location">📌 Santa Clarita, CA</div>
-                </div>
-            
-                <div class="action-card critical">
-                    <div class="action-header">
-                        <span class="action-dsp">FICL</span>
-                        <span class="action-station">📍 HAU1</span>
-                    </div>
-                    <div class="action-stats">
-                        <div class="action-stat"><span class="action-stat-label">Adoption</span><span class="action-stat-value red">46.9%</span></div>
-                        <div class="action-stat"><span class="action-stat-label">Leaked WOs</span><span class="action-stat-value orange">60</span></div>
-                        <div class="action-stat"><span class="action-stat-label">Priority</span><span class="priority-pill priority-critical">critical</span></div>
-                    </div>
-                    <div class="action-location">📌 Austin, TX</div>
-                </div>
-            
-                <div class="action-card high">
-                    <div class="action-header">
-                        <span class="action-dsp">BORN</span>
-                        <span class="action-station">📍 HLA2</span>
-                    </div>
-                    <div class="action-stats">
-                        <div class="action-stat"><span class="action-stat-label">Adoption</span><span class="action-stat-value red">56.9%</span></div>
-                        <div class="action-stat"><span class="action-stat-label">Leaked WOs</span><span class="action-stat-value orange">47</span></div>
-                        <div class="action-stat"><span class="action-stat-label">Priority</span><span class="priority-pill priority-high">high</span></div>
-                    </div>
-                    <div class="action-location">📌 Santa Clarita, CA</div>
-                </div>
-            
-                <div class="action-card high">
-                    <div class="action-header">
-                        <span class="action-dsp">JDTC</span>
-                        <span class="action-station">📍 HPD1</span>
-                    </div>
-                    <div class="action-stats">
-                        <div class="action-stat"><span class="action-stat-label">Adoption</span><span class="action-stat-value red">5.9%</span></div>
-                        <div class="action-stat"><span class="action-stat-label">Leaked WOs</span><span class="action-stat-value orange">32</span></div>
-                        <div class="action-stat"><span class="action-stat-label">Priority</span><span class="priority-pill priority-high">high</span></div>
-                    </div>
-                    <div class="action-location">📌 Portland, OR</div>
-                </div>
-            </div>
+                    <div class="action-list" id="actionList"></div>
                 </div>
 
-                <div class="card full-width fade-in">
+                <div class="card full-width">
                     <div class="card-header">
                         <div class="card-title">📋 DSP → Station Quick Reference</div>
                     </div>
                     <table class="data-table">
-                        <thead>
-                            <tr><th>Priority</th><th>DSP</th><th>Station</th><th>Location</th><th>Adoption</th><th>Leaked WOs</th><th>Action</th></tr>
-                        </thead>
-                        <tbody id="actionTable"><tr>
-                    <td><span class="priority-pill priority-critical">critical</span></td>
-                    <td><span class="station-name">SFRM</span></td>
-                    <td><span class="action-station">HDT3</span></td>
-                    <td>Romulus, MI</td>
-                    <td style="color: var(--accent-red)">37.6%</td>
-                    <td>113</td>
-                    <td>Schedule fleet manager meeting</td>
-                </tr><tr>
-                    <td><span class="priority-pill priority-critical">critical</span></td>
-                    <td><span class="station-name">ARMA</span></td>
-                    <td><span class="action-station">HLA2</span></td>
-                    <td>Santa Clarita, CA</td>
-                    <td style="color: var(--accent-red)">2.9%</td>
-                    <td>101</td>
-                    <td>Schedule fleet manager meeting</td>
-                </tr><tr>
-                    <td><span class="priority-pill priority-critical">critical</span></td>
-                    <td><span class="station-name">FICL</span></td>
-                    <td><span class="action-station">HAU1</span></td>
-                    <td>Austin, TX</td>
-                    <td style="color: var(--accent-red)">46.9%</td>
-                    <td>60</td>
-                    <td>Schedule fleet manager meeting</td>
-                </tr><tr>
-                    <td><span class="priority-pill priority-high">high</span></td>
-                    <td><span class="station-name">MDAS</span></td>
-                    <td><span class="action-station">HLA2</span></td>
-                    <td>Santa Clarita, CA</td>
-                    <td style="color: var(--accent-red)">62.2%</td>
-                    <td>73</td>
-                    <td>Outreach &amp; propose agreement</td>
-                </tr><tr>
-                    <td><span class="priority-pill priority-high">high</span></td>
-                    <td><span class="station-name">BORN</span></td>
-                    <td><span class="action-station">HLA2</span></td>
-                    <td>Santa Clarita, CA</td>
-                    <td style="color: var(--accent-red)">56.9%</td>
-                    <td>47</td>
-                    <td>Outreach &amp; propose agreement</td>
-                </tr><tr>
-                    <td><span class="priority-pill priority-high">high</span></td>
-                    <td><span class="station-name">JDTC</span></td>
-                    <td><span class="action-station">HPD1</span></td>
-                    <td>Portland, OR</td>
-                    <td style="color: var(--accent-red)">5.9%</td>
-                    <td>32</td>
-                    <td>Outreach &amp; propose agreement</td>
-                </tr><tr>
-                    <td><span class="priority-pill priority-high">high</span></td>
-                    <td><span class="station-name">DGWD</span></td>
-                    <td><span class="action-station">HCL2</span></td>
-                    <td>—</td>
-                    <td style="color: var(--accent-red)">0.0%</td>
-                    <td>28</td>
-                    <td>Outreach &amp; propose agreement</td>
-                </tr><tr>
-                    <td><span class="priority-pill priority-high">high</span></td>
-                    <td><span class="station-name">LDOG</span></td>
-                    <td><span class="action-station">HMS2</span></td>
-                    <td>Lakeville, MN</td>
-                    <td style="color: var(--accent-red)">62.5%</td>
-                    <td>27</td>
-                    <td>Outreach &amp; propose agreement</td>
-                </tr><tr>
-                    <td><span class="priority-pill priority-high">high</span></td>
-                    <td><span class="station-name">D4DS</span></td>
-                    <td><span class="action-station">HCL2</span></td>
-                    <td>—</td>
-                    <td style="color: var(--accent-red)">0.0%</td>
-                    <td>23</td>
-                    <td>Outreach &amp; propose agreement</td>
-                </tr><tr>
-                    <td><span class="priority-pill priority-high">high</span></td>
-                    <td><span class="station-name">RRTL</span></td>
-                    <td><span class="action-station">HHO3</span></td>
-                    <td>Porter, TX</td>
-                    <td style="color: var(--accent-red)">75.9%</td>
-                    <td>13</td>
-                    <td>Outreach &amp; propose agreement</td>
-                </tr><tr>
-                    <td><span class="priority-pill priority-medium">medium</span></td>
-                    <td><span class="station-name">NLZL</span></td>
-                    <td><span class="action-station">HHO3</span></td>
-                    <td>Porter, TX</td>
-                    <td style="color: var(--accent-red)">70.8%</td>
-                    <td>7</td>
-                    <td>Monitor relationship</td>
-                </tr><tr>
-                    <td><span class="priority-pill priority-low">low</span></td>
-                    <td><span class="station-name">GMIL</span></td>
-                    <td><span class="action-station">HAU1</span></td>
-                    <td>Austin, TX</td>
-                    <td style="color: var(--accent-red)">42.1%</td>
-                    <td>11</td>
-                    <td>Monitor relationship</td>
-                </tr><tr>
-                    <td><span class="priority-pill priority-low">low</span></td>
-                    <td><span class="station-name">JBXL</span></td>
-                    <td><span class="action-station">HIN3</span></td>
-                    <td>—</td>
-                    <td style="color: var(--accent-red)">0.0%</td>
-                    <td>9</td>
-                    <td>Monitor relationship</td>
-                </tr><tr>
-                    <td><span class="priority-pill priority-low">low</span></td>
-                    <td><span class="station-name">ARVL</span></td>
-                    <td><span class="action-station">HTP2</span></td>
-                    <td>Gibsonton, FL</td>
-                    <td style="color: var(--accent-red)">54.5%</td>
-                    <td>5</td>
-                    <td>Monitor relationship</td>
-                </tr><tr>
-                    <td><span class="priority-pill priority-low">low</span></td>
-                    <td><span class="station-name">AMVF</span></td>
-                    <td><span class="action-station">HLA2</span></td>
-                    <td>Santa Clarita, CA</td>
-                    <td style="color: var(--accent-red)">0.0%</td>
-                    <td>4</td>
-                    <td>Monitor relationship</td>
-                </tr><tr>
-                    <td><span class="priority-pill priority-low">low</span></td>
-                    <td><span class="station-name">MAEP</span></td>
-                    <td><span class="action-station">HIN3</span></td>
-                    <td>—</td>
-                    <td style="color: var(--accent-red)">0.0%</td>
-                    <td>4</td>
-                    <td>Monitor relationship</td>
-                </tr><tr>
-                    <td><span class="priority-pill priority-low">low</span></td>
-                    <td><span class="station-name">DASL</span></td>
-                    <td><span class="action-station">HHO3</span></td>
-                    <td>Porter, TX</td>
-                    <td style="color: var(--accent-red)">83.3%</td>
-                    <td>2</td>
-                    <td>Monitor relationship</td>
-                </tr></tbody>
+                        <thead><tr><th>Priority</th><th>DSP</th><th>Station</th><th>Location</th><th>Adoption</th><th>Leaked WOs</th><th>Action</th></tr></thead>
+                        <tbody id="actionTable"></tbody>
                     </table>
                 </div>
             </div>
@@ -1446,7 +608,7 @@
     </div>
 
     <script>
-        // CORRECTED DATA - Amazon Week Calendar (Sun-Sat)
+        // DATA
         const weekLabels = ['WK51', 'WK52', 'WK53', 'WK1', 'WK2', 'WK3', 'WK4', 'WK5'];
         const weekDates = {
             'WK51': 'Dec 7-13', 'WK52': 'Dec 14-20', 'WK53': 'Dec 21-27', 'WK1': 'Dec 28-Jan 3',
@@ -1491,21 +653,14 @@
             { dsp: 'DASL', station: 'HHO3', location: 'Porter, TX', kooner: 10, leaked: 2, adoption: 83.3, gap: 1.7, priority: 'low', weekly: [null, 100, null, 100, 100, 100, 33.3, 100] },
             { dsp: 'DGWD', station: 'HCL2', location: '', kooner: 0, leaked: 28, adoption: 0, gap: 85, priority: 'high', weekly: [0, 0, 0, 0, 0, 0, 0, 0] },
             { dsp: 'D4DS', station: 'HCL2', location: '', kooner: 0, leaked: 23, adoption: 0, gap: 85, priority: 'high', weekly: [0, 0, null, null, 0, 0, 0, 0] },
-            { dsp: 'JBXL', station: 'HIN3', location: '', kooner: 0, leaked: 9, adoption: 0, gap: 85, priority: 'low', weekly: [0, 0, 0, null, null, 0, null, 0] },
-            { dsp: 'AMVF', station: 'HLA2', location: 'Santa Clarita, CA', kooner: 0, leaked: 4, adoption: 0, gap: 85, priority: 'low', weekly: [null, null, null, null, null, 0, null, 0] },
-            { dsp: 'MAEP', station: 'HIN3', location: '', kooner: 0, leaked: 4, adoption: 0, gap: 85, priority: 'low', weekly: [null, null, null, null, null, null, null, null] },
             { dsp: 'ORMP', station: 'HTP2', location: 'Gibsonton, FL', kooner: 121, leaked: 12, adoption: 91, gap: -6, priority: 'on-target', weekly: [71.4, 100, null, 100, 94.4, 100, 73.7, 66.7] },
             { dsp: 'ALAB', station: 'HDT3', location: 'Romulus, MI', kooner: 68, leaked: 7, adoption: 90.7, gap: -5.7, priority: 'on-target', weekly: [80, 88.9, 100, 93.3, 83.3, 90, 90, 92.9] },
             { dsp: 'CMIL', station: 'HIN3', location: '', kooner: 23, leaked: 2, adoption: 92, gap: -7, priority: 'on-target', weekly: [75, null, 100, 100, 100, 66.7, 100, 100] },
             { dsp: 'PERP', station: 'HMK4', location: '', kooner: 44, leaked: 0, adoption: 100, gap: -15, priority: 'on-target', weekly: [100, 100, 100, 100, null, 100, 100, 100] },
-            { dsp: 'PRLC', station: 'HSL1', location: '', kooner: 41, leaked: 0, adoption: 100, gap: -15, priority: 'on-target', weekly: [100, 100, null, 100, 100, 100, 100, 100] },
-            { dsp: 'TGLO', station: 'HCT2', location: '', kooner: 36, leaked: 0, adoption: 100, gap: -15, priority: 'on-target', weekly: [100, 100, null, 100, 100, 100, 100, 100] },
-            { dsp: 'TWLD', station: 'HDY1', location: '', kooner: 35, leaked: 0, adoption: 100, gap: -15, priority: 'on-target', weekly: [100, 100, null, 100, 100, 100, 100, null] },
-            { dsp: 'AMWT', station: 'HMK4', location: '', kooner: 34, leaked: 0, adoption: 100, gap: -15, priority: 'on-target', weekly: [100, 100, 100, 100, null, 100, 100, 100] },
-            { dsp: 'TLGZ', station: 'HDY1', location: '', kooner: 14, leaked: 0, adoption: 100, gap: -15, priority: 'on-target', weekly: [null, null, null, 100, 100, 100, 100, null] }
+            { dsp: 'PRLC', station: 'HSL1', location: '', kooner: 41, leaked: 0, adoption: 100, gap: -15, priority: 'on-target', weekly: [100, 100, null, 100, 100, 100, 100, 100] }
         ];
 
-        // Helper functions
+        // Functions
         function showTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
@@ -1526,9 +681,9 @@
 
         function getTrendArrow(change) {
             if (change == null) return '<span class="trend-arrow flat">—</span>';
-            if (change > 5) return `<span class="trend-arrow up">↑ +${change.toFixed(1)}%</span>`;
-            if (change < -5) return `<span class="trend-arrow down">↓ ${change.toFixed(1)}%</span>`;
-            return `<span class="trend-arrow flat">→ ${change >= 0 ? '+' : ''}${change.toFixed(1)}%</span>`;
+            if (change > 5) return '<span class="trend-arrow up">↑ +' + change.toFixed(1) + '%</span>';
+            if (change < -5) return '<span class="trend-arrow down">↓ ' + change.toFixed(1) + '%</span>';
+            return '<span class="trend-arrow flat">→ ' + (change >= 0 ? '+' : '') + change.toFixed(1) + '%</span>';
         }
 
         function getCellClass(v) {
@@ -1538,212 +693,180 @@
             return 'low';
         }
 
-        // Populate functions
         function populateWeeklyTable() {
-            const tbody = document.getElementById('weeklyTable');
-            let prev = null;
-            tbody.innerHTML = overallWeekly.map((r, i) => {
-                const change = prev != null ? r.adoption - prev : null;
-                const changeHtml = change != null 
-                    ? `<span class="wow-change ${change >= 0 ? 'positive' : 'negative'}">${change >= 0 ? '+' : ''}${change.toFixed(1)}%</span>`
+            var tbody = document.getElementById('weeklyTable');
+            var prev = null;
+            var html = '';
+            overallWeekly.forEach(function(r) {
+                var change = prev != null ? r.adoption - prev : null;
+                var changeHtml = change != null 
+                    ? '<span class="wow-change ' + (change >= 0 ? 'positive' : 'negative') + '">' + (change >= 0 ? '+' : '') + change.toFixed(1) + '%</span>'
                     : '<span class="wow-change neutral">—</span>';
                 prev = r.adoption;
-                return `<tr>
-                    <td><span class="station-name">${r.week}</span></td>
-                    <td>${weekDates[r.week]}</td>
-                    <td>${r.kooner}</td>
-                    <td>${r.leaked}</td>
-                    <td>${r.total}</td>
-                    <td style="color: ${r.adoption >= 85 ? 'var(--accent-green)' : 'var(--accent-red)'}">${r.adoption.toFixed(1)}%</td>
-                    <td>${changeHtml}</td>
-                </tr>`;
-            }).join('');
+                html += '<tr><td><span class="station-name">' + r.week + '</span></td><td>' + weekDates[r.week] + '</td><td>' + r.kooner + '</td><td>' + r.leaked + '</td><td>' + r.total + '</td><td style="color: ' + (r.adoption >= 85 ? 'var(--accent-green)' : 'var(--accent-red)') + '">' + r.adoption.toFixed(1) + '%</td><td>' + changeHtml + '</td></tr>';
+            });
+            tbody.innerHTML = html;
         }
 
         function populateStationHeatmap() {
-            const tbody = document.getElementById('stationHeatmap');
-            const sorted = Object.entries(stationWeekly).sort((a,b) => {
-                const aAdopt = a[1].kooner / (a[1].kooner + a[1].leaked);
-                const bAdopt = b[1].kooner / (b[1].kooner + b[1].leaked);
+            var tbody = document.getElementById('stationHeatmap');
+            var sorted = Object.entries(stationWeekly).sort(function(a,b) {
+                var aAdopt = a[1].kooner / (a[1].kooner + a[1].leaked);
+                var bAdopt = b[1].kooner / (b[1].kooner + b[1].leaked);
                 return bAdopt - aAdopt;
             });
-            tbody.innerHTML = sorted.map(([st, info]) => {
-                const change = getWoWChange(info.data, 7);
-                return `<tr>
-                    <td><span class="station-name">${st}</span></td>
-                    ${info.data.map(v => `<td class="week-cell ${getCellClass(v)}">${v != null ? v.toFixed(0) + '%' : '—'}</td>`).join('')}
-                    <td>${getTrendArrow(change)}</td>
-                </tr>`;
-            }).join('');
+            var html = '';
+            sorted.forEach(function(item) {
+                var st = item[0];
+                var info = item[1];
+                var change = getWoWChange(info.data, 7);
+                html += '<tr><td><span class="station-name">' + st + '</span></td>';
+                info.data.forEach(function(v) {
+                    html += '<td class="week-cell ' + getCellClass(v) + '">' + (v != null ? v.toFixed(0) + '%' : '—') + '</td>';
+                });
+                html += '<td>' + getTrendArrow(change) + '</td></tr>';
+            });
+            tbody.innerHTML = html;
         }
 
         function populateStationQuickTable() {
-            const tbody = document.getElementById('stationQuickTable');
-            const sorted = Object.entries(stationWeekly).sort((a,b) => {
-                const aAdopt = a[1].kooner / (a[1].kooner + a[1].leaked);
-                const bAdopt = b[1].kooner / (b[1].kooner + b[1].leaked);
+            var tbody = document.getElementById('stationQuickTable');
+            var sorted = Object.entries(stationWeekly).sort(function(a,b) {
+                var aAdopt = a[1].kooner / (a[1].kooner + a[1].leaked);
+                var bAdopt = b[1].kooner / (b[1].kooner + b[1].leaked);
                 return bAdopt - aAdopt;
             });
-            tbody.innerHTML = sorted.map(([st, info]) => {
-                const adoption = (info.kooner / (info.kooner + info.leaked) * 100);
-                const change = getWoWChange(info.data, 7);
-                const onTarget = adoption >= 85;
-                return `<tr>
-                    <td><span class="station-name">${st}</span></td>
-                    <td style="color: ${onTarget ? 'var(--accent-green)' : 'var(--accent-red)'}">${adoption.toFixed(1)}%</td>
-                    <td>${getTrendArrow(change)}</td>
-                    <td><span class="status-pill ${onTarget ? 'on-target' : 'below-target'}"><span class="status-dot"></span>${onTarget ? 'On Target' : 'Below'}</span></td>
-                </tr>`;
-            }).join('');
+            var html = '';
+            sorted.forEach(function(item) {
+                var st = item[0];
+                var info = item[1];
+                var adoption = (info.kooner / (info.kooner + info.leaked) * 100);
+                var change = getWoWChange(info.data, 7);
+                var onTarget = adoption >= 85;
+                html += '<tr><td><span class="station-name">' + st + '</span></td><td style="color: ' + (onTarget ? 'var(--accent-green)' : 'var(--accent-red)') + '">' + adoption.toFixed(1) + '%</td><td>' + getTrendArrow(change) + '</td><td><span class="status-pill ' + (onTarget ? 'on-target' : 'below-target') + '"><span class="status-dot"></span>' + (onTarget ? 'On Target' : 'Below') + '</span></td></tr>';
+            });
+            tbody.innerHTML = html;
         }
 
         function populateStationFullTable() {
-            const tbody = document.getElementById('stationFullTable');
-            const sorted = Object.entries(stationWeekly).sort((a,b) => {
-                const aAdopt = a[1].kooner / (a[1].kooner + a[1].leaked);
-                const bAdopt = b[1].kooner / (b[1].kooner + b[1].leaked);
+            var tbody = document.getElementById('stationFullTable');
+            var sorted = Object.entries(stationWeekly).sort(function(a,b) {
+                var aAdopt = a[1].kooner / (a[1].kooner + a[1].leaked);
+                var bAdopt = b[1].kooner / (b[1].kooner + b[1].leaked);
                 return bAdopt - aAdopt;
             });
-            tbody.innerHTML = sorted.map(([st, info]) => {
-                const adoption = info.kooner / (info.kooner + info.leaked) * 100;
-                const gap = 85 - adoption;
-                const change = getWoWChange(info.data, 7);
-                const onTarget = adoption >= 85;
-                return `<tr>
-                    <td><span class="station-name">${st}</span></td>
-                    <td>${info.location || '—'}</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar"><div class="adoption-fill ${onTarget ? 'on-target' : 'below-target'}" style="width:${adoption}%"></div></div><span class="adoption-value" style="color:${onTarget ? 'var(--accent-green)' : 'var(--accent-red)'}">${adoption.toFixed(1)}%</span></div></td>
-                    <td>${info.kooner}</td>
-                    <td>${info.leaked}</td>
-                    <td style="color:${gap > 0 ? 'var(--accent-red)' : 'var(--accent-green)'}">${gap > 0 ? '+' : ''}${gap.toFixed(1)}%</td>
-                    <td>${getTrendArrow(change)}</td>
-                    <td><span class="status-pill ${onTarget ? 'on-target' : 'below-target'}"><span class="status-dot"></span>${onTarget ? 'On Target' : 'Below'}</span></td>
-                </tr>`;
-            }).join('');
+            var html = '';
+            sorted.forEach(function(item) {
+                var st = item[0];
+                var info = item[1];
+                var adoption = info.kooner / (info.kooner + info.leaked) * 100;
+                var gap = 85 - adoption;
+                var change = getWoWChange(info.data, 7);
+                var onTarget = adoption >= 85;
+                html += '<tr><td><span class="station-name">' + st + '</span></td><td>' + (info.location || '—') + '</td><td><div class="adoption-bar-container"><div class="adoption-bar"><div class="adoption-fill ' + (onTarget ? 'on-target' : 'below-target') + '" style="width:' + adoption + '%"></div></div><span class="adoption-value" style="color:' + (onTarget ? 'var(--accent-green)' : 'var(--accent-red)') + '">' + adoption.toFixed(1) + '%</span></div></td><td>' + info.kooner + '</td><td>' + info.leaked + '</td><td style="color:' + (gap > 0 ? 'var(--accent-red)' : 'var(--accent-green)') + '">' + (gap > 0 ? '+' : '') + gap.toFixed(1) + '%</td><td>' + getTrendArrow(change) + '</td><td><span class="status-pill ' + (onTarget ? 'on-target' : 'below-target') + '"><span class="status-dot"></span>' + (onTarget ? 'On Target' : 'Below') + '</span></td></tr>';
+            });
+            tbody.innerHTML = html;
         }
 
         function populateDSPQuickTable() {
-            const tbody = document.getElementById('dspQuickTable');
-            const priority = dspData.filter(d => d.priority === 'critical' || d.priority === 'high').sort((a,b) => a.adoption - b.adoption).slice(0, 8);
-            tbody.innerHTML = priority.map(d => {
-                const change = d.weekly[7] != null && d.weekly[6] != null ? d.weekly[7] - d.weekly[6] : null;
-                return `<tr>
-                    <td><span class="station-name">${d.dsp}</span></td>
-                    <td><span class="action-station">${d.station}</span></td>
-                    <td style="color: var(--accent-red)">${d.adoption.toFixed(1)}%</td>
-                    <td>${getTrendArrow(change)}</td>
-                </tr>`;
-            }).join('');
+            var tbody = document.getElementById('dspQuickTable');
+            var priority = dspData.filter(function(d) { return d.priority === 'critical' || d.priority === 'high'; }).sort(function(a,b) { return a.adoption - b.adoption; }).slice(0, 8);
+            var html = '';
+            priority.forEach(function(d) {
+                var change = d.weekly[7] != null && d.weekly[6] != null ? d.weekly[7] - d.weekly[6] : null;
+                html += '<tr><td><span class="station-name">' + d.dsp + '</span></td><td><span class="action-station">' + d.station + '</span></td><td style="color: var(--accent-red)">' + d.adoption.toFixed(1) + '%</td><td>' + getTrendArrow(change) + '</td></tr>';
+            });
+            tbody.innerHTML = html;
         }
 
-        function populateDSPFullTable(filter = 'all') {
-            const tbody = document.getElementById('dspFullTable');
-            let filtered = filter === 'all' ? dspData : dspData.filter(d => d.priority === filter);
-            filtered = [...filtered].sort((a,b) => a.adoption - b.adoption);
-            tbody.innerHTML = filtered.map(d => {
-                const onTarget = d.adoption >= 85;
-                const wk5 = d.weekly[7];
-                return `<tr>
-                    <td><span class="station-name">${d.dsp}</span></td>
-                    <td><span class="action-station">${d.station}</span></td>
-                    <td>${d.location || '—'}</td>
-                    <td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill ${onTarget ? 'on-target' : 'below-target'}" style="width:${d.adoption}%"></div></div><span class="adoption-value" style="color:${onTarget ? 'var(--accent-green)' : 'var(--accent-red)'}">${d.adoption.toFixed(1)}%</span></div></td>
-                    <td>${d.kooner}</td>
-                    <td>${d.leaked}</td>
-                    <td style="color:${d.gap > 0 ? 'var(--accent-red)' : 'var(--accent-green)'}">${d.gap > 0 ? '+' : ''}${d.gap.toFixed(1)}%</td>
-                    <td class="week-cell ${getCellClass(wk5)}">${wk5 != null ? wk5.toFixed(0) + '%' : '—'}</td>
-                    <td><span class="priority-pill priority-${d.priority}">${d.priority}</span></td>
-                </tr>`;
-            }).join('');
+        function populateDSPFullTable(filter) {
+            filter = filter || 'all';
+            var tbody = document.getElementById('dspFullTable');
+            var filtered = filter === 'all' ? dspData : dspData.filter(function(d) { return d.priority === filter; });
+            filtered = filtered.slice().sort(function(a,b) { return a.adoption - b.adoption; });
+            var html = '';
+            filtered.forEach(function(d) {
+                var onTarget = d.adoption >= 85;
+                var wk5 = d.weekly[7];
+                html += '<tr><td><span class="station-name">' + d.dsp + '</span></td><td><span class="action-station">' + d.station + '</span></td><td>' + (d.location || '—') + '</td><td><div class="adoption-bar-container"><div class="adoption-bar" style="width:80px"><div class="adoption-fill ' + (onTarget ? 'on-target' : 'below-target') + '" style="width:' + d.adoption + '%"></div></div><span class="adoption-value" style="color:' + (onTarget ? 'var(--accent-green)' : 'var(--accent-red)') + '">' + d.adoption.toFixed(1) + '%</span></div></td><td>' + d.kooner + '</td><td>' + d.leaked + '</td><td style="color:' + (d.gap > 0 ? 'var(--accent-red)' : 'var(--accent-green)') + '">' + (d.gap > 0 ? '+' : '') + d.gap.toFixed(1) + '%</td><td class="week-cell ' + getCellClass(wk5) + '">' + (wk5 != null ? wk5.toFixed(0) + '%' : '—') + '</td><td><span class="priority-pill priority-' + d.priority + '">' + d.priority + '</span></td></tr>';
+            });
+            tbody.innerHTML = html;
         }
 
         function populateActionCards() {
-            const container = document.getElementById('actionList');
-            const priority = dspData.filter(d => d.priority === 'critical' || d.priority === 'high').sort((a,b) => b.leaked - a.leaked).slice(0, 6);
-            container.innerHTML = priority.map(d => `
-                <div class="action-card ${d.priority}">
-                    <div class="action-header">
-                        <span class="action-dsp">${d.dsp}</span>
-                        <span class="action-station">📍 ${d.station}</span>
-                    </div>
-                    <div class="action-stats">
-                        <div class="action-stat"><span class="action-stat-label">Adoption</span><span class="action-stat-value red">${d.adoption.toFixed(1)}%</span></div>
-                        <div class="action-stat"><span class="action-stat-label">Leaked WOs</span><span class="action-stat-value orange">${d.leaked}</span></div>
-                        <div class="action-stat"><span class="action-stat-label">Priority</span><span class="priority-pill priority-${d.priority}">${d.priority}</span></div>
-                    </div>
-                    ${d.location ? `<div class="action-location">📌 ${d.location}</div>` : ''}
-                </div>
-            `).join('');
+            var container = document.getElementById('actionList');
+            var priority = dspData.filter(function(d) { return d.priority === 'critical' || d.priority === 'high'; }).sort(function(a,b) { return b.leaked - a.leaked; }).slice(0, 6);
+            var html = '';
+            priority.forEach(function(d) {
+                html += '<div class="action-card ' + d.priority + '"><div class="action-header"><span class="action-dsp">' + d.dsp + '</span><span class="action-station">📍 ' + d.station + '</span></div><div class="action-stats"><div class="action-stat"><span class="action-stat-label">Adoption</span><span class="action-stat-value red">' + d.adoption.toFixed(1) + '%</span></div><div class="action-stat"><span class="action-stat-label">Leaked WOs</span><span class="action-stat-value orange">' + d.leaked + '</span></div><div class="action-stat"><span class="action-stat-label">Priority</span><span class="priority-pill priority-' + d.priority + '">' + d.priority + '</span></div></div>' + (d.location ? '<div class="action-location">📌 ' + d.location + '</div>' : '') + '</div>';
+            });
+            container.innerHTML = html;
         }
 
         function populateActionTable() {
-            const tbody = document.getElementById('actionTable');
-            const actions = dspData.filter(d => d.priority !== 'on-target').sort((a,b) => {
-                const order = { critical: 0, high: 1, medium: 2, low: 3 };
+            var tbody = document.getElementById('actionTable');
+            var actions = dspData.filter(function(d) { return d.priority !== 'on-target'; }).sort(function(a,b) {
+                var order = { critical: 0, high: 1, medium: 2, low: 3 };
                 return order[a.priority] - order[b.priority] || b.leaked - a.leaked;
             });
-            tbody.innerHTML = actions.map(d => {
-                const action = d.priority === 'critical' ? 'Schedule fleet manager meeting' : d.priority === 'high' ? 'Outreach & propose agreement' : 'Monitor relationship';
-                return `<tr>
-                    <td><span class="priority-pill priority-${d.priority}">${d.priority}</span></td>
-                    <td><span class="station-name">${d.dsp}</span></td>
-                    <td><span class="action-station">${d.station}</span></td>
-                    <td>${d.location || '—'}</td>
-                    <td style="color: var(--accent-red)">${d.adoption.toFixed(1)}%</td>
-                    <td>${d.leaked}</td>
-                    <td>${action}</td>
-                </tr>`;
-            }).join('');
+            var html = '';
+            actions.forEach(function(d) {
+                var action = d.priority === 'critical' ? 'Schedule fleet manager meeting' : d.priority === 'high' ? 'Outreach & propose agreement' : 'Monitor relationship';
+                html += '<tr><td><span class="priority-pill priority-' + d.priority + '">' + d.priority + '</span></td><td><span class="station-name">' + d.dsp + '</span></td><td><span class="action-station">' + d.station + '</span></td><td>' + (d.location || '—') + '</td><td style="color: var(--accent-red)">' + d.adoption.toFixed(1) + '%</td><td>' + d.leaked + '</td><td>' + action + '</td></tr>';
+            });
+            tbody.innerHTML = html;
         }
 
-        // Charts
         function createCharts() {
-            const colors = ['#ff4757', '#ffa502', '#3742fa', '#a855f7', '#00ff88', '#00d4ff', '#ff6b81', '#2ed573', '#1e90ff'];
+            var colors = ['#ff4757', '#ffa502', '#3742fa', '#a855f7', '#00ff88', '#00d4ff', '#ff6b81', '#2ed573', '#1e90ff'];
 
             // Overall Trend
-            new Chart(document.getElementById('overallTrendChart').getContext('2d'), {
+            new Chart(document.getElementById('overallTrendChart'), {
                 type: 'line',
                 data: {
                     labels: weekLabels,
                     datasets: [{
                         label: 'Adoption Rate',
-                        data: overallWeekly.map(d => d.adoption),
+                        data: overallWeekly.map(function(d) { return d.adoption; }),
                         borderColor: '#3742fa',
                         backgroundColor: 'rgba(55, 66, 250, 0.1)',
                         fill: true,
                         tension: 0.4,
-                        pointBackgroundColor: overallWeekly.map(d => d.adoption >= 85 ? '#00ff88' : '#ff4757'),
+                        pointBackgroundColor: overallWeekly.map(function(d) { return d.adoption >= 85 ? '#00ff88' : '#ff4757'; }),
                         pointRadius: 6
                     }, {
                         label: 'Target (85%)',
-                        data: Array(8).fill(85),
+                        data: [85, 85, 85, 85, 85, 85, 85, 85],
                         borderColor: '#00ff88',
                         borderDash: [5, 5],
-                        pointRadius: 0
+                        pointRadius: 0,
+                        fill: false
                     }]
                 },
                 options: {
-                    responsive: true, maintainAspectRatio: false,
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { legend: { labels: { color: '#8b8b9a' } } },
                     scales: {
-                        y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b8b9a', callback: v => v + '%' } },
+                        y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b8b9a', callback: function(v) { return v + '%'; } } },
                         x: { grid: { display: false }, ticks: { color: '#8b8b9a' } }
                     }
                 }
             });
 
             // Weekly Bar
-            new Chart(document.getElementById('weeklyBarChart').getContext('2d'), {
+            new Chart(document.getElementById('weeklyBarChart'), {
                 type: 'bar',
                 data: {
                     labels: weekLabels,
                     datasets: [
-                        { label: 'Kooner WOs', data: overallWeekly.map(d => d.kooner), backgroundColor: 'rgba(0, 255, 136, 0.7)', borderRadius: 4 },
-                        { label: 'Leaked WOs', data: overallWeekly.map(d => d.leaked), backgroundColor: 'rgba(255, 71, 87, 0.7)', borderRadius: 4 }
+                        { label: 'Kooner WOs', data: overallWeekly.map(function(d) { return d.kooner; }), backgroundColor: 'rgba(0, 255, 136, 0.7)', borderRadius: 4 },
+                        { label: 'Leaked WOs', data: overallWeekly.map(function(d) { return d.leaked; }), backgroundColor: 'rgba(255, 71, 87, 0.7)', borderRadius: 4 }
                     ]
                 },
                 options: {
-                    responsive: true, maintainAspectRatio: false,
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { legend: { labels: { color: '#8b8b9a' } } },
                     scales: {
                         y: { stacked: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b8b9a' } },
@@ -1753,108 +876,116 @@
             });
 
             // WoW Overall
-            new Chart(document.getElementById('wowOverallChart').getContext('2d'), {
+            new Chart(document.getElementById('wowOverallChart'), {
                 type: 'line',
                 data: {
-                    labels: weekLabels.map(w => `${w}\n${weekDates[w]}`),
+                    labels: weekLabels.map(function(w) { return w + '\n' + weekDates[w]; }),
                     datasets: [{
                         label: 'Adoption Rate',
-                        data: overallWeekly.map(d => d.adoption),
+                        data: overallWeekly.map(function(d) { return d.adoption; }),
                         borderColor: '#3742fa',
                         backgroundColor: 'rgba(55, 66, 250, 0.1)',
                         fill: true,
                         tension: 0.4,
-                        pointBackgroundColor: overallWeekly.map(d => d.adoption >= 85 ? '#00ff88' : '#ff4757'),
+                        pointBackgroundColor: overallWeekly.map(function(d) { return d.adoption >= 85 ? '#00ff88' : '#ff4757'; }),
                         pointRadius: 8
                     }, {
                         label: 'Target (85%)',
-                        data: Array(8).fill(85),
+                        data: [85, 85, 85, 85, 85, 85, 85, 85],
                         borderColor: '#00ff88',
                         borderDash: [5, 5],
-                        pointRadius: 0
+                        pointRadius: 0,
+                        fill: false
                     }]
                 },
                 options: {
-                    responsive: true, maintainAspectRatio: false,
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { legend: { labels: { color: '#8b8b9a' } } },
                     scales: {
-                        y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b8b9a', callback: v => v + '%' } },
+                        y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b8b9a', callback: function(v) { return v + '%'; } } },
                         x: { grid: { display: false }, ticks: { color: '#8b8b9a' } }
                     }
                 }
             });
 
             // Station Trend
-            new Chart(document.getElementById('stationTrendChart').getContext('2d'), {
+            var stationDatasets = [];
+            var i = 0;
+            for (var st in stationWeekly) {
+                stationDatasets.push({
+                    label: st,
+                    data: stationWeekly[st].data,
+                    borderColor: colors[i % colors.length],
+                    backgroundColor: 'transparent',
+                    tension: 0.3,
+                    pointRadius: 3
+                });
+                i++;
+            }
+            new Chart(document.getElementById('stationTrendChart'), {
                 type: 'line',
-                data: {
-                    labels: weekLabels,
-                    datasets: Object.entries(stationWeekly).map(([st, info], i) => ({
-                        label: st,
-                        data: info.data,
-                        borderColor: colors[i],
-                        backgroundColor: 'transparent',
-                        tension: 0.3,
-                        pointRadius: 3
-                    }))
-                },
+                data: { labels: weekLabels, datasets: stationDatasets },
                 options: {
-                    responsive: true, maintainAspectRatio: false,
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { legend: { labels: { color: '#8b8b9a' }, position: 'right' } },
                     scales: {
-                        y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b8b9a', callback: v => v + '%' } },
+                        y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b8b9a', callback: function(v) { return v + '%'; } } },
                         x: { grid: { display: false }, ticks: { color: '#8b8b9a' } }
                     }
                 }
             });
 
             // Station Bar
-            const sortedStations = Object.entries(stationWeekly).map(([st, info]) => ({ st, adoption: info.kooner / (info.kooner + info.leaked) * 100 })).sort((a,b) => b.adoption - a.adoption);
-            new Chart(document.getElementById('stationBarChart').getContext('2d'), {
+            var sortedStations = Object.entries(stationWeekly).map(function(e) { return { st: e[0], adoption: e[1].kooner / (e[1].kooner + e[1].leaked) * 100 }; }).sort(function(a,b) { return b.adoption - a.adoption; });
+            new Chart(document.getElementById('stationBarChart'), {
                 type: 'bar',
                 data: {
-                    labels: sortedStations.map(s => s.st),
-                    datasets: [{ data: sortedStations.map(s => s.adoption), backgroundColor: sortedStations.map(s => s.adoption >= 85 ? 'rgba(0, 255, 136, 0.7)' : 'rgba(255, 71, 87, 0.7)'), borderRadius: 4 }]
+                    labels: sortedStations.map(function(s) { return s.st; }),
+                    datasets: [{ data: sortedStations.map(function(s) { return s.adoption; }), backgroundColor: sortedStations.map(function(s) { return s.adoption >= 85 ? 'rgba(0, 255, 136, 0.7)' : 'rgba(255, 71, 87, 0.7)'; }), borderRadius: 4 }]
                 },
                 options: {
-                    responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
                     plugins: { legend: { display: false } },
                     scales: {
-                        x: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b8b9a', callback: v => v + '%' } },
+                        x: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b8b9a', callback: function(v) { return v + '%'; } } },
                         y: { grid: { display: false }, ticks: { color: '#8b8b9a' } }
                     }
                 }
             });
 
             // Leakage Pie
-            const leakageSorted = Object.entries(stationWeekly).map(([st, info]) => ({ st, leaked: info.leaked })).sort((a,b) => b.leaked - a.leaked);
-            new Chart(document.getElementById('stationLeakageChart').getContext('2d'), {
+            var leakageSorted = Object.entries(stationWeekly).map(function(e) { return { st: e[0], leaked: e[1].leaked }; }).sort(function(a,b) { return b.leaked - a.leaked; });
+            new Chart(document.getElementById('stationLeakageChart'), {
                 type: 'doughnut',
                 data: {
-                    labels: leakageSorted.map(s => s.st),
-                    datasets: [{ data: leakageSorted.map(s => s.leaked), backgroundColor: colors, borderWidth: 0 }]
+                    labels: leakageSorted.map(function(s) { return s.st; }),
+                    datasets: [{ data: leakageSorted.map(function(s) { return s.leaked; }), backgroundColor: colors, borderWidth: 0 }]
                 },
                 options: {
-                    responsive: true, maintainAspectRatio: false,
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { legend: { position: 'right', labels: { color: '#8b8b9a', padding: 12 } } },
                     cutout: '60%'
                 }
             });
         }
 
-        // Init
-        document.addEventListener('DOMContentLoaded', () => {
+        // Initialize
+        window.onload = function() {
             populateWeeklyTable();
             populateStationHeatmap();
             populateStationQuickTable();
             populateStationFullTable();
             populateDSPQuickTable();
-            populateDSPFullTable();
+            populateDSPFullTable('all');
             populateActionCards();
             populateActionTable();
             createCharts();
-        });
+        };
     </script>
-
-
-</body></html>
+</body>
+</html>
