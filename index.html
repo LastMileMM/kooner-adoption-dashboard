@@ -212,6 +212,7 @@
         .badge-stations { background: rgba(55, 66, 250, 0.2); color: var(--accent-blue); }
         .badge-dsps { background: rgba(168, 85, 247, 0.2); color: var(--accent-purple); }
         .badge-trends { background: rgba(0, 212, 255, 0.2); color: var(--accent-cyan); }
+        .badge-insights { background: rgba(0, 255, 136, 0.2); color: var(--accent-green); }
 
         .data-table { width: 100%; border-collapse: collapse; }
 
@@ -351,9 +352,120 @@
         .wow-change.negative { color: var(--accent-red); background: rgba(255, 71, 87, 0.1); }
         .wow-change.neutral { color: var(--text-muted); }
 
+        /* Insights Section Styles */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .insight-card {
+            background: var(--bg-card-hover);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .insight-card.positive { border-left-color: var(--accent-green); }
+        .insight-card.negative { border-left-color: var(--accent-red); }
+        .insight-card.warning { border-left-color: var(--accent-orange); }
+        .insight-card.info { border-left-color: var(--accent-cyan); }
+
+        .insight-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .insight-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .insight-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .insight-metric {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .insight-metric.green { color: var(--accent-green); }
+        .insight-metric.red { color: var(--accent-red); }
+        .insight-metric.orange { color: var(--accent-orange); }
+
+        .executive-summary {
+            background: linear-gradient(135deg, rgba(55, 66, 250, 0.1), rgba(168, 85, 247, 0.1));
+            border: 1px solid var(--accent-blue);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .executive-summary h3 {
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            color: var(--accent-cyan);
+        }
+
+        .executive-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .executive-summary li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .executive-summary li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        .next-steps {
+            background: var(--bg-card-hover);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .next-steps h4 {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: var(--accent-orange);
+        }
+
+        .next-steps ol {
+            padding-left: 20px;
+            color: var(--text-secondary);
+        }
+
+        .next-steps li {
+            padding: 6px 0;
+            font-size: 0.9rem;
+        }
+
         @media (max-width: 1200px) {
             .kpi-row { grid-template-columns: repeat(3, 1fr); }
             .action-list { grid-template-columns: repeat(2, 1fr); }
+            .insights-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 900px) {
             .main-grid { grid-template-columns: 1fr; }
@@ -482,6 +594,74 @@
         <!-- TRENDS TAB -->
         <div id="trends" class="tab-content">
             <div class="main-grid">
+                <!-- EXECUTIVE SUMMARY FOR WBR -->
+                <div class="card full-width">
+                    <div class="card-header">
+                        <div class="card-title">📋 WBR Executive Summary - WK5 (Jan 25-31)</div>
+                        <span class="card-badge badge-insights">FOR AMAZON WBR</span>
+                    </div>
+                    
+                    <div class="executive-summary">
+                        <h3>🎯 Key Takeaways</h3>
+                        <ul>
+                            <li><strong>Overall adoption improved to 65.7%</strong> in WK5, up +6.1% from WK4 (59.6%), but still 19.3% below the 85% target.</li>
+                            <li><strong>WK1 (Dec 28-Jan 3) achieved 87.7% adoption</strong> with only 19 leaked WOs — proving the 85% target is achievable under optimal conditions.</li>
+                            <li><strong>HLA2 (Santa Clarita) remains the largest opportunity</strong> with 225 leaked WOs (39% of total leakage), driven primarily by ARMA (101 leaked, 2.9% adoption).</li>
+                            <li><strong>HDT3 (Romulus) showed strong WK5 recovery</strong> — adoption jumped from 55.3% to 80.0% (+24.7%), indicating successful DSP engagement.</li>
+                            <li><strong>HAU1 (Austin) requires immediate attention</strong> — adoption dropped from 48.3% (WK4) to 12.5% (WK5), a -35.8% decline driven by FICL.</li>
+                        </ul>
+                    </div>
+
+                    <div class="insights-grid">
+                        <div class="insight-card positive">
+                            <div class="insight-icon">📈</div>
+                            <div class="insight-title">Positive Momentum</div>
+                            <div class="insight-text">
+                                WK5 marks the <span class="insight-metric green">2nd consecutive week</span> of improvement after the WK2-WK4 decline. 
+                                Current trajectory suggests potential to reach <span class="insight-metric">70%+</span> by WK7 if momentum continues.
+                            </div>
+                        </div>
+
+                        <div class="insight-card negative">
+                            <div class="insight-icon">⚠️</div>
+                            <div class="insight-title">Critical Alert: HAU1 Austin</div>
+                            <div class="insight-text">
+                                Station dropped <span class="insight-metric red">-35.8%</span> WoW (48.3% → 12.5%). 
+                                FICL adoption collapsed from 45.8% to 5.0%. Recommend immediate fleet manager outreach.
+                            </div>
+                        </div>
+
+                        <div class="insight-card warning">
+                            <div class="insight-icon">🎯</div>
+                            <div class="insight-title">Biggest Opportunity: HLA2</div>
+                            <div class="insight-text">
+                                <span class="insight-metric orange">225 leaked WOs</span> (39% of total). Converting just ARMA alone would add 
+                                <span class="insight-metric">+6.2%</span> to overall adoption. MDAS showing improvement (64.9% → 92% in WK5).
+                            </div>
+                        </div>
+
+                        <div class="insight-card info">
+                            <div class="insight-icon">🏆</div>
+                            <div class="insight-title">Best Performers</div>
+                            <div class="insight-text">
+                                <span class="insight-metric green">HTP2</span> (89.2%) and <span class="insight-metric green">HHO3</span> (87.1%) 
+                                consistently above target. ALAB at HDT3 maintained <span class="insight-metric">90%+</span> adoption for 8 consecutive weeks.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="next-steps">
+                        <h4>🚀 Recommended Actions for WK6</h4>
+                        <ol>
+                            <li><strong>HAU1 Emergency:</strong> Schedule call with FICL fleet manager to understand WK5 drop and recovery plan</li>
+                            <li><strong>HLA2 Focus:</strong> Initiate ARMA engagement — largest single DSP opportunity (101 leaked WOs)</li>
+                            <li><strong>Replicate HDT3 Success:</strong> Document what drove the +24.7% improvement for playbook</li>
+                            <li><strong>Maintain HTP2/HHO3:</strong> Continue current practices at top-performing stations</li>
+                            <li><strong>HPD1 Portland:</strong> JDTC showing first signs of adoption (14.3% in WK5) — nurture relationship</li>
+                        </ol>
+                    </div>
+                </div>
+
                 <div class="card full-width">
                     <div class="card-header">
                         <div class="card-title">📈 Week-over-Week Adoption (Sunday - Saturday)</div>
@@ -499,6 +679,36 @@
                         <thead><tr><th>Week</th><th>Dates</th><th>Kooner</th><th>Leaked</th><th>Total</th><th>Adoption</th><th>WoW Change</th></tr></thead>
                         <tbody id="weeklyTable"></tbody>
                     </table>
+                </div>
+
+                <!-- STATION INSIGHTS -->
+                <div class="card full-width">
+                    <div class="card-header">
+                        <div class="card-title">🏢 Station WoW Analysis</div>
+                        <span class="card-badge badge-insights">WK4 → WK5</span>
+                    </div>
+                    
+                    <div class="insights-grid">
+                        <div class="insight-card positive">
+                            <div class="insight-icon">🚀</div>
+                            <div class="insight-title">Top Improvers</div>
+                            <div class="insight-text">
+                                <strong>HDT3 (Romulus):</strong> <span class="insight-metric green">+24.7%</span> (55.3% → 80.0%)<br>
+                                <strong>HCL2 (Charlotte):</strong> <span class="insight-metric green">+18.1%</span> (53.3% → 71.4%)<br>
+                                <strong>HLA2 (Santa Clarita):</strong> <span class="insight-metric green">+11.8%</span> (49.4% → 61.2%)
+                            </div>
+                        </div>
+
+                        <div class="insight-card negative">
+                            <div class="insight-icon">📉</div>
+                            <div class="insight-title">Needs Attention</div>
+                            <div class="insight-text">
+                                <strong>HAU1 (Austin):</strong> <span class="insight-metric red">-35.8%</span> (48.3% → 12.5%)<br>
+                                <strong>HIN3 (South Bend):</strong> <span class="insight-metric red">-66.7%</span> (100% → 33.3%)<br>
+                                <strong>HMS2 (Lakeville):</strong> <span class="insight-metric red">-4.1%</span> (73.3% → 69.2%)
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card full-width">
