@@ -156,16 +156,16 @@
 
         <div id="overview" class="tab-content active">
             <div class="kpi-row">
-                <div class="kpi-card"><div class="kpi-label">Total Kooner WOs</div><div class="kpi-value green">727</div><div class="kpi-subtext">Completed by Kooner</div></div>
+                <div class="kpi-card"><div class="kpi-label">Total Kooner WOs</div><div class="kpi-value green">726</div><div class="kpi-subtext">Completed by Kooner</div></div>
                 <div class="kpi-card warning"><div class="kpi-label">Total Leaked WOs</div><div class="kpi-value orange">594</div><div class="kpi-subtext">Sent to other vendors</div></div>
                 <div class="kpi-card danger"><div class="kpi-label">Current Adoption</div><div class="kpi-value red">55.0%</div><div class="kpi-subtext">30.0% gap to target</div></div>
-                <div class="kpi-card success"><div class="kpi-label">On Target Stations</div><div class="kpi-value green">4</div><div class="kpi-subtext">of 14 stations ≥85%</div></div>
-                <div class="kpi-card"><div class="kpi-label">Total WOs</div><div class="kpi-value">1,321</div><div class="kpi-subtext">Across 14 stations</div></div>
+                <div class="kpi-card success"><div class="kpi-label">On Target Stations</div><div class="kpi-value green">3</div><div class="kpi-subtext">of 13 stations ≥85%</div></div>
+                <div class="kpi-card"><div class="kpi-label">Total WOs</div><div class="kpi-value">1,320</div><div class="kpi-subtext">Across 13 stations</div></div>
             </div>
             <div class="main-grid">
                 <div class="card"><div class="card-header"><div class="card-title">Weekly Kooner Volume</div><span class="card-badge badge-trends">6 WEEKS</span></div><div class="chart-container"><canvas id="weeklyBarChart"></canvas></div></div>
                 <div class="card"><div class="card-header"><div class="card-title">Station Adoption Distribution</div></div><div class="chart-container"><canvas id="stationBarChart"></canvas></div></div>
-                <div class="card"><div class="card-header"><div class="card-title">Station Status</div><span class="card-badge badge-stations">14 STATIONS</span></div><div class="table-scroll" style="max-height:300px"><table class="data-table"><thead><tr><th>Station</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>Status</th></tr></thead><tbody id="stationQuickTable"></tbody></table></div></div>
+                <div class="card"><div class="card-header"><div class="card-title">Station Status</div><span class="card-badge badge-stations">13 STATIONS</span></div><div class="table-scroll" style="max-height:300px"><table class="data-table"><thead><tr><th>Station</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>Status</th></tr></thead><tbody id="stationQuickTable"></tbody></table></div></div>
                 <div class="card"><div class="card-header"><div class="card-title">Top Opportunities</div><span class="card-badge badge-dsps">BY LEAKED WOs</span></div><div class="table-scroll" style="max-height:300px"><table class="data-table"><thead><tr><th>Station</th><th>Leaked</th><th>Adoption</th><th>Potential</th></tr></thead><tbody id="opportunityTable"></tbody></table></div></div>
             </div>
         </div>
@@ -178,14 +178,14 @@
                         <h3>🎯 Key Takeaways</h3>
                         <ul>
                             <li><strong>Overall adoption at 55.0%</strong> — 30% below the 85% target. 727 Kooner WOs vs 594 leaked.</li>
-                            <li><strong>4 stations meeting target:</strong> HMK4 (100%), HSL1 (100%), HSD2 (100%), HCT2 (87.0%)</li>
+                            <li><strong>3 stations meeting target:</strong> HMK4 (100%), HSL1 (100%), HCT2 (87.0%)</li>
                             <li><strong>HLA2 is the largest opportunity:</strong> 225 leaked WOs (38% of all leakage), only 40.3% adoption.</li>
                             <li><strong>HDT3 has highest volume</strong> but only 51.8% adoption with 120 leaked WOs.</li>
                             <li><strong>HPD1 is critical:</strong> Only 3.0% adoption (1 Kooner vs 32 leaked).</li>
                         </ul>
                     </div>
                     <div class="insights-grid">
-                        <div class="insight-card positive"><div class="insight-icon">✅</div><div class="insight-title">On Target Stations</div><div class="insight-text"><span class="insight-metric green">HMK4, HSL1, HSD2, HCT2</span> — 4 stations meeting 85%+ target.</div></div>
+                        <div class="insight-card positive"><div class="insight-icon">✅</div><div class="insight-title">On Target Stations</div><div class="insight-text"><span class="insight-metric green">HMK4, HSL1, HCT2/span> — 3 stations meeting 85%+ target.</div></div>
                         <div class="insight-card negative"><div class="insight-icon">🔴</div><div class="insight-title">Critical: HPD1</div><div class="insight-text"><span class="insight-metric red">3.0% adoption</span> — Only 1 Kooner WO vs 32 leaked. Needs immediate action.</div></div>
                         <div class="insight-card warning"><div class="insight-icon">🎯</div><div class="insight-title">Biggest Opportunity: HLA2</div><div class="insight-text"><span class="insight-metric orange">225 leaked WOs</span> — Improving HLA2 would add +17% to total Kooner WOs.</div></div>
                         <div class="insight-card info"><div class="insight-icon">📊</div><div class="insight-title">Near Target</div><div class="insight-text"><span class="insight-metric">HDY1 (81.7%), HTP2 (79.8%), HHO3 (79.2%)</span> — Close to 85% target.</div></div>
@@ -199,7 +199,7 @@
 
         <div id="stations" class="tab-content">
             <div class="main-grid">
-                <div class="card full-width"><div class="card-header"><div class="card-title">Station Adoption Details</div><span class="card-badge badge-stations">14 STATIONS</span></div><table class="data-table"><thead><tr><th>Station</th><th>Location</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>Total</th><th>Gap to 85%</th><th>Status</th></tr></thead><tbody id="stationFullTable"></tbody></table></div>
+                <div class="card full-width"><div class="card-header"><div class="card-title">Station Adoption Details</div><span class="card-badge badge-stations">13 STATIONS</span></div><table class="data-table"><thead><tr><th>Station</th><th>Location</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>Total</th><th>Gap to 85%</th><th>Status</th></tr></thead><tbody id="stationFullTable"></tbody></table></div>
                 <div class="card"><div class="card-header"><div class="card-title">Station Rankings</div></div><div class="chart-container tall"><canvas id="stationRankChart"></canvas></div></div>
                 <div class="card"><div class="card-header"><div class="card-title">Leakage Distribution</div></div><div class="chart-container tall"><canvas id="leakageChart"></canvas></div></div>
             </div>
@@ -248,11 +248,10 @@
     <script>
         // UPDATED DATA from new Kooner report
         var stationData = [
-            {station:'HMK4',location:'',kooner:57,leaked:0,adoption:100.0},
-            {station:'HSD2',location:'NEW',kooner:1,leaked:0,adoption:100.0},
-            {station:'HSL1',location:'',kooner:20,leaked:0,adoption:100.0},
-            {station:'HCT2',location:'',kooner:20,leaked:3,adoption:87.0},
-            {station:'HDY1',location:'',kooner:49,leaked:11,adoption:81.7},
+            {station:'HMK4',location:'Milwaukee, WI',kooner:57,leaked:0,adoption:100.0},
+            {station:'HSL1',location:'Salt Lake City, UT',kooner:20,leaked:0,adoption:100.0},
+            {station:'HCT2',location:'Chattanooga, TN',kooner:20,leaked:3,adoption:87.0},
+            {station:'HDY1',location:'Clayton, OH',kooner:49,leaked:11,adoption:81.7},
             {station:'HTP2',location:'Gibsonton, FL',kooner:67,leaked:17,adoption:79.8},
             {station:'HHO3',location:'Porter, TX',kooner:84,leaked:22,adoption:79.2},
             {station:'HMS2',location:'Lakeville, MN',kooner:35,leaked:27,adoption:56.5},
@@ -276,7 +275,6 @@
             'HMK4':{WK53:7,WK1:10,WK2:8,WK3:15,WK4:3,WK5:14,total:57},
             'HMS2':{WK53:2,WK1:2,WK2:6,WK3:5,WK4:11,WK5:9,total:35},
             'HPD1':{WK53:null,WK1:null,WK2:null,WK3:null,WK4:1,WK5:null,total:1},
-            'HSD2':{WK53:null,WK1:null,WK2:null,WK3:null,WK4:1,WK5:null,total:1},
             'HSL1':{WK53:null,WK1:1,WK2:4,WK3:5,WK4:5,WK5:5,total:20},
             'HTP2':{WK53:13,WK1:3,WK2:20,WK3:8,WK4:16,WK5:7,total:67}
         };
