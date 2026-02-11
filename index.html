@@ -141,8 +141,8 @@
                 <div class="subtitle"><span>Vendor Adoption Tracking</span><span class="target-badge">TARGET: 85%</span></div>
             </div>
             <div class="header-right">
-                <div class="last-updated">Last Updated: 2026-02-04</div>
-                <div class="data-period">Data Period: WK53 - WK5 (Dec 21 - Jan 31)</div>
+                <div class="last-updated">Last Updated: 2026-02-11</div>
+                <div class="data-period">Data Period: WK01 - WK06 (Dec 28 - Feb 7)</div>
             </div>
         </header>
         <div class="nav-tabs">
@@ -158,12 +158,12 @@
             <div class="kpi-row">
                 <div class="kpi-card"><div class="kpi-label">Total Kooner WOs</div><div class="kpi-value green">726</div><div class="kpi-subtext">Completed by Kooner</div></div>
                 <div class="kpi-card warning"><div class="kpi-label">Total Leaked WOs</div><div class="kpi-value orange">594</div><div class="kpi-subtext">Sent to other vendors</div></div>
-                <div class="kpi-card danger"><div class="kpi-label">Current Adoption</div><div class="kpi-value red">55.0%</div><div class="kpi-subtext">30.0% gap to target</div></div>
+                <div class="kpi-card danger"><div class="kpi-label">Current Adoption</div><div class="kpi-value red">46.0%</div><div class="kpi-subtext">39.0% gap to target</div></div>
                 <div class="kpi-card success"><div class="kpi-label">On Target Stations</div><div class="kpi-value green">3</div><div class="kpi-subtext">of 13 stations ≥85%</div></div>
                 <div class="kpi-card"><div class="kpi-label">Total WOs</div><div class="kpi-value">1,320</div><div class="kpi-subtext">Across 13 stations</div></div>
             </div>
             <div class="main-grid">
-                <div class="card"><div class="card-header"><div class="card-title">Weekly Kooner Volume</div><span class="card-badge badge-trends">6 WEEKS</span></div><div class="chart-container"><canvas id="weeklyBarChart"></canvas></div></div>
+                <div class="card"><div class="card-header"><div class="card-title">Weekly Kooner Volume</div><span class="card-badge badge-trends">WK01-WK06</span></div><div class="chart-container"><canvas id="weeklyBarChart"></canvas></div></div>
                 <div class="card"><div class="card-header"><div class="card-title">Station Adoption Distribution</div></div><div class="chart-container"><canvas id="stationBarChart"></canvas></div></div>
                 <div class="card"><div class="card-header"><div class="card-title">Station Status</div><span class="card-badge badge-stations">13 STATIONS</span></div><div class="table-scroll" style="max-height:300px"><table class="data-table"><thead><tr><th>Station</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>Status</th></tr></thead><tbody id="stationQuickTable"></tbody></table></div></div>
                 <div class="card"><div class="card-header"><div class="card-title">Top Opportunities</div><span class="card-badge badge-dsps">BY LEAKED WOs</span></div><div class="table-scroll" style="max-height:300px"><table class="data-table"><thead><tr><th>Station</th><th>Leaked</th><th>Adoption</th><th>Potential</th></tr></thead><tbody id="opportunityTable"></tbody></table></div></div>
@@ -177,7 +177,7 @@
                     <div class="executive-summary">
                         <h3>🎯 Key Takeaways</h3>
                         <ul>
-                            <li><strong>Overall adoption at 55.0%</strong> — 30% below the 85% target. 727 Kooner WOs vs 594 leaked.</li>
+                            <li><strong>Overall adoption at 46.0% (Amazon official)</strong> — 39% below the 85% target. WK06 shows +4% WoW improvement. 727 Kooner WOs vs 594 leaked.</li>
                             <li><strong>3 stations meeting target:</strong> HMK4 (100%), HSL1 (100%), HCT2 (87.0%)</li>
                             <li><strong>HLA2 is the largest opportunity:</strong> 225 leaked WOs (38% of all leakage), only 40.3% adoption.</li>
                             <li><strong>HDT3 has highest volume</strong> but only 51.8% adoption with 120 leaked WOs.</li>
@@ -193,7 +193,7 @@
                     <div class="next-steps"><h4>🚀 Recommended Actions</h4><ol><li><strong>HPD1:</strong> Emergency intervention — identify blockers for 3% adoption</li><li><strong>HLA2:</strong> Focus on DSPs with highest leakage (ARMA, MDAS, BORN)</li><li><strong>HAU1:</strong> Dropped to 39.8% — investigate recent decline</li><li><strong>Push near-target stations:</strong> HDY1, HTP2, HHO3 need small improvements</li></ol></div>
                 </div>
                 <div class="card full-width"><div class="card-header"><div class="card-title">📈 Weekly Kooner Volume by Station</div></div><div class="chart-container tall"><canvas id="stationWeeklyChart"></canvas></div></div>
-                <div class="card full-width"><div class="card-header"><div class="card-title">Station Weekly Breakdown</div></div><div class="table-scroll"><table class="data-table"><thead><tr><th>Station</th><th>WK53</th><th>WK1</th><th>WK2</th><th>WK3</th><th>WK4</th><th>WK5</th><th>Total</th></tr></thead><tbody id="stationWeeklyTable"></tbody></table></div></div>
+                <div class="card full-width"><div class="card-header"><div class="card-title">Station Weekly Breakdown</div></div><div class="table-scroll"><table class="data-table"><thead><tr><th>Station</th><th>WK1</th><th>WK2</th><th>WK5</th><th>WK6</th><th>WK5</th><th>WK6</th><th>Total</th></tr></thead><tbody id="stationWeeklyTable"></tbody></table></div></div>
             </div>
         </div>
 
@@ -224,15 +224,15 @@
 
         <div id="sentiment" class="tab-content">
             <div class="kpi-row" style="grid-template-columns:repeat(4,1fr)">
-                <div class="kpi-card"><div class="kpi-label">Survey Responses</div><div class="kpi-value">11</div><div class="kpi-subtext">From 7 DSPs</div></div>
-                <div class="kpi-card warning"><div class="kpi-label">Avg Satisfaction</div><div class="kpi-value yellow">2.5</div><div class="kpi-subtext">out of 5.0</div></div>
-                <div class="kpi-card warning"><div class="kpi-label">Avg Timeliness</div><div class="kpi-value orange">2.5</div><div class="kpi-subtext">out of 5.0</div></div>
-                <div class="kpi-card warning"><div class="kpi-label">Avg Quality</div><div class="kpi-value orange">2.5</div><div class="kpi-subtext">out of 5.0</div></div>
+                <div class="kpi-card"><div class="kpi-label">Survey Responses</div><div class="kpi-value">14</div><div class="kpi-subtext">From 7 DSPs</div></div>
+                <div class="kpi-card warning"><div class="kpi-label">Avg Satisfaction</div><div class="kpi-value yellow">2.8</div><div class="kpi-subtext">out of 5.0</div></div>
+                <div class="kpi-card warning"><div class="kpi-label">Avg Timeliness</div><div class="kpi-value orange">2.8</div><div class="kpi-subtext">out of 5.0</div></div>
+                <div class="kpi-card warning"><div class="kpi-label">Avg Quality</div><div class="kpi-value orange">2.9</div><div class="kpi-subtext">out of 5.0</div></div>
             </div>
             <div class="main-grid">
                 <div class="card"><div class="card-header"><div class="card-title">Sentiment by DSP</div></div><div class="chart-container"><canvas id="sentimentChart"></canvas></div></div>
                 <div class="card"><div class="card-header"><div class="card-title">Sentiment vs Adoption</div></div><div class="chart-container"><canvas id="correlationChart"></canvas></div></div>
-                <div class="card full-width"><div class="card-header"><div class="card-title">🎯 Key Themes</div></div><div class="insights-grid"><div class="insight-card negative"><div class="insight-icon">⏱️</div><div class="insight-title">Timeliness</div><div class="insight-text">PM completion 4+ days</div></div><div class="insight-card negative"><div class="insight-icon">📄</div><div class="insight-title">Paperwork</div><div class="insight-text">Documentation delays</div></div><div class="insight-card warning"><div class="insight-icon">💬</div><div class="insight-title">Communication</div><div class="insight-text">Need proactive updates</div></div><div class="insight-card positive"><div class="insight-icon">⭐</div><div class="insight-title">D4DS (5/5)</div><div class="insight-text">Very impressed with supervisor</div></div></div></div>
+                <div class="card full-width"><div class="card-header"><div class="card-title">🎯 Key Themes</div></div><div class="insights-grid"><div class="insight-card negative"><div class="insight-icon">⏱️</div><div class="insight-title">Timeliness</div><div class="insight-text">PM completion 4+ days</div></div><div class="insight-card negative"><div class="insight-icon">📄</div><div class="insight-title">Paperwork</div><div class="insight-text">Documentation delays</div></div><div class="insight-card warning"><div class="insight-icon">💬</div><div class="insight-title">Communication</div><div class="insight-text">Need proactive updates</div></div><div class="insight-card positive"><div class="insight-icon">🌟</div><div class="insight-title">ARMA Turnaround!</div><div class="insight-text">Feb 9: 5/5 - "Jose Madrigal is GREAT!"</div></div></div></div>
                 <div class="card full-width"><div class="card-header"><div class="card-title">💬 Recent Feedback</div></div><div id="feedbackList"></div></div>
             </div>
         </div>
@@ -264,39 +264,42 @@
         ];
 
         var weeklyByStation = {
-            'HAU1':{WK53:2,WK1:6,WK2:12,WK3:10,WK4:14,WK5:3,total:47},
-            'HCL2':{WK53:1,WK1:1,WK2:5,WK3:29,WK4:8,WK5:10,total:54},
-            'HCT2':{WK53:3,WK1:null,WK2:4,WK3:5,WK4:7,WK5:2,total:20},
-            'HDT3':{WK53:18,WK1:9,WK2:15,WK3:17,WK4:26,WK5:44,total:129},
-            'HDY1':{WK53:1,WK1:9,WK2:20,WK3:10,WK4:6,WK5:null,total:49},
-            'HHO3':{WK53:9,WK1:6,WK2:22,WK3:13,WK4:19,WK5:15,total:84},
-            'HIN3':{WK53:1,WK1:1,WK2:5,WK3:4,WK4:2,WK5:null,total:11},
-            'HLA2':{WK53:17,WK1:9,WK2:20,WK3:23,WK4:42,WK5:41,total:152},
-            'HMK4':{WK53:7,WK1:10,WK2:8,WK3:15,WK4:3,WK5:14,total:57},
-            'HMS2':{WK53:2,WK1:2,WK2:6,WK3:5,WK4:11,WK5:9,total:35},
-            'HPD1':{WK53:null,WK1:null,WK2:null,WK3:null,WK4:1,WK5:null,total:1},
-            'HSL1':{WK53:null,WK1:1,WK2:4,WK3:5,WK4:5,WK5:5,total:20},
-            'HTP2':{WK53:13,WK1:3,WK2:20,WK3:8,WK4:16,WK5:7,total:67}
+            'HAU1':{WK1:6,WK2:12,WK3:10,WK4:14,WK5:3,WK6:null,total:47},
+            'HCL2':{WK1:1,WK2:5,WK3:29,WK4:8,WK5:10,WK6:null,total:54},
+            'HCT2':{WK1:null,WK2:4,WK3:5,WK4:7,WK5:2,WK6:null,total:20},
+            'HDT3':{WK1:9,WK2:15,WK3:17,WK4:26,WK5:44,WK6:null,total:129},
+            'HDY1':{WK1:9,WK2:20,WK3:10,WK4:6,WK5:null,WK6:null,total:49},
+            'HHO3':{WK1:6,WK2:22,WK3:13,WK4:19,WK5:15,WK6:null,total:84},
+            'HIN3':{WK1:1,WK2:5,WK3:4,WK4:2,WK5:null,WK6:null,total:11},
+            'HLA2':{WK1:9,WK2:20,WK3:23,WK4:42,WK5:41,WK6:null,total:152},
+            'HMK4':{WK1:10,WK2:8,WK3:15,WK4:3,WK5:14,WK6:null,total:57},
+            'HMS2':{WK1:2,WK2:6,WK3:5,WK4:11,WK5:9,WK6:null,total:35},
+            'HPD1':{WK1:null,WK2:null,WK3:null,WK4:1,WK5:null,WK6:null,total:1},
+            'HSL1':{WK1:1,WK2:4,WK3:5,WK4:5,WK5:5,WK6:null,total:20},
+            'HTP2':{WK1:3,WK2:20,WK3:8,WK4:16,WK5:7,WK6:null,total:67}
         };
 
-        var weekTotals = {WK53:77,WK1:58,WK2:140,WK3:140,WK4:159,WK5:153};
+        var weekTotals = {WK1:58,WK2:140,WK3:140,WK4:159,WK5:153,WK6:148};
 
         var sentimentData = [
-            {dsp:'ALAB',station:'HDT3',responses:1,satisfaction:1.0,timeliness:1.0,quality:1.0,avgScore:1.0,adoption:51.8},
-            {dsp:'ARMA',station:'HLA2',responses:4,satisfaction:2.0,timeliness:2.0,quality:2.0,avgScore:2.0,adoption:40.3},
-            {dsp:'ORMP',station:'HTP2',responses:1,satisfaction:2.0,timeliness:2.0,quality:2.0,avgScore:2.0,adoption:79.8},
-            {dsp:'MAEP',station:'HIN3',responses:1,satisfaction:2.0,timeliness:2.0,quality:3.0,avgScore:2.3,adoption:42.3},
-            {dsp:'SFRM',station:'HDT3',responses:2,satisfaction:3.0,timeliness:2.5,quality:2.5,avgScore:2.7,adoption:51.8},
-            {dsp:'PRLC',station:'HSL1',responses:1,satisfaction:4.0,timeliness:5.0,quality:3.0,avgScore:4.0,adoption:100},
-            {dsp:'D4DS',station:'HCL2',responses:1,satisfaction:5.0,timeliness:5.0,quality:5.0,avgScore:5.0,adoption:51.4}
+            {dsp:"ALAB",station:"HDT3",responses:1,satisfaction:1.0,timeliness:1.0,quality:1.0,avgScore:1.0,adoption:51.8},
+            {dsp:"ARMA",station:"HLA2",responses:5,satisfaction:2.6,timeliness:2.6,quality:2.6,avgScore:2.6,adoption:40.3},
+            {dsp:"ORMP",station:"HTP2",responses:2,satisfaction:2.0,timeliness:2.0,quality:3.0,avgScore:2.3,adoption:79.8},
+            {dsp:"MAEP",station:"HIN3",responses:1,satisfaction:2.0,timeliness:2.0,quality:3.0,avgScore:2.3,adoption:42.3},
+            {dsp:"SFRM",station:"HDT3",responses:3,satisfaction:3.3,timeliness:3.0,quality:3.0,avgScore:3.1,adoption:51.8},
+            {dsp:"PRLC",station:"HSL1",responses:1,satisfaction:4.0,timeliness:5.0,quality:3.0,avgScore:4.0,adoption:100},
+            {dsp:"D4DS",station:"HCL2",responses:1,satisfaction:5.0,timeliness:5.0,quality:5.0,avgScore:5.0,adoption:51.4}
         ];
 
         var feedbackData = [
-            {date:'Feb 2',dsp:'SFRM',station:'HDT3',satisfaction:3,timeliness:3,quality:3,issue:'',suggestion:'Need 2 day techs. Better communication.'},
-            {date:'Jan 26',dsp:'ALAB',station:'HDT3',satisfaction:1,timeliness:1,quality:1,issue:'Lack of timely repairs.',suggestion:'Timely repairs needed.'},
-            {date:'Jan 12',dsp:'D4DS',station:'HCL2',satisfaction:5,timeliness:5,quality:5,issue:'',suggestion:'Supervisor got more vehicles running in one evening than any mechanic in 5 years.'},
-            {date:'Jan 6',dsp:'ORMP',station:'HTP2',satisfaction:2,timeliness:2,quality:2,issue:'No paperwork after 7 days.',suggestion:'Need schedule access.'},
-            {date:'Jan 5',dsp:'ARMA',station:'HLA2',satisfaction:1,timeliness:1,quality:1,issue:'No work orders submitted.',suggestion:'Better communication.'}
+            {date:"Feb 10",dsp:"SFRM",station:"HDT3",satisfaction:4,timeliness:4,quality:4,issue:"Unit 2974 pending diagnostics for a few days",suggestion:"More availability for weekend issues, over the road calls."},
+            {date:"Feb 9",dsp:"ORMP",station:"HTP2",satisfaction:2,timeliness:2,quality:4,issue:"Multiple WOs not looked at since 2/4. Helpful contact laid off, no new contact info.",suggestion:""},
+            {date:"Feb 9",dsp:"ARMA",station:"HLA2",satisfaction:5,timeliness:5,quality:5,issue:"",suggestion:"Jose Madrigal is GREAT! Very professional and attentive. Thank you for keeping Jose at HLA2."},
+            {date:"Feb 2",dsp:"SFRM",station:"HDT3",satisfaction:3,timeliness:3,quality:3,issue:"",suggestion:"Need 2 day techs. Better communication between techs."},
+            {date:"Jan 26",dsp:"ALAB",station:"HDT3",satisfaction:1,timeliness:1,quality:1,issue:"Lack of timely repairs. Same issue after ungrounding.",suggestion:"Timely and complete repairs."},
+            {date:"Jan 12",dsp:"D4DS",station:"HCL2",satisfaction:5,timeliness:5,quality:5,issue:"",suggestion:"Supervisor got more vehicles running in one evening than any mechanic in 5 years."},
+            {date:"Jan 6",dsp:"ORMP",station:"HTP2",satisfaction:2,timeliness:2,quality:2,issue:"No paperwork after 7 days. Brakes still bad after repair.",suggestion:"Need schedule access and email alerts."},
+            {date:"Jan 5",dsp:"ARMA",station:"HLA2",satisfaction:1,timeliness:1,quality:1,issue:"No work orders submitted.",suggestion:"Better communication."}
         ];
 
         function showTab(tabId){
@@ -344,8 +347,8 @@
             var t=document.getElementById('stationWeeklyTable'),h='';
             var stations=Object.keys(weeklyByStation).sort(function(a,b){return weeklyByStation[b].total-weeklyByStation[a].total});
             for(var i=0;i<stations.length;i++){var st=stations[i],w=weeklyByStation[st];
-            h+='<tr><td><span class="station-name">'+st+'</span></td><td>'+(w.WK53||'—')+'</td><td>'+(w.WK1||'—')+'</td><td>'+(w.WK2||'—')+'</td><td>'+(w.WK3||'—')+'</td><td>'+(w.WK4||'—')+'</td><td>'+(w.WK5||'—')+'</td><td><strong>'+w.total+'</strong></td></tr>';}
-            h+='<tr style="background:var(--bg-card-hover)"><td><strong>TOTAL</strong></td><td><strong>'+weekTotals.WK53+'</strong></td><td><strong>'+weekTotals.WK1+'</strong></td><td><strong>'+weekTotals.WK2+'</strong></td><td><strong>'+weekTotals.WK3+'</strong></td><td><strong>'+weekTotals.WK4+'</strong></td><td><strong>'+weekTotals.WK5+'</strong></td><td><strong>727</strong></td></tr>';
+            h+='<tr><td><span class="station-name">'+st+'</span></td><td>'+(w.WK1||'—')+'</td><td>'+(w.WK2||'—')+'</td><td>'+(w.WK5||'—')+'</td><td>'+(w.WK6||'—')+'</td><td>'+(w.WK5||'—')+'</td><td>'+(w.WK6||'—')+'</td><td><strong>'+w.total+'</strong></td></tr>';}
+            h+='<tr style="background:var(--bg-card-hover)"><td><strong>TOTAL</strong></td><td><strong>'+weekTotals.WK1+'</strong></td><td><strong>'+weekTotals.WK2+'</strong></td><td><strong>'+weekTotals.WK3+'</strong></td><td><strong>'+weekTotals.WK4+'</strong></td><td><strong>'+weekTotals.WK5+'</strong></td><td><strong>'+weekTotals.WK6+'</strong></td><td><strong>798</strong></td></tr>';
             t.innerHTML=h;
         }
 
@@ -396,7 +399,7 @@
             // Weekly bar chart
             new Chart(document.getElementById('weeklyBarChart'),{
                 type:'bar',
-                data:{labels:['WK53','WK1','WK2','WK3','WK4','WK5'],datasets:[{label:'Kooner WOs',data:[77,58,140,140,159,153],backgroundColor:'rgba(0,255,136,0.7)',borderRadius:4}]},
+                data:{labels:['WK1','WK2','WK3','WK4','WK5','WK6'],datasets:[{label:'Kooner WOs',data:[58,140,140,159,153,148],backgroundColor:'rgba(0,255,136,0.7)',borderRadius:4}]},
                 options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a'}}},scales:{y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},x:{grid:{display:false},ticks:{color:'#8b8b9a'}}}}
             });
 
@@ -409,11 +412,11 @@
             });
 
             // Station weekly stacked chart
-            var weekLabels=['WK53','WK1','WK2','WK3','WK4','WK5'];
+            var weekLabels=['WK1','WK2','WK3','WK4','WK5','WK6'];
             var topStations=['HDT3','HLA2','HHO3','HTP2','HMK4','HCL2','HDY1','HAU1'];
             var datasets=topStations.map(function(st,i){
                 var w=weeklyByStation[st];
-                return{label:st,data:[w.WK53||0,w.WK1||0,w.WK2||0,w.WK3||0,w.WK4||0,w.WK5||0],backgroundColor:colors[i],borderRadius:2};
+                return{label:st,data:[w.WK1||0,w.WK2||0,w.WK3||0,w.WK4||0,w.WK5||0,w.WK6||0],backgroundColor:colors[i],borderRadius:2};
             });
             new Chart(document.getElementById('stationWeeklyChart'),{
                 type:'bar',
