@@ -106,19 +106,42 @@
         .feedback-text.issue{border-left:3px solid var(--accent-red);padding-left:12px;margin-bottom:12px}
         .feedback-text.suggestion{border-left:3px solid var(--accent-cyan);padding-left:12px}
         /* Calendar Styles */
+        .calendar-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+        .calendar-nav-btn{background:var(--bg-card-hover);border:1px solid var(--border-color);color:var(--text-primary);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:0.9rem;transition:all 0.2s}
+        .calendar-nav-btn:hover{background:var(--accent-blue);border-color:var(--accent-blue)}
+        .calendar-month-title{font-size:1.3rem;font-weight:600;font-family:'JetBrains Mono',monospace}
         .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:24px}
         .calendar-header{text-align:center;padding:10px;font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;font-weight:600}
         .calendar-day{background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:8px;min-height:100px;padding:8px}
         .calendar-day.other-month{opacity:0.3}
         .calendar-day.today{border-color:var(--accent-blue);background:rgba(55,66,250,0.1)}
         .calendar-date{font-size:0.85rem;font-weight:600;margin-bottom:6px;font-family:'JetBrains Mono',monospace}
-        .calendar-event{font-size:0.7rem;padding:4px 6px;border-radius:4px;margin-bottom:4px;cursor:pointer}
+        .calendar-event{font-size:0.7rem;padding:4px 6px;border-radius:4px;margin-bottom:4px;cursor:pointer;transition:transform 0.1s}
+        .calendar-event:hover{transform:scale(1.02);opacity:0.9}
         .calendar-event.roundtable{background:rgba(168,85,247,0.3);color:var(--accent-purple);border-left:2px solid var(--accent-purple)}
         .calendar-event.site-visit{background:rgba(0,255,136,0.2);color:var(--accent-green);border-left:2px solid var(--accent-green)}
         .calendar-event.training{background:rgba(0,212,255,0.2);color:var(--accent-cyan);border-left:2px solid var(--accent-cyan)}
         .calendar-event.deadline{background:rgba(255,71,87,0.2);color:var(--accent-red);border-left:2px solid var(--accent-red)}
         .calendar-event.review{background:rgba(255,165,2,0.2);color:var(--accent-orange);border-left:2px solid var(--accent-orange)}
+        .calendar-event.newsletter{background:rgba(0,200,150,0.2);color:#00c896;border-left:2px solid #00c896}
         .calendar-event.past{opacity:0.7}
+        /* Modal Styles */
+        .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:1000;display:none;justify-content:center;align-items:center;padding:20px}
+        .modal-overlay.active{display:flex}
+        .modal{background:var(--bg-card);border:1px solid var(--border-color);border-radius:16px;max-width:700px;width:100%;max-height:80vh;overflow-y:auto;position:relative}
+        .modal-header{display:flex;justify-content:space-between;align-items:flex-start;padding:24px;border-bottom:1px solid var(--border-color)}
+        .modal-title{font-size:1.3rem;font-weight:700}
+        .modal-subtitle{font-size:0.9rem;color:var(--text-secondary);margin-top:4px}
+        .modal-close{background:none;border:none;color:var(--text-muted);font-size:1.5rem;cursor:pointer;padding:4px 8px;border-radius:4px}
+        .modal-close:hover{background:var(--bg-card-hover);color:var(--text-primary)}
+        .modal-body{padding:24px}
+        .modal-section{margin-bottom:20px}
+        .modal-section-title{font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;font-weight:600}
+        .modal-notes{background:var(--bg-dark);border-radius:8px;padding:16px;font-size:0.9rem;color:var(--text-secondary);line-height:1.7}
+        .modal-actions{display:flex;flex-direction:column;gap:8px}
+        .modal-action-item{display:flex;gap:12px;padding:10px;background:var(--bg-card-hover);border-radius:8px;align-items:flex-start}
+        .modal-action-owner{font-size:0.75rem;color:var(--accent-purple);font-weight:600;text-transform:uppercase;min-width:80px}
+        .modal-action-text{font-size:0.85rem;color:var(--text-secondary);flex:1}
         .event-list{margin-top:10px}
         .event-item{display:flex;gap:16px;padding:16px;background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:12px;margin-bottom:12px;align-items:flex-start}
         .event-item.past{border-left:3px solid var(--text-muted)}
@@ -162,7 +185,7 @@
                 <div class="subtitle"><span>Vendor Adoption Tracking</span><span class="target-badge">TARGET: 85%</span></div>
             </div>
             <div class="header-right">
-                <div class="last-updated">Last Updated: 2026-02-11</div>
+                <div class="last-updated">Last Updated: 2026-02-13 @ 3:45 PM EST</div>
                 <div class="data-period">Data Period: WK01 - WK06 (Dec 28 - Feb 7)</div>
             </div>
         </header>
@@ -262,7 +285,7 @@
             <div class="kpi-row" style="grid-template-columns:repeat(4,1fr)">
                 <div class="kpi-card danger"><div class="kpi-label">Critical Priority</div><div class="kpi-value red">3</div><div class="kpi-subtext">Immediate action needed</div></div>
                 <div class="kpi-card warning"><div class="kpi-label">High Priority</div><div class="kpi-value orange">4</div><div class="kpi-subtext">Address this week</div></div>
-                <div class="kpi-card"><div class="kpi-label">Roundtable Actions</div><div class="kpi-value yellow">13</div><div class="kpi-subtext">From recent meetings</div></div>
+                <div class="kpi-card"><div class="kpi-label">Roundtable Actions</div><div class="kpi-value yellow">19</div><div class="kpi-subtext">From 3 meetings</div></div>
                 <div class="kpi-card success"><div class="kpi-label">Improving</div><div class="kpi-value green">2</div><div class="kpi-subtext">Positive trend</div></div>
             </div>
             <div class="main-grid">
@@ -275,15 +298,22 @@
         <div id="calendar" class="tab-content">
             <div class="main-grid">
                 <div class="card full-width">
-                    <div class="card-header"><div class="card-title">📅 February 2026</div><span class="card-badge badge-calendar">ENGAGEMENT CALENDAR</span></div>
+                    <div class="card-header"><div class="card-title">📅 Engagement Calendar</div><span class="card-badge badge-calendar">CLICK EVENTS FOR DETAILS</span></div>
                     <div class="legend">
                         <div class="legend-item"><div class="legend-dot" style="background:rgba(168,85,247,0.5)"></div>DSP Roundtable</div>
                         <div class="legend-item"><div class="legend-dot" style="background:rgba(0,255,136,0.5)"></div>Site Visit</div>
                         <div class="legend-item"><div class="legend-dot" style="background:rgba(0,212,255,0.5)"></div>Training</div>
                         <div class="legend-item"><div class="legend-dot" style="background:rgba(255,71,87,0.5)"></div>Deadline</div>
                         <div class="legend-item"><div class="legend-dot" style="background:rgba(255,165,2,0.5)"></div>Review</div>
+                        <div class="legend-item"><div class="legend-dot" style="background:rgba(0,200,150,0.5)"></div>Newsletter</div>
+                    </div>
+                    <div class="calendar-nav">
+                        <button class="calendar-nav-btn" onclick="changeMonth(-1)">← Previous</button>
+                        <span class="calendar-month-title" id="calendarMonthTitle">February 2026</span>
+                        <button class="calendar-nav-btn" onclick="changeMonth(1)">Next →</button>
                     </div>
                     <div class="calendar-grid" id="calendarGrid"></div>
+                </div>
                 </div>
                 <div class="card">
                     <div class="card-header"><div class="card-title">📋 Upcoming Events</div></div>
@@ -292,6 +322,29 @@
                 <div class="card">
                     <div class="card-header"><div class="card-title">📝 Past Event Notes</div><span class="card-badge badge-dsps">ROUNDTABLE NOTES</span></div>
                     <div class="event-list" id="pastEventList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Detail Modal -->
+    <div class="modal-overlay" id="eventModal" onclick="closeModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div>
+                    <div class="modal-title" id="modalTitle">Event Title</div>
+                    <div class="modal-subtitle" id="modalSubtitle">Date & Station</div>
+                </div>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section" id="modalNotesSection">
+                    <div class="modal-section-title">📝 Notes & Summary</div>
+                    <div class="modal-notes" id="modalNotes">No notes available for this event.</div>
+                </div>
+                <div class="modal-section" id="modalActionsSection" style="display:none">
+                    <div class="modal-section-title">✅ Action Items</div>
+                    <div class="modal-actions" id="modalActions"></div>
                 </div>
             </div>
         </div>
@@ -371,7 +424,9 @@
         var calendarEvents = [
             {date:'2026-02-09',title:'HMS2 Roundtable',type:'roundtable',station:'HMS2',time:'10:00 AM',notes:'<strong>Key Issues:</strong> Severe communication delays - questions unanswered 6-8 hrs, multi-day gaps despite 60-80 people in Kooner chat. Steven: "Never experienced such delay" vs prior vendors.<br><br><strong>Safety/Compliance Failures:</strong> Truck 21 passed Federal DOT but failed MN inspection with visible drag link issues. Truck 20 had 5 federal DOT failures caught by external shop. Wrong stickers on wrong vehicles. Steven: "Would rather pay out of pocket for inspections."<br><br><strong>Work Quality:</strong> Truck 1 urgent WO at 8am, tech sat idle until 12:15pm. WOs marked complete when repairs not finished. Multiple recreations needed.<br><br><strong>Root Causes:</strong> Coverage gaps across shifts, tech (Michael) attendance/training issues, no escalation protocols, DSPs unclear on contacts.<br><br><strong>Solutions Discussed:</strong> David (experienced manager tech) deploying next week for training/oversight. Formal dispatch schedule being created. This is 2nd escalation - relationship at risk.<br><br><strong style="color:#ff4757">Action Items:</strong><br>• Brooke/Alberto: Provide direct numbers for 24/7 contact<br>• Ash: Send dispatch schedule with roles/coverage times<br>• David: Visit HMS2 next week for training & process review<br>• Steven: Document VINs, dates, WO details via email + chat<br>• Team: Schedule site visit after David training complete<br>• Team: Establish escalation protocols for urgent repairs<br>• Team: Implement follow-up tracking for all issues'},
             {date:'2026-02-10',title:'HCL2 Roundtable',type:'roundtable',station:'HCL2',time:'2:00 PM',notes:'<strong>Key Issues:</strong> D4DS (Andrea) down to 6 of 17 trucks. Multiple vehicles grounded due to incomplete PMs - one sitting since Jan 22. Communication breakdown: no responses since Saturday, messages unanswered for days. Unexpected tech departure caused service disruption.<br><br><strong>Root Causes:</strong> No proactive status updates, parts availability delays, badge access issues, two intake systems creating confusion, no real-time WO visibility for DSPs.<br><br><strong>Solutions Discussed:</strong> Justin Ellis relocating permanently (6pm-2am shift), Eugene deploying to help clear backlog. Relay Garage integration planned for mid-March with Fleet Portal scheduling.<br><br><strong style="color:#ff4757">Action Items:</strong><br>• Ash: Provide cell numbers for direct contact<br>• Ash: Daily AM updates in Chime on overnight completions<br>• Kathy: Send contact list with roles<br>• Team: Provide ETA doc for all 28 open WOs<br>• Mark: Meet Justin to set up vehicle shuttle system<br>• Mark: Set up key box at FC entrance<br>• Andrea: Share D4 WOs in Chime for reconciliation'},
-            {date:'2026-02-11',title:'HPD1 Roundtable',type:'roundtable',station:'HPD1',time:'11:00 AM',notes:'<strong>Pre-Meeting Context (from Ryan Sager email):</strong><br>• Only 8 repair orders created with Kooner since launch<br>• Smaller fleet: &lt;16 branded vehicles<br>• DSP (Robert) was "okay" with mobile service but not using Kooner for all repairs<br><br><strong>Known Issues:</strong><br>• Invoice/DOT documents moved to BOX without DSP awareness - caused delay getting vehicle back operational<br>• Some issues with scheduling service and getting timeline updates<br>• Issues mostly fixed quickly by assistants per Ryan, but DSP may have more to share<br><br><strong>Key Question:</strong> Why aren\'t they using Kooner for all repairs?<br><br><strong>Attendees:</strong> Robert (DSP), Ryan Sager (Amazon Sr. PM), Brooke, Kooner team<br><br><em>Add meeting notes and action items after roundtable...</em>'}
+            {date:'2026-02-11',title:'HPD1 Roundtable',type:'roundtable',station:'HPD1',time:'11:00 AM',notes:'<strong>Key Context:</strong> Unique site - only DSP at location, co-located with FC, 20-30 min from other Amazon facilities. Robert (DSP) has existing vendor relationship (1.5 yrs) with dedicated 1-2 techs who know his fleet.<br><br><strong>Service Gaps Identified:</strong><br>• No proactive PM scheduling communication<br>• No notification when repairs completed<br>• Inconsistent tech coverage - "multiple technicians...next day new tech not familiar with anything"<br>• Kooner removed dedicated Vancouver travel tech due to volume decrease<br>• BOX invoice process implemented without DSP awareness<br><br><strong>Impact:</strong> Ryan: "My biggest concern is fleet constraints from maintenance causing dropped routes." Recent DOT/Box issue nearly caused route capacity problems.<br><br><strong>Site Complexity:</strong> FC co-location creates security/access challenges. Strict landlord with exterior building requirements including painting restrictions.<br><br><strong>Solutions Discussed:</strong><br>• Tech integration within 1 month for comms<br>• Amazon Fleet Portal integration end of March/April - direct scheduling, real-time updates, single portal<br>• Dedicated tech Michael available (5-10 min from site, knows Last Mile)<br>• Moving from Chime to Slack<br><br><strong style="color:#ff4757">Action Items:</strong><br>• Team: Schedule follow-up Fri or Mon/Tue same time<br>• Attendees: Ash, Alberto, Brooke, Robert + fleet team member<br>• Meeting Goals: Document comms expectations, align on SLAs, introduce Michael, establish escalation<br>• Ash/Alberto: Provided cell numbers for urgent situations<br>• Team: Send meeting invite with forwarding option'},
+            {date:'2026-02-16',title:'HDY1 Roundtable',type:'roundtable',station:'HDY1',time:'',notes:''},
+            {date:'2026-03-02',title:'DSP Monthly Newsletter #1',type:'newsletter',station:'All',time:'',notes:'First edition of the DSP Monthly Newsletter'}
         ];
 
         // Roundtable action items for Actions tab
@@ -388,7 +443,13 @@
             {station:'HCL2',date:'Feb 10',owner:'Team',action:'Provide ETA doc for all 28 open WOs',status:'pending'},
             {station:'HCL2',date:'Feb 10',owner:'Mark',action:'Meet Justin to set up vehicle shuttle system',status:'pending'},
             {station:'HCL2',date:'Feb 10',owner:'Mark',action:'Set up key box at FC entrance',status:'pending'},
-            {station:'HCL2',date:'Feb 10',owner:'Andrea',action:'Share D4 WOs in Chime for reconciliation',status:'pending'}
+            {station:'HCL2',date:'Feb 10',owner:'Andrea',action:'Share D4 WOs in Chime for reconciliation',status:'pending'},
+            {station:'HPD1',date:'Feb 11',owner:'Team',action:'Schedule follow-up meeting Fri or Mon/Tue same time',status:'pending'},
+            {station:'HPD1',date:'Feb 11',owner:'Team',action:'Send meeting invite to attendees with forwarding option',status:'pending'},
+            {station:'HPD1',date:'Feb 11',owner:'Meeting',action:'Document specific communication expectations',status:'pending'},
+            {station:'HPD1',date:'Feb 11',owner:'Meeting',action:'Align on service level requirements',status:'pending'},
+            {station:'HPD1',date:'Feb 11',owner:'Meeting',action:'Introduce dedicated technician Michael',status:'pending'},
+            {station:'HPD1',date:'Feb 11',owner:'Meeting',action:'Establish escalation procedures',status:'pending'}
         ];
 
         function showTab(tabId){
@@ -482,32 +543,116 @@
             c.innerHTML=h;
         }
 
+        var currentMonth = 1; // 0=Jan, 1=Feb, 2=Mar
+        var currentYear = 2026;
+        var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+        function changeMonth(delta){
+            currentMonth += delta;
+            if(currentMonth > 11){currentMonth = 0; currentYear++;}
+            if(currentMonth < 0){currentMonth = 11; currentYear--;}
+            populateCalendar();
+        }
+
+        function getDaysInMonth(month, year){
+            return new Date(year, month + 1, 0).getDate();
+        }
+
+        function getFirstDayOfMonth(month, year){
+            return new Date(year, month, 1).getDay();
+        }
+
         function populateCalendar(){
             var grid=document.getElementById('calendarGrid');
+            var titleEl=document.getElementById('calendarMonthTitle');
+            titleEl.textContent = monthNames[currentMonth] + ' ' + currentYear;
+            
             var days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
             var h='';
             for(var i=0;i<7;i++){h+='<div class="calendar-header">'+days[i]+'</div>';}
-            // February 2026 starts on Sunday (day 0)
-            var daysInMonth=28;
-            var startDay=0; // Sunday
-            // Add empty cells for days before month starts (none needed for Feb 2026)
+            
+            var daysInMonth = getDaysInMonth(currentMonth, currentYear);
+            var firstDay = getFirstDayOfMonth(currentMonth, currentYear);
+            var today = new Date('2026-02-13');
+            
+            // Add empty cells for days before month starts
+            for(var i=0;i<firstDay;i++){
+                h+='<div class="calendar-day other-month"></div>';
+            }
+            
             for(var d=1;d<=daysInMonth;d++){
-                var dateStr='2026-02-'+(d<10?'0':'')+d;
-                var isToday=(d===11);
-                var dayEvents=calendarEvents.filter(function(e){return e.date===dateStr});
+                var monthStr = (currentMonth+1)<10?'0'+(currentMonth+1):(currentMonth+1);
+                var dayStr = d<10?'0'+d:d;
+                var dateStr = currentYear+'-'+monthStr+'-'+dayStr;
+                var isToday = (currentYear===2026 && currentMonth===1 && d===13);
+                var dayEvents = calendarEvents.filter(function(e){return e.date===dateStr});
+                
                 h+='<div class="calendar-day'+(isToday?' today':'')+'">';
                 h+='<div class="calendar-date">'+d+'</div>';
                 for(var e=0;e<dayEvents.length;e++){
-                    h+='<div class="calendar-event '+dayEvents[e].type+'">'+dayEvents[e].title+'</div>';
+                    var evt = dayEvents[e];
+                    h+='<div class="calendar-event '+evt.type+'" onclick="openEventModal(\''+evt.date+'\')">'+evt.title+'</div>';
                 }
                 h+='</div>';
             }
             grid.innerHTML=h;
         }
 
+        function openEventModal(dateStr){
+            var evt = calendarEvents.find(function(e){return e.date===dateStr});
+            if(!evt) return;
+            
+            var modal = document.getElementById('eventModal');
+            var d = new Date(dateStr);
+            var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            var dayNames=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+            
+            document.getElementById('modalTitle').textContent = evt.title;
+            document.getElementById('modalSubtitle').innerHTML = '<span class="event-type calendar-event '+evt.type+'">'+evt.type.replace('-',' ')+'</span> · '+dayNames[d.getDay()]+', '+months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear()+(evt.time?' · '+evt.time:'')+(evt.station?' · 📍 '+evt.station:'');
+            
+            // Notes section
+            var notesSection = document.getElementById('modalNotesSection');
+            var notesEl = document.getElementById('modalNotes');
+            if(evt.notes && evt.notes.length > 0 && !evt.notes.includes('Add notes')){
+                notesSection.style.display = 'block';
+                notesEl.innerHTML = evt.notes;
+            } else {
+                notesSection.style.display = 'block';
+                notesEl.innerHTML = '<em style="color:var(--text-muted)">No notes available for this event yet.</em>';
+            }
+            
+            // Actions section
+            var actionsSection = document.getElementById('modalActionsSection');
+            var actionsEl = document.getElementById('modalActions');
+            var eventActions = roundtableActions.filter(function(a){return a.station===evt.station && evt.title.includes('Roundtable')});
+            if(eventActions.length > 0){
+                actionsSection.style.display = 'block';
+                var actionsHtml = '';
+                for(var i=0;i<eventActions.length;i++){
+                    var a = eventActions[i];
+                    actionsHtml += '<div class="modal-action-item"><span class="modal-action-owner">'+a.owner+'</span><span class="modal-action-text">'+a.action+'</span><span class="action-status '+a.status+'">'+a.status+'</span></div>';
+                }
+                actionsEl.innerHTML = actionsHtml;
+            } else {
+                actionsSection.style.display = 'none';
+            }
+            
+            modal.classList.add('active');
+        }
+
+        function closeModal(e){
+            if(e && e.target !== e.currentTarget) return;
+            document.getElementById('eventModal').classList.remove('active');
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e){
+            if(e.key === 'Escape') closeModal();
+        });
+
         function populateEventList(){
             var list=document.getElementById('eventList');
-            var today=new Date('2026-02-11');
+            var today=new Date('2026-02-13');
             var upcoming=calendarEvents.filter(function(e){return new Date(e.date)>=today}).sort(function(a,b){return new Date(a.date)-new Date(b.date)});
             var h='';
             if(upcoming.length===0){
@@ -524,7 +669,7 @@
 
         function populatePastEventList(){
             var list=document.getElementById('pastEventList');
-            var today=new Date('2026-02-11');
+            var today=new Date('2026-02-13');
             var past=calendarEvents.filter(function(e){return new Date(e.date)<today}).sort(function(a,b){return new Date(b.date)-new Date(a.date)});
             var h='';
             if(past.length===0){
@@ -544,7 +689,7 @@
         function populateRoundtableActions(){
             var container=document.getElementById('roundtableActions');
             var h='';
-            var stations=['HMS2','HCL2'];
+            var stations=['HMS2','HCL2','HPD1'];
             for(var s=0;s<stations.length;s++){
                 var station=stations[s];
                 var stationActions=roundtableActions.filter(function(a){return a.station===station});
