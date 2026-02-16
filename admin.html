@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin — Event Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#0a0a0f;--card:#12121a;--card2:#1a1a25;--border:#2a2a3a;--blue:#3742fa;--green:#00ff88;--red:#ff4757;--orange:#ffa502;--purple:#a855f7;--cyan:#00d4ff;--text:#fff;--text2:#8b8b9a;--text3:#4a4a5a}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:24px}
+        .container{max-width:900px;margin:0 auto}
+        h1{font-size:1.8rem;font-weight:700;margin-bottom:8px;background:linear-gradient(135deg,#fff,#8b8b9a);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .subtitle{color:var(--text2);font-size:0.9rem;margin-bottom:32px}
+        .section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:24px}
+        .section-title{font-size:1.1rem;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+        .badge{font-size:0.7rem;padding:3px 10px;border-radius:12px;font-family:'JetBrains Mono',monospace}
+        .badge-blue{background:rgba(55,66,250,0.2);color:var(--blue)}
+        .badge-green{background:rgba(0,255,136,0.2);color:var(--green)}
+        .badge-purple{background:rgba(168,85,247,0.2);color:var(--purple)}
+
+        /* Form Styles */
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+        .form-row.full{grid-template-columns:1fr}
+        .form-group{display:flex;flex-direction:column;gap:6px}
+        .form-group label{font-size:0.8rem;color:var(--text2);text-transform:uppercase;letter-spacing:0.05em;font-weight:500}
+        input,select,textarea{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:0.9rem;transition:border-color 0.2s}
+        input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue)}
+        textarea{resize:vertical;min-height:80px;line-height:1.5}
+        select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238b8b9a' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+
+        .btn{padding:10px 20px;border-radius:8px;font-size:0.9rem;font-weight:600;cursor:pointer;border:none;transition:all 0.2s;font-family:'Space Grotesk',sans-serif}
+        .btn-primary{background:var(--blue);color:white}
+        .btn-primary:hover{background:#2a35e0}
+        .btn-success{background:var(--green);color:#000}
+        .btn-success:hover{background:#00dd75}
+        .btn-danger{background:rgba(255,71,87,0.2);color:var(--red);border:1px solid rgba(255,71,87,0.3)}
+        .btn-danger:hover{background:rgba(255,71,87,0.3)}
+        .btn-outline{background:transparent;color:var(--text2);border:1px solid var(--border)}
+        .btn-outline:hover{background:var(--card2);color:var(--text)}
+        .btn-sm{padding:6px 14px;font-size:0.8rem}
+        .btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+
+        /* Event Cards */
+        .event-card{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px}
+        .event-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px}
+        .event-card-title{font-weight:600;font-size:1rem}
+        .event-card-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+        .event-card-date{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--cyan)}
+        .event-type-tag{padding:2px 8px;border-radius:10px;font-size:0.7rem;font-weight:600}
+        .event-type-tag.roundtable{background:rgba(168,85,247,0.3);color:var(--purple)}
+        .event-type-tag.site-visit{background:rgba(0,255,136,0.2);color:var(--green)}
+        .event-type-tag.training{background:rgba(0,212,255,0.2);color:var(--cyan)}
+        .event-type-tag.deadline{background:rgba(255,71,87,0.2);color:var(--red)}
+        .event-type-tag.review{background:rgba(255,165,2,0.2);color:var(--orange)}
+        .event-type-tag.newsletter{background:rgba(0,200,150,0.2);color:#00c896}
+        .event-card-station{font-family:'JetBrains Mono',monospace;font-size:0.8rem;background:var(--bg);padding:3px 8px;border-radius:6px;color:var(--text2)}
+        .event-card-notes{font-size:0.85rem;color:var(--text2);margin-top:8px;line-height:1.5;max-height:80px;overflow:hidden;position:relative}
+        .event-card-notes.has-overflow::after{content:'';position:absolute;bottom:0;left:0;right:0;height:30px;background:linear-gradient(transparent,var(--card2))}
+        .event-card-actions{display:flex;gap:8px;margin-top:12px}
+        .action-count{font-size:0.8rem;color:var(--text3);margin-top:8px}
+
+        /* Action Items in Form */
+        .action-item-form{display:grid;grid-template-columns:150px 1fr 100px 40px;gap:8px;align-items:center;margin-bottom:8px}
+        .action-item-form input,.action-item-form select{padding:8px 10px;font-size:0.85rem}
+        .remove-btn{background:none;border:none;color:var(--red);cursor:pointer;font-size:1.2rem;padding:4px}
+        .remove-btn:hover{opacity:0.7}
+
+        /* Output */
+        .output-area{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px;font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--green);max-height:400px;overflow:auto;white-space:pre-wrap;word-break:break-all;line-height:1.6}
+        .copy-success{color:var(--green);font-size:0.85rem;margin-top:8px;display:none}
+
+        /* Steps */
+        .steps{display:flex;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+        .step{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;flex:1;min-width:200px}
+        .step-number{width:28px;height:28px;border-radius:50%;background:var(--blue);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;margin-bottom:10px}
+        .step-title{font-weight:600;font-size:0.9rem;margin-bottom:4px}
+        .step-text{font-size:0.8rem;color:var(--text2);line-height:1.4}
+
+        .divider{height:1px;background:var(--border);margin:20px 0}
+        .help-text{font-size:0.8rem;color:var(--text3);margin-top:4px;font-style:italic}
+        .empty-state{text-align:center;padding:32px;color:var(--text3)}
+
+        /* Toast */
+        .toast{position:fixed;bottom:24px;right:24px;background:var(--green);color:#000;padding:12px 20px;border-radius:10px;font-weight:600;font-size:0.9rem;transform:translateY(100px);opacity:0;transition:all 0.3s;z-index:100}
+        .toast.show{transform:translateY(0);opacity:1}
+
+        @media(max-width:600px){.form-row{grid-template-columns:1fr}.action-item-form{grid-template-columns:1fr}.steps{flex-direction:column}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📅 Dashboard Event Manager</h1>
+        <p class="subtitle">Add events, write notes, and manage action items — then copy the output to GitHub.</p>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-title">Add or edit events below</div>
+                <div class="step-text">Use the form to add new events or edit existing ones</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-title">Click "Generate JSON"</div>
+                <div class="step-text">Creates the code needed for the dashboard</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-title">Copy & paste into GitHub</div>
+                <div class="step-text">Replace the contents of events-data.json</div>
+            </div>
+        </div>
+
+        <!-- EXISTING EVENTS -->
+        <div class="section">
+            <div class="section-title">Current Events <span class="badge badge-blue" id="eventCount">0 events</span></div>
+            <div id="eventList"><div class="empty-state">Loading events...</div></div>
+        </div>
+
+        <!-- ADD / EDIT EVENT FORM -->
+        <div class="section" id="eventFormSection">
+            <div class="section-title" id="formTitle">➕ Add New Event</div>
+            <input type="hidden" id="editIndex" value="-1">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Event Title *</label>
+                    <input type="text" id="evtTitle" placeholder="e.g., HLA2 Roundtable">
+                </div>
+                <div class="form-group">
+                    <label>Date *</label>
+                    <input type="date" id="evtDate">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Event Type</label>
+                    <select id="evtType">
+                        <option value="roundtable">DSP Roundtable</option>
+                        <option value="site-visit">Site Visit</option>
+                        <option value="training">Training</option>
+                        <option value="deadline">Deadline</option>
+                        <option value="review">Review</option>
+                        <option value="newsletter">Newsletter</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Station</label>
+                    <input type="text" id="evtStation" placeholder="e.g., HLA2 or All">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Time</label>
+                    <input type="text" id="evtTime" placeholder="e.g., 2:00 PM (optional)">
+                </div>
+                <div class="form-group"></div>
+            </div>
+            <div class="form-row full">
+                <div class="form-group">
+                    <label>Notes / Summary</label>
+                    <textarea id="evtNotes" rows="5" placeholder="Meeting notes, key discussion points, decisions made...&#10;&#10;Tip: Just write in plain text. Line breaks will be preserved."></textarea>
+                    <span class="help-text">Write naturally — formatting is handled automatically</span>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section-title">Action Items <span class="badge badge-purple" id="actionCount">0 items</span></div>
+            <div id="actionItemsList"></div>
+            <button class="btn btn-outline btn-sm" onclick="addActionItemRow()">+ Add Action Item</button>
+
+            <div class="btn-row">
+                <button class="btn btn-primary" onclick="saveEvent()">💾 Save Event</button>
+                <button class="btn btn-outline" onclick="clearForm()">Clear Form</button>
+            </div>
+        </div>
+
+        <!-- GENERATE OUTPUT -->
+        <div class="section">
+            <div class="section-title">📋 Generate & Copy to GitHub</div>
+            <p style="font-size:0.9rem;color:var(--text2);margin-bottom:16px">When you're done editing events, generate the JSON and copy it to <a href="https://github.com/LastMileMM/kooner-adoption-dashboard/edit/main/events-data.json" target="_blank" style="color:var(--cyan)">events-data.json on GitHub</a>.</p>
+            <div class="btn-row" style="margin-top:0;margin-bottom:16px">
+                <button class="btn btn-success" onclick="generateJSON()">⚡ Generate JSON</button>
+                <button class="btn btn-primary" onclick="copyJSON()">📋 Copy to Clipboard</button>
+                <a href="https://github.com/LastMileMM/kooner-adoption-dashboard/edit/main/events-data.json" target="_blank" class="btn btn-outline">Open GitHub →</a>
+            </div>
+            <div class="output-area" id="jsonOutput">Click "Generate JSON" to see the output here...</div>
+            <div class="copy-success" id="copySuccess">✅ Copied to clipboard!</div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+    // =========================================================================
+    // STATE
+    // =========================================================================
+    var events = [];
+
+    // =========================================================================
+    // LOAD EXISTING EVENTS
+    // =========================================================================
+    function loadEvents() {
+        // Try to load from events-data.json (works when hosted alongside it)
+        fetch('events-data.json')
+            .then(function(r) { if (!r.ok) throw new Error('Not found'); return r.json(); })
+            .then(function(data) { events = data.events || []; renderEventList(); })
+            .catch(function() {
+                // Fallback: load built-in data
+                events = getDefaultEvents();
+                renderEventList();
+            });
+    }
+
+    function getDefaultEvents() {
+        return [
+            {date:'2026-02-09',title:'HMS2 Roundtable',type:'roundtable',station:'HMS2',time:'10:00 AM',notes:'Key Issues: Severe communication delays - questions unanswered 6-8 hrs, multi-day gaps despite 60-80 people in Kooner chat. Steven: Never experienced such delay vs prior vendors.\n\nSafety/Compliance Failures: Truck 21 passed Federal DOT but failed MN inspection with visible drag link issues. Truck 20 had 5 federal DOT failures caught by external shop. Wrong stickers on wrong vehicles.\n\nWork Quality: Truck 1 urgent WO at 8am, tech sat idle until 12:15pm. WOs marked complete when repairs not finished. Multiple recreations needed.\n\nRoot Causes: Coverage gaps across shifts, tech (Michael) attendance/training issues, no escalation protocols, DSPs unclear on contacts.\n\nSolutions Discussed: David (experienced manager tech) deploying next week for training/oversight. Formal dispatch schedule being created. This is 2nd escalation - relationship at risk.',actionItems:[{owner:'Brooke/Alberto',action:'Provide direct numbers for 24/7 contact',status:'done'},{owner:'Ash',action:'Send dispatch schedule with roles/coverage times',status:'done'},{owner:'David',action:'Visit HMS2 next week for training & process review',status:'done'},{owner:'Steven',action:'Document VINs, dates, WO details via email + chat',status:'done'},{owner:'Team',action:'Schedule site visit after David training complete',status:'done'},{owner:'Team',action:'Establish escalation protocols for urgent repairs',status:'done'}]},
+            {date:'2026-02-10',title:'HCL2 Roundtable',type:'roundtable',station:'HCL2',time:'2:00 PM',notes:'Key Issues: D4DS (Andrea) down to 6 of 17 trucks. Multiple vehicles grounded due to incomplete PMs - one sitting since Jan 22. Communication breakdown: no responses since Saturday, messages unanswered for days. Unexpected tech departure caused service disruption.\n\nRoot Causes: No proactive status updates, parts availability delays, badge access issues, two intake systems creating confusion, no real-time WO visibility for DSPs.\n\nSolutions Discussed: Justin Ellis relocating permanently (6pm-2am shift), Eugene deploying to help clear backlog. Relay Garage integration planned for mid-March with Fleet Portal scheduling.',actionItems:[{owner:'Ash',action:'Provide cell numbers for direct contact',status:'done'},{owner:'Ash',action:'Daily AM updates in Chime on overnight completions',status:'done'},{owner:'Kathy',action:'Send contact list with roles',status:'done'},{owner:'Team',action:'Provide ETA doc for all 28 open WOs',status:'done'},{owner:'Mark',action:'Meet Justin to set up vehicle shuttle system',status:'done'},{owner:'Mark',action:'Set up key box at FC entrance',status:'done'},{owner:'Andrea',action:'Share D4 WOs in Chime for reconciliation',status:'done'}]},
+            {date:'2026-02-11',title:'HPD1 Roundtable',type:'roundtable',station:'HPD1',time:'11:00 AM',notes:'Key Context: Unique site - only DSP at location, co-located with FC, 20-30 min from other Amazon facilities. Robert (DSP) has existing vendor relationship (1.5 yrs) with dedicated 1-2 techs who know his fleet.\n\nService Gaps Identified: No proactive PM scheduling communication. No notification when repairs completed. Inconsistent tech coverage. Kooner removed dedicated Vancouver travel tech due to volume decrease. BOX invoice process implemented without DSP awareness.\n\nImpact: Ryan - Biggest concern is fleet constraints from maintenance causing dropped routes.\n\nSolutions Discussed: Tech integration within 1 month for comms. Amazon Fleet Portal integration end of March/April. Dedicated tech Michael available (5-10 min from site). Moving from Chime to Slack.',actionItems:[{owner:'Team',action:'Schedule follow-up meeting Fri or Mon/Tue same time',status:'done'},{owner:'Team',action:'Send meeting invite to attendees with forwarding option',status:'done'},{owner:'Meeting',action:'Document specific communication expectations',status:'done'},{owner:'Meeting',action:'Align on service level requirements',status:'done'},{owner:'Meeting',action:'Introduce dedicated technician Michael',status:'done'},{owner:'Meeting',action:'Establish escalation procedures',status:'done'}]},
+            {date:'2026-02-16',title:'HDY1 Roundtable',type:'roundtable',station:'HDY1',time:'',notes:'Communication & Process Issues: New tech Charles transitioned from middle mile without proper last mile training. Missing badge access. No direct communication established with DSP fleet managers. Previous tech Tim left suddenly, creating rushed transition.\n\nService Quality & Documentation Problems: Invoice delays impacting truck availability. PMs completed overnight but invoices not uploaded to Box until 4pm next day. DOT inspection quality issue at TLG. Weather delays affecting timely service.\n\nDaily Operations & Scheduling: Charles currently works Mon-Fri 8am-5pm. May need later hours for vehicles returning from routes. New daily reporting system starting.',actionItems:[{owner:'Brandon',action:'Get Charles badge access, follow up with station today',status:'pending'},{owner:'Ash',action:'Share Charles contact info with DSP fleet managers',status:'pending'},{owner:'Ash',action:'Continue daily schedule updates in Chime',status:'pending'},{owner:'Ash',action:'Review DOT inspection training with Charles',status:'pending'},{owner:'Brooke',action:'Send escalation path contacts by EOD',status:'pending'},{owner:'Brooke',action:'Formalize SOP document',status:'pending'},{owner:'DSP teams',action:'Audit daily schedules, prioritize WOs, tag team in Chime',status:'pending'},{owner:'Drew',action:'Provide FIM details for DOT inspection incident',status:'pending'}]},
+            {date:'2026-03-02',title:'DSP Monthly Newsletter #1',type:'newsletter',station:'All',time:'',notes:'First edition of the DSP Monthly Newsletter',actionItems:[]}
+        ];
+    }
+
+    // =========================================================================
+    // RENDER
+    // =========================================================================
+    function renderEventList() {
+        var container = document.getElementById('eventList');
+        document.getElementById('eventCount').textContent = events.length + ' events';
+
+        if (events.length === 0) {
+            container.innerHTML = '<div class="empty-state">No events yet — add one below!</div>';
+            return;
+        }
+
+        var sorted = events.slice().sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+        var h = '';
+        for (var i = 0; i < sorted.length; i++) {
+            var e = sorted[i];
+            var origIdx = events.indexOf(e);
+            var plainNotes = (e.notes || '').replace(/<[^>]+>/g, '').replace(/\n/g, ' ');
+            var aiCount = (e.actionItems || []).length;
+            var pendingCount = (e.actionItems || []).filter(function(a) { return a.status === 'pending'; }).length;
+
+            h += '<div class="event-card">';
+            h += '<div class="event-card-header">';
+            h += '<div class="event-card-meta"><span class="event-card-date">' + e.date + '</span><span class="event-type-tag ' + e.type + '">' + e.type + '</span><span class="event-card-station">' + e.station + '</span></div>';
+            h += '<div class="event-card-actions"><button class="btn btn-outline btn-sm" onclick="editEvent(' + origIdx + ')">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="deleteEvent(' + origIdx + ')">🗑️</button></div>';
+            h += '</div>';
+            h += '<div class="event-card-title">' + e.title + '</div>';
+            if (plainNotes) h += '<div class="event-card-notes">' + plainNotes.substring(0, 200) + (plainNotes.length > 200 ? '...' : '') + '</div>';
+            if (aiCount > 0) h += '<div class="action-count">📋 ' + aiCount + ' action items' + (pendingCount > 0 ? ' (' + pendingCount + ' pending)' : ' (all done)') + '</div>';
+            h += '</div>';
+        }
+        container.innerHTML = h;
+    }
+
+    // =========================================================================
+    // FORM ACTIONS
+    // =========================================================================
+    function clearForm() {
+        document.getElementById('editIndex').value = '-1';
+        document.getElementById('formTitle').textContent = '➕ Add New Event';
+        document.getElementById('evtTitle').value = '';
+        document.getElementById('evtDate').value = '';
+        document.getElementById('evtType').value = 'roundtable';
+        document.getElementById('evtStation').value = '';
+        document.getElementById('evtTime').value = '';
+        document.getElementById('evtNotes').value = '';
+        document.getElementById('actionItemsList').innerHTML = '';
+        updateActionCount();
+    }
+
+    function editEvent(idx) {
+        var e = events[idx];
+        document.getElementById('editIndex').value = idx;
+        document.getElementById('formTitle').textContent = '✏️ Editing: ' + e.title;
+        document.getElementById('evtTitle').value = e.title;
+        document.getElementById('evtDate').value = e.date;
+        document.getElementById('evtType').value = e.type;
+        document.getElementById('evtStation').value = e.station;
+        document.getElementById('evtTime').value = e.time || '';
+
+        // Convert HTML notes back to plain text for editing
+        var notes = (e.notes || '');
+        notes = notes.replace(/<strong>/g, '').replace(/<\/strong>/g, '');
+        notes = notes.replace(/<br\s*\/?>/g, '\n');
+        notes = notes.replace(/<[^>]+>/g, '');
+        document.getElementById('evtNotes').value = notes;
+
+        // Load action items
+        document.getElementById('actionItemsList').innerHTML = '';
+        if (e.actionItems) {
+            for (var i = 0; i < e.actionItems.length; i++) {
+                addActionItemRow(e.actionItems[i]);
+            }
+        }
+        updateActionCount();
+
+        // Scroll to form
+        document.getElementById('eventFormSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function deleteEvent(idx) {
+        if (confirm('Delete "' + events[idx].title + '"?')) {
+            events.splice(idx, 1);
+            renderEventList();
+            showToast('Event deleted');
+        }
+    }
+
+    function addActionItemRow(data) {
+        var list = document.getElementById('actionItemsList');
+        var row = document.createElement('div');
+        row.className = 'action-item-form';
+        row.innerHTML = '<input type="text" placeholder="Owner" class="ai-owner" value="' + (data ? data.owner : '') + '">' +
+            '<input type="text" placeholder="Action description" class="ai-action" value="' + (data ? data.action : '') + '">' +
+            '<select class="ai-status"><option value="pending"' + (data && data.status === 'pending' ? ' selected' : '') + '>Pending</option><option value="done"' + (data && data.status === 'done' ? ' selected' : '') + '>Done</option></select>' +
+            '<button class="remove-btn" onclick="this.parentElement.remove();updateActionCount()">✕</button>';
+        list.appendChild(row);
+        updateActionCount();
+    }
+
+    function updateActionCount() {
+        var count = document.querySelectorAll('#actionItemsList .action-item-form').length;
+        document.getElementById('actionCount').textContent = count + ' items';
+    }
+
+    function saveEvent() {
+        var title = document.getElementById('evtTitle').value.trim();
+        var date = document.getElementById('evtDate').value;
+        if (!title || !date) {
+            showToast('Title and date are required');
+            return;
+        }
+
+        // Convert plain text notes to HTML formatting
+        var rawNotes = document.getElementById('evtNotes').value.trim();
+        var htmlNotes = rawNotes
+            .split('\n')
+            .map(function(line) { return line.trim(); })
+            .join('<br>')
+            .replace(/<br><br>/g, '<br><br>')
+            // Auto-bold lines that end with a colon (section headers)
+            .replace(/^([^<]+?):(<br>)/gm, '<strong>$1:</strong>$2')
+            .replace(/(<br>)([^<]+?):(<br>)/g, '$1<strong>$2:</strong>$3');
+
+        // Collect action items
+        var actionItems = [];
+        var rows = document.querySelectorAll('#actionItemsList .action-item-form');
+        for (var i = 0; i < rows.length; i++) {
+            var owner = rows[i].querySelector('.ai-owner').value.trim();
+            var action = rows[i].querySelector('.ai-action').value.trim();
+            var status = rows[i].querySelector('.ai-status').value;
+            if (owner && action) {
+                actionItems.push({ owner: owner, action: action, status: status });
+            }
+        }
+
+        var evt = {
+            date: date,
+            title: title,
+            type: document.getElementById('evtType').value,
+            station: document.getElementById('evtStation').value.trim() || 'All',
+            time: document.getElementById('evtTime').value.trim(),
+            notes: htmlNotes,
+            actionItems: actionItems
+        };
+
+        var editIdx = parseInt(document.getElementById('editIndex').value);
+        if (editIdx >= 0) {
+            events[editIdx] = evt;
+            showToast('Event updated!');
+        } else {
+            events.push(evt);
+            showToast('Event added!');
+        }
+
+        clearForm();
+        renderEventList();
+    }
+
+    // =========================================================================
+    // GENERATE JSON
+    // =========================================================================
+    function generateJSON() {
+        var output = JSON.stringify({ events: events }, null, 2);
+        document.getElementById('jsonOutput').textContent = output;
+    }
+
+    function copyJSON() {
+        var output = document.getElementById('jsonOutput').textContent;
+        if (output.indexOf('"events"') === -1) {
+            generateJSON();
+            output = document.getElementById('jsonOutput').textContent;
+        }
+        navigator.clipboard.writeText(output).then(function() {
+            var el = document.getElementById('copySuccess');
+            el.style.display = 'block';
+            showToast('Copied to clipboard!');
+            setTimeout(function() { el.style.display = 'none'; }, 3000);
+        });
+    }
+
+    function showToast(msg) {
+        var t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(function() { t.classList.remove('show'); }, 2500);
+    }
+
+    // =========================================================================
+    // INIT
+    // =========================================================================
+    document.addEventListener('DOMContentLoaded', function() {
+        loadEvents();
+    });
+    </script>
+</body>
+</html>
