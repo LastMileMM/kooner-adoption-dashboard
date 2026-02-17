@@ -6,7 +6,6 @@
     <title>Kooner Adoption Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
         :root{--bg-dark:#0a0a0f;--bg-card:#12121a;--bg-card-hover:#1a1a25;--accent-green:#00ff88;--accent-red:#ff4757;--accent-orange:#ffa502;--accent-blue:#3742fa;--accent-purple:#a855f7;--accent-cyan:#00d4ff;--accent-yellow:#ffd93d;--text-primary:#ffffff;--text-secondary:#8b8b9a;--text-muted:#4a4a5a;--border-color:#2a2a3a}
         *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Space Grotesk',sans-serif;background:var(--bg-dark);color:var(--text-primary);min-height:100vh}
@@ -17,7 +16,6 @@
         .header-left .subtitle{color:var(--text-secondary);font-size:1rem;display:flex;align-items:center;gap:12px}
         .target-badge{background:linear-gradient(135deg,var(--accent-green),#00cc6a);color:#000;padding:4px 12px;border-radius:20px;font-weight:600;font-size:0.85rem}
         .header-right{text-align:right}.last-updated{color:var(--text-muted);font-size:0.85rem;font-family:'JetBrains Mono',monospace}.data-period{color:var(--text-secondary);font-size:0.9rem;margin-top:4px}
-        .data-source-info{font-size:0.75rem;color:var(--text-muted);margin-top:4px;font-style:italic}
         .nav-tabs{display:flex;gap:8px;margin-bottom:24px;background:var(--bg-card);padding:8px;border-radius:12px;width:fit-content;flex-wrap:wrap}
         .nav-tab{padding:10px 20px;border-radius:8px;font-size:0.9rem;font-weight:500;cursor:pointer;transition:all 0.2s ease;background:transparent;border:none;color:var(--text-secondary)}
         .nav-tab:hover{background:var(--bg-card-hover);color:var(--text-primary)}.nav-tab.active{background:var(--accent-blue);color:white}
@@ -43,8 +41,6 @@
         .badge-insights{background:rgba(0,255,136,0.2);color:var(--accent-green)}
         .badge-sentiment{background:rgba(255,217,61,0.2);color:var(--accent-yellow)}
         .badge-calendar{background:rgba(255,71,87,0.2);color:var(--accent-red)}
-        .badge-live{background:rgba(0,255,136,0.2);color:var(--accent-green);animation:pulse 2s infinite}
-        @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.6}}
         .data-table{width:100%;border-collapse:collapse}
         .data-table th{text-align:left;padding:12px 8px;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted);border-bottom:1px solid var(--border-color);background:var(--bg-card)}
         .data-table td{padding:14px 8px;font-size:0.9rem;border-bottom:1px solid var(--border-color)}
@@ -90,6 +86,9 @@
         .executive-summary ul{list-style:none;padding:0}
         .executive-summary li{padding:8px 0;padding-left:24px;position:relative;color:var(--text-secondary);font-size:0.95rem;line-height:1.5}
         .executive-summary li::before{content:'→';position:absolute;left:0;color:var(--accent-blue)}
+        .next-steps{background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:12px;padding:20px}
+        .next-steps h4{font-size:1rem;margin-bottom:12px;color:var(--accent-orange)}
+        .next-steps ol{padding-left:20px;color:var(--text-secondary)}.next-steps li{padding:6px 0;font-size:0.9rem}
         .sentiment-score{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.9rem}
         .sentiment-score.score-5{background:rgba(0,255,136,0.2);color:var(--accent-green)}
         .sentiment-score.score-4{background:rgba(0,212,255,0.2);color:var(--accent-cyan)}
@@ -106,6 +105,7 @@
         .feedback-text{font-size:0.9rem;color:var(--text-secondary);line-height:1.6;font-style:italic}
         .feedback-text.issue{border-left:3px solid var(--accent-red);padding-left:12px;margin-bottom:12px}
         .feedback-text.suggestion{border-left:3px solid var(--accent-cyan);padding-left:12px}
+        /* Calendar Styles */
         .calendar-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
         .calendar-nav-btn{background:var(--bg-card-hover);border:1px solid var(--border-color);color:var(--text-primary);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:0.9rem;transition:all 0.2s}
         .calendar-nav-btn:hover{background:var(--accent-blue);border-color:var(--accent-blue)}
@@ -125,6 +125,7 @@
         .calendar-event.review{background:rgba(255,165,2,0.2);color:var(--accent-orange);border-left:2px solid var(--accent-orange)}
         .calendar-event.newsletter{background:rgba(0,200,150,0.2);color:#00c896;border-left:2px solid #00c896}
         .calendar-event.past{opacity:0.7}
+        /* Modal Styles */
         .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:1000;display:none;justify-content:center;align-items:center;padding:20px}
         .modal-overlay.active{display:flex}
         .modal{background:var(--bg-card);border:1px solid var(--border-color);border-radius:16px;max-width:700px;width:100%;max-height:80vh;overflow-y:auto;position:relative}
@@ -170,12 +171,7 @@
         .action-status{font-size:0.7rem;padding:3px 8px;border-radius:10px;font-weight:600}
         .action-status.pending{background:rgba(255,165,2,0.2);color:var(--accent-orange)}
         .action-status.done{background:rgba(0,255,136,0.2);color:var(--accent-green)}
-        .loading-indicator{display:flex;align-items:center;justify-content:center;padding:40px;color:var(--text-muted);gap:12px}
-        .loading-spinner{width:20px;height:20px;border:2px solid var(--border-color);border-top:2px solid var(--accent-blue);border-radius:50%;animation:spin 1s linear infinite}
-        @keyframes spin{to{transform:rotate(360deg)}}
-        .data-error{background:rgba(255,71,87,0.1);border:1px solid rgba(255,71,87,0.3);border-radius:12px;padding:20px;text-align:center;color:var(--accent-red)}
-        .data-error p{margin-top:8px;color:var(--text-secondary);font-size:0.85rem}
-        @media(max-width:1200px){.kpi-row{grid-template-columns:repeat(3,1fr)}.action-list{grid-template-columns:repeat(2,1fr)}.insights-grid{grid-template-columns:1fr}}
+        @media(max-width:1200px){.kpi-row{grid-template-columns:repeat(3,1fr)}.action-list{grid-template-columns:repeat(2,1fr)}.insights-grid{grid-template-columns:1fr}.calendar-grid{grid-template-columns:repeat(7,1fr)}}
         @media(max-width:900px){.main-grid{grid-template-columns:1fr}.kpi-row{grid-template-columns:repeat(2,1fr)}.action-list{grid-template-columns:1fr}}
         @media(max-width:600px){.header{flex-direction:column;gap:16px}.kpi-row{grid-template-columns:1fr}.nav-tabs{flex-wrap:wrap}.calendar-day{min-height:60px}}
     </style>
@@ -189,9 +185,8 @@
                 <div class="subtitle"><span>Vendor Adoption Tracking</span><span class="target-badge">TARGET: 85%</span></div>
             </div>
             <div class="header-right">
-                <div class="last-updated" id="lastUpdated">Last Updated: Loading...</div>
+                <div class="last-updated">Last Updated: 2026-02-16 @ 1:00 PM EST</div>
                 <div class="data-period">Data Period: WK01 - WK06 (Dec 28 - Feb 7)</div>
-                <div class="data-source-info">Survey: Live from Google Sheets · Events: events-data.json</div>
             </div>
         </header>
         <div class="nav-tabs">
@@ -204,7 +199,6 @@
             <button class="nav-tab" onclick="showTab('calendar')">📅 Calendar</button>
         </div>
 
-        <!-- ===== OVERVIEW TAB ===== -->
         <div id="overview" class="tab-content active">
             <div class="kpi-row">
                 <div class="kpi-card"><div class="kpi-label">Total Kooner WOs</div><div class="kpi-value green">811</div><div class="kpi-subtext">Completed by Kooner</div></div>
@@ -221,7 +215,6 @@
             </div>
         </div>
 
-        <!-- ===== TRENDS TAB ===== -->
         <div id="trends" class="tab-content">
             <div class="main-grid">
                 <div class="card full-width">
@@ -249,7 +242,6 @@
             </div>
         </div>
 
-        <!-- ===== STATIONS TAB ===== -->
         <div id="stations" class="tab-content">
             <div class="main-grid">
                 <div class="card full-width"><div class="card-header"><div class="card-title">Station Adoption Details</div><span class="card-badge badge-stations">12 STATIONS</span></div><table class="data-table"><thead><tr><th>Station</th><th>Location</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>Total</th><th>Gap to 85%</th><th>Status</th></tr></thead><tbody id="stationFullTable"></tbody></table></div>
@@ -258,7 +250,6 @@
             </div>
         </div>
 
-        <!-- ===== DSPs TAB ===== -->
         <div id="dsps" class="tab-content">
             <div class="main-grid">
                 <div class="card full-width">
@@ -276,41 +267,39 @@
             </div>
         </div>
 
-        <!-- ===== SENTIMENT TAB (LIVE FROM GOOGLE SHEETS) ===== -->
         <div id="sentiment" class="tab-content">
-            <div class="kpi-row" style="grid-template-columns:repeat(4,1fr)" id="sentimentKPIs">
-                <div class="kpi-card"><div class="kpi-label">Survey Responses</div><div class="kpi-value" id="kpiResponses">—</div><div class="kpi-subtext" id="kpiRespondents">Loading...</div></div>
-                <div class="kpi-card warning"><div class="kpi-label">Avg Satisfaction</div><div class="kpi-value yellow" id="kpiSatisfaction">—</div><div class="kpi-subtext">out of 5.0</div></div>
-                <div class="kpi-card warning"><div class="kpi-label">Avg Timeliness</div><div class="kpi-value orange" id="kpiTimeliness">—</div><div class="kpi-subtext">out of 5.0</div></div>
-                <div class="kpi-card warning"><div class="kpi-label">Avg Quality</div><div class="kpi-value orange" id="kpiQuality">—</div><div class="kpi-subtext">out of 5.0</div></div>
+            <div class="kpi-row" style="grid-template-columns:repeat(4,1fr)">
+                <div class="kpi-card"><div class="kpi-label">Survey Responses</div><div class="kpi-value">14</div><div class="kpi-subtext">From 7 DSPs</div></div>
+                <div class="kpi-card warning"><div class="kpi-label">Avg Satisfaction</div><div class="kpi-value yellow">2.8</div><div class="kpi-subtext">out of 5.0</div></div>
+                <div class="kpi-card warning"><div class="kpi-label">Avg Timeliness</div><div class="kpi-value orange">2.8</div><div class="kpi-subtext">out of 5.0</div></div>
+                <div class="kpi-card warning"><div class="kpi-label">Avg Quality</div><div class="kpi-value orange">2.9</div><div class="kpi-subtext">out of 5.0</div></div>
             </div>
             <div class="main-grid">
-                <div class="card"><div class="card-header"><div class="card-title">Sentiment by DSP</div><span class="card-badge badge-live">● LIVE</span></div><div class="chart-container"><canvas id="sentimentChart"></canvas></div></div>
+                <div class="card"><div class="card-header"><div class="card-title">Sentiment by DSP</div></div><div class="chart-container"><canvas id="sentimentChart"></canvas></div></div>
                 <div class="card"><div class="card-header"><div class="card-title">Sentiment vs Adoption</div></div><div class="chart-container"><canvas id="correlationChart"></canvas></div></div>
-                <div class="card full-width"><div class="card-header"><div class="card-title">💬 Recent Feedback</div><span class="card-badge badge-live">● LIVE FROM JOTFORM</span></div><div id="feedbackList"><div class="loading-indicator"><div class="loading-spinner"></div>Loading survey data...</div></div></div>
+                <div class="card full-width"><div class="card-header"><div class="card-title">🎯 Key Themes</div></div><div class="insights-grid"><div class="insight-card negative"><div class="insight-icon">⏱️</div><div class="insight-title">Timeliness</div><div class="insight-text">PM completion 4+ days</div></div><div class="insight-card negative"><div class="insight-icon">📄</div><div class="insight-title">Paperwork</div><div class="insight-text">Documentation delays</div></div><div class="insight-card warning"><div class="insight-icon">💬</div><div class="insight-title">Communication</div><div class="insight-text">Need proactive updates</div></div><div class="insight-card positive"><div class="insight-icon">🌟</div><div class="insight-title">ARMA Turnaround!</div><div class="insight-text">Feb 9: 5/5 - "Jose Madrigal is GREAT!"</div></div></div></div>
+                <div class="card full-width"><div class="card-header"><div class="card-title">💬 Recent Feedback</div></div><div id="feedbackList"></div></div>
             </div>
         </div>
 
-        <!-- ===== ACTIONS TAB ===== -->
         <div id="actions" class="tab-content">
             <div class="kpi-row" style="grid-template-columns:repeat(4,1fr)">
                 <div class="kpi-card danger"><div class="kpi-label">Critical Priority</div><div class="kpi-value red">3</div><div class="kpi-subtext">Immediate action needed</div></div>
                 <div class="kpi-card warning"><div class="kpi-label">High Priority</div><div class="kpi-value orange">4</div><div class="kpi-subtext">Address this week</div></div>
-                <div class="kpi-card"><div class="kpi-label">Roundtable Actions</div><div class="kpi-value yellow" id="kpiRoundtableActions">—</div><div class="kpi-subtext">From meetings</div></div>
+                <div class="kpi-card"><div class="kpi-label">Roundtable Actions</div><div class="kpi-value yellow">19</div><div class="kpi-subtext">From 3 meetings</div></div>
                 <div class="kpi-card success"><div class="kpi-label">Improving</div><div class="kpi-value green">2</div><div class="kpi-subtext">Positive trend</div></div>
             </div>
             <div class="main-grid">
                 <div class="card full-width"><div class="card-header"><div class="card-title">🎯 Priority Actions (Adoption + Sentiment)</div><span class="card-badge badge-sentiment">COMBINED SCORING</span></div><div class="action-list" id="actionList"></div></div>
                 <div class="card full-width"><div class="card-header"><div class="card-title">📋 Action Matrix</div></div><table class="data-table"><thead><tr><th>Priority</th><th>Station</th><th>Adoption</th><th>Sentiment</th><th>Leaked</th><th>Key Issue</th><th>Recommended Action</th></tr></thead><tbody id="actionTable"></tbody></table></div>
-                <div class="card full-width"><div class="card-header"><div class="card-title">📅 Roundtable Action Items</div><span class="card-badge badge-calendar">FROM EVENTS DATA</span></div><div id="roundtableActions"><div class="loading-indicator"><div class="loading-spinner"></div>Loading events data...</div></div></div>
+                <div class="card full-width"><div class="card-header"><div class="card-title">📅 Roundtable Action Items</div><span class="card-badge badge-calendar">FROM MEETINGS</span></div><div id="roundtableActions"></div></div>
             </div>
         </div>
 
-        <!-- ===== CALENDAR TAB (LIVE FROM JSON) ===== -->
         <div id="calendar" class="tab-content">
             <div class="main-grid">
                 <div class="card full-width">
-                    <div class="card-header"><div class="card-title">📅 Engagement Calendar</div><span class="card-badge badge-live">● LIVE</span></div>
+                    <div class="card-header"><div class="card-title">📅 Engagement Calendar</div><span class="card-badge badge-calendar">CLICK EVENTS FOR DETAILS</span></div>
                     <div class="legend">
                         <div class="legend-item"><div class="legend-dot" style="background:rgba(168,85,247,0.5)"></div>DSP Roundtable</div>
                         <div class="legend-item"><div class="legend-dot" style="background:rgba(0,255,136,0.5)"></div>Site Visit</div>
@@ -324,15 +313,16 @@
                         <span class="calendar-month-title" id="calendarMonthTitle">February 2026</span>
                         <button class="calendar-nav-btn" onclick="changeMonth(1)">Next →</button>
                     </div>
-                    <div class="calendar-grid" id="calendarGrid"><div class="loading-indicator full-width"><div class="loading-spinner"></div>Loading calendar...</div></div>
+                    <div class="calendar-grid" id="calendarGrid"></div>
+                </div>
                 </div>
                 <div class="card">
                     <div class="card-header"><div class="card-title">📋 Upcoming Events</div></div>
-                    <div class="event-list" id="eventList"><div class="loading-indicator"><div class="loading-spinner"></div>Loading...</div></div>
+                    <div class="event-list" id="eventList"></div>
                 </div>
                 <div class="card">
                     <div class="card-header"><div class="card-title">📝 Past Event Notes</div><span class="card-badge badge-dsps">ROUNDTABLE NOTES</span></div>
-                    <div class="event-list" id="pastEventList"><div class="loading-indicator"><div class="loading-spinner"></div>Loading...</div></div>
+                    <div class="event-list" id="pastEventList"></div>
                 </div>
             </div>
         </div>
@@ -362,161 +352,49 @@
     </div>
 
     <script>
-    // =========================================================================
-    // CONFIGURATION — UPDATE THESE VALUES
-    // =========================================================================
-    var CONFIG = {
-        // Replace with your published Google Sheets CSV URL
-        // In Google Sheets: File > Share > Publish to web > CSV
-        SURVEY_SHEET_URL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQXajk2Gv76ZmqD7YW8QXe6Rs7AOsfbJi3ueRJ4X_F9EX_63eWozXWFfQExGIcqYIjpwPT-L_nQudS6/pub?gid=2094613316&single=true&output=csv',
+        var stationData = [
+            {station:'HTP2',location:'Gibsonton, FL',kooner:89,leaked:18,adoption:83.2},
+            {station:'HSL1',location:'Salt Lake City, UT',kooner:30,leaked:2,adoption:93.8},
+            {station:'HHO3',location:'Porter, TX',kooner:96,leaked:24,adoption:80.0},
+            {station:'HDY1',location:'Clayton, OH',kooner:54,leaked:13,adoption:80.6},
+            {station:'HCT2',location:'Chattanooga, TN',kooner:24,leaked:4,adoption:85.7},
+            {station:'HCL2',location:'Charlotte, NC',kooner:70,leaked:62,adoption:53.0},
+            {station:'HDT3',location:'Romulus, MI',kooner:152,leaked:141,adoption:51.9},
+            {station:'HMS2',location:'Lakeville, MN',kooner:37,leaked:33,adoption:52.9},
+            {station:'HIN3',location:'South Bend, IN',kooner:16,leaked:20,adoption:44.4},
+            {station:'HLA2',location:'Santa Clarita, CA',kooner:189,leaked:250,adoption:43.1},
+            {station:'HAU1',location:'Austin, TX',kooner:53,leaked:78,adoption:40.5},
+            {station:'HPD1',location:'Portland, OR',kooner:1,leaked:34,adoption:2.9}
+        ];
 
-        // Column mapping — adjust if your Jotform columns have different names
-        // These should match the EXACT column headers in your Google Sheet
-        SURVEY_COLUMNS: {
-            date: 'Submission Date',
-            dsp: 'DSP Shortcode',
-            station: 'Station/Site Code',
-            satisfaction: 'Overall satisfaction with Kooner\'s services this week:',
-            timeliness: 'Timeliness of service:',
-            quality: 'Quality of repairs:',
-            issue: 'Did you experience any unresolved issues this week? If so, please briefly describe the issue(s)',
-            suggestion: 'Is there anything else our team can do to better support you?',
-            additionalFeedback: 'Please share any additional fleet or service-related feedback from this week.',
-            contactName: 'Full Name',
-            followUp: 'Would you like someone from the Kooner Ops team to follow up with you? If yes, please include your preferred method of contact.'
-        },
+        var weeklyByStation = {
+            'HAU1':{WK1:6,WK2:12,WK3:10,WK4:14,WK5:3,WK6:6,total:53},
+            'HCL2':{WK1:1,WK2:5,WK3:29,WK4:8,WK5:10,WK6:16,total:70},
+            'HCT2':{WK1:null,WK2:4,WK3:5,WK4:7,WK5:2,WK6:4,total:24},
+            'HDT3':{WK1:9,WK2:15,WK3:17,WK4:26,WK5:44,WK6:23,total:152},
+            'HDY1':{WK1:9,WK2:20,WK3:10,WK4:6,WK5:null,WK6:5,total:54},
+            'HHO3':{WK1:6,WK2:22,WK3:13,WK4:19,WK5:15,WK6:12,total:96},
+            'HIN3':{WK1:1,WK2:5,WK3:4,WK4:2,WK5:null,WK6:5,total:16},
+            'HLA2':{WK1:9,WK2:20,WK3:23,WK4:42,WK5:41,WK6:37,total:189},
+            'HMS2':{WK1:2,WK2:6,WK3:5,WK4:11,WK5:9,WK6:2,total:37},
+            'HPD1':{WK1:null,WK2:null,WK3:null,WK4:1,WK5:null,WK6:null,total:1},
+            'HSL1':{WK1:1,WK2:4,WK3:5,WK4:5,WK5:5,WK6:10,total:30},
+            'HTP2':{WK1:3,WK2:20,WK3:8,WK4:16,WK5:7,WK6:22,total:89}
+        };
 
-        // Path to events JSON file (relative to index.html)
-        EVENTS_JSON_PATH: 'events-data.json'
-    };
+        var weekTotals = {WK1:48,WK2:132,WK3:125,WK4:156,WK5:139,WK6:142};
 
-    // =========================================================================
-    // STATIC DATA (Station adoption, weekly WOs, action priorities)
-    // =========================================================================
-    var stationData = [
-        {station:'HTP2',location:'Gibsonton, FL',kooner:89,leaked:18,adoption:83.2},
-        {station:'HSL1',location:'Salt Lake City, UT',kooner:30,leaked:2,adoption:93.8},
-        {station:'HHO3',location:'Porter, TX',kooner:96,leaked:24,adoption:80.0},
-        {station:'HDY1',location:'Clayton, OH',kooner:54,leaked:13,adoption:80.6},
-        {station:'HCT2',location:'Chattanooga, TN',kooner:24,leaked:4,adoption:85.7},
-        {station:'HCL2',location:'Charlotte, NC',kooner:70,leaked:62,adoption:53.0},
-        {station:'HDT3',location:'Romulus, MI',kooner:152,leaked:141,adoption:51.9},
-        {station:'HMS2',location:'Lakeville, MN',kooner:37,leaked:33,adoption:52.9},
-        {station:'HIN3',location:'South Bend, IN',kooner:16,leaked:20,adoption:44.4},
-        {station:'HLA2',location:'Santa Clarita, CA',kooner:189,leaked:250,adoption:43.1},
-        {station:'HAU1',location:'Austin, TX',kooner:53,leaked:78,adoption:40.5},
-        {station:'HPD1',location:'Portland, OR',kooner:1,leaked:34,adoption:2.9}
-    ];
+        var sentimentData = [
+            {dsp:"ALAB",station:"HDT3",responses:1,satisfaction:1.0,timeliness:1.0,quality:1.0,avgScore:1.0,adoption:51.9},
+            {dsp:"ARMA",station:"HLA2",responses:5,satisfaction:2.6,timeliness:2.6,quality:2.6,avgScore:2.6,adoption:43.1},
+            {dsp:"ORMP",station:"HTP2",responses:2,satisfaction:2.0,timeliness:2.0,quality:3.0,avgScore:2.3,adoption:83.2},
+            {dsp:"MAEP",station:"HIN3",responses:1,satisfaction:2.0,timeliness:2.0,quality:3.0,avgScore:2.3,adoption:44.4},
+            {dsp:"SFRM",station:"HDT3",responses:5,satisfaction:3.2,timeliness:2.6,quality:3.2,avgScore:3.0,adoption:51.9},
+            {dsp:"PRLC",station:"HSL1",responses:1,satisfaction:4.0,timeliness:5.0,quality:3.0,avgScore:4.0,adoption:93.8},
+            {dsp:"D4DS",station:"HCL2",responses:1,satisfaction:5.0,timeliness:5.0,quality:5.0,avgScore:5.0,adoption:53.0}
+        ];
 
-    var weeklyByStation = {
-        'HAU1':{WK1:6,WK2:12,WK3:10,WK4:14,WK5:3,WK6:6,total:53},
-        'HCL2':{WK1:1,WK2:5,WK3:29,WK4:8,WK5:10,WK6:16,total:70},
-        'HCT2':{WK1:null,WK2:4,WK3:5,WK4:7,WK5:2,WK6:4,total:24},
-        'HDT3':{WK1:9,WK2:15,WK3:17,WK4:26,WK5:44,WK6:23,total:152},
-        'HDY1':{WK1:9,WK2:20,WK3:10,WK4:6,WK5:null,WK6:5,total:54},
-        'HHO3':{WK1:6,WK2:22,WK3:13,WK4:19,WK5:15,WK6:12,total:96},
-        'HIN3':{WK1:1,WK2:5,WK3:4,WK4:2,WK5:null,WK6:5,total:16},
-        'HLA2':{WK1:9,WK2:20,WK3:23,WK4:42,WK5:41,WK6:37,total:189},
-        'HMS2':{WK1:2,WK2:6,WK3:5,WK4:11,WK5:9,WK6:2,total:37},
-        'HPD1':{WK1:null,WK2:null,WK3:null,WK4:1,WK5:null,WK6:null,total:1},
-        'HSL1':{WK1:1,WK2:4,WK3:5,WK4:5,WK5:5,WK6:10,total:30},
-        'HTP2':{WK1:3,WK2:20,WK3:8,WK4:16,WK5:7,WK6:22,total:89}
-    };
-    var weekTotals = {WK1:48,WK2:132,WK3:125,WK4:156,WK5:139,WK6:142};
-
-    var actionData = [
-        {station:'HPD1',location:'Portland, OR',adoption:2.9,leaked:34,sentiment:null,issue:'No survey data - unknown DSP engagement',action:'Emergency: Identify DSP contacts, schedule immediate roundtable',priority:'critical'},
-        {station:'HLA2',location:'Santa Clarita, CA',adoption:43.1,leaked:250,sentiment:2.6,issue:'ARMA improving (5/5 recent), but historical issues',action:'Continue momentum with Jose M. Expand to other DSPs at station',priority:'critical'},
-        {station:'HAU1',location:'Austin, TX',adoption:40.5,leaked:78,sentiment:null,issue:'No survey data - dropped from 88% to 40%',action:'Urgent site visit to identify root cause of decline',priority:'critical'},
-        {station:'HDT3',location:'Romulus, MI',adoption:51.9,leaked:141,sentiment:2.1,issue:'ALAB (1/5) and SFRM (3.1/5) mixed feedback',action:'Address ALAB concerns first - timeliness and rework issues',priority:'high'},
-        {station:'HIN3',location:'South Bend, IN',adoption:44.4,leaked:20,sentiment:2.3,issue:'MAEP reports unresolved issues, wrong parts',action:'Quality review with tech team, parts inventory check',priority:'high'},
-        {station:'HCL2',location:'Charlotte, NC',adoption:53.0,leaked:62,sentiment:5.0,issue:'D4DS loves service but adoption still low',action:'Identify other DSPs at station causing leakage',priority:'high'},
-        {station:'HTP2',location:'Gibsonton, FL',adoption:83.2,leaked:18,sentiment:2.3,issue:'ORMP: contact laid off, no visibility into WOs',action:'Near target — assign new contact, maintain WK06 momentum',priority:'high'},
-        {station:'HMS2',location:'Lakeville, MN',adoption:52.9,leaked:33,sentiment:null,issue:'No survey data',action:'Schedule DSP roundtable to gather feedback',priority:'medium'},
-        {station:'HHO3',location:'Porter, TX',adoption:80.0,leaked:24,sentiment:null,issue:'Near target but no survey feedback',action:'Quick wins to push over 85%, gather DSP input',priority:'medium'},
-        {station:'HDY1',location:'Clayton, OH',adoption:80.6,leaked:13,sentiment:null,issue:'Very close to target',action:'Final push to 85% - identify remaining blockers',priority:'low'}
-    ];
-
-    // =========================================================================
-    // GLOBAL STATE
-    // =========================================================================
-    var calendarEvents = [];
-    var allRoundtableActions = [];
-    var surveyData = [];
-    var currentMonth = 1;
-    var currentYear = 2026;
-    var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    var sentimentChartInstance = null;
-    var correlationChartInstance = null;
-
-    // =========================================================================
-    // DATA LOADING — SURVEY (Google Sheets)
-    // =========================================================================
-    function loadSurveyData() {
-        var url = CONFIG.SURVEY_SHEET_URL;
-        if (!url || url === 'YOUR_GOOGLE_SHEETS_PUBLISHED_CSV_URL_HERE') {
-            console.log('No Google Sheets URL configured — using fallback survey data');
-            useFallbackSurveyData();
-            return;
-        }
-
-        Papa.parse(url, {
-            download: true,
-            header: true,
-            skipEmptyLines: true,
-            complete: function(results) {
-                if (results.errors.length > 0) {
-                    console.warn('CSV parse errors:', results.errors);
-                }
-                if (results.data.length === 0) {
-                    console.warn('No survey data found — using fallback');
-                    useFallbackSurveyData();
-                    return;
-                }
-
-                var cols = CONFIG.SURVEY_COLUMNS;
-                surveyData = results.data.map(function(row) {
-                    // Parse ratings - handle both numeric ("3") and text ("3 - Neutral") formats
-                    function parseRating(val) {
-                        if (!val) return 0;
-                        var str = String(val).trim();
-                        var num = parseFloat(str);
-                        if (!isNaN(num)) return num;
-                        // Try extracting leading number from text like "3 - Neutral"
-                        var match = str.match(/^(\d+)/);
-                        return match ? parseFloat(match[1]) : 0;
-                    }
-
-                    // Combine suggestion + additional feedback
-                    var suggestion = (row[cols.suggestion] || '').trim();
-                    var additional = (row[cols.additionalFeedback] || '').trim();
-                    var combined = [suggestion, additional].filter(function(s) { return s.length > 0; }).join(' | ');
-
-                    return {
-                        date: row[cols.date] || '',
-                        dsp: (row[cols.dsp] || '').trim().toUpperCase(),
-                        station: (row[cols.station] || '').trim().toUpperCase(),
-                        contactName: (row[cols.contactName] || '').trim(),
-                        satisfaction: parseRating(row[cols.satisfaction]),
-                        timeliness: parseRating(row[cols.timeliness]),
-                        quality: parseRating(row[cols.quality]),
-                        issue: (row[cols.issue] || '').trim(),
-                        suggestion: combined,
-                        followUp: (row[cols.followUp] || '').trim()
-                    };
-                }).filter(function(r) { return r.dsp && r.station; });
-
-                renderSentimentTab(surveyData);
-            },
-            error: function(err) {
-                console.error('Failed to load Google Sheets CSV:', err);
-                useFallbackSurveyData();
-            }
-        });
-    }
-
-    function useFallbackSurveyData() {
-        surveyData = [
+        var feedbackData = [
             {date:"Feb 16",dsp:"SFRM",station:"HDT3",satisfaction:3,timeliness:2,quality:4,issue:"Unit 0160 grounded 02/11 for engine issues - still not diagnosed. Unit 5768 grounded 02/09 for HVAC - awaiting repairs due to estimate/pricing issues.",suggestion:"Need more techs - stretched thin across 2 DSPs. No weekend work causing delays. Techs should comingle on WOs to avoid knowledge gaps between shifts. 14 grounded vehicles, 8 outsourced to other vendors."},
             {date:"Feb 10",dsp:"SFRM",station:"HDT3",satisfaction:4,timeliness:4,quality:4,issue:"Unit 2974 pending diagnostics for a few days",suggestion:"More availability for weekend issues, over the road calls."},
             {date:"Feb 9",dsp:"ORMP",station:"HTP2",satisfaction:2,timeliness:2,quality:4,issue:"Multiple WOs not looked at since 2/4. Helpful contact laid off.",suggestion:""},
@@ -530,491 +408,363 @@
             {date:"Jan 5",dsp:"ARMA",station:"HLA2",satisfaction:1,timeliness:1,quality:1,issue:"No work orders submitted.",suggestion:"Better communication."},
             {date:"Dec 30",dsp:"MAEP",station:"HIN3",satisfaction:2,timeliness:2,quality:3,issue:"Most issues not resolved. Wrong brake parts ordered, then additional issues found. Had to outsource repair.",suggestion:""}
         ];
-        renderSentimentTab(surveyData);
-    }
 
-    function renderSentimentTab(data) {
-        // Calculate KPIs
-        var totalResponses = data.length;
-        var dsps = {};
-        var totalSat = 0, totalTime = 0, totalQual = 0;
+        // Combined action data with sentiment
+        var actionData = [
+            {station:'HPD1',location:'Portland, OR',adoption:2.9,leaked:34,sentiment:null,issue:'No survey data - unknown DSP engagement',action:'Emergency: Identify DSP contacts, schedule immediate roundtable',priority:'critical'},
+            {station:'HLA2',location:'Santa Clarita, CA',adoption:43.1,leaked:250,sentiment:2.6,issue:'ARMA improving (5/5 recent), but historical issues',action:'Continue momentum with Jose M. Expand to other DSPs at station',priority:'critical'},
+            {station:'HAU1',location:'Austin, TX',adoption:40.5,leaked:78,sentiment:null,issue:'No survey data - dropped from 88% to 40%',action:'Urgent site visit to identify root cause of decline',priority:'critical'},
+            {station:'HDT3',location:'Romulus, MI',adoption:51.9,leaked:141,sentiment:2.1,issue:'ALAB (1/5) and SFRM (3.1/5) mixed feedback',action:'Address ALAB concerns first - timeliness and rework issues',priority:'high'},
+            {station:'HIN3',location:'South Bend, IN',adoption:44.4,leaked:20,sentiment:2.3,issue:'MAEP reports unresolved issues, wrong parts',action:'Quality review with tech team, parts inventory check',priority:'high'},
+            {station:'HCL2',location:'Charlotte, NC',adoption:53.0,leaked:62,sentiment:5.0,issue:'D4DS loves service but adoption still low',action:'Identify other DSPs at station causing leakage',priority:'high'},
+            {station:'HTP2',location:'Gibsonton, FL',adoption:83.2,leaked:18,sentiment:2.3,issue:'ORMP: contact laid off, no visibility into WOs',action:'Near target — assign new contact, maintain WK06 momentum',priority:'high'},
+            {station:'HMS2',location:'Lakeville, MN',adoption:52.9,leaked:33,sentiment:null,issue:'No survey data',action:'Schedule DSP roundtable to gather feedback',priority:'medium'},
+            {station:'HHO3',location:'Porter, TX',adoption:80.0,leaked:24,sentiment:null,issue:'Near target but no survey feedback',action:'Quick wins to push over 85%, gather DSP input',priority:'medium'},
+            {station:'HDY1',location:'Clayton, OH',adoption:80.6,leaked:13,sentiment:null,issue:'Very close to target',action:'Final push to 85% - identify remaining blockers',priority:'low'}
+        ];
 
-        data.forEach(function(r) {
-            if (!dsps[r.dsp]) dsps[r.dsp] = [];
-            dsps[r.dsp].push(r);
-            totalSat += r.satisfaction;
-            totalTime += r.timeliness;
-            totalQual += r.quality;
-        });
+        // Calendar events
+        var calendarEvents = [
+            {date:'2026-02-09',title:'HMS2 Roundtable',type:'roundtable',station:'HMS2',time:'10:00 AM',notes:'<strong>Key Issues:</strong> Severe communication delays - questions unanswered 6-8 hrs, multi-day gaps despite 60-80 people in Kooner chat. Steven: "Never experienced such delay" vs prior vendors.<br><br><strong>Safety/Compliance Failures:</strong> Truck 21 passed Federal DOT but failed MN inspection with visible drag link issues. Truck 20 had 5 federal DOT failures caught by external shop. Wrong stickers on wrong vehicles. Steven: "Would rather pay out of pocket for inspections."<br><br><strong>Work Quality:</strong> Truck 1 urgent WO at 8am, tech sat idle until 12:15pm. WOs marked complete when repairs not finished. Multiple recreations needed.<br><br><strong>Root Causes:</strong> Coverage gaps across shifts, tech (Michael) attendance/training issues, no escalation protocols, DSPs unclear on contacts.<br><br><strong>Solutions Discussed:</strong> David (experienced manager tech) deploying next week for training/oversight. Formal dispatch schedule being created. This is 2nd escalation - relationship at risk.<br><br><strong style="color:#ff4757">Action Items:</strong><br>• Brooke/Alberto: Provide direct numbers for 24/7 contact<br>• Ash: Send dispatch schedule with roles/coverage times<br>• David: Visit HMS2 next week for training & process review<br>• Steven: Document VINs, dates, WO details via email + chat<br>• Team: Schedule site visit after David training complete<br>• Team: Establish escalation protocols for urgent repairs<br>• Team: Implement follow-up tracking for all issues'},
+            {date:'2026-02-10',title:'HCL2 Roundtable',type:'roundtable',station:'HCL2',time:'2:00 PM',notes:'<strong>Key Issues:</strong> D4DS (Andrea) down to 6 of 17 trucks. Multiple vehicles grounded due to incomplete PMs - one sitting since Jan 22. Communication breakdown: no responses since Saturday, messages unanswered for days. Unexpected tech departure caused service disruption.<br><br><strong>Root Causes:</strong> No proactive status updates, parts availability delays, badge access issues, two intake systems creating confusion, no real-time WO visibility for DSPs.<br><br><strong>Solutions Discussed:</strong> Justin Ellis relocating permanently (6pm-2am shift), Eugene deploying to help clear backlog. Relay Garage integration planned for mid-March with Fleet Portal scheduling.<br><br><strong style="color:#ff4757">Action Items:</strong><br>• Ash: Provide cell numbers for direct contact<br>• Ash: Daily AM updates in Chime on overnight completions<br>• Kathy: Send contact list with roles<br>• Team: Provide ETA doc for all 28 open WOs<br>• Mark: Meet Justin to set up vehicle shuttle system<br>• Mark: Set up key box at FC entrance<br>• Andrea: Share D4 WOs in Chime for reconciliation'},
+            {date:'2026-02-11',title:'HPD1 Roundtable',type:'roundtable',station:'HPD1',time:'11:00 AM',notes:'<strong>Key Context:</strong> Unique site - only DSP at location, co-located with FC, 20-30 min from other Amazon facilities. Robert (DSP) has existing vendor relationship (1.5 yrs) with dedicated 1-2 techs who know his fleet.<br><br><strong>Service Gaps Identified:</strong><br>• No proactive PM scheduling communication<br>• No notification when repairs completed<br>• Inconsistent tech coverage - "multiple technicians...next day new tech not familiar with anything"<br>• Kooner removed dedicated Vancouver travel tech due to volume decrease<br>• BOX invoice process implemented without DSP awareness<br><br><strong>Impact:</strong> Ryan: "My biggest concern is fleet constraints from maintenance causing dropped routes." Recent DOT/Box issue nearly caused route capacity problems.<br><br><strong>Site Complexity:</strong> FC co-location creates security/access challenges. Strict landlord with exterior building requirements including painting restrictions.<br><br><strong>Solutions Discussed:</strong><br>• Tech integration within 1 month for comms<br>• Amazon Fleet Portal integration end of March/April - direct scheduling, real-time updates, single portal<br>• Dedicated tech Michael available (5-10 min from site, knows Last Mile)<br>• Moving from Chime to Slack<br><br><strong style="color:#ff4757">Action Items:</strong><br>• Team: Schedule follow-up Fri or Mon/Tue same time<br>• Attendees: Ash, Alberto, Brooke, Robert + fleet team member<br>• Meeting Goals: Document comms expectations, align on SLAs, introduce Michael, establish escalation<br>• Ash/Alberto: Provided cell numbers for urgent situations<br>• Team: Send meeting invite with forwarding option'},
+            {date:'2026-02-16',title:'HDY1 Roundtable',type:'roundtable',station:'HDY1',time:'',notes:'<strong>Communication & Process Issues:</strong> New tech Charles transitioned from middle mile without proper last mile training. Missing badge access - Brandon following up with station today. No direct communication established with DSP fleet managers. Previous tech Tim left suddenly, creating rushed transition. DSP teams (TLG: Hunter/Drew, TWLD: Chris/Luke) need direct tech contact — historical success with direct Tim communication.<br><br><strong>Service Quality & Documentation Problems:</strong> Invoice delays impacting truck availability — PMs completed overnight but invoices not uploaded to Box until 4pm next day. Trucks cannot run without Amazon portal clearance. Invoices lack specific PM details required by Amazon. DOT inspection quality issue at TLG — $1,000 in repairs needed for loose/missing U-bolts on box truck attachment (safety risk requiring tech training emphasis). Weather delays affecting timely service, vehicles being grounded due to incomplete work.<br><br><strong>Daily Operations & Scheduling:</strong> Charles currently works Mon-Fri 8am-5pm (Tim previous schedule). May need later hours for vehicles returning from routes — open to adjustments. New daily reporting system starting: Ash posting completed/pending work updates in Chime, DSPs to validate and prioritize WOs, screen grabs showing 24-hour completion status. Key box installation pending — Amazon restrictions on building modifications, working with Jeff on external placement.<br><br><strong style="color:#ff4757">Action Items:</strong><br>• Brandon: Get Charles badge access, follow up with station today<br>• Ash: Share Charles contact info with DSP fleet managers, continue daily schedule updates, review DOT inspection training<br>• Brooke: Send escalation path contacts by EOD, formalize SOP document<br>• DSP teams: Audit daily schedules, prioritize WOs, tag team members in Chime<br>• Drew: Provide FIM details for DOT inspection incident'},
+            {date:'2026-03-02',title:'DSP Monthly Newsletter #1',type:'newsletter',station:'All',time:'',notes:'First edition of the DSP Monthly Newsletter'}
+        ];
 
-        var avgSat = totalResponses > 0 ? (totalSat / totalResponses).toFixed(1) : '—';
-        var avgTime = totalResponses > 0 ? (totalTime / totalResponses).toFixed(1) : '—';
-        var avgQual = totalResponses > 0 ? (totalQual / totalResponses).toFixed(1) : '—';
+        // Roundtable action items for Actions tab
+        var roundtableActions = [
+            {station:'HMS2',date:'Feb 9',owner:'Brooke/Alberto',action:'Provide direct numbers for 24/7 contact',status:'done'},
+            {station:'HMS2',date:'Feb 9',owner:'Ash',action:'Send dispatch schedule with roles/coverage times',status:'done'},
+            {station:'HMS2',date:'Feb 9',owner:'David',action:'Visit HMS2 next week for training & process review',status:'done'},
+            {station:'HMS2',date:'Feb 9',owner:'Steven',action:'Document VINs, dates, WO details via email + chat',status:'done'},
+            {station:'HMS2',date:'Feb 9',owner:'Team',action:'Schedule site visit after David training complete',status:'done'},
+            {station:'HMS2',date:'Feb 9',owner:'Team',action:'Establish escalation protocols for urgent repairs',status:'done'},
+            {station:'HCL2',date:'Feb 10',owner:'Ash',action:'Provide cell numbers for direct contact',status:'done'},
+            {station:'HCL2',date:'Feb 10',owner:'Ash',action:'Daily AM updates in Chime on overnight completions',status:'done'},
+            {station:'HCL2',date:'Feb 10',owner:'Kathy',action:'Send contact list with roles',status:'done'},
+            {station:'HCL2',date:'Feb 10',owner:'Team',action:'Provide ETA doc for all 28 open WOs',status:'done'},
+            {station:'HCL2',date:'Feb 10',owner:'Mark',action:'Meet Justin to set up vehicle shuttle system',status:'done'},
+            {station:'HCL2',date:'Feb 10',owner:'Mark',action:'Set up key box at FC entrance',status:'done'},
+            {station:'HCL2',date:'Feb 10',owner:'Andrea',action:'Share D4 WOs in Chime for reconciliation',status:'done'},
+            {station:'HPD1',date:'Feb 11',owner:'Team',action:'Schedule follow-up meeting Fri or Mon/Tue same time',status:'done'},
+            {station:'HPD1',date:'Feb 11',owner:'Team',action:'Send meeting invite to attendees with forwarding option',status:'done'},
+            {station:'HPD1',date:'Feb 11',owner:'Meeting',action:'Document specific communication expectations',status:'done'},
+            {station:'HPD1',date:'Feb 11',owner:'Meeting',action:'Align on service level requirements',status:'done'},
+            {station:'HPD1',date:'Feb 11',owner:'Meeting',action:'Introduce dedicated technician Michael',status:'done'},
+            {station:'HPD1',date:'Feb 11',owner:'Meeting',action:'Establish escalation procedures',status:'done'},
+            {station:'HDY1',date:'Feb 16',owner:'Brandon',action:'Get Charles badge access, follow up with station today',status:'pending'},
+            {station:'HDY1',date:'Feb 16',owner:'Ash',action:'Share Charles contact info with DSP fleet managers',status:'pending'},
+            {station:'HDY1',date:'Feb 16',owner:'Ash',action:'Continue daily schedule updates in Chime',status:'pending'},
+            {station:'HDY1',date:'Feb 16',owner:'Ash',action:'Review DOT inspection training with Charles',status:'pending'},
+            {station:'HDY1',date:'Feb 16',owner:'Brooke',action:'Send escalation path contacts by EOD',status:'pending'},
+            {station:'HDY1',date:'Feb 16',owner:'Brooke',action:'Formalize SOP document',status:'pending'},
+            {station:'HDY1',date:'Feb 16',owner:'DSP teams',action:'Audit daily schedules, prioritize WOs, tag team in Chime',status:'pending'},
+            {station:'HDY1',date:'Feb 16',owner:'Drew',action:'Provide FIM details for DOT inspection incident',status:'pending'}
+        ];
 
-        document.getElementById('kpiResponses').textContent = totalResponses;
-        document.getElementById('kpiRespondents').textContent = 'From ' + Object.keys(dsps).length + ' DSPs';
-        document.getElementById('kpiSatisfaction').textContent = avgSat;
-        document.getElementById('kpiTimeliness').textContent = avgTime;
-        document.getElementById('kpiQuality').textContent = avgQual;
-
-        // Render feedback list
-        renderFeedbackList(data);
-        renderSentimentCharts(dsps);
-    }
-
-    function renderFeedbackList(data) {
-        var c = document.getElementById('feedbackList'), h = '';
-        var sorted = data.slice().sort(function(a, b) {
-            return new Date(b.date) - new Date(a.date);
-        });
-
-        if (sorted.length === 0) {
-            c.innerHTML = '<div class="no-events">No survey responses yet</div>';
-            return;
+        function showTab(tabId){
+            document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+            document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active')});
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
         }
 
-        for (var i = 0; i < sorted.length; i++) {
-            var f = sorted[i];
-            var nameTag = f.contactName ? '<span style="color:var(--text-primary);font-weight:500;margin-left:8px">' + f.contactName + '</span>' : '';
-            var followUpTag = f.followUp ? '<div style="margin-top:10px;padding:8px 12px;background:rgba(168,85,247,0.1);border-radius:8px;font-size:0.8rem;color:var(--accent-purple)"><strong>Follow-up requested:</strong> ' + f.followUp + '</div>' : '';
-            h += '<div class="feedback-card"><div class="feedback-header"><div class="feedback-meta"><span class="station-name">' + f.dsp + '</span><span class="action-station">' + f.station + '</span>' + nameTag + '<span class="feedback-date">' + f.date + '</span></div><div class="feedback-scores"><div class="score-mini"><span class="score-mini-label">Sat</span><span class="score-mini-value" style="color:' + getScoreColor(f.satisfaction) + '">' + f.satisfaction + '</span></div><div class="score-mini"><span class="score-mini-label">Time</span><span class="score-mini-value" style="color:' + getScoreColor(f.timeliness) + '">' + f.timeliness + '</span></div><div class="score-mini"><span class="score-mini-label">Qual</span><span class="score-mini-value" style="color:' + getScoreColor(f.quality) + '">' + f.quality + '</span></div></div></div>';
-            if (f.issue) h += '<div class="feedback-text issue"><strong>Issue:</strong> ' + f.issue + '</div>';
-            if (f.suggestion) h += '<div class="feedback-text suggestion"><strong>Feedback:</strong> ' + f.suggestion + '</div>';
-            h += followUpTag;
-            h += '</div>';
+        function filterStations(filter,btn){
+            document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
+            btn.classList.add('active');
+            populateDSPTable(filter);
         }
-        c.innerHTML = h;
-    }
 
-    function renderSentimentCharts(dspGroups) {
-        var dspNames = Object.keys(dspGroups).sort();
-        var satData = [], timeData = [], qualData = [];
-        var scatterData = [];
+        function getScoreColor(s){if(s>=4)return'var(--accent-green)';if(s>=3)return'var(--accent-yellow)';if(s>=2)return'var(--accent-orange)';return'var(--accent-red)'}
+        function getScoreClass(s){if(s>=4)return'score-'+Math.round(s);if(s>=3)return'score-3';if(s>=2)return'score-2';return'score-1'}
 
-        dspNames.forEach(function(dsp) {
-            var rows = dspGroups[dsp];
-            var avgS = rows.reduce(function(s, r) { return s + r.satisfaction; }, 0) / rows.length;
-            var avgT = rows.reduce(function(s, r) { return s + r.timeliness; }, 0) / rows.length;
-            var avgQ = rows.reduce(function(s, r) { return s + r.quality; }, 0) / rows.length;
-            satData.push(avgS);
-            timeData.push(avgT);
-            qualData.push(avgQ);
+        function populateStationQuickTable(){
+            var t=document.getElementById('stationQuickTable'),h='';
+            var sorted=stationData.slice().sort(function(a,b){return b.adoption-a.adoption});
+            for(var i=0;i<sorted.length;i++){var s=sorted[i],ot=s.adoption>=85;
+            h+='<tr><td><span class="station-name">'+s.station+'</span></td><td style="color:'+(ot?'var(--accent-green)':'var(--accent-red)')+'">'+s.adoption.toFixed(1)+'%</td><td>'+s.kooner+'</td><td>'+s.leaked+'</td><td><span class="status-pill '+(ot?'on-target':'below-target')+'"><span class="status-dot"></span>'+(ot?'On Target':'Below')+'</span></td></tr>';}
+            t.innerHTML=h;
+        }
 
-            var avgAll = (avgS + avgT + avgQ) / 3;
-            var station = rows[0].station;
-            var stInfo = stationData.find(function(s) { return s.station === station; });
-            var adoption = stInfo ? stInfo.adoption : 50;
-            scatterData.push({ x: avgAll, y: adoption, label: dsp });
-        });
+        function populateOpportunityTable(){
+            var t=document.getElementById('opportunityTable'),h='';
+            var sorted=stationData.slice().filter(function(s){return s.leaked>0}).sort(function(a,b){return b.leaked-a.leaked});
+            for(var i=0;i<Math.min(sorted.length,8);i++){var s=sorted[i];
+            var potential=((s.kooner+s.leaked)/(811+679)*100).toFixed(1);
+            h+='<tr><td><span class="station-name">'+s.station+'</span></td><td style="color:var(--accent-red)">'+s.leaked+'</td><td>'+s.adoption.toFixed(1)+'%</td><td>'+potential+'% of total</td></tr>';}
+            t.innerHTML=h;
+        }
 
-        // Destroy old charts if they exist
-        if (sentimentChartInstance) sentimentChartInstance.destroy();
-        if (correlationChartInstance) correlationChartInstance.destroy();
+        function populateStationFullTable(){
+            var t=document.getElementById('stationFullTable'),h='';
+            var sorted=stationData.slice().sort(function(a,b){return b.adoption-a.adoption});
+            for(var i=0;i<sorted.length;i++){var s=sorted[i],ot=s.adoption>=85,gap=85-s.adoption,total=s.kooner+s.leaked;
+            h+='<tr><td><span class="station-name">'+s.station+'</span></td><td>'+(s.location||'—')+'</td><td style="color:'+(ot?'var(--accent-green)':'var(--accent-red)')+'">'+s.adoption.toFixed(1)+'%</td><td>'+s.kooner+'</td><td>'+s.leaked+'</td><td>'+total+'</td><td style="color:'+(gap>0?'var(--accent-red)':'var(--accent-green)')+'">'+(gap>0?'+':'')+gap.toFixed(1)+'%</td><td><span class="status-pill '+(ot?'on-target':'below-target')+'"><span class="status-dot"></span>'+(ot?'On Target':'Below')+'</span></td></tr>';}
+            t.innerHTML=h;
+        }
 
-        sentimentChartInstance = new Chart(document.getElementById('sentimentChart'), {
-            type: 'bar',
-            data: {
-                labels: dspNames,
-                datasets: [
-                    { label: 'Satisfaction', data: satData, backgroundColor: 'rgba(168,85,247,0.7)', borderRadius: 4 },
-                    { label: 'Timeliness', data: timeData, backgroundColor: 'rgba(0,212,255,0.7)', borderRadius: 4 },
-                    { label: 'Quality', data: qualData, backgroundColor: 'rgba(255,217,61,0.7)', borderRadius: 4 }
-                ]
-            },
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#8b8b9a' } } }, scales: { y: { beginAtZero: true, max: 5, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b8b9a' } }, x: { grid: { display: false }, ticks: { color: '#8b8b9a' } } } }
-        });
+        function populateStationWeeklyTable(){
+            var t=document.getElementById('stationWeeklyTable'),h='';
+            var stations=Object.keys(weeklyByStation).sort(function(a,b){return weeklyByStation[b].total-weeklyByStation[a].total});
+            for(var i=0;i<stations.length;i++){var st=stations[i],w=weeklyByStation[st];
+            h+='<tr><td><span class="station-name">'+st+'</span></td><td>'+(w.WK1||'—')+'</td><td>'+(w.WK2||'—')+'</td><td>'+(w.WK3||'—')+'</td><td>'+(w.WK4||'—')+'</td><td>'+(w.WK5||'—')+'</td><td>'+(w.WK6||'—')+'</td><td><strong>'+w.total+'</strong></td></tr>';}
+            h+='<tr style="background:var(--bg-card-hover)"><td><strong>TOTAL</strong></td><td><strong>'+weekTotals.WK1+'</strong></td><td><strong>'+weekTotals.WK2+'</strong></td><td><strong>'+weekTotals.WK3+'</strong></td><td><strong>'+weekTotals.WK4+'</strong></td><td><strong>'+weekTotals.WK5+'</strong></td><td><strong>'+weekTotals.WK6+'</strong></td><td><strong>798</strong></td></tr>';
+            t.innerHTML=h;
+        }
 
-        correlationChartInstance = new Chart(document.getElementById('correlationChart'), {
-            type: 'scatter',
-            data: {
-                datasets: [{
-                    label: 'DSPs',
-                    data: scatterData,
-                    backgroundColor: function(ctx) {
-                        var v = ctx.raw;
-                        if (!v) return '#8b8b9a';
-                        if (v.y >= 85) return 'rgba(0,255,136,0.8)';
-                        if (v.y >= 50) return 'rgba(255,165,2,0.8)';
-                        return 'rgba(255,71,87,0.8)';
-                    },
-                    pointRadius: 12,
-                    pointHoverRadius: 15
-                }]
-            },
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx) { var p = ctx.raw; return p.label + ': ' + p.x.toFixed(1) + ' sent, ' + p.y.toFixed(1) + '% adopt'; } } } }, scales: { y: { beginAtZero: true, max: 100, title: { display: true, text: 'Adoption %', color: '#8b8b9a' }, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b8b9a', callback: function(v) { return v + '%'; } } }, x: { beginAtZero: true, max: 5, title: { display: true, text: 'Sentiment', color: '#8b8b9a' }, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b8b9a' } } } }
-        });
-    }
+        function populateDSPTable(filter){
+            filter=filter||'all';var t=document.getElementById('dspTable'),h='';
+            var filtered=filter==='all'?stationData:stationData.filter(function(s){return s.station===filter});
+            filtered=filtered.slice().sort(function(a,b){return b.leaked-a.leaked});
+            for(var i=0;i<filtered.length;i++){var s=filtered[i];if(s.leaked===0)continue;
+            var priority=s.adoption<20?'critical':s.adoption<50?'high':s.adoption<70?'medium':'low';
+            var opp=(s.leaked/594*100).toFixed(1);
+            h+='<tr><td><span class="station-name">'+s.station+'</span></td><td style="color:'+(s.adoption>=85?'var(--accent-green)':'var(--accent-red)')+'">'+s.adoption.toFixed(1)+'%</td><td>'+s.kooner+'</td><td>'+s.leaked+'</td><td>'+opp+'% of leakage</td><td><span class="priority-pill priority-'+priority+'">'+priority+'</span></td></tr>';}
+            t.innerHTML=h;
+        }
 
-    // =========================================================================
-    // DATA LOADING — EVENTS (JSON file)
-    // =========================================================================
-    // Fallback events data (used when events-data.json can't be fetched, e.g. local preview)
-    var FALLBACK_EVENTS = [
-        {date:'2026-02-09',title:'HMS2 Roundtable',type:'roundtable',station:'HMS2',time:'10:00 AM',notes:'<strong>Key Issues:</strong> Severe communication delays - questions unanswered 6-8 hrs, multi-day gaps despite 60-80 people in Kooner chat. Steven: Never experienced such delay vs prior vendors.<br><br><strong>Safety/Compliance Failures:</strong> Truck 21 passed Federal DOT but failed MN inspection with visible drag link issues. Truck 20 had 5 federal DOT failures caught by external shop. Wrong stickers on wrong vehicles.<br><br><strong>Work Quality:</strong> Truck 1 urgent WO at 8am, tech sat idle until 12:15pm. WOs marked complete when repairs not finished. Multiple recreations needed.<br><br><strong>Root Causes:</strong> Coverage gaps across shifts, tech (Michael) attendance/training issues, no escalation protocols, DSPs unclear on contacts.<br><br><strong>Solutions Discussed:</strong> David (experienced manager tech) deploying next week for training/oversight. Formal dispatch schedule being created. This is 2nd escalation - relationship at risk.',actionItems:[{owner:'Brooke/Alberto',action:'Provide direct numbers for 24/7 contact',status:'done'},{owner:'Ash',action:'Send dispatch schedule with roles/coverage times',status:'done'},{owner:'David',action:'Visit HMS2 next week for training & process review',status:'done'},{owner:'Steven',action:'Document VINs, dates, WO details via email + chat',status:'done'},{owner:'Team',action:'Schedule site visit after David training complete',status:'done'},{owner:'Team',action:'Establish escalation protocols for urgent repairs',status:'done'}]},
-        {date:'2026-02-10',title:'HCL2 Roundtable',type:'roundtable',station:'HCL2',time:'2:00 PM',notes:'<strong>Key Issues:</strong> D4DS (Andrea) down to 6 of 17 trucks. Multiple vehicles grounded due to incomplete PMs - one sitting since Jan 22. Communication breakdown: no responses since Saturday, messages unanswered for days. Unexpected tech departure caused service disruption.<br><br><strong>Root Causes:</strong> No proactive status updates, parts availability delays, badge access issues, two intake systems creating confusion, no real-time WO visibility for DSPs.<br><br><strong>Solutions Discussed:</strong> Justin Ellis relocating permanently (6pm-2am shift), Eugene deploying to help clear backlog. Relay Garage integration planned for mid-March with Fleet Portal scheduling.',actionItems:[{owner:'Ash',action:'Provide cell numbers for direct contact',status:'done'},{owner:'Ash',action:'Daily AM updates in Chime on overnight completions',status:'done'},{owner:'Kathy',action:'Send contact list with roles',status:'done'},{owner:'Team',action:'Provide ETA doc for all 28 open WOs',status:'done'},{owner:'Mark',action:'Meet Justin to set up vehicle shuttle system',status:'done'},{owner:'Mark',action:'Set up key box at FC entrance',status:'done'},{owner:'Andrea',action:'Share D4 WOs in Chime for reconciliation',status:'done'}]},
-        {date:'2026-02-11',title:'HPD1 Roundtable',type:'roundtable',station:'HPD1',time:'11:00 AM',notes:'<strong>Key Context:</strong> Unique site - only DSP at location, co-located with FC, 20-30 min from other Amazon facilities. Robert (DSP) has existing vendor relationship (1.5 yrs) with dedicated 1-2 techs who know his fleet.<br><br><strong>Service Gaps Identified:</strong> No proactive PM scheduling communication. No notification when repairs completed. Inconsistent tech coverage. Kooner removed dedicated Vancouver travel tech due to volume decrease. BOX invoice process implemented without DSP awareness.<br><br><strong>Impact:</strong> Ryan: Biggest concern is fleet constraints from maintenance causing dropped routes.<br><br><strong>Solutions Discussed:</strong> Tech integration within 1 month for comms. Amazon Fleet Portal integration end of March/April. Dedicated tech Michael available (5-10 min from site). Moving from Chime to Slack.',actionItems:[{owner:'Team',action:'Schedule follow-up meeting Fri or Mon/Tue same time',status:'done'},{owner:'Team',action:'Send meeting invite to attendees with forwarding option',status:'done'},{owner:'Meeting',action:'Document specific communication expectations',status:'done'},{owner:'Meeting',action:'Align on service level requirements',status:'done'},{owner:'Meeting',action:'Introduce dedicated technician Michael',status:'done'},{owner:'Meeting',action:'Establish escalation procedures',status:'done'}]},
-        {date:'2026-02-16',title:'HDY1 Roundtable',type:'roundtable',station:'HDY1',time:'',notes:'<strong>Communication & Process Issues:</strong> New tech Charles transitioned from middle mile without proper last mile training. Missing badge access. No direct communication established with DSP fleet managers. Previous tech Tim left suddenly, creating rushed transition.<br><br><strong>Service Quality & Documentation Problems:</strong> Invoice delays impacting truck availability. PMs completed overnight but invoices not uploaded to Box until 4pm next day. DOT inspection quality issue at TLG. Weather delays affecting timely service.<br><br><strong>Daily Operations & Scheduling:</strong> Charles currently works Mon-Fri 8am-5pm. May need later hours for vehicles returning from routes. New daily reporting system starting.',actionItems:[{owner:'Brandon',action:'Get Charles badge access, follow up with station today',status:'pending'},{owner:'Ash',action:'Share Charles contact info with DSP fleet managers',status:'pending'},{owner:'Ash',action:'Continue daily schedule updates in Chime',status:'pending'},{owner:'Ash',action:'Review DOT inspection training with Charles',status:'pending'},{owner:'Brooke',action:'Send escalation path contacts by EOD',status:'pending'},{owner:'Brooke',action:'Formalize SOP document',status:'pending'},{owner:'DSP teams',action:'Audit daily schedules, prioritize WOs, tag team in Chime',status:'pending'},{owner:'Drew',action:'Provide FIM details for DOT inspection incident',status:'pending'}]},
-        {date:'2026-03-02',title:'DSP Monthly Newsletter #1',type:'newsletter',station:'All',time:'',notes:'First edition of the DSP Monthly Newsletter',actionItems:[]}
-    ];
+        function populateActionCards(){
+            var c=document.getElementById('actionList'),h='';
+            var sorted=actionData.slice().sort(function(a,b){
+                var po={critical:0,high:1,medium:2,low:3};
+                return po[a.priority]-po[b.priority];
+            }).slice(0,6);
+            for(var i=0;i<sorted.length;i++){var a=sorted[i];
+            var sentimentHtml=a.sentiment?'<div class="action-stat"><span class="action-stat-label">Sentiment</span><span class="action-stat-value '+(a.sentiment>=3?'green':a.sentiment>=2?'orange':'red')+'">'+a.sentiment.toFixed(1)+'/5</span></div>':'<div class="action-stat"><span class="action-stat-label">Sentiment</span><span class="action-stat-value" style="color:var(--text-muted)">No data</span></div>';
+            h+='<div class="action-card '+a.priority+'"><div class="action-header"><span class="action-dsp">'+a.station+'</span><span class="priority-pill priority-'+a.priority+'">'+a.priority+'</span></div><div class="action-stats"><div class="action-stat"><span class="action-stat-label">Adoption</span><span class="action-stat-value red">'+a.adoption.toFixed(1)+'%</span></div><div class="action-stat"><span class="action-stat-label">Leaked</span><span class="action-stat-value orange">'+a.leaked+'</span></div>'+sentimentHtml+'</div><div class="action-feedback">💡 '+a.action+'</div></div>';}
+            c.innerHTML=h;
+        }
 
-    function processEventsData(eventsArray) {
-        calendarEvents = eventsArray;
-        allRoundtableActions = [];
+        function populateActionTable(){
+            var t=document.getElementById('actionTable'),h='';
+            for(var i=0;i<actionData.length;i++){var a=actionData[i];
+            var sentimentHtml=a.sentiment?'<span class="sentiment-score '+getScoreClass(a.sentiment)+'">'+a.sentiment.toFixed(1)+'</span>':'<span style="color:var(--text-muted)">—</span>';
+            h+='<tr><td><span class="priority-pill priority-'+a.priority+'">'+a.priority+'</span></td><td><span class="station-name">'+a.station+'</span><br><span style="font-size:0.75rem;color:var(--text-muted)">'+a.location+'</span></td><td style="color:'+(a.adoption>=85?'var(--accent-green)':'var(--accent-red)')+'">'+a.adoption.toFixed(1)+'%</td><td>'+sentimentHtml+'</td><td>'+a.leaked+'</td><td style="font-size:0.85rem;color:var(--text-secondary)">'+a.issue+'</td><td style="font-size:0.85rem">'+a.action+'</td></tr>';}
+            t.innerHTML=h;
+        }
 
-        calendarEvents.forEach(function(evt) {
-            if (evt.actionItems && evt.actionItems.length > 0) {
-                evt.actionItems.forEach(function(ai) {
-                    allRoundtableActions.push({
-                        station: evt.station,
-                        date: formatShortDate(evt.date),
-                        owner: ai.owner,
-                        action: ai.action,
-                        status: ai.status
-                    });
-                });
+        function populateFeedbackList(){
+            var c=document.getElementById('feedbackList'),h='';
+            for(var i=0;i<feedbackData.length;i++){var f=feedbackData[i];
+            h+='<div class="feedback-card"><div class="feedback-header"><div class="feedback-meta"><span class="station-name">'+f.dsp+'</span><span class="action-station">'+f.station+'</span><span class="feedback-date">'+f.date+'</span></div><div class="feedback-scores"><div class="score-mini"><span class="score-mini-label">Sat</span><span class="score-mini-value" style="color:'+getScoreColor(f.satisfaction)+'">'+f.satisfaction+'</span></div><div class="score-mini"><span class="score-mini-label">Time</span><span class="score-mini-value" style="color:'+getScoreColor(f.timeliness)+'">'+f.timeliness+'</span></div><div class="score-mini"><span class="score-mini-label">Qual</span><span class="score-mini-value" style="color:'+getScoreColor(f.quality)+'">'+f.quality+'</span></div></div></div>';
+            if(f.issue)h+='<div class="feedback-text issue"><strong>Issue:</strong> '+f.issue+'</div>';
+            if(f.suggestion)h+='<div class="feedback-text suggestion"><strong>Feedback:</strong> '+f.suggestion+'</div>';
+            h+='</div>';}
+            c.innerHTML=h;
+        }
+
+        var currentMonth = 1; // 0=Jan, 1=Feb, 2=Mar
+        var currentYear = 2026;
+        var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+        function changeMonth(delta){
+            currentMonth += delta;
+            if(currentMonth > 11){currentMonth = 0; currentYear++;}
+            if(currentMonth < 0){currentMonth = 11; currentYear--;}
+            populateCalendar();
+        }
+
+        function getDaysInMonth(month, year){
+            return new Date(year, month + 1, 0).getDate();
+        }
+
+        function getFirstDayOfMonth(month, year){
+            return new Date(year, month, 1).getDay();
+        }
+
+        function populateCalendar(){
+            var grid=document.getElementById('calendarGrid');
+            var titleEl=document.getElementById('calendarMonthTitle');
+            titleEl.textContent = monthNames[currentMonth] + ' ' + currentYear;
+            
+            var days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+            var h='';
+            for(var i=0;i<7;i++){h+='<div class="calendar-header">'+days[i]+'</div>';}
+            
+            var daysInMonth = getDaysInMonth(currentMonth, currentYear);
+            var firstDay = getFirstDayOfMonth(currentMonth, currentYear);
+            var today = new Date('2026-02-17');
+            
+            // Add empty cells for days before month starts
+            for(var i=0;i<firstDay;i++){
+                h+='<div class="calendar-day other-month"></div>';
             }
+            
+            for(var d=1;d<=daysInMonth;d++){
+                var monthStr = (currentMonth+1)<10?'0'+(currentMonth+1):(currentMonth+1);
+                var dayStr = d<10?'0'+d:d;
+                var dateStr = currentYear+'-'+monthStr+'-'+dayStr;
+                var isToday = (currentYear===2026 && currentMonth===1 && d===13);
+                var dayEvents = calendarEvents.filter(function(e){return e.date===dateStr});
+                
+                h+='<div class="calendar-day'+(isToday?' today':'')+'">';
+                h+='<div class="calendar-date">'+d+'</div>';
+                for(var e=0;e<dayEvents.length;e++){
+                    var evt = dayEvents[e];
+                    h+='<div class="calendar-event '+evt.type+'" onclick="openEventModal(\''+evt.date+'\')">'+evt.title+'</div>';
+                }
+                h+='</div>';
+            }
+            grid.innerHTML=h;
+        }
+
+        function openEventModal(dateStr){
+            var evt = calendarEvents.find(function(e){return e.date===dateStr});
+            if(!evt) return;
+            
+            var modal = document.getElementById('eventModal');
+            var d = new Date(dateStr);
+            var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            var dayNames=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+            
+            document.getElementById('modalTitle').textContent = evt.title;
+            document.getElementById('modalSubtitle').innerHTML = '<span class="event-type calendar-event '+evt.type+'">'+evt.type.replace('-',' ')+'</span> · '+dayNames[d.getDay()]+', '+months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear()+(evt.time?' · '+evt.time:'')+(evt.station?' · 📍 '+evt.station:'');
+            
+            // Notes section
+            var notesSection = document.getElementById('modalNotesSection');
+            var notesEl = document.getElementById('modalNotes');
+            if(evt.notes && evt.notes.length > 0 && !evt.notes.includes('Add notes')){
+                notesSection.style.display = 'block';
+                notesEl.innerHTML = evt.notes;
+            } else {
+                notesSection.style.display = 'block';
+                notesEl.innerHTML = '<em style="color:var(--text-muted)">No notes available for this event yet.</em>';
+            }
+            
+            // Actions section
+            var actionsSection = document.getElementById('modalActionsSection');
+            var actionsEl = document.getElementById('modalActions');
+            var eventActions = roundtableActions.filter(function(a){return a.station===evt.station && evt.title.includes('Roundtable')});
+            if(eventActions.length > 0){
+                actionsSection.style.display = 'block';
+                var actionsHtml = '';
+                for(var i=0;i<eventActions.length;i++){
+                    var a = eventActions[i];
+                    actionsHtml += '<div class="modal-action-item"><span class="modal-action-owner">'+a.owner+'</span><span class="modal-action-text">'+a.action+'</span><span class="action-status '+a.status+'">'+a.status+'</span></div>';
+                }
+                actionsEl.innerHTML = actionsHtml;
+            } else {
+                actionsSection.style.display = 'none';
+            }
+            
+            modal.classList.add('active');
+        }
+
+        function closeModal(e){
+            if(e && e.target !== e.currentTarget) return;
+            document.getElementById('eventModal').classList.remove('active');
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e){
+            if(e.key === 'Escape') closeModal();
         });
 
-        document.getElementById('kpiRoundtableActions').textContent = allRoundtableActions.length;
-        populateCalendar();
-        populateEventList();
-        populatePastEventList();
-        populateRoundtableActions();
-    }
+        function populateEventList(){
+            var list=document.getElementById('eventList');
+            var today=new Date('2026-02-17');
+            var upcoming=calendarEvents.filter(function(e){return new Date(e.date)>=today}).sort(function(a,b){return new Date(a.date)-new Date(b.date)});
+            var h='';
+            if(upcoming.length===0){
+                h='<div class="no-events">No upcoming events scheduled</div>';
+            } else {
+                for(var i=0;i<upcoming.length;i++){var e=upcoming[i];
+                var d=new Date(e.date);
+                var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                var timeStr=e.time?'🕐 '+e.time+' · ':'';
+                h+='<div class="event-item"><div class="event-date-box"><div class="event-month">'+months[d.getMonth()]+'</div><div class="event-day">'+d.getDate()+'</div></div><div class="event-details"><div class="event-title">'+e.title+'<span class="event-type calendar-event '+e.type+'">'+e.type.replace('-',' ')+'</span></div><div class="event-meta">'+timeStr+'📍 '+e.station+'</div></div></div>';}
+            }
+            list.innerHTML=h;
+        }
 
-    function loadEventsData() {
-        fetch(CONFIG.EVENTS_JSON_PATH)
-            .then(function(res) {
-                if (!res.ok) throw new Error('Failed to load events: ' + res.status);
-                return res.json();
-            })
-            .then(function(data) {
-                processEventsData(data.events || []);
-            })
-            .catch(function(err) {
-                console.log('Using embedded events data (fetch failed: ' + err.message + ')');
-                processEventsData(FALLBACK_EVENTS);
+        function populatePastEventList(){
+            var list=document.getElementById('pastEventList');
+            var today=new Date('2026-02-17');
+            var past=calendarEvents.filter(function(e){return new Date(e.date)<today}).sort(function(a,b){return new Date(b.date)-new Date(a.date)});
+            var h='';
+            if(past.length===0){
+                h='<div class="no-events">No past events with notes yet</div>';
+            } else {
+                for(var i=0;i<past.length;i++){var e=past[i];
+                var d=new Date(e.date);
+                var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                var timeStr=e.time?'🕐 '+e.time+' · ':'';
+                h+='<div class="event-item past"><div class="event-date-box"><div class="event-month">'+months[d.getMonth()]+'</div><div class="event-day">'+d.getDate()+'</div></div><div class="event-details"><div class="event-title">'+e.title+'<span class="event-type calendar-event '+e.type+'">'+e.type.replace('-',' ')+'</span></div><div class="event-meta">'+timeStr+'📍 '+e.station+'</div>';
+                if(e.notes){h+='<div class="event-notes"><div class="event-notes-label">📝 Notes</div>'+e.notes+'</div>';}
+                h+='</div></div>';}
+            }
+            list.innerHTML=h;
+        }
+
+        function populateRoundtableActions(){
+            var container=document.getElementById('roundtableActions');
+            var h='';
+            var stations=['HMS2','HCL2','HPD1','HDY1'];
+            for(var s=0;s<stations.length;s++){
+                var station=stations[s];
+                var stationActions=roundtableActions.filter(function(a){return a.station===station});
+                if(stationActions.length>0){
+                    var dateStr=stationActions[0].date;
+                    h+='<div class="roundtable-section">';
+                    h+='<div class="roundtable-header"><span class="roundtable-station">'+station+'</span><span class="roundtable-date">'+dateStr+' Roundtable</span></div>';
+                    for(var i=0;i<stationActions.length;i++){var a=stationActions[i];
+                    h+='<div class="action-item-row"><div class="action-checkbox '+(a.status==='done'?'done':'')+'"></div><span class="action-owner">'+a.owner+'</span><span class="action-text">'+a.action+'</span><span class="action-status '+a.status+'">'+a.status+'</span></div>';}
+                    h+='</div>';
+                }
+            }
+            container.innerHTML=h;
+        }
+
+        function createCharts(){
+            var colors=['#00ff88','#00d4ff','#3742fa','#a855f7','#ff4757','#ffa502','#ff6b81','#2ed573','#1e90ff','#ff9ff3','#54a0ff','#ffd93d','#c8d6e5'];
+            
+            new Chart(document.getElementById('weeklyBarChart'),{
+                type:'bar',
+                data:{labels:['WK1','WK2','WK3','WK4','WK5','WK6'],datasets:[{label:'Kooner WOs',data:[48,132,125,156,139,142],backgroundColor:'rgba(0,255,136,0.7)',borderRadius:4}]},
+                options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a'}}},scales:{y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},x:{grid:{display:false},ticks:{color:'#8b8b9a'}}}}
             });
-    }
 
-    function formatShortDate(dateStr) {
-        var d = new Date(dateStr + 'T00:00:00');
-        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        return months[d.getMonth()] + ' ' + d.getDate();
-    }
-
-    // =========================================================================
-    // UI FUNCTIONS
-    // =========================================================================
-    function showTab(tabId) {
-        document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
-        document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
-        document.getElementById(tabId).classList.add('active');
-        event.target.classList.add('active');
-    }
-
-    function filterStations(filter, btn) {
-        document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        populateDSPTable(filter);
-    }
-
-    function getScoreColor(s) { if (s >= 4) return 'var(--accent-green)'; if (s >= 3) return 'var(--accent-yellow)'; if (s >= 2) return 'var(--accent-orange)'; return 'var(--accent-red)'; }
-    function getScoreClass(s) { if (s >= 4) return 'score-' + Math.round(s); if (s >= 3) return 'score-3'; if (s >= 2) return 'score-2'; return 'score-1'; }
-
-    // =========================================================================
-    // STATIC TABLE POPULATION
-    // =========================================================================
-    function populateStationQuickTable() {
-        var t = document.getElementById('stationQuickTable'), h = '';
-        var sorted = stationData.slice().sort(function(a, b) { return b.adoption - a.adoption; });
-        for (var i = 0; i < sorted.length; i++) {
-            var s = sorted[i], ot = s.adoption >= 85;
-            h += '<tr><td><span class="station-name">' + s.station + '</span></td><td style="color:' + (ot ? 'var(--accent-green)' : 'var(--accent-red)') + '">' + s.adoption.toFixed(1) + '%</td><td>' + s.kooner + '</td><td>' + s.leaked + '</td><td><span class="status-pill ' + (ot ? 'on-target' : 'below-target') + '"><span class="status-dot"></span>' + (ot ? 'On Target' : 'Below') + '</span></td></tr>';
-        }
-        t.innerHTML = h;
-    }
-
-    function populateOpportunityTable() {
-        var t = document.getElementById('opportunityTable'), h = '';
-        var sorted = stationData.slice().filter(function(s) { return s.leaked > 0; }).sort(function(a, b) { return b.leaked - a.leaked; });
-        for (var i = 0; i < Math.min(sorted.length, 8); i++) {
-            var s = sorted[i];
-            var potential = ((s.kooner + s.leaked) / (811 + 679) * 100).toFixed(1);
-            h += '<tr><td><span class="station-name">' + s.station + '</span></td><td style="color:var(--accent-red)">' + s.leaked + '</td><td>' + s.adoption.toFixed(1) + '%</td><td>' + potential + '% of total</td></tr>';
-        }
-        t.innerHTML = h;
-    }
-
-    function populateStationFullTable() {
-        var t = document.getElementById('stationFullTable'), h = '';
-        var sorted = stationData.slice().sort(function(a, b) { return b.adoption - a.adoption; });
-        for (var i = 0; i < sorted.length; i++) {
-            var s = sorted[i], ot = s.adoption >= 85, gap = 85 - s.adoption, total = s.kooner + s.leaked;
-            h += '<tr><td><span class="station-name">' + s.station + '</span></td><td>' + (s.location || '—') + '</td><td style="color:' + (ot ? 'var(--accent-green)' : 'var(--accent-red)') + '">' + s.adoption.toFixed(1) + '%</td><td>' + s.kooner + '</td><td>' + s.leaked + '</td><td>' + total + '</td><td style="color:' + (gap > 0 ? 'var(--accent-red)' : 'var(--accent-green)') + '">' + (gap > 0 ? '+' : '') + gap.toFixed(1) + '%</td><td><span class="status-pill ' + (ot ? 'on-target' : 'below-target') + '"><span class="status-dot"></span>' + (ot ? 'On Target' : 'Below') + '</span></td></tr>';
-        }
-        t.innerHTML = h;
-    }
-
-    function populateStationWeeklyTable() {
-        var t = document.getElementById('stationWeeklyTable'), h = '';
-        var stations = Object.keys(weeklyByStation).sort(function(a, b) { return weeklyByStation[b].total - weeklyByStation[a].total; });
-        for (var i = 0; i < stations.length; i++) {
-            var st = stations[i], w = weeklyByStation[st];
-            h += '<tr><td><span class="station-name">' + st + '</span></td><td>' + (w.WK1 || '—') + '</td><td>' + (w.WK2 || '—') + '</td><td>' + (w.WK3 || '—') + '</td><td>' + (w.WK4 || '—') + '</td><td>' + (w.WK5 || '—') + '</td><td>' + (w.WK6 || '—') + '</td><td><strong>' + w.total + '</strong></td></tr>';
-        }
-        h += '<tr style="background:var(--bg-card-hover)"><td><strong>TOTAL</strong></td><td><strong>' + weekTotals.WK1 + '</strong></td><td><strong>' + weekTotals.WK2 + '</strong></td><td><strong>' + weekTotals.WK3 + '</strong></td><td><strong>' + weekTotals.WK4 + '</strong></td><td><strong>' + weekTotals.WK5 + '</strong></td><td><strong>' + weekTotals.WK6 + '</strong></td><td><strong>798</strong></td></tr>';
-        t.innerHTML = h;
-    }
-
-    function populateDSPTable(filter) {
-        filter = filter || 'all';
-        var t = document.getElementById('dspTable'), h = '';
-        var filtered = filter === 'all' ? stationData : stationData.filter(function(s) { return s.station === filter; });
-        filtered = filtered.slice().sort(function(a, b) { return b.leaked - a.leaked; });
-        for (var i = 0; i < filtered.length; i++) {
-            var s = filtered[i];
-            if (s.leaked === 0) continue;
-            var priority = s.adoption < 20 ? 'critical' : s.adoption < 50 ? 'high' : s.adoption < 70 ? 'medium' : 'low';
-            var opp = (s.leaked / 594 * 100).toFixed(1);
-            h += '<tr><td><span class="station-name">' + s.station + '</span></td><td style="color:' + (s.adoption >= 85 ? 'var(--accent-green)' : 'var(--accent-red)') + '">' + s.adoption.toFixed(1) + '%</td><td>' + s.kooner + '</td><td>' + s.leaked + '</td><td>' + opp + '% of leakage</td><td><span class="priority-pill priority-' + priority + '">' + priority + '</span></td></tr>';
-        }
-        t.innerHTML = h;
-    }
-
-    function populateActionCards() {
-        var c = document.getElementById('actionList'), h = '';
-        var sorted = actionData.slice().sort(function(a, b) {
-            var po = { critical: 0, high: 1, medium: 2, low: 3 };
-            return po[a.priority] - po[b.priority];
-        }).slice(0, 6);
-        for (var i = 0; i < sorted.length; i++) {
-            var a = sorted[i];
-            var sentimentHtml = a.sentiment ? '<div class="action-stat"><span class="action-stat-label">Sentiment</span><span class="action-stat-value ' + (a.sentiment >= 3 ? 'green' : a.sentiment >= 2 ? 'orange' : 'red') + '">' + a.sentiment.toFixed(1) + '/5</span></div>' : '<div class="action-stat"><span class="action-stat-label">Sentiment</span><span class="action-stat-value" style="color:var(--text-muted)">No data</span></div>';
-            h += '<div class="action-card ' + a.priority + '"><div class="action-header"><span class="action-dsp">' + a.station + '</span><span class="priority-pill priority-' + a.priority + '">' + a.priority + '</span></div><div class="action-stats"><div class="action-stat"><span class="action-stat-label">Adoption</span><span class="action-stat-value red">' + a.adoption.toFixed(1) + '%</span></div><div class="action-stat"><span class="action-stat-label">Leaked</span><span class="action-stat-value orange">' + a.leaked + '</span></div>' + sentimentHtml + '</div><div class="action-feedback">💡 ' + a.action + '</div></div>';
-        }
-        c.innerHTML = h;
-    }
-
-    function populateActionTable() {
-        var t = document.getElementById('actionTable'), h = '';
-        for (var i = 0; i < actionData.length; i++) {
-            var a = actionData[i];
-            var sentimentHtml = a.sentiment ? '<span class="sentiment-score ' + getScoreClass(a.sentiment) + '">' + a.sentiment.toFixed(1) + '</span>' : '<span style="color:var(--text-muted)">—</span>';
-            h += '<tr><td><span class="priority-pill priority-' + a.priority + '">' + a.priority + '</span></td><td><span class="station-name">' + a.station + '</span><br><span style="font-size:0.75rem;color:var(--text-muted)">' + a.location + '</span></td><td style="color:' + (a.adoption >= 85 ? 'var(--accent-green)' : 'var(--accent-red)') + '">' + a.adoption.toFixed(1) + '%</td><td>' + sentimentHtml + '</td><td>' + a.leaked + '</td><td style="font-size:0.85rem;color:var(--text-secondary)">' + a.issue + '</td><td style="font-size:0.85rem">' + a.action + '</td></tr>';
-        }
-        t.innerHTML = h;
-    }
-
-    // =========================================================================
-    // CALENDAR (from loaded events JSON)
-    // =========================================================================
-    function changeMonth(delta) {
-        currentMonth += delta;
-        if (currentMonth > 11) { currentMonth = 0; currentYear++; }
-        if (currentMonth < 0) { currentMonth = 11; currentYear--; }
-        populateCalendar();
-    }
-
-    function populateCalendar() {
-        var grid = document.getElementById('calendarGrid');
-        var titleEl = document.getElementById('calendarMonthTitle');
-        titleEl.textContent = monthNames[currentMonth] + ' ' + currentYear;
-
-        var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        var h = '';
-        for (var i = 0; i < 7; i++) h += '<div class="calendar-header">' + days[i] + '</div>';
-
-        var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-        var firstDay = new Date(currentYear, currentMonth, 1).getDay();
-        var today = new Date();
-
-        for (var i = 0; i < firstDay; i++) h += '<div class="calendar-day other-month"></div>';
-
-        for (var d = 1; d <= daysInMonth; d++) {
-            var monthStr = (currentMonth + 1) < 10 ? '0' + (currentMonth + 1) : (currentMonth + 1);
-            var dayStr = d < 10 ? '0' + d : d;
-            var dateStr = currentYear + '-' + monthStr + '-' + dayStr;
-            var isToday = (today.getFullYear() === currentYear && today.getMonth() === currentMonth && today.getDate() === d);
-            var dayEvents = calendarEvents.filter(function(e) { return e.date === dateStr; });
-
-            h += '<div class="calendar-day' + (isToday ? ' today' : '') + '">';
-            h += '<div class="calendar-date">' + d + '</div>';
-            for (var e = 0; e < dayEvents.length; e++) {
-                var evt = dayEvents[e];
-                h += '<div class="calendar-event ' + evt.type + '" onclick="openEventModal(\'' + evt.date + '\')">' + evt.title + '</div>';
-            }
-            h += '</div>';
-        }
-        grid.innerHTML = h;
-    }
-
-    function openEventModal(dateStr) {
-        var evt = calendarEvents.find(function(e) { return e.date === dateStr; });
-        if (!evt) return;
-
-        var modal = document.getElementById('eventModal');
-        var d = new Date(dateStr + 'T00:00:00');
-        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-        document.getElementById('modalTitle').textContent = evt.title;
-        document.getElementById('modalSubtitle').innerHTML = '<span class="event-type calendar-event ' + evt.type + '">' + evt.type.replace('-', ' ') + '</span> · ' + dayNames[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear() + (evt.time ? ' · ' + evt.time : '') + (evt.station ? ' · 📍 ' + evt.station : '');
-
-        var notesSection = document.getElementById('modalNotesSection');
-        var notesEl = document.getElementById('modalNotes');
-        if (evt.notes && evt.notes.length > 0) {
-            notesSection.style.display = 'block';
-            notesEl.innerHTML = evt.notes;
-        } else {
-            notesSection.style.display = 'block';
-            notesEl.innerHTML = '<em style="color:var(--text-muted)">No notes available for this event yet.</em>';
-        }
-
-        var actionsSection = document.getElementById('modalActionsSection');
-        var actionsEl = document.getElementById('modalActions');
-        if (evt.actionItems && evt.actionItems.length > 0) {
-            actionsSection.style.display = 'block';
-            var actionsHtml = '';
-            evt.actionItems.forEach(function(a) {
-                actionsHtml += '<div class="modal-action-item"><span class="modal-action-owner">' + a.owner + '</span><span class="modal-action-text">' + a.action + '</span><span class="action-status ' + a.status + '">' + a.status + '</span></div>';
+            var sortedStations=stationData.slice().sort(function(a,b){return b.adoption-a.adoption});
+            new Chart(document.getElementById('stationBarChart'),{
+                type:'bar',
+                data:{labels:sortedStations.map(function(s){return s.station}),datasets:[{data:sortedStations.map(function(s){return s.adoption}),backgroundColor:sortedStations.map(function(s){return s.adoption>=85?'rgba(0,255,136,0.7)':'rgba(255,71,87,0.7)'}),borderRadius:4}]},
+                options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,max:100,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a',callback:function(v){return v+'%'}}},y:{grid:{display:false},ticks:{color:'#8b8b9a'}}}}
             });
-            actionsEl.innerHTML = actionsHtml;
-        } else {
-            actionsSection.style.display = 'none';
-        }
 
-        modal.classList.add('active');
-    }
-
-    function closeModal(e) {
-        if (e && e.target !== e.currentTarget) return;
-        document.getElementById('eventModal').classList.remove('active');
-    }
-
-    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
-
-    function populateEventList() {
-        var list = document.getElementById('eventList');
-        var today = new Date();
-        var upcoming = calendarEvents.filter(function(e) { return new Date(e.date + 'T00:00:00') >= today; }).sort(function(a, b) { return new Date(a.date) - new Date(b.date); });
-        var h = '';
-        if (upcoming.length === 0) {
-            h = '<div class="no-events">No upcoming events scheduled</div>';
-        } else {
-            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            for (var i = 0; i < upcoming.length; i++) {
-                var e = upcoming[i];
-                var d = new Date(e.date + 'T00:00:00');
-                var timeStr = e.time ? '🕐 ' + e.time + ' · ' : '';
-                h += '<div class="event-item"><div class="event-date-box"><div class="event-month">' + months[d.getMonth()] + '</div><div class="event-day">' + d.getDate() + '</div></div><div class="event-details"><div class="event-title">' + e.title + '<span class="event-type calendar-event ' + e.type + '">' + e.type.replace('-', ' ') + '</span></div><div class="event-meta">' + timeStr + '📍 ' + e.station + '</div></div></div>';
-            }
-        }
-        list.innerHTML = h;
-    }
-
-    function populatePastEventList() {
-        var list = document.getElementById('pastEventList');
-        var today = new Date();
-        var past = calendarEvents.filter(function(e) { return new Date(e.date + 'T00:00:00') < today; }).sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
-        var h = '';
-        if (past.length === 0) {
-            h = '<div class="no-events">No past events with notes yet</div>';
-        } else {
-            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            for (var i = 0; i < past.length; i++) {
-                var e = past[i];
-                var d = new Date(e.date + 'T00:00:00');
-                var timeStr = e.time ? '🕐 ' + e.time + ' · ' : '';
-                h += '<div class="event-item past"><div class="event-date-box"><div class="event-month">' + months[d.getMonth()] + '</div><div class="event-day">' + d.getDate() + '</div></div><div class="event-details"><div class="event-title">' + e.title + '<span class="event-type calendar-event ' + e.type + '">' + e.type.replace('-', ' ') + '</span></div><div class="event-meta">' + timeStr + '📍 ' + e.station + '</div>';
-                if (e.notes) h += '<div class="event-notes"><div class="event-notes-label">📝 Notes</div>' + e.notes + '</div>';
-                h += '</div></div>';
-            }
-        }
-        list.innerHTML = h;
-    }
-
-    function populateRoundtableActions() {
-        var container = document.getElementById('roundtableActions');
-        if (allRoundtableActions.length === 0) {
-            container.innerHTML = '<div class="no-events">No roundtable actions loaded</div>';
-            return;
-        }
-
-        var h = '';
-        var stationGroups = {};
-        allRoundtableActions.forEach(function(a) {
-            if (!stationGroups[a.station]) stationGroups[a.station] = [];
-            stationGroups[a.station].push(a);
-        });
-
-        Object.keys(stationGroups).forEach(function(station) {
-            var actions = stationGroups[station];
-            h += '<div class="roundtable-section">';
-            h += '<div class="roundtable-header"><span class="roundtable-station">' + station + '</span><span class="roundtable-date">' + actions[0].date + ' Roundtable</span></div>';
-            actions.forEach(function(a) {
-                h += '<div class="action-item-row"><div class="action-checkbox ' + (a.status === 'done' ? 'done' : '') + '"></div><span class="action-owner">' + a.owner + '</span><span class="action-text">' + a.action + '</span><span class="action-status ' + a.status + '">' + a.status + '</span></div>';
+            var weekLabels=['WK1','WK2','WK3','WK4','WK5','WK6'];
+            var topStations=['HLA2','HDT3','HHO3','HTP2','HCL2','HDY1','HAU1','HSL1'];
+            var datasets=topStations.map(function(st,i){
+                var w=weeklyByStation[st];
+                return{label:st,data:[w.WK1||0,w.WK2||0,w.WK3||0,w.WK4||0,w.WK5||0,w.WK6||0],backgroundColor:colors[i],borderRadius:2};
             });
-            h += '</div>';
+            new Chart(document.getElementById('stationWeeklyChart'),{type:'bar',data:{labels:weekLabels,datasets:datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a'},position:'right'}},scales:{y:{stacked:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},x:{stacked:true,grid:{display:false},ticks:{color:'#8b8b9a'}}}}});
+
+            new Chart(document.getElementById('stationRankChart'),{type:'bar',data:{labels:sortedStations.map(function(s){return s.station}),datasets:[{label:'Kooner',data:sortedStations.map(function(s){return s.kooner}),backgroundColor:'rgba(0,255,136,0.7)',borderRadius:2},{label:'Leaked',data:sortedStations.map(function(s){return s.leaked}),backgroundColor:'rgba(255,71,87,0.7)',borderRadius:2}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{labels:{color:'#8b8b9a'}}},scales:{x:{stacked:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},y:{stacked:true,grid:{display:false},ticks:{color:'#8b8b9a'}}}}});
+
+            var leakStations=stationData.filter(function(s){return s.leaked>0}).sort(function(a,b){return b.leaked-a.leaked});
+            new Chart(document.getElementById('leakageChart'),{type:'doughnut',data:{labels:leakStations.map(function(s){return s.station}),datasets:[{data:leakStations.map(function(s){return s.leaked}),backgroundColor:colors,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#8b8b9a',padding:8}}},cutout:'60%'}});
+
+            new Chart(document.getElementById('sentimentChart'),{type:'bar',data:{labels:sentimentData.map(function(d){return d.dsp}),datasets:[{label:'Satisfaction',data:sentimentData.map(function(d){return d.satisfaction}),backgroundColor:'rgba(168,85,247,0.7)',borderRadius:4},{label:'Timeliness',data:sentimentData.map(function(d){return d.timeliness}),backgroundColor:'rgba(0,212,255,0.7)',borderRadius:4},{label:'Quality',data:sentimentData.map(function(d){return d.quality}),backgroundColor:'rgba(255,217,61,0.7)',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a'}}},scales:{y:{beginAtZero:true,max:5,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},x:{grid:{display:false},ticks:{color:'#8b8b9a'}}}}});
+
+            new Chart(document.getElementById('correlationChart'),{type:'scatter',data:{datasets:[{label:'DSPs',data:sentimentData.map(function(d){return{x:d.avgScore,y:d.adoption,label:d.dsp}}),backgroundColor:function(ctx){var v=ctx.raw;if(!v)return'#8b8b9a';if(v.y>=85)return'rgba(0,255,136,0.8)';if(v.y>=50)return'rgba(255,165,2,0.8)';return'rgba(255,71,87,0.8)'},pointRadius:12,pointHoverRadius:15}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){var p=ctx.raw;return p.label+': '+p.x.toFixed(1)+' sent, '+p.y.toFixed(1)+'% adopt'}}}},scales:{y:{beginAtZero:true,max:100,title:{display:true,text:'Adoption %',color:'#8b8b9a'},grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a',callback:function(v){return v+'%'}}},x:{beginAtZero:true,max:5,title:{display:true,text:'Sentiment',color:'#8b8b9a'},grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}}}}});
+        }
+
+        document.addEventListener('DOMContentLoaded',function(){
+            populateStationQuickTable();
+            populateOpportunityTable();
+            populateStationFullTable();
+            populateStationWeeklyTable();
+            populateDSPTable('all');
+            populateActionCards();
+            populateActionTable();
+            populateFeedbackList();
+            populateCalendar();
+            populateEventList();
+            populatePastEventList();
+            populateRoundtableActions();
+            createCharts();
         });
-        container.innerHTML = h;
-    }
-
-    // =========================================================================
-    // CHARTS (static data)
-    // =========================================================================
-    function createCharts() {
-        var colors = ['#00ff88', '#00d4ff', '#3742fa', '#a855f7', '#ff4757', '#ffa502', '#ff6b81', '#2ed573', '#1e90ff', '#ff9ff3', '#54a0ff', '#ffd93d'];
-
-        new Chart(document.getElementById('weeklyBarChart'), {
-            type: 'bar',
-            data: { labels: ['WK1', 'WK2', 'WK3', 'WK4', 'WK5', 'WK6'], datasets: [{ label: 'Kooner WOs', data: [48, 132, 125, 156, 139, 142], backgroundColor: 'rgba(0,255,136,0.7)', borderRadius: 4 }] },
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#8b8b9a' } } }, scales: { y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b8b9a' } }, x: { grid: { display: false }, ticks: { color: '#8b8b9a' } } } }
-        });
-
-        var sortedStations = stationData.slice().sort(function(a, b) { return b.adoption - a.adoption; });
-        new Chart(document.getElementById('stationBarChart'), {
-            type: 'bar',
-            data: { labels: sortedStations.map(function(s) { return s.station; }), datasets: [{ data: sortedStations.map(function(s) { return s.adoption; }), backgroundColor: sortedStations.map(function(s) { return s.adoption >= 85 ? 'rgba(0,255,136,0.7)' : 'rgba(255,71,87,0.7)'; }), borderRadius: 4 }] },
-            options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b8b9a', callback: function(v) { return v + '%'; } } }, y: { grid: { display: false }, ticks: { color: '#8b8b9a' } } } }
-        });
-
-        var weekLabels = ['WK1', 'WK2', 'WK3', 'WK4', 'WK5', 'WK6'];
-        var topStations = ['HLA2', 'HDT3', 'HHO3', 'HTP2', 'HCL2', 'HDY1', 'HAU1', 'HSL1'];
-        var datasets = topStations.map(function(st, i) {
-            var w = weeklyByStation[st];
-            return { label: st, data: [w.WK1 || 0, w.WK2 || 0, w.WK3 || 0, w.WK4 || 0, w.WK5 || 0, w.WK6 || 0], backgroundColor: colors[i], borderRadius: 2 };
-        });
-        new Chart(document.getElementById('stationWeeklyChart'), { type: 'bar', data: { labels: weekLabels, datasets: datasets }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#8b8b9a' }, position: 'right' } }, scales: { y: { stacked: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b8b9a' } }, x: { stacked: true, grid: { display: false }, ticks: { color: '#8b8b9a' } } } } });
-
-        new Chart(document.getElementById('stationRankChart'), { type: 'bar', data: { labels: sortedStations.map(function(s) { return s.station; }), datasets: [{ label: 'Kooner', data: sortedStations.map(function(s) { return s.kooner; }), backgroundColor: 'rgba(0,255,136,0.7)', borderRadius: 2 }, { label: 'Leaked', data: sortedStations.map(function(s) { return s.leaked; }), backgroundColor: 'rgba(255,71,87,0.7)', borderRadius: 2 }] }, options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { labels: { color: '#8b8b9a' } } }, scales: { x: { stacked: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b8b9a' } }, y: { stacked: true, grid: { display: false }, ticks: { color: '#8b8b9a' } } } } });
-
-        var leakStations = stationData.filter(function(s) { return s.leaked > 0; }).sort(function(a, b) { return b.leaked - a.leaked; });
-        new Chart(document.getElementById('leakageChart'), { type: 'doughnut', data: { labels: leakStations.map(function(s) { return s.station; }), datasets: [{ data: leakStations.map(function(s) { return s.leaked; }), backgroundColor: colors, borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: '#8b8b9a', padding: 8 } } }, cutout: '60%' } });
-    }
-
-    // =========================================================================
-    // INITIALIZATION
-    // =========================================================================
-    document.addEventListener('DOMContentLoaded', function() {
-        // Set last updated timestamp
-        var now = new Date();
-        document.getElementById('lastUpdated').textContent = 'Last Updated: ' + now.toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
-
-        // Static tables and charts
-        populateStationQuickTable();
-        populateOpportunityTable();
-        populateStationFullTable();
-        populateStationWeeklyTable();
-        populateDSPTable('all');
-        populateActionCards();
-        populateActionTable();
-        createCharts();
-
-        // Load live data
-        loadSurveyData();
-        loadEventsData();
-    });
     </script>
 </body>
 </html>
