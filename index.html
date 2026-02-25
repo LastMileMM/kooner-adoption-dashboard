@@ -185,8 +185,8 @@
                 <div class="subtitle"><span>Vendor Adoption Tracking</span><span class="target-badge">TARGET: 85%</span></div>
             </div>
             <div class="header-right">
-                <div class="last-updated">Last Updated: 2026-02-19</div>
-                <div class="data-period">Data Period: WK01 - WK06 (Dec 28 - Feb 7)</div>
+                <div class="last-updated">Last Updated: 2026-02-16 @ 1:30 PM EST</div>
+                <div class="data-period">Data Period: WK01 - WK07 (Dec 28 - Feb 14) · Station data through WK06</div>
             </div>
         </header>
         <div class="nav-tabs">
@@ -201,16 +201,16 @@
 
         <div id="overview" class="tab-content active">
             <div class="kpi-row">
-                <div class="kpi-card"><div class="kpi-label">Total Kooner WOs</div><div class="kpi-value green">726</div><div class="kpi-subtext">Completed by Kooner</div></div>
-                <div class="kpi-card warning"><div class="kpi-label">Total Leaked WOs</div><div class="kpi-value orange">594</div><div class="kpi-subtext">Sent to other vendors</div></div>
-                <div class="kpi-card danger"><div class="kpi-label">Current Adoption</div><div class="kpi-value red">46.0%</div><div class="kpi-subtext">39.0% gap to target</div></div>
-                <div class="kpi-card success"><div class="kpi-label">On Target Stations</div><div class="kpi-value green">3</div><div class="kpi-subtext">of 13 stations ≥85%</div></div>
-                <div class="kpi-card"><div class="kpi-label">Total WOs</div><div class="kpi-value">1,320</div><div class="kpi-subtext">Across 13 stations</div></div>
+                <div class="kpi-card"><div class="kpi-label">Total Kooner WOs</div><div class="kpi-value green">811</div><div class="kpi-subtext">Completed by Kooner</div></div>
+                <div class="kpi-card warning"><div class="kpi-label">Total Leaked WOs</div><div class="kpi-value orange">679</div><div class="kpi-subtext">Sent to other vendors</div></div>
+                <div class="kpi-card danger"><div class="kpi-label">Current Adoption</div><div class="kpi-value red">54.4%</div><div class="kpi-subtext">30.6% gap to target</div></div>
+                <div class="kpi-card success"><div class="kpi-label">On Target Stations</div><div class="kpi-value green">2</div><div class="kpi-subtext">of 12 stations ≥85%</div></div>
+                <div class="kpi-card"><div class="kpi-label">Total WOs</div><div class="kpi-value">1,490</div><div class="kpi-subtext">Across 12 stations</div></div>
             </div>
             <div class="main-grid">
-                <div class="card"><div class="card-header"><div class="card-title">Weekly Kooner Volume</div><span class="card-badge badge-trends">WK01-WK06</span></div><div class="chart-container"><canvas id="weeklyBarChart"></canvas></div></div>
+                <div class="card"><div class="card-header"><div class="card-title">Weekly Kooner Volume</div><span class="card-badge badge-trends">WK01-WK07</span></div><div class="chart-container"><canvas id="weeklyBarChart"></canvas></div></div>
                 <div class="card"><div class="card-header"><div class="card-title">Station Adoption Distribution</div></div><div class="chart-container"><canvas id="stationBarChart"></canvas></div></div>
-                <div class="card"><div class="card-header"><div class="card-title">Station Status</div><span class="card-badge badge-stations">13 STATIONS</span></div><div class="table-scroll" style="max-height:300px"><table class="data-table"><thead><tr><th>Station</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>Status</th></tr></thead><tbody id="stationQuickTable"></tbody></table></div></div>
+                <div class="card"><div class="card-header"><div class="card-title">Station Status</div><span class="card-badge badge-stations">12 STATIONS</span></div><div class="table-scroll" style="max-height:300px"><table class="data-table"><thead><tr><th>Station</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>Status</th></tr></thead><tbody id="stationQuickTable"></tbody></table></div></div>
                 <div class="card"><div class="card-header"><div class="card-title">Top Opportunities</div><span class="card-badge badge-dsps">BY LEAKED WOs</span></div><div class="table-scroll" style="max-height:300px"><table class="data-table"><thead><tr><th>Station</th><th>Leaked</th><th>Adoption</th><th>Potential</th></tr></thead><tbody id="opportunityTable"></tbody></table></div></div>
             </div>
         </div>
@@ -218,32 +218,76 @@
         <div id="trends" class="tab-content">
             <div class="main-grid">
                 <div class="card full-width">
-                    <div class="card-header"><div class="card-title">📋 WBR Executive Summary</div><span class="card-badge badge-insights">WK06 DATA</span></div>
+                    <div class="card-header"><div class="card-title">📋 WBR Executive Summary</div><span class="card-badge badge-insights">WK07 SCORECARD + WK06 STATION DATA</span></div>
                     <div class="executive-summary">
                         <h3>🎯 Key Takeaways</h3>
                         <ul>
-                            <li><strong>Overall adoption at 46.0% (Amazon official)</strong> — 39% below the 85% target. WK06 shows +4% WoW improvement.</li>
-                            <li><strong>3 stations meeting target:</strong> HMK4 (100%), HSL1 (100%), HCT2 (87.0%)</li>
-                            <li><strong>HLA2 is the largest opportunity:</strong> 225 leaked WOs (38% of all leakage), only 40.3% adoption.</li>
-                            <li><strong>HDT3 has highest volume</strong> but only 51.8% adoption with 120 leaked WOs.</li>
-                            <li><strong>HPD1 is critical:</strong> Only 3.0% adoption (1 Kooner vs 32 leaked).</li>
+                            <li><strong>Amazon WK07 Scorecard: 48% adoption</strong> (+2% WoW from 46%). 1 of 9 KPIs hit. Kooner tracks 13 live stations; Amazon reports 11.</li>
+                            <li><strong>Efficiency trending down:</strong> Avg TAT 2.17 days (target &lt;1), Median TAT 3.34 days (target &lt;2), Backlog burndown at 5.09 days — all worse WoW.</li>
+                            <li><strong>Box truck TAT critical:</strong> Avg 2.88 days, Median 4.36 days — significantly worse than cargo vehicles.</li>
+                            <li><strong>Weekend deficit at 62.2%</strong> (target &gt;85%) — improved from 23.1% in WK06 but still a miss.</li>
+                            <li><strong>Volume growing:</strong> 169 WOs created in WK07 (66 cargo + 103 box truck), up from WK06.</li>
+                            <li><strong>Station data (through WK06):</strong> 2 stations on target — HSL1 (93.8%), HCT2 (85.7%). HTP2 (83.2%) near target. Station-level WK07 breakdown pending leakage report.</li>
                         </ul>
                     </div>
                     <div class="insights-grid">
-                        <div class="insight-card positive"><div class="insight-icon">✅</div><div class="insight-title">On Target Stations</div><div class="insight-text"><span class="insight-metric">HMK4, HSL1, HCT2</span> — 3 stations meeting 85%+ target.</div></div>
-                        <div class="insight-card negative"><div class="insight-icon">🔴</div><div class="insight-title">Critical: HPD1</div><div class="insight-text"><span class="insight-metric">3.0% adoption</span> — Only 1 Kooner WO vs 32 leaked.</div></div>
-                        <div class="insight-card warning"><div class="insight-icon">🎯</div><div class="insight-title">Biggest Opportunity: HLA2</div><div class="insight-text"><span class="insight-metric">225 leaked WOs</span> — 38% of total leakage.</div></div>
-                        <div class="insight-card info"><div class="insight-icon">📊</div><div class="insight-title">Near Target</div><div class="insight-text"><span class="insight-metric">HDY1 (81.7%), HTP2 (79.8%), HHO3 (79.2%)</span></div></div>
+                        <div class="insight-card positive"><div class="insight-icon">✅</div><div class="insight-title">On Target Stations</div><div class="insight-text"><span class="insight-metric">HSL1, HCT2</span> — 2 stations meeting 85%+ target. HTP2 (83.2%) close.</div></div>
+                        <div class="insight-card negative"><div class="insight-icon">🔴</div><div class="insight-title">Efficiency Declining</div><div class="insight-text"><span class="insight-metric">Avg TAT 2.17d, Backlog 5.09d</span> — All efficiency KPIs missed in WK07.</div></div>
+                        <div class="insight-card warning"><div class="insight-icon">🎯</div><div class="insight-title">Box Truck TAT Critical</div><div class="insight-text"><span class="insight-metric">Avg 2.88d / Median 4.36d</span> — Significantly worse than cargo vehicles.</div></div>
+                        <div class="insight-card info"><div class="insight-icon">📊</div><div class="insight-title">WK07 Scorecard</div><div class="insight-text"><span class="insight-metric">48% adoption, 1/9 KPIs hit</span> — Rejection rate improved to 0.8%.</div></div>
+                    </div>
+                </div>
+                <div class="card full-width">
+                    <div class="card-header"><div class="card-title">📊 Amazon WK07 Performance Scorecard</div><span class="card-badge badge-calendar">1 OF 9 KPIs HIT</span></div>
+                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px">
+                        <div style="background:var(--bg-card-hover);border-radius:12px;padding:16px;border-left:3px solid var(--accent-orange)">
+                            <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px">Amazon Adoption</div>
+                            <div style="font-size:1.8rem;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--accent-orange)">48%</div>
+                            <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:4px">+2% WoW (from 46%)</div>
+                        </div>
+                        <div style="background:var(--bg-card-hover);border-radius:12px;padding:16px;border-left:3px solid var(--accent-red)">
+                            <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px">Avg TAT</div>
+                            <div style="font-size:1.8rem;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--accent-red)">2.17d</div>
+                            <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:4px">Target &lt;1d · +0.94 WoW</div>
+                        </div>
+                        <div style="background:var(--bg-card-hover);border-radius:12px;padding:16px;border-left:3px solid var(--accent-red)">
+                            <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px">Backlog Burndown</div>
+                            <div style="font-size:1.8rem;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--accent-red)">5.09d</div>
+                            <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:4px">Target &lt;1d · +1.17 WoW</div>
+                        </div>
+                        <div style="background:var(--bg-card-hover);border-radius:12px;padding:16px;border-left:3px solid var(--accent-orange)">
+                            <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px">Weekend Deficit</div>
+                            <div style="font-size:1.8rem;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--accent-orange)">62.2%</div>
+                            <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:4px">Target &gt;85% · +39% WoW</div>
+                        </div>
+                    </div>
+                    <table class="data-table">
+                        <thead><tr><th>KPI / SLA</th><th>Target</th><th>WK02</th><th>WK03</th><th>WK04</th><th>WK05</th><th>WK06</th><th>WK07</th><th>WoW</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>Adoption %</td><td>85%</td><td>39%</td><td>34%</td><td>38%</td><td>42%</td><td>46%</td><td style="font-weight:700">48%</td><td style="color:var(--accent-green)">+2%</td><td><span class="status-pill below-target"><span class="status-dot"></span>Below</span></td></tr>
+                            <tr><td>Avg TAT — Overall</td><td>&lt;1 day</td><td>1.56</td><td>1.08</td><td>0.96</td><td>1.55</td><td>1.23</td><td style="font-weight:700">2.17</td><td style="color:var(--accent-red)">+0.94</td><td><span class="status-pill below-target"><span class="status-dot"></span>Miss</span></td></tr>
+                            <tr><td>Avg TAT — Cargo</td><td>&lt;1 day</td><td>1.59</td><td>2.93</td><td>0.72</td><td>1.39</td><td>0.86</td><td style="font-weight:700">1.41</td><td style="color:var(--accent-red)">+0.55</td><td><span class="status-pill below-target"><span class="status-dot"></span>Miss</span></td></tr>
+                            <tr><td>Avg TAT — Box Truck</td><td>&lt;1 day</td><td>1.56</td><td>0.78</td><td>1.20</td><td>1.65</td><td>1.23</td><td style="font-weight:700">2.88</td><td style="color:var(--accent-red)">+1.65</td><td><span class="status-pill below-target"><span class="status-dot"></span>Miss</span></td></tr>
+                            <tr><td>Median TAT — Overall</td><td>&lt;2 days</td><td>2.74</td><td>1.87</td><td>2.16</td><td>2.39</td><td>2.58</td><td style="font-weight:700">3.34</td><td style="color:var(--accent-red)">+0.76</td><td><span class="status-pill below-target"><span class="status-dot"></span>Miss</span></td></tr>
+                            <tr><td>Median TAT — Cargo</td><td>&lt;2 days</td><td>2.05</td><td>2.85</td><td>1.30</td><td>2.68</td><td>2.33</td><td style="font-weight:700;color:var(--accent-green)">1.65</td><td style="color:var(--accent-green)">-0.68</td><td><span class="status-pill on-target"><span class="status-dot"></span>Hit</span></td></tr>
+                            <tr><td>Median TAT — Box Truck</td><td>&lt;2 days</td><td>3.16</td><td>1.51</td><td>2.60</td><td>2.12</td><td>2.76</td><td style="font-weight:700">4.36</td><td style="color:var(--accent-red)">+1.60</td><td><span class="status-pill below-target"><span class="status-dot"></span>Miss</span></td></tr>
+                            <tr><td>Backlog Burndown</td><td>&lt;1 day</td><td>3.28</td><td>3.62</td><td>4.21</td><td>4.44</td><td>3.92</td><td style="font-weight:700">5.09</td><td style="color:var(--accent-red)">+1.17</td><td><span class="status-pill below-target"><span class="status-dot"></span>Miss</span></td></tr>
+                            <tr><td>Weekend Deficit</td><td>&gt;85%</td><td>183%</td><td>91.7%</td><td>95%</td><td>100%</td><td>23.1%</td><td style="font-weight:700">62.2%</td><td style="color:var(--accent-green)">+39%</td><td><span class="status-pill below-target"><span class="status-dot"></span>Miss</span></td></tr>
+                            <tr><td>Vendor Rejection Rate</td><td>&lt;0%</td><td>0%</td><td>3.8%</td><td>0%</td><td>1.2%</td><td>1.9%</td><td style="font-weight:700">0.8%</td><td style="color:var(--accent-green)">-1.1%</td><td><span class="status-pill below-target"><span class="status-dot"></span>Miss</span></td></tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-top:16px;padding:12px 16px;background:var(--bg-card-hover);border-radius:8px;font-size:0.85rem;color:var(--text-secondary);border-left:3px solid var(--accent-cyan)">
+                        <strong style="color:var(--accent-cyan)">⚠️ Station Count Note:</strong> Amazon scorecard reports 11 live stations. Kooner tracks 13 live stations (including HMK4 and the 12 in this dashboard). Discrepancy may affect adoption % comparison — Amazon WK07: 48% vs Kooner internal WK06: 54.4%.
                     </div>
                 </div>
                 <div class="card full-width"><div class="card-header"><div class="card-title">📈 Weekly Kooner Volume by Station</div></div><div class="chart-container tall"><canvas id="stationWeeklyChart"></canvas></div></div>
-                <div class="card full-width"><div class="card-header"><div class="card-title">Station Weekly Breakdown</div></div><div class="table-scroll"><table class="data-table"><thead><tr><th>Station</th><th>WK1</th><th>WK2</th><th>WK3</th><th>WK4</th><th>WK5</th><th>WK6</th><th>Total</th></tr></thead><tbody id="stationWeeklyTable"></tbody></table></div></div>
+                <div class="card full-width"><div class="card-header"><div class="card-title">Station Weekly Breakdown</div></div><div class="table-scroll"><table class="data-table"><thead><tr><th>Station</th><th>WK1</th><th>WK2</th><th>WK3</th><th>WK4</th><th>WK5</th><th>WK6</th><th>WK7</th><th>Total</th></tr></thead><tbody id="stationWeeklyTable"></tbody></table></div></div>
             </div>
         </div>
 
         <div id="stations" class="tab-content">
             <div class="main-grid">
-                <div class="card full-width"><div class="card-header"><div class="card-title">Station Adoption Details</div><span class="card-badge badge-stations">13 STATIONS</span></div><table class="data-table"><thead><tr><th>Station</th><th>Location</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>Total</th><th>Gap to 85%</th><th>Status</th></tr></thead><tbody id="stationFullTable"></tbody></table></div>
+                <div class="card full-width"><div class="card-header"><div class="card-title">Station Adoption Details</div><span class="card-badge badge-stations">12 STATIONS</span></div><table class="data-table"><thead><tr><th>Station</th><th>Location</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>Total</th><th>Gap to 85%</th><th>Status</th></tr></thead><tbody id="stationFullTable"></tbody></table></div>
                 <div class="card"><div class="card-header"><div class="card-title">Station Rankings</div></div><div class="chart-container tall"><canvas id="stationRankChart"></canvas></div></div>
                 <div class="card"><div class="card-header"><div class="card-title">Leakage Distribution</div></div><div class="chart-container tall"><canvas id="leakageChart"></canvas></div></div>
             </div>
@@ -352,50 +396,49 @@
 
     <script>
         var stationData = [
-            {station:'HMK4',location:'Milwaukee, WI',kooner:57,leaked:0,adoption:100.0},
-            {station:'HSL1',location:'Salt Lake City, UT',kooner:20,leaked:0,adoption:100.0},
-            {station:'HCT2',location:'Chattanooga, TN',kooner:20,leaked:3,adoption:87.0},
-            {station:'HDY1',location:'Clayton, OH',kooner:49,leaked:11,adoption:81.7},
-            {station:'HTP2',location:'Gibsonton, FL',kooner:67,leaked:17,adoption:79.8},
-            {station:'HHO3',location:'Porter, TX',kooner:84,leaked:22,adoption:79.2},
-            {station:'HMS2',location:'Lakeville, MN',kooner:35,leaked:27,adoption:56.5},
-            {station:'HDT3',location:'Romulus, MI',kooner:129,leaked:120,adoption:51.8},
-            {station:'HCL2',location:'Charlotte, NC',kooner:54,leaked:51,adoption:51.4},
-            {station:'HIN3',location:'South Bend, IN',kooner:11,leaked:15,adoption:42.3},
-            {station:'HLA2',location:'Santa Clarita, CA',kooner:152,leaked:225,adoption:40.3},
-            {station:'HAU1',location:'Austin, TX',kooner:47,leaked:71,adoption:39.8},
-            {station:'HPD1',location:'Portland, OR',kooner:1,leaked:32,adoption:3.0}
+            {station:'HTP2',location:'Gibsonton, FL',kooner:89,leaked:18,adoption:83.2},
+            {station:'HSL1',location:'Salt Lake City, UT',kooner:30,leaked:2,adoption:93.8},
+            {station:'HHO3',location:'Porter, TX',kooner:96,leaked:24,adoption:80.0},
+            {station:'HDY1',location:'Clayton, OH',kooner:54,leaked:13,adoption:80.6},
+            {station:'HCT2',location:'Chattanooga, TN',kooner:24,leaked:4,adoption:85.7},
+            {station:'HCL2',location:'Charlotte, NC',kooner:70,leaked:62,adoption:53.0},
+            {station:'HDT3',location:'Romulus, MI',kooner:152,leaked:141,adoption:51.9},
+            {station:'HMS2',location:'Lakeville, MN',kooner:37,leaked:33,adoption:52.9},
+            {station:'HIN3',location:'South Bend, IN',kooner:16,leaked:20,adoption:44.4},
+            {station:'HLA2',location:'Santa Clarita, CA',kooner:189,leaked:250,adoption:43.1},
+            {station:'HAU1',location:'Austin, TX',kooner:53,leaked:78,adoption:40.5},
+            {station:'HPD1',location:'Portland, OR',kooner:1,leaked:34,adoption:2.9}
         ];
 
         var weeklyByStation = {
-            'HAU1':{WK1:6,WK2:12,WK3:10,WK4:14,WK5:3,WK6:null,total:47},
-            'HCL2':{WK1:1,WK2:5,WK3:29,WK4:8,WK5:10,WK6:null,total:54},
-            'HCT2':{WK1:null,WK2:4,WK3:5,WK4:7,WK5:2,WK6:null,total:20},
-            'HDT3':{WK1:9,WK2:15,WK3:17,WK4:26,WK5:44,WK6:null,total:129},
-            'HDY1':{WK1:9,WK2:20,WK3:10,WK4:6,WK5:null,WK6:null,total:49},
-            'HHO3':{WK1:6,WK2:22,WK3:13,WK4:19,WK5:15,WK6:null,total:84},
-            'HIN3':{WK1:1,WK2:5,WK3:4,WK4:2,WK5:null,WK6:null,total:11},
-            'HLA2':{WK1:9,WK2:20,WK3:23,WK4:42,WK5:41,WK6:null,total:152},
-            'HMK4':{WK1:10,WK2:8,WK3:15,WK4:3,WK5:14,WK6:null,total:57},
-            'HMS2':{WK1:2,WK2:6,WK3:5,WK4:11,WK5:9,WK6:null,total:35},
-            'HPD1':{WK1:null,WK2:null,WK3:null,WK4:1,WK5:null,WK6:null,total:1},
-            'HSL1':{WK1:1,WK2:4,WK3:5,WK4:5,WK5:5,WK6:null,total:20},
-            'HTP2':{WK1:3,WK2:20,WK3:8,WK4:16,WK5:7,WK6:null,total:67}
+            'HAU1':{WK1:6,WK2:12,WK3:10,WK4:14,WK5:3,WK6:6,WK7:null,total:53},
+            'HCL2':{WK1:1,WK2:5,WK3:29,WK4:8,WK5:10,WK6:16,WK7:null,total:70},
+            'HCT2':{WK1:null,WK2:4,WK3:5,WK4:7,WK5:2,WK6:4,WK7:null,total:24},
+            'HDT3':{WK1:9,WK2:15,WK3:17,WK4:26,WK5:44,WK6:23,WK7:null,total:152},
+            'HDY1':{WK1:9,WK2:20,WK3:10,WK4:6,WK5:null,WK6:5,WK7:null,total:54},
+            'HHO3':{WK1:6,WK2:22,WK3:13,WK4:19,WK5:15,WK6:12,WK7:null,total:96},
+            'HIN3':{WK1:1,WK2:5,WK3:4,WK4:2,WK5:null,WK6:5,WK7:null,total:16},
+            'HLA2':{WK1:9,WK2:20,WK3:23,WK4:42,WK5:41,WK6:37,WK7:null,total:189},
+            'HMS2':{WK1:2,WK2:6,WK3:5,WK4:11,WK5:9,WK6:2,WK7:null,total:37},
+            'HPD1':{WK1:null,WK2:null,WK3:null,WK4:1,WK5:null,WK6:null,WK7:null,total:1},
+            'HSL1':{WK1:1,WK2:4,WK3:5,WK4:5,WK5:5,WK6:10,WK7:null,total:30},
+            'HTP2':{WK1:3,WK2:20,WK3:8,WK4:16,WK5:7,WK6:22,WK7:null,total:89}
         };
 
-        var weekTotals = {WK1:58,WK2:140,WK3:140,WK4:159,WK5:153,WK6:148};
+        var weekTotals = {WK1:48,WK2:132,WK3:125,WK4:156,WK5:139,WK6:142,WK7:62};
 
         var sentimentData = [
-            {dsp:"ALAB",station:"HDT3",responses:1,satisfaction:1.0,timeliness:1.0,quality:1.0,avgScore:1.0,adoption:51.8},
-            {dsp:"ARMA",station:"HLA2",responses:5,satisfaction:2.6,timeliness:2.6,quality:2.6,avgScore:2.6,adoption:40.3},
-            {dsp:"ORMP",station:"HTP2",responses:2,satisfaction:2.0,timeliness:2.0,quality:3.0,avgScore:2.3,adoption:79.8},
-            {dsp:"MAEP",station:"HIN3",responses:1,satisfaction:2.0,timeliness:2.0,quality:3.0,avgScore:2.3,adoption:42.3},
-            {dsp:"SFRM",station:"HDT3",responses:3,satisfaction:3.3,timeliness:3.0,quality:3.0,avgScore:3.1,adoption:51.8},
-            {dsp:"PRLC",station:"HSL1",responses:1,satisfaction:4.0,timeliness:5.0,quality:3.0,avgScore:4.0,adoption:100},
-            {dsp:"D4DS",station:"HCL2",responses:1,satisfaction:5.0,timeliness:5.0,quality:5.0,avgScore:5.0,adoption:51.4}
+            {dsp:"ALAB",station:"HDT3",responses:1,satisfaction:1.0,timeliness:1.0,quality:1.0,avgScore:1.0,adoption:51.9},
+            {dsp:"ARMA",station:"HLA2",responses:5,satisfaction:2.6,timeliness:2.6,quality:2.6,avgScore:2.6,adoption:43.1},
+            {dsp:"ORMP",station:"HTP2",responses:2,satisfaction:2.0,timeliness:2.0,quality:3.0,avgScore:2.3,adoption:83.2},
+            {dsp:"MAEP",station:"HIN3",responses:1,satisfaction:2.0,timeliness:2.0,quality:3.0,avgScore:2.3,adoption:44.4},
+            {dsp:"SFRM",station:"HDT3",responses:5,satisfaction:3.2,timeliness:2.6,quality:3.2,avgScore:3.0,adoption:51.9},
+            {dsp:"PRLC",station:"HSL1",responses:1,satisfaction:4.0,timeliness:5.0,quality:3.0,avgScore:4.0,adoption:93.8},
+            {dsp:"D4DS",station:"HCL2",responses:1,satisfaction:5.0,timeliness:5.0,quality:5.0,avgScore:5.0,adoption:53.0}
         ];
 
         var feedbackData = [
+            {date:"Feb 16",dsp:"SFRM",station:"HDT3",satisfaction:3,timeliness:2,quality:4,issue:"Unit 0160 grounded 02/11 for engine issues - still not diagnosed. Unit 5768 grounded 02/09 for HVAC - awaiting repairs due to estimate/pricing issues.",suggestion:"Need more techs - stretched thin across 2 DSPs. No weekend work causing delays. Techs should comingle on WOs to avoid knowledge gaps between shifts. 14 grounded vehicles, 8 outsourced to other vendors."},
             {date:"Feb 10",dsp:"SFRM",station:"HDT3",satisfaction:4,timeliness:4,quality:4,issue:"Unit 2974 pending diagnostics for a few days",suggestion:"More availability for weekend issues, over the road calls."},
             {date:"Feb 9",dsp:"ORMP",station:"HTP2",satisfaction:2,timeliness:2,quality:4,issue:"Multiple WOs not looked at since 2/4. Helpful contact laid off.",suggestion:""},
             {date:"Feb 9",dsp:"ARMA",station:"HLA2",satisfaction:5,timeliness:5,quality:5,issue:"",suggestion:"Jose Madrigal is GREAT! Very professional and attentive."},
@@ -403,21 +446,24 @@
             {date:"Jan 26",dsp:"ALAB",station:"HDT3",satisfaction:1,timeliness:1,quality:1,issue:"Lack of timely repairs. Same issue after ungrounding.",suggestion:"Timely repairs needed."},
             {date:"Jan 12",dsp:"D4DS",station:"HCL2",satisfaction:5,timeliness:5,quality:5,issue:"",suggestion:"Supervisor got more vehicles running in one evening than any mechanic in 5 years."},
             {date:"Jan 6",dsp:"ORMP",station:"HTP2",satisfaction:2,timeliness:2,quality:2,issue:"No paperwork after 7 days. Brakes still bad.",suggestion:"Need schedule access."},
-            {date:"Jan 5",dsp:"ARMA",station:"HLA2",satisfaction:1,timeliness:1,quality:1,issue:"No work orders submitted.",suggestion:"Better communication."}
+            {date:"Jan 6",dsp:"PRLC",station:"HSL1",satisfaction:4,timeliness:5,quality:3,issue:"",suggestion:"Service request to vehicle return is smooth. Techs are great. Paperwork/invoicing process needs improvement."},
+            {date:"Jan 5",dsp:"SFRM",station:"HDT3",satisfaction:3,timeliness:2,quality:2,issue:"",suggestion:"Need better field supervision of technicians. Who is validating completeness and quality of their work?"},
+            {date:"Jan 5",dsp:"ARMA",station:"HLA2",satisfaction:1,timeliness:1,quality:1,issue:"No work orders submitted.",suggestion:"Better communication."},
+            {date:"Dec 30",dsp:"MAEP",station:"HIN3",satisfaction:2,timeliness:2,quality:3,issue:"Most issues not resolved. Wrong brake parts ordered, then additional issues found. Had to outsource repair.",suggestion:""}
         ];
 
         // Combined action data with sentiment
         var actionData = [
-            {station:'HPD1',location:'Portland, OR',adoption:3.0,leaked:32,sentiment:null,issue:'No survey data - unknown DSP engagement',action:'Emergency: Identify DSP contacts, schedule immediate roundtable',priority:'critical'},
-            {station:'HLA2',location:'Santa Clarita, CA',adoption:40.3,leaked:225,sentiment:2.6,issue:'ARMA improving (5/5 recent), but historical issues',action:'Continue momentum with Jose M. Expand to other DSPs at station',priority:'critical'},
-            {station:'HAU1',location:'Austin, TX',adoption:39.8,leaked:71,sentiment:null,issue:'No survey data - dropped from 88% to 40%',action:'Urgent site visit to identify root cause of decline',priority:'critical'},
-            {station:'HDT3',location:'Romulus, MI',adoption:51.8,leaked:120,sentiment:2.1,issue:'ALAB (1/5) and SFRM (3.1/5) mixed feedback',action:'Address ALAB concerns first - timeliness and rework issues',priority:'high'},
-            {station:'HIN3',location:'South Bend, IN',adoption:42.3,leaked:15,sentiment:2.3,issue:'MAEP reports unresolved issues, wrong parts',action:'Quality review with tech team, parts inventory check',priority:'high'},
-            {station:'HCL2',location:'Charlotte, NC',adoption:51.4,leaked:51,sentiment:5.0,issue:'D4DS loves service but adoption still low',action:'Identify other DSPs at station causing leakage',priority:'high'},
-            {station:'HTP2',location:'Gibsonton, FL',adoption:79.8,leaked:17,sentiment:2.3,issue:'ORMP: contact laid off, no visibility into WOs',action:'Assign new contact, improve communication cadence',priority:'high'},
-            {station:'HMS2',location:'Lakeville, MN',adoption:56.5,leaked:27,sentiment:null,issue:'No survey data',action:'Schedule DSP roundtable to gather feedback',priority:'medium'},
-            {station:'HHO3',location:'Porter, TX',adoption:79.2,leaked:22,sentiment:null,issue:'Near target but no survey feedback',action:'Quick wins to push over 85%, gather DSP input',priority:'medium'},
-            {station:'HDY1',location:'Clayton, OH',adoption:81.7,leaked:11,sentiment:null,issue:'Very close to target',action:'Final push to 85% - identify remaining blockers',priority:'low'}
+            {station:'HPD1',location:'Portland, OR',adoption:2.9,leaked:34,sentiment:null,issue:'No survey data - unknown DSP engagement',action:'Emergency: Identify DSP contacts, schedule immediate roundtable',priority:'critical'},
+            {station:'HLA2',location:'Santa Clarita, CA',adoption:43.1,leaked:250,sentiment:2.6,issue:'ARMA improving (5/5 recent), but historical issues',action:'Continue momentum with Jose M. Expand to other DSPs at station',priority:'critical'},
+            {station:'HAU1',location:'Austin, TX',adoption:40.5,leaked:78,sentiment:null,issue:'No survey data - dropped from 88% to 40%',action:'Urgent site visit to identify root cause of decline',priority:'critical'},
+            {station:'HDT3',location:'Romulus, MI',adoption:51.9,leaked:141,sentiment:2.1,issue:'ALAB (1/5) and SFRM (3.1/5) mixed feedback',action:'Address ALAB concerns first - timeliness and rework issues',priority:'high'},
+            {station:'HIN3',location:'South Bend, IN',adoption:44.4,leaked:20,sentiment:2.3,issue:'MAEP reports unresolved issues, wrong parts',action:'Quality review with tech team, parts inventory check',priority:'high'},
+            {station:'HCL2',location:'Charlotte, NC',adoption:53.0,leaked:62,sentiment:5.0,issue:'D4DS loves service but adoption still low',action:'Identify other DSPs at station causing leakage',priority:'high'},
+            {station:'HTP2',location:'Gibsonton, FL',adoption:83.2,leaked:18,sentiment:2.3,issue:'ORMP: contact laid off, no visibility into WOs',action:'Near target — assign new contact, maintain WK06 momentum',priority:'high'},
+            {station:'HMS2',location:'Lakeville, MN',adoption:52.9,leaked:33,sentiment:null,issue:'No survey data',action:'Schedule DSP roundtable to gather feedback',priority:'medium'},
+            {station:'HHO3',location:'Porter, TX',adoption:80.0,leaked:24,sentiment:null,issue:'Near target but no survey feedback',action:'Quick wins to push over 85%, gather DSP input',priority:'medium'},
+            {station:'HDY1',location:'Clayton, OH',adoption:80.6,leaked:13,sentiment:null,issue:'Very close to target',action:'Final push to 85% - identify remaining blockers',priority:'low'}
         ];
 
         // Calendar events
@@ -425,34 +471,59 @@
             {date:'2026-02-09',title:'HMS2 Roundtable',type:'roundtable',station:'HMS2',time:'10:00 AM',notes:'<strong>Key Issues:</strong> Severe communication delays - questions unanswered 6-8 hrs, multi-day gaps despite 60-80 people in Kooner chat. Steven: "Never experienced such delay" vs prior vendors.<br><br><strong>Safety/Compliance Failures:</strong> Truck 21 passed Federal DOT but failed MN inspection with visible drag link issues. Truck 20 had 5 federal DOT failures caught by external shop. Wrong stickers on wrong vehicles. Steven: "Would rather pay out of pocket for inspections."<br><br><strong>Work Quality:</strong> Truck 1 urgent WO at 8am, tech sat idle until 12:15pm. WOs marked complete when repairs not finished. Multiple recreations needed.<br><br><strong>Root Causes:</strong> Coverage gaps across shifts, tech (Michael) attendance/training issues, no escalation protocols, DSPs unclear on contacts.<br><br><strong>Solutions Discussed:</strong> David (experienced manager tech) deploying next week for training/oversight. Formal dispatch schedule being created. This is 2nd escalation - relationship at risk.<br><br><strong style="color:#ff4757">Action Items:</strong><br>• Brooke/Alberto: Provide direct numbers for 24/7 contact<br>• Ash: Send dispatch schedule with roles/coverage times<br>• David: Visit HMS2 next week for training & process review<br>• Steven: Document VINs, dates, WO details via email + chat<br>• Team: Schedule site visit after David training complete<br>• Team: Establish escalation protocols for urgent repairs<br>• Team: Implement follow-up tracking for all issues'},
             {date:'2026-02-10',title:'HCL2 Roundtable',type:'roundtable',station:'HCL2',time:'2:00 PM',notes:'<strong>Key Issues:</strong> D4DS (Andrea) down to 6 of 17 trucks. Multiple vehicles grounded due to incomplete PMs - one sitting since Jan 22. Communication breakdown: no responses since Saturday, messages unanswered for days. Unexpected tech departure caused service disruption.<br><br><strong>Root Causes:</strong> No proactive status updates, parts availability delays, badge access issues, two intake systems creating confusion, no real-time WO visibility for DSPs.<br><br><strong>Solutions Discussed:</strong> Justin Ellis relocating permanently (6pm-2am shift), Eugene deploying to help clear backlog. Relay Garage integration planned for mid-March with Fleet Portal scheduling.<br><br><strong style="color:#ff4757">Action Items:</strong><br>• Ash: Provide cell numbers for direct contact<br>• Ash: Daily AM updates in Chime on overnight completions<br>• Kathy: Send contact list with roles<br>• Team: Provide ETA doc for all 28 open WOs<br>• Mark: Meet Justin to set up vehicle shuttle system<br>• Mark: Set up key box at FC entrance<br>• Andrea: Share D4 WOs in Chime for reconciliation'},
             {date:'2026-02-11',title:'HPD1 Roundtable',type:'roundtable',station:'HPD1',time:'11:00 AM',notes:'<strong>Key Context:</strong> Unique site - only DSP at location, co-located with FC, 20-30 min from other Amazon facilities. Robert (DSP) has existing vendor relationship (1.5 yrs) with dedicated 1-2 techs who know his fleet.<br><br><strong>Service Gaps Identified:</strong><br>• No proactive PM scheduling communication<br>• No notification when repairs completed<br>• Inconsistent tech coverage - "multiple technicians...next day new tech not familiar with anything"<br>• Kooner removed dedicated Vancouver travel tech due to volume decrease<br>• BOX invoice process implemented without DSP awareness<br><br><strong>Impact:</strong> Ryan: "My biggest concern is fleet constraints from maintenance causing dropped routes." Recent DOT/Box issue nearly caused route capacity problems.<br><br><strong>Site Complexity:</strong> FC co-location creates security/access challenges. Strict landlord with exterior building requirements including painting restrictions.<br><br><strong>Solutions Discussed:</strong><br>• Tech integration within 1 month for comms<br>• Amazon Fleet Portal integration end of March/April - direct scheduling, real-time updates, single portal<br>• Dedicated tech Michael available (5-10 min from site, knows Last Mile)<br>• Moving from Chime to Slack<br><br><strong style="color:#ff4757">Action Items:</strong><br>• Team: Schedule follow-up Fri or Mon/Tue same time<br>• Attendees: Ash, Alberto, Brooke, Robert + fleet team member<br>• Meeting Goals: Document comms expectations, align on SLAs, introduce Michael, establish escalation<br>• Ash/Alberto: Provided cell numbers for urgent situations<br>• Team: Send meeting invite with forwarding option'},
-            {date:'2026-02-16',title:'HDY1 Roundtable',type:'roundtable',station:'HDY1',time:'',notes:'Add notes from HDY1 roundtable here...'},
-            {date:'2026-02-18',title:'HHO3 Roundtable',type:'roundtable',station:'HHO3',time:'',notes:'Add notes from HHO3 roundtable here...'},
+            {date:'2026-02-16',title:'HDY1 Roundtable',type:'roundtable',station:'HDY1',time:'',notes:'<strong>Communication & Process Issues:</strong> New tech Charles transitioned from middle mile without proper last mile training. Missing badge access - Brandon following up with station today. No direct communication established with DSP fleet managers. Previous tech Tim left suddenly, creating rushed transition. DSP teams (TLG: Hunter/Drew, TWLD: Chris/Luke) need direct tech contact — historical success with direct Tim communication.<br><br><strong>Service Quality & Documentation Problems:</strong> Invoice delays impacting truck availability — PMs completed overnight but invoices not uploaded to Box until 4pm next day. Trucks cannot run without Amazon portal clearance. Invoices lack specific PM details required by Amazon. DOT inspection quality issue at TLG — $1,000 in repairs needed for loose/missing U-bolts on box truck attachment (safety risk requiring tech training emphasis). Weather delays affecting timely service, vehicles being grounded due to incomplete work.<br><br><strong>Daily Operations & Scheduling:</strong> Charles currently works Mon-Fri 8am-5pm (Tim previous schedule). May need later hours for vehicles returning from routes — open to adjustments. New daily reporting system starting: Ash posting completed/pending work updates in Chime, DSPs to validate and prioritize WOs, screen grabs showing 24-hour completion status. Key box installation pending — Amazon restrictions on building modifications, working with Jeff on external placement.<br><br><strong style="color:#ff4757">Action Items:</strong><br>• Brandon: Get Charles badge access, follow up with station today<br>• Ash: Share Charles contact info with DSP fleet managers, continue daily schedule updates, review DOT inspection training<br>• Brooke: Send escalation path contacts by EOD, formalize SOP document<br>• DSP teams: Audit daily schedules, prioritize WOs, tag team members in Chime<br>• Drew: Provide FIM details for DOT inspection incident'},
+            {date:'2026-02-25',title:'HCL2/HCT2 RFM Engagement Call',type:'review',station:'HCL2 / HCT2',time:'10:30 AM CST',notes:'<strong>Attendees:</strong> RFM Kathy, Kooner team<br><br><strong>Current Satisfaction:</strong> Kathy appreciates Kooner maintenance provision but identified significant operational challenges. Both HCT2 and HCL2 experiencing vehicle downtime causing DSPs to rent replacements. Communication gaps creating confusion about repair processes and timelines. Positive feedback on recent improvements — daily snapshots and technician contact info.<br><br><strong>HCT2 (Chattanooga) Status:</strong> Backlog reduced from 4 to 3 pending repairs. Corner cap replacement delayed (wrong part size — overnight replacement ordered). Fuel tank repair scheduled for parts arrival Feb 27. PM completion process improved with daily paperwork uploads to Box.<br><br><strong>HCL2 (North Carolina) Challenges:</strong> Significant backlog after January technician disconnection. Outsourcing work that should have stayed in-house due to emergency. Justin assigned as new dedicated tech, handling ~5 WOs nightly. David Knight provided additional support last week to clear backlog. Box platform access issues preventing some DSP personnel from accessing completed paperwork.<br><br><strong>Process Complexity:</strong> HCT2 operates under closed-loop pilot with MCS team management. HCL2 handled completely by Kooner WO management system. Vehicles sitting with Kooner for days without repair determination. PM completions requiring multiple uploads (one vehicle bounced back 4 times). Diagnostic equipment finally being sent to HCT2. Badge access issues for techs at off-site locations. Chime-to-Slack migration challenges.<br><br><strong>Opportunities & Next Steps:</strong> Implement weekly VIN-level review meetings for both stations until processes stabilize. Establish clear SLA expectations for outsourced repairs. Continue daily communication cadence with status updates and EDDs. Focus on preventing DSP migration to external vendors.<br><br><strong style="color:#ff4757">Action Items:</strong><br>• Kathy: Provide Box access list for personnel needing platform access<br>• Ash: Deliver HCL2 burn-down plan within one hour via email<br>• Ash: Send HCL2 technician schedule and contact info (similar to HCT2)<br>• Team: Schedule follow-up meeting once Kooner discusses internal capacity for weekly reviews'},
             {date:'2026-03-02',title:'DSP Monthly Newsletter #1',type:'newsletter',station:'All',time:'',notes:'First edition of the DSP Monthly Newsletter'},
-            {date:'2026-03-04',title:'HCL2 Site Visit',type:'site-visit',station:'HCL2',time:'',notes:'Follow-up site visit to HCL2'},
-            {date:'2026-03-11',title:'HIN3 Site Visit',type:'site-visit',station:'HIN3',time:'',notes:'Site visit to HIN3 - quality review'}
+            {date:'2026-03-02',title:'Station Visit Block',type:'site-visit',station:'TBD',time:'All Day',notes:'Week 1 of station visits — stations TBD'},
+            {date:'2026-03-03',title:'Office Hours',type:'training',station:'All',time:'1:00 PM PST',notes:'Weekly office hours — open to all DSPs and station teams'},
+            {date:'2026-03-03',title:'Station Visit Block',type:'site-visit',station:'TBD',time:'All Day',notes:'Week 1 of station visits — stations TBD'},
+            {date:'2026-03-04',title:'Station Visit Block',type:'site-visit',station:'TBD',time:'All Day',notes:'Week 1 of station visits — stations TBD'},
+            {date:'2026-03-05',title:'Station Visit Block',type:'site-visit',station:'TBD',time:'All Day',notes:'Week 1 of station visits — stations TBD'},
+            {date:'2026-03-06',title:'Station Visit Block',type:'site-visit',station:'TBD',time:'All Day',notes:'Week 1 of station visits — stations TBD'},
+            {date:'2026-03-09',title:'Station Visit Block',type:'site-visit',station:'TBD',time:'All Day',notes:'Week 2 of station visits — stations TBD'},
+            {date:'2026-03-10',title:'Office Hours',type:'training',station:'All',time:'1:00 PM PST',notes:'Weekly office hours — open to all DSPs and station teams'},
+            {date:'2026-03-10',title:'Station Visit Block',type:'site-visit',station:'TBD',time:'All Day',notes:'Week 2 of station visits — stations TBD'},
+            {date:'2026-03-11',title:'Station Visit Block',type:'site-visit',station:'TBD',time:'All Day',notes:'Week 2 of station visits — stations TBD'},
+            {date:'2026-03-12',title:'Station Visit Block',type:'site-visit',station:'TBD',time:'All Day',notes:'Week 2 of station visits — stations TBD'},
+            {date:'2026-03-13',title:'Station Visit Block',type:'site-visit',station:'TBD',time:'All Day',notes:'Week 2 of station visits — stations TBD'},
+            {date:'2026-03-17',title:'Office Hours',type:'training',station:'All',time:'1:00 PM PST',notes:'Weekly office hours — open to all DSPs and station teams'},
+            {date:'2026-03-24',title:'Office Hours',type:'training',station:'All',time:'1:00 PM PST',notes:'Weekly office hours — open to all DSPs and station teams'},
+            {date:'2026-03-31',title:'Office Hours',type:'training',station:'All',time:'1:00 PM PST',notes:'Weekly office hours — open to all DSPs and station teams'}
         ];
 
         // Roundtable action items for Actions tab
         var roundtableActions = [
-            {station:'HMS2',date:'Feb 9',owner:'Brooke/Alberto',action:'Provide direct numbers for 24/7 contact',status:'pending'},
-            {station:'HMS2',date:'Feb 9',owner:'Ash',action:'Send dispatch schedule with roles/coverage times',status:'pending'},
-            {station:'HMS2',date:'Feb 9',owner:'David',action:'Visit HMS2 next week for training & process review',status:'pending'},
-            {station:'HMS2',date:'Feb 9',owner:'Steven',action:'Document VINs, dates, WO details via email + chat',status:'pending'},
-            {station:'HMS2',date:'Feb 9',owner:'Team',action:'Schedule site visit after David training complete',status:'pending'},
-            {station:'HMS2',date:'Feb 9',owner:'Team',action:'Establish escalation protocols for urgent repairs',status:'pending'},
-            {station:'HCL2',date:'Feb 10',owner:'Ash',action:'Provide cell numbers for direct contact',status:'pending'},
-            {station:'HCL2',date:'Feb 10',owner:'Ash',action:'Daily AM updates in Chime on overnight completions',status:'pending'},
-            {station:'HCL2',date:'Feb 10',owner:'Kathy',action:'Send contact list with roles',status:'pending'},
-            {station:'HCL2',date:'Feb 10',owner:'Team',action:'Provide ETA doc for all 28 open WOs',status:'pending'},
-            {station:'HCL2',date:'Feb 10',owner:'Mark',action:'Meet Justin to set up vehicle shuttle system',status:'pending'},
-            {station:'HCL2',date:'Feb 10',owner:'Mark',action:'Set up key box at FC entrance',status:'pending'},
-            {station:'HCL2',date:'Feb 10',owner:'Andrea',action:'Share D4 WOs in Chime for reconciliation',status:'pending'},
-            {station:'HPD1',date:'Feb 11',owner:'Team',action:'Schedule follow-up meeting Fri or Mon/Tue same time',status:'pending'},
-            {station:'HPD1',date:'Feb 11',owner:'Team',action:'Send meeting invite to attendees with forwarding option',status:'pending'},
-            {station:'HPD1',date:'Feb 11',owner:'Meeting',action:'Document specific communication expectations',status:'pending'},
-            {station:'HPD1',date:'Feb 11',owner:'Meeting',action:'Align on service level requirements',status:'pending'},
-            {station:'HPD1',date:'Feb 11',owner:'Meeting',action:'Introduce dedicated technician Michael',status:'pending'},
-            {station:'HPD1',date:'Feb 11',owner:'Meeting',action:'Establish escalation procedures',status:'pending'}
+            {station:'HMS2',date:'Feb 9',owner:'Brooke/Alberto',action:'Provide direct numbers for 24/7 contact',status:'done'},
+            {station:'HMS2',date:'Feb 9',owner:'Ash',action:'Send dispatch schedule with roles/coverage times',status:'done'},
+            {station:'HMS2',date:'Feb 9',owner:'David',action:'Visit HMS2 next week for training & process review',status:'done'},
+            {station:'HMS2',date:'Feb 9',owner:'Steven',action:'Document VINs, dates, WO details via email + chat',status:'done'},
+            {station:'HMS2',date:'Feb 9',owner:'Team',action:'Schedule site visit after David training complete',status:'done'},
+            {station:'HMS2',date:'Feb 9',owner:'Team',action:'Establish escalation protocols for urgent repairs',status:'done'},
+            {station:'HCL2',date:'Feb 10',owner:'Ash',action:'Provide cell numbers for direct contact',status:'done'},
+            {station:'HCL2',date:'Feb 10',owner:'Ash',action:'Daily AM updates in Chime on overnight completions',status:'done'},
+            {station:'HCL2',date:'Feb 10',owner:'Kathy',action:'Send contact list with roles',status:'done'},
+            {station:'HCL2',date:'Feb 10',owner:'Team',action:'Provide ETA doc for all 28 open WOs',status:'done'},
+            {station:'HCL2',date:'Feb 10',owner:'Mark',action:'Meet Justin to set up vehicle shuttle system',status:'done'},
+            {station:'HCL2',date:'Feb 10',owner:'Mark',action:'Set up key box at FC entrance',status:'done'},
+            {station:'HCL2',date:'Feb 10',owner:'Andrea',action:'Share D4 WOs in Chime for reconciliation',status:'done'},
+            {station:'HPD1',date:'Feb 11',owner:'Team',action:'Schedule follow-up meeting Fri or Mon/Tue same time',status:'done'},
+            {station:'HPD1',date:'Feb 11',owner:'Team',action:'Send meeting invite to attendees with forwarding option',status:'done'},
+            {station:'HPD1',date:'Feb 11',owner:'Meeting',action:'Document specific communication expectations',status:'done'},
+            {station:'HPD1',date:'Feb 11',owner:'Meeting',action:'Align on service level requirements',status:'done'},
+            {station:'HPD1',date:'Feb 11',owner:'Meeting',action:'Introduce dedicated technician Michael',status:'done'},
+            {station:'HPD1',date:'Feb 11',owner:'Meeting',action:'Establish escalation procedures',status:'done'},
+            {station:'HDY1',date:'Feb 16',owner:'Brandon',action:'Get Charles badge access, follow up with station today',status:'pending'},
+            {station:'HDY1',date:'Feb 16',owner:'Ash',action:'Share Charles contact info with DSP fleet managers',status:'pending'},
+            {station:'HDY1',date:'Feb 16',owner:'Ash',action:'Continue daily schedule updates in Chime',status:'pending'},
+            {station:'HDY1',date:'Feb 16',owner:'Ash',action:'Review DOT inspection training with Charles',status:'pending'},
+            {station:'HDY1',date:'Feb 16',owner:'Brooke',action:'Send escalation path contacts by EOD',status:'pending'},
+            {station:'HDY1',date:'Feb 16',owner:'Brooke',action:'Formalize SOP document',status:'pending'},
+            {station:'HDY1',date:'Feb 16',owner:'DSP teams',action:'Audit daily schedules, prioritize WOs, tag team in Chime',status:'pending'},
+            {station:'HDY1',date:'Feb 16',owner:'Drew',action:'Provide FIM details for DOT inspection incident',status:'pending'},
+            {station:'HCL2/HCT2',date:'Feb 25',owner:'Kathy',action:'Provide Box access list for personnel needing platform access',status:'pending'},
+            {station:'HCL2/HCT2',date:'Feb 25',owner:'Ash',action:'Deliver HCL2 burn-down plan within one hour via email',status:'pending'},
+            {station:'HCL2/HCT2',date:'Feb 25',owner:'Ash',action:'Send HCL2 technician schedule and contact info (similar to HCT2)',status:'pending'},
+            {station:'HCL2/HCT2',date:'Feb 25',owner:'Team',action:'Schedule follow-up meeting for weekly VIN-level reviews',status:'pending'}
         ];
 
         function showTab(tabId){
@@ -483,7 +554,7 @@
             var t=document.getElementById('opportunityTable'),h='';
             var sorted=stationData.slice().filter(function(s){return s.leaked>0}).sort(function(a,b){return b.leaked-a.leaked});
             for(var i=0;i<Math.min(sorted.length,8);i++){var s=sorted[i];
-            var potential=((s.kooner+s.leaked)/(726+594)*100).toFixed(1);
+            var potential=((s.kooner+s.leaked)/(811+679)*100).toFixed(1);
             h+='<tr><td><span class="station-name">'+s.station+'</span></td><td style="color:var(--accent-red)">'+s.leaked+'</td><td>'+s.adoption.toFixed(1)+'%</td><td>'+potential+'% of total</td></tr>';}
             t.innerHTML=h;
         }
@@ -500,8 +571,8 @@
             var t=document.getElementById('stationWeeklyTable'),h='';
             var stations=Object.keys(weeklyByStation).sort(function(a,b){return weeklyByStation[b].total-weeklyByStation[a].total});
             for(var i=0;i<stations.length;i++){var st=stations[i],w=weeklyByStation[st];
-            h+='<tr><td><span class="station-name">'+st+'</span></td><td>'+(w.WK1||'—')+'</td><td>'+(w.WK2||'—')+'</td><td>'+(w.WK3||'—')+'</td><td>'+(w.WK4||'—')+'</td><td>'+(w.WK5||'—')+'</td><td>'+(w.WK6||'—')+'</td><td><strong>'+w.total+'</strong></td></tr>';}
-            h+='<tr style="background:var(--bg-card-hover)"><td><strong>TOTAL</strong></td><td><strong>'+weekTotals.WK1+'</strong></td><td><strong>'+weekTotals.WK2+'</strong></td><td><strong>'+weekTotals.WK3+'</strong></td><td><strong>'+weekTotals.WK4+'</strong></td><td><strong>'+weekTotals.WK5+'</strong></td><td><strong>'+weekTotals.WK6+'</strong></td><td><strong>798</strong></td></tr>';
+            h+='<tr><td><span class="station-name">'+st+'</span></td><td>'+(w.WK1||'—')+'</td><td>'+(w.WK2||'—')+'</td><td>'+(w.WK3||'—')+'</td><td>'+(w.WK4||'—')+'</td><td>'+(w.WK5||'—')+'</td><td>'+(w.WK6||'—')+'</td><td>'+(w.WK7||'—')+'</td><td><strong>'+w.total+'</strong></td></tr>';}
+            h+='<tr style="background:var(--bg-card-hover)"><td><strong>TOTAL</strong></td><td><strong>'+weekTotals.WK1+'</strong></td><td><strong>'+weekTotals.WK2+'</strong></td><td><strong>'+weekTotals.WK3+'</strong></td><td><strong>'+weekTotals.WK4+'</strong></td><td><strong>'+weekTotals.WK5+'</strong></td><td><strong>'+weekTotals.WK6+'</strong></td><td><strong>'+weekTotals.WK7+'</strong></td><td><strong>866</strong></td></tr>';
             t.innerHTML=h;
         }
 
@@ -576,7 +647,7 @@
             
             var daysInMonth = getDaysInMonth(currentMonth, currentYear);
             var firstDay = getFirstDayOfMonth(currentMonth, currentYear);
-            var today = new Date('2026-02-19');
+            var today = new Date('2026-02-26');
             
             // Add empty cells for days before month starts
             for(var i=0;i<firstDay;i++){
@@ -587,7 +658,7 @@
                 var monthStr = (currentMonth+1)<10?'0'+(currentMonth+1):(currentMonth+1);
                 var dayStr = d<10?'0'+d:d;
                 var dateStr = currentYear+'-'+monthStr+'-'+dayStr;
-                var isToday = (currentYear===2026 && currentMonth===1 && d===19);
+                var isToday = (currentYear===2026 && currentMonth===1 && d===13);
                 var dayEvents = calendarEvents.filter(function(e){return e.date===dateStr});
                 
                 h+='<div class="calendar-day'+(isToday?' today':'')+'">';
@@ -655,7 +726,7 @@
 
         function populateEventList(){
             var list=document.getElementById('eventList');
-            var today=new Date('2026-02-19');
+            var today=new Date('2026-02-26');
             var upcoming=calendarEvents.filter(function(e){return new Date(e.date)>=today}).sort(function(a,b){return new Date(a.date)-new Date(b.date)});
             var h='';
             if(upcoming.length===0){
@@ -672,7 +743,7 @@
 
         function populatePastEventList(){
             var list=document.getElementById('pastEventList');
-            var today=new Date('2026-02-19');
+            var today=new Date('2026-02-26');
             var past=calendarEvents.filter(function(e){return new Date(e.date)<today}).sort(function(a,b){return new Date(b.date)-new Date(a.date)});
             var h='';
             if(past.length===0){
@@ -692,7 +763,7 @@
         function populateRoundtableActions(){
             var container=document.getElementById('roundtableActions');
             var h='';
-            var stations=['HMS2','HCL2','HPD1'];
+            var stations=['HMS2','HCL2','HPD1','HDY1','HCL2/HCT2'];
             for(var s=0;s<stations.length;s++){
                 var station=stations[s];
                 var stationActions=roundtableActions.filter(function(a){return a.station===station});
@@ -713,7 +784,7 @@
             
             new Chart(document.getElementById('weeklyBarChart'),{
                 type:'bar',
-                data:{labels:['WK1','WK2','WK3','WK4','WK5','WK6'],datasets:[{label:'Kooner WOs',data:[58,140,140,159,153,148],backgroundColor:'rgba(0,255,136,0.7)',borderRadius:4}]},
+                data:{labels:['WK1','WK2','WK3','WK4','WK5','WK6','WK7'],datasets:[{label:'Kooner WOs',data:[48,132,125,156,139,142,62],backgroundColor:'rgba(0,255,136,0.7)',borderRadius:4}]},
                 options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a'}}},scales:{y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},x:{grid:{display:false},ticks:{color:'#8b8b9a'}}}}
             });
 
@@ -724,11 +795,11 @@
                 options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,max:100,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a',callback:function(v){return v+'%'}}},y:{grid:{display:false},ticks:{color:'#8b8b9a'}}}}
             });
 
-            var weekLabels=['WK1','WK2','WK3','WK4','WK5','WK6'];
-            var topStations=['HDT3','HLA2','HHO3','HTP2','HMK4','HCL2','HDY1','HAU1'];
+            var weekLabels=['WK1','WK2','WK3','WK4','WK5','WK6','WK7'];
+            var topStations=['HLA2','HDT3','HHO3','HTP2','HCL2','HDY1','HAU1','HSL1'];
             var datasets=topStations.map(function(st,i){
                 var w=weeklyByStation[st];
-                return{label:st,data:[w.WK1||0,w.WK2||0,w.WK3||0,w.WK4||0,w.WK5||0,w.WK6||0],backgroundColor:colors[i],borderRadius:2};
+                return{label:st,data:[w.WK1||0,w.WK2||0,w.WK3||0,w.WK4||0,w.WK5||0,w.WK6||0,w.WK7||0],backgroundColor:colors[i],borderRadius:2};
             });
             new Chart(document.getElementById('stationWeeklyChart'),{type:'bar',data:{labels:weekLabels,datasets:datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a'},position:'right'}},scales:{y:{stacked:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},x:{stacked:true,grid:{display:false},ticks:{color:'#8b8b9a'}}}}});
 
