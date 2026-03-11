@@ -896,6 +896,33 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
     c.innerHTML = h || '<p class="modal-empty">No past events with notes yet</p>';
 }
 
+
+        function populateWk10LeakTable(){
+            var t = document.getElementById('wk10LeakBody');
+            if(!t) return;
+            var sorted = stationData.slice().sort(function(a,b){ return (wk10Leaked[b.station]||0) - (wk10Leaked[a.station]||0); });
+            var h = '';
+            for(var i = 0; i < sorted.length; i++){
+                var s = sorted[i];
+                var wk10 = wk10Leaked[s.station] || 0;
+                var topDSP = wk10TopDSP[s.station] || '—';
+                var signal = s.adoption >= 85 ? '<span class="status-pill on-target"><span class="status-dot"></span>On Target</span>'
+                           : wk10 === 0 ? '<span style="color:var(--accent-green);font-size:0.8rem">✓ No leakage</span>'
+                           : wk10 <= 3 ? '<span style="color:var(--accent-yellow);font-size:0.8rem">↔ Stable</span>'
+                           : '<span style="color:var(--accent-red);font-size:0.8rem">↑ Leaking</span>';
+                h += '<tr>';
+                h += '<td><span class="station-name">' + s.station + '</span></td>';
+                h += '<td style="color:' + (wk10 > 0 ? 'var(--accent-red)' : 'var(--accent-green)') + '">' + wk10 + '</td>';
+                h += '<td style="color:var(--text-secondary);font-size:0.85rem">' + topDSP + '</td>';
+                h += '<td>' + s.leaked + '</td>';
+                h += '<td>' + s.kooner + '</td>';
+                h += '<td style="color:' + (s.adoption >= 85 ? 'var(--accent-green)' : 'var(--accent-red)') + '">' + s.adoption.toFixed(1) + '%</td>';
+                h += '<td>' + signal + '</td>';
+                h += '</tr>';
+            }
+            t.innerHTML = h;
+        }
+
         document.addEventListener('DOMContentLoaded',function(){
             populateStationQuickTable();
             populateOpportunityTable();
