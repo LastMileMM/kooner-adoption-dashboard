@@ -1875,7 +1875,14 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
 }
 
 function calClick(el){
-    openEventModal(el.getAttribute('data-date'), parseInt(el.getAttribute('data-idx')));
+    var date = el.getAttribute('data-date');
+    var idx  = parseInt(el.getAttribute('data-idx'));
+    if(adminMode){
+        event.stopPropagation();
+        adminOpenEditModal(date, idx);
+        return;
+    }
+    openEventModal(date, idx);
 }
 
 function openEventModal(date, idx){
@@ -2059,18 +2066,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
         }
 
         // Override calClick to handle admin mode
-        var _origCalClick = typeof calClick !== 'undefined' ? calClick : null;
-        function calClick(date, idx){
-            if(adminMode){
-                if(idx !== undefined && idx !== null){
-                    adminOpenEditModal(date, idx);
-                } else {
-                    adminOpenAddModal(date);
-                }
-                return;
-            }
-            openEventModal(date, idx);
-        }
+        
 
         function adminOpenAddModal(date){
             document.getElementById('adminModalTitle').textContent = 'Add Event';
