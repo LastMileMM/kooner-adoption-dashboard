@@ -1991,9 +1991,14 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
                             if(idx>=0) calendarEvents[idx] = m;
                         });
                     }
-                    // Add new events
+                    // Add new events — skip any that already exist in base array (dedup by date+title)
                     if(edits.added){
-                        edits.added.forEach(function(a){ calendarEvents.push(a); });
+                        edits.added.forEach(function(a){
+                            var alreadyExists = calendarEvents.some(function(e){
+                                return e.date === a.date && e.title === a.title;
+                            });
+                            if(!alreadyExists) calendarEvents.push(a);
+                        });
                     }
                 }
             } catch(e){}
