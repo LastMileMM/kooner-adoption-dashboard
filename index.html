@@ -15,7 +15,7 @@
         .header-left h1{font-size:2.5rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:8px;background:linear-gradient(135deg,#fff 0%,#8b8b9a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
         .header-left .subtitle{color:var(--text-secondary);font-size:1rem;display:flex;align-items:center;gap:12px}
         .target-badge{background:linear-gradient(135deg,var(--accent-green),#00cc6a);color:#000;padding:4px 12px;border-radius:20px;font-weight:600;font-size:0.85rem}
-        .header-right{text-align:right}.last-updated{color:var(--text-muted);font-size:0.85rem;font-family:'JetBrains Mono',monospace}.data-period{color:var(--text-secondary);font-size:0.9rem;margin-top:4px}
+        .header-right{text-align:right}.last-updated{color:var(--text-muted);font-size:0.85rem;font-family:monospace}.data-period{color:var(--text-secondary);font-size:0.9rem;margin-top:4px}
         .nav-tabs{display:flex;gap:8px;margin-bottom:24px;background:var(--bg-card);padding:8px;border-radius:12px;width:fit-content;flex-wrap:wrap}
         .nav-tab{padding:10px 20px;border-radius:8px;font-size:0.9rem;font-weight:500;cursor:pointer;transition:all 0.2s ease;background:transparent;border:none;color:var(--text-secondary)}
         .nav-tab:hover{background:var(--bg-card-hover);color:var(--text-primary)}.nav-tab.active{background:var(--accent-blue);color:white}
@@ -27,7 +27,7 @@
         .kpi-card.warning::before{background:linear-gradient(90deg,var(--accent-orange),#ff6b00)}
         .kpi-card.danger::before{background:linear-gradient(90deg,var(--accent-red),#ff2f43)}
         .kpi-label{font-size:0.85rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px}
-        .kpi-value{font-size:2.2rem;font-weight:700;font-family:'JetBrains Mono',monospace;line-height:1}
+        .kpi-value{font-size:2.2rem;font-weight:700;font-family:monospace;line-height:1}
         .kpi-value.green{color:var(--accent-green)}.kpi-value.red{color:var(--accent-red)}.kpi-value.orange{color:var(--accent-orange)}.kpi-value.yellow{color:var(--accent-yellow)}
         .kpi-subtext{font-size:0.8rem;color:var(--text-muted);margin-top:8px}
         .kpi-trend{display:inline-flex;align-items:center;gap:4px;font-size:0.85rem;margin-top:8px;padding:2px 8px;border-radius:4px}
@@ -36,7 +36,7 @@
         .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:16px;padding:24px}
         .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
         .card-title{font-size:1.1rem;font-weight:600}
-        .card-badge{font-size:0.75rem;padding:4px 10px;border-radius:12px;font-family:'JetBrains Mono',monospace}
+        .card-badge{font-size:0.75rem;padding:4px 10px;border-radius:12px;font-family:monospace}
         .badge-stations{background:rgba(55,66,250,0.2);color:var(--accent-blue)}
         .badge-dsps{background:rgba(168,85,247,0.2);color:var(--accent-purple)}
         .badge-trends{background:rgba(0,212,255,0.2);color:var(--accent-cyan)}
@@ -46,7 +46,7 @@
         .data-table th{text-align:left;padding:12px 8px;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted);border-bottom:1px solid var(--border-color);background:var(--bg-card)}
         .data-table td{padding:14px 8px;font-size:0.9rem;border-bottom:1px solid var(--border-color)}
         .data-table tr:hover td{background:rgba(55,66,250,0.05)}
-        .station-name{font-weight:600;font-family:'JetBrains Mono',monospace}
+        .station-name{font-weight:600;font-family:monospace}
         .status-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-size:0.75rem;font-weight:500}
         .status-pill.on-target{background:rgba(0,255,136,0.15);color:var(--accent-green)}
         .status-pill.below-target{background:rgba(255,71,87,0.15);color:var(--accent-red)}
@@ -57,24 +57,24 @@
         .priority-medium{background:rgba(55,66,250,0.2);color:var(--accent-blue)}
         .priority-low{background:rgba(139,139,154,0.2);color:var(--text-secondary)}
         .priority-on-target{background:rgba(0,255,136,0.2);color:var(--accent-green)}
-        .week-cell{font-family:'JetBrains Mono',monospace;font-size:0.8rem;text-align:center;min-width:55px;padding:6px 4px!important}
+        .week-cell{font-family:monospace;font-size:0.8rem;text-align:center;min-width:55px;padding:6px 4px!important}
         .week-cell.high{color:var(--accent-green);background:rgba(0,255,136,0.1)}
         .week-cell.medium{color:var(--accent-orange);background:rgba(255,165,2,0.1)}
         .week-cell.low{color:var(--accent-red);background:rgba(255,71,87,0.1)}
         .week-cell.none{color:var(--text-muted)}
-        .trend-arrow{display:inline-flex;align-items:center;gap:4px;font-size:0.85rem;font-family:'JetBrains Mono',monospace}
+        .trend-arrow{display:inline-flex;align-items:center;gap:4px;font-size:0.85rem;font-family:monospace}
         .trend-arrow.up{color:var(--accent-green)}.trend-arrow.down{color:var(--accent-red)}.trend-arrow.flat{color:var(--text-muted)}
         .full-width{grid-column:1/-1}
         .action-list{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
         .action-card{background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:12px;padding:20px}
         .action-card.critical{border-left:3px solid var(--accent-red)}.action-card.high{border-left:3px solid var(--accent-orange)}
         .action-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
-        .action-dsp{font-size:1.5rem;font-weight:700;font-family:'JetBrains Mono',monospace}
-        .action-station{background:var(--bg-dark);padding:4px 10px;border-radius:8px;font-size:0.8rem;font-family:'JetBrains Mono',monospace;color:var(--text-secondary)}
+        .action-dsp{font-size:1.5rem;font-weight:700;font-family:monospace}
+        .action-station{background:var(--bg-dark);padding:4px 10px;border-radius:8px;font-size:0.8rem;font-family:monospace;color:var(--text-secondary)}
         .action-stats{display:flex;gap:16px;margin-bottom:12px}
         .action-stat{display:flex;flex-direction:column}
         .action-stat-label{font-size:0.7rem;color:var(--text-muted);text-transform:uppercase}
-        .action-stat-value{font-size:1.1rem;font-weight:600;font-family:'JetBrains Mono',monospace}
+        .action-stat-value{font-size:1.1rem;font-weight:600;font-family:monospace}
         .action-stat-value.red{color:var(--accent-red)}.action-stat-value.orange{color:var(--accent-orange)}
         .action-location{font-size:0.85rem;color:var(--text-secondary);padding-top:12px;border-top:1px solid var(--border-color)}
         .chart-container{position:relative;height:300px;width:100%}.chart-container.tall{height:400px}
@@ -82,7 +82,7 @@
         .filter-btn{padding:6px 14px;border-radius:20px;font-size:0.8rem;font-weight:500;cursor:pointer;background:var(--bg-card-hover);border:1px solid var(--border-color);color:var(--text-secondary)}
         .filter-btn:hover,.filter-btn.active{background:var(--accent-blue);border-color:var(--accent-blue);color:white}
         .table-scroll{max-height:400px;overflow-y:auto}
-        .wow-change{font-family:'JetBrains Mono',monospace;font-size:0.8rem;padding:2px 6px;border-radius:4px}
+        .wow-change{font-family:monospace;font-size:0.8rem;padding:2px 6px;border-radius:4px}
         .wow-change.positive{color:var(--accent-green);background:rgba(0,255,136,0.1)}
         .wow-change.negative{color:var(--accent-red);background:rgba(255,71,87,0.1)}
         .wow-change.neutral{color:var(--text-muted)}
@@ -92,7 +92,7 @@
         .insight-card.warning{border-left-color:var(--accent-orange)}.insight-card.info{border-left-color:var(--accent-cyan)}
         .insight-icon{font-size:1.5rem;margin-bottom:10px}.insight-title{font-size:1rem;font-weight:600;margin-bottom:8px;color:var(--text-primary)}
         .insight-text{font-size:0.9rem;color:var(--text-secondary);line-height:1.5}
-        .insight-metric{display:inline-block;font-family:'JetBrains Mono',monospace;font-weight:600;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,0.1)}
+        .insight-metric{display:inline-block;font-family:monospace;font-weight:600;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,0.1)}
         .insight-metric.green{color:var(--accent-green)}.insight-metric.red{color:var(--accent-red)}.insight-metric.orange{color:var(--accent-orange)}
         .executive-summary{background:linear-gradient(135deg,rgba(55,66,250,0.1),rgba(168,85,247,0.1));border:1px solid var(--accent-blue);border-radius:12px;padding:24px;margin-bottom:24px}
         .executive-summary h3{font-size:1.2rem;margin-bottom:16px;color:var(--accent-cyan)}
@@ -102,7 +102,7 @@
         .next-steps{background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:12px;padding:20px}
         .next-steps h4{font-size:1rem;margin-bottom:12px;color:var(--accent-orange)}
         .next-steps ol{padding-left:20px;color:var(--text-secondary)}.next-steps li{padding:6px 0;font-size:0.9rem}
-        .sentiment-score{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem}
+        .sentiment-score{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;font-family:monospace;font-weight:700;font-size:1rem}
         .sentiment-score.score-5{background:rgba(0,255,136,0.2);color:var(--accent-green)}
         .sentiment-score.score-4{background:rgba(0,212,255,0.2);color:var(--accent-cyan)}
         .sentiment-score.score-3{background:rgba(255,217,61,0.2);color:var(--accent-yellow)}
@@ -114,7 +114,7 @@
         .feedback-scores{display:flex;gap:8px}
         .score-mini{display:flex;flex-direction:column;align-items:center;gap:2px}
         .score-mini-label{font-size:0.6rem;color:var(--text-muted);text-transform:uppercase}
-        .score-mini-value{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:0.9rem}
+        .score-mini-value{font-family:monospace;font-weight:600;font-size:0.9rem}
         .feedback-text{font-size:0.9rem;color:var(--text-secondary);line-height:1.6;font-style:italic}
         .feedback-text.issue{border-left:3px solid var(--accent-red);padding-left:12px;margin-bottom:12px}
         .feedback-text.suggestion{border-left:3px solid var(--accent-cyan);padding-left:12px}
@@ -122,11 +122,11 @@
         .correlation-card h4{color:var(--accent-yellow);margin-bottom:12px}
         .correlation-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-color);flex-wrap:wrap;gap:10px}
         .correlation-item:last-child{border-bottom:none}
-        .correlation-dsp{font-family:'JetBrains Mono',monospace;font-weight:600}
+        .correlation-dsp{font-family:monospace;font-weight:600}
         .correlation-metrics{display:flex;gap:20px}
         .correlation-metric{display:flex;flex-direction:column;align-items:center}
         .correlation-label{font-size:0.7rem;color:var(--text-muted)}
-        .correlation-value{font-family:'JetBrains Mono',monospace;font-weight:600}
+        .correlation-value{font-family:monospace;font-weight:600}
         @media(max-width:1200px){.kpi-row{grid-template-columns:repeat(3,1fr)}.action-list{grid-template-columns:repeat(2,1fr)}.insights-grid{grid-template-columns:1fr}}
         @media(max-width:900px){.main-grid{grid-template-columns:1fr}.kpi-row{grid-template-columns:repeat(2,1fr)}.action-list{grid-template-columns:1fr}}
         @media(max-width:600px){.header{flex-direction:column;gap:16px}.kpi-row{grid-template-columns:1fr}.nav-tabs{flex-wrap:wrap}}
@@ -139,14 +139,14 @@
         .calendar-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
         .calendar-nav-btn{background:var(--bg-card-hover);border:1px solid var(--border-color);color:var(--text-secondary);padding:8px 18px;border-radius:8px;cursor:pointer;font-size:0.85rem;font-family:'Space Grotesk',sans-serif;transition:all 0.15s ease}
         .calendar-nav-btn:hover{background:var(--accent-blue);color:white;border-color:var(--accent-blue)}
-        .calendar-month-title{font-size:1.3rem;font-weight:700;color:var(--text-primary);font-family:'JetBrains Mono',monospace}
+        .calendar-month-title{font-size:1.3rem;font-weight:700;color:var(--text-primary);font-family:monospace}
         .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
         .calendar-header,.cal-header-cell{padding:8px;text-align:center;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;font-weight:600;letter-spacing:0.05em}
         .calendar-day{min-height:90px;background:var(--bg-card-hover);border-radius:8px;padding:6px;border:1px solid transparent;transition:border-color 0.15s ease}
         .calendar-day:hover{border-color:var(--border-color)}
         .calendar-day.today,.calendar-day.cal-today{border-color:var(--accent-blue);background:rgba(55,66,250,0.1)}
         .calendar-day.other-month{opacity:0.25}
-        .calendar-date,.cal-date-num{font-size:0.8rem;font-weight:600;margin-bottom:4px;font-family:'JetBrains Mono',monospace}
+        .calendar-date,.cal-date-num{font-size:0.8rem;font-weight:600;margin-bottom:4px;font-family:monospace}
         .calendar-event{font-size:0.62rem;padding:2px 5px;border-radius:4px;margin-bottom:2px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity 0.1s ease}
         .calendar-event:hover{opacity:0.75}
         .calendar-event.roundtable{background:rgba(168,85,247,0.3);color:var(--accent-purple)}
@@ -164,10 +164,10 @@
         .event-note-card.type-deadline{border-left-color:var(--accent-red)}
         .event-note-card.type-newsletter{border-left-color:#00c896}
         .event-title{font-weight:600;font-size:0.9rem;margin-bottom:2px}
-        .event-date-meta{font-size:0.75rem;color:var(--text-muted);margin-bottom:6px;font-family:'JetBrains Mono',monospace}
+        .event-date-meta{font-size:0.75rem;color:var(--text-muted);margin-bottom:6px;font-family:monospace}
         .event-summary-text{font-size:0.8rem;color:var(--text-secondary);line-height:1.45}
         .section-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:10px;font-weight:600}
-        .action-count,.cal-action-count{display:inline-block;background:rgba(55,66,250,0.2);color:var(--accent-blue);font-size:0.65rem;padding:1px 6px;border-radius:8px;margin-left:6px;font-family:'JetBrains Mono',monospace;font-weight:600}
+        .action-count,.cal-action-count{display:inline-block;background:rgba(55,66,250,0.2);color:var(--accent-blue);font-size:0.65rem;padding:1px 6px;border-radius:8px;margin-left:6px;font-family:monospace;font-weight:600}
         .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:1000;justify-content:center;align-items:center;backdrop-filter:blur(4px)}
         .modal-overlay.active{display:flex}
         .modal-content{background:var(--bg-card);border:1px solid var(--border-color);border-radius:16px;padding:32px;max-width:580px;width:90%;max-height:80vh;overflow-y:auto;position:relative;animation:modalIn 0.2s ease}
@@ -215,11 +215,11 @@
 
         <div id="overview" class="tab-content active">
             <div class="kpi-row">
-                <div class="kpi-card"><div class="kpi-label">Total Kooner WOs</div><div class="kpi-value green">1,205</div><div class="kpi-subtext">WK53 through WK10</div></div>
-                <div class="kpi-card warning"><div class="kpi-label">Total Leaked WOs</div><div class="kpi-value red">725</div><div class="kpi-subtext">Sent to other vendors</div></div>
-                <div class="kpi-card danger"><div class="kpi-label">Current Adoption</div><div class="kpi-value red">62.4%</div><div class="kpi-subtext">22.6% gap to target</div></div>
+                <div class="kpi-card"><div class="kpi-label">Total Kooner WOs</div><div class="kpi-value green">1,571</div><div class="kpi-subtext">WK1 through WK10 (all weeks)</div></div>
+                <div class="kpi-card warning"><div class="kpi-label">Total Leaked WOs</div><div class="kpi-value red">977</div><div class="kpi-subtext">Sent to other vendors</div></div>
+                <div class="kpi-card danger"><div class="kpi-label">Current Adoption</div><div class="kpi-value red">61.7%</div><div class="kpi-subtext">23.3% gap to target</div></div>
                 <div class="kpi-card success"><div class="kpi-label">On Target Stations</div><div class="kpi-value green">3</div><div class="kpi-subtext">of 13 stations ≥85%</div></div>
-                <div class="kpi-card"><div class="kpi-label">Total WOs</div><div class="kpi-value">1,930</div><div class="kpi-subtext">Across all 13 stations</div></div>
+                <div class="kpi-card"><div class="kpi-label">Total WOs</div><div class="kpi-value">2,548</div><div class="kpi-subtext">Across all 13 stations</div></div>
             </div>
             <div class="main-grid">
                 <div class="card"><div class="card-header"><div class="card-title">Weekly Kooner Volume</div><span class="card-badge badge-trends">6 WEEKS</span></div><div class="chart-container"><canvas id="weeklyBarChart"></canvas></div></div>
@@ -236,7 +236,7 @@
                     <div class="executive-summary">
                         <h3>🎯 Key Takeaways</h3>
                         <ul>
-                            <li><strong>Overall adoption at 62.4%</strong> — 22.6% below the 85% target. 1,205 Kooner WOs vs 725 leaked (WK53–WK10).</li>
+                            <li><strong>Overall adoption at 62.4%</strong> — 22.6% below the 85% target. 1,205 Kooner WOs vs 977 leaked (WK1–WK10).</li>
                             <li><strong>4 stations on target:</strong> HMK4 (100%), HCT2 (92.5%), HSL1 (91.2%), HTP2 (86.0%)</li>
                             <li><strong>HLA2 is the largest leak source:</strong> 264 total leaked (36%), 14 in WK10 — ARMA accounts for 11.</li>
                             <li><strong>HDT3 improving:</strong> 141 leaked, 58.7% adoption. SFRM is the primary leaking DSP (8 WOs in WK10).</li>
@@ -264,7 +264,7 @@
                         <tbody id="wk10LeakBody"></tbody>
                     </table>
                 </div>
-<div class="card full-width"><div class="card-header"><div class="card-title">Station Weekly Breakdown</div></div><div class="table-scroll"><table class="data-table"><thead><tr><th>Station</th><th>WK53</th><th>WK1</th><th>WK2</th><th>WK3</th><th>WK4</th><th>WK5</th><th>WK10</th><th>Total</th></tr></thead><tbody id="stationWeeklyTable"></tbody></table></div></div>
+<div class="card full-width"><div class="card-header"><div class="card-title">Station Weekly Breakdown</div></div><div class="table-scroll"><table class="data-table"><thead><tr><th>Station</th><th>WK6</th><th>WK7</th><th>WK8</th><th>WK9</th><th>WK10</th><th>Total</th></tr></thead><tbody id="stationWeeklyTable"></tbody></table></div></div>
             </div>
         </div>
 
@@ -304,9 +304,20 @@
         </div>
 
         <div id="actions" class="tab-content">
+            <div class="kpi-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:24px">
+                <div class="kpi-card danger"><div class="kpi-label">Critical Priority</div><div class="kpi-value red" id="actionCountCritical">—</div><div class="kpi-subtext">Stations needing immediate action</div></div>
+                <div class="kpi-card warning"><div class="kpi-label">High Priority</div><div class="kpi-value orange" id="actionCountHigh">—</div><div class="kpi-subtext">Significant leakage + sentiment gap</div></div>
+                <div class="kpi-card"><div class="kpi-label">Monitor</div><div class="kpi-value" id="actionCountMedium">—</div><div class="kpi-subtext">Near target, watch closely</div></div>
+                <div class="kpi-card success"><div class="kpi-label">On Track</div><div class="kpi-value green" id="actionCountGood">—</div><div class="kpi-subtext">At or above 85% target</div></div>
+            </div>
             <div class="main-grid">
-                <div class="card full-width"><div class="card-header"><div class="card-title">🎯 Priority Actions by Leaked Volume</div></div><div class="action-list" id="actionList"></div></div>
-                <div class="card full-width"><div class="card-header"><div class="card-title">📋 Station Action Plan</div></div><table class="data-table"><thead><tr><th>Priority</th><th>Station</th><th>Adoption</th><th>Leaked</th><th>Impact</th><th>Action</th></tr></thead><tbody id="actionTable"></tbody></table></div>
+                <div class="card full-width">
+                    <div class="card-header">
+                        <div class="card-title">🎯 Station Priority Matrix</div>
+                        <span class="card-badge" style="background:rgba(168,85,247,0.2);color:var(--accent-purple)">COMPOSITE SCORE: ADOPTION + LEAKAGE + SENTIMENT</span>
+                    </div>
+                    <div id="actionMatrixList"></div>
+                </div>
             </div>
         </div>
 
@@ -352,38 +363,38 @@
     <script>
         // UPDATED DATA from new Kooner report
         var stationData = [
-            {station:'HMK4', location:'Milwaukee, WI',      kooner:78,  leaked:0,   adoption:100.0},
-            {station:'HSL1', location:'Salt Lake City, UT', kooner:31,  leaked:3,   adoption:91.2},
-            {station:'HCT2', location:'Chattanooga, TN',    kooner:62,  leaked:5,   adoption:92.5},
-            {station:'HTP2', location:'Gibsonton, FL',      kooner:135, leaked:22,  adoption:86.0},
-            {station:'HDY1', location:'Clayton, OH',        kooner:87,  leaked:18,  adoption:82.9},
-            {station:'HHO3', location:'Porter, TX',         kooner:116, leaked:31,  adoption:78.9},
-            {station:'HCL2', location:'Charlotte, NC',      kooner:102, leaked:66,  adoption:60.7},
-            {station:'HDT3', location:'Romulus, MI',        kooner:200, leaked:141, adoption:58.7},
-            {station:'HAU1', location:'Austin, TX',         kooner:93,  leaked:77,  adoption:54.7},
-            {station:'HMS2', location:'Lakeville, MN',      kooner:40,  leaked:39,  adoption:50.6},
-            {station:'HIN3', location:'South Bend, IN',     kooner:13,  leaked:19,  adoption:40.6},
-            {station:'HLA2', location:'Santa Clarita, CA',  kooner:244, leaked:264, adoption:48.0},
-            {station:'HPD1', location:'Portland, OR',       kooner:4,   leaked:40,  adoption:9.1}
+            {station:'HMK4', location:'Milwaukee, WI',      kooner:82,  leaked:0,   adoption:100.0},
+            {station:'HCT2', location:'Chattanooga, TN',    kooner:69,  leaked:8,   adoption:89.6},
+            {station:'HSL1', location:'Salt Lake City, UT', kooner:58,  leaked:6,   adoption:90.6},
+            {station:'HTP2', location:'Gibsonton, FL',      kooner:171, leaked:31,  adoption:84.7},
+            {station:'HHO3', location:'Porter, TX',         kooner:140, leaked:37,  adoption:79.1},
+            {station:'HDY1', location:'Clayton, OH',        kooner:109, leaked:29,  adoption:79.0},
+            {station:'HCL2', location:'Charlotte, NC',      kooner:163, leaked:93,  adoption:63.7},
+            {station:'HDT3', location:'Romulus, MI',        kooner:244, leaked:181, adoption:57.4},
+            {station:'HAU1', location:'Austin, TX',         kooner:124, leaked:97,  adoption:56.1},
+            {station:'HMS2', location:'Lakeville, MN',      kooner:41,  leaked:54,  adoption:43.2},
+            {station:'HIN3', location:'South Bend, IN',     kooner:19,  leaked:29,  adoption:39.6},
+            {station:'HLA2', location:'Santa Clarita, CA',  kooner:347, leaked:361, adoption:49.0},
+            {station:'HPD1', location:'Portland, OR',       kooner:4,   leaked:51,  adoption:7.3}
         ];
 
         var weeklyByStation = {
-            'HAU1':{WK53:2, WK1:6,  WK2:12, WK3:10, WK4:14, WK5:3,  WK9:16, WK10:30, total:93},
-            'HCL2':{WK53:1, WK1:1,  WK2:5,  WK3:29, WK4:8,  WK5:10, WK9:20, WK10:28, total:102},
-            'HCT2':{WK53:3, WK1:0,  WK2:4,  WK3:5,  WK4:7,  WK5:2,  WK9:7,  WK10:35, total:62},
-            'HDT3':{WK53:18,WK1:9,  WK2:15, WK3:17, WK4:26, WK5:44, WK9:14, WK10:57, total:200},
-            'HDY1':{WK53:1, WK1:9,  WK2:20, WK3:10, WK4:6,  WK5:0,  WK9:13, WK10:25, total:87},
-            'HHO3':{WK53:9, WK1:6,  WK2:22, WK3:13, WK4:19, WK5:15, WK9:13, WK10:19, total:116},
-            'HIN3':{WK53:1, WK1:1,  WK2:5,  WK3:4,  WK4:2,  WK5:0,  WK9:2,  WK10:0,  total:13},
-            'HLA2':{WK53:17,WK1:9,  WK2:20, WK3:23, WK4:42, WK5:41, WK9:43, WK10:49, total:244},
-            'HMK4':{WK53:7, WK1:10, WK2:8,  WK3:15, WK4:3,  WK5:14, WK9:7,  WK10:14, total:78},
-            'HMS2':{WK53:2, WK1:2,  WK2:6,  WK3:5,  WK4:11, WK5:9,  WK9:1,  WK10:4,  total:40},
-            'HPD1':{WK53:0, WK1:0,  WK2:0,  WK3:0,  WK4:1,  WK5:0,  WK9:0,  WK10:3,  total:4},
-            'HSL1':{WK53:0, WK1:1,  WK2:4,  WK3:5,  WK4:5,  WK5:5,  WK9:7,  WK10:4,  total:31},
-            'HTP2':{WK53:13,WK1:3,  WK2:20, WK3:8,  WK4:16, WK5:7,  WK9:10, WK10:58, total:135}
+            'HAU1':{WK53:2, WK1:6,  WK2:12, WK3:10, WK4:14, WK5:3,  WK6:6,  WK7:25, WK8:12, WK9:16, WK10:30, total:124},
+            'HCL2':{WK53:1, WK1:1,  WK2:5,  WK3:29, WK4:8,  WK5:10, WK6:16, WK7:22, WK8:32, WK9:20, WK10:28, total:163},
+            'HCT2':{WK53:3, WK1:0,  WK2:4,  WK3:5,  WK4:7,  WK5:2,  WK6:4,  WK7:1,  WK8:4,  WK9:7,  WK10:35, total:69},
+            'HDT3':{WK53:18,WK1:9,  WK2:15, WK3:17, WK4:26, WK5:44, WK6:24, WK7:21, WK8:35, WK9:14, WK10:57, total:244},
+            'HDY1':{WK53:1, WK1:9,  WK2:20, WK3:10, WK4:6,  WK5:0,  WK6:5,  WK7:6,  WK8:9,  WK9:13, WK10:25, total:109},
+            'HHO3':{WK53:9, WK1:6,  WK2:22, WK3:13, WK4:19, WK5:15, WK6:14, WK7:18, WK8:13, WK9:13, WK10:19, total:140},
+            'HIN3':{WK53:1, WK1:1,  WK2:5,  WK3:4,  WK4:2,  WK5:0,  WK6:5,  WK7:0,  WK8:1,  WK9:2,  WK10:0,  total:19},
+            'HLA2':{WK53:17,WK1:9,  WK2:20, WK3:23, WK4:42, WK5:41, WK6:38, WK7:42, WK8:41, WK9:43, WK10:49, total:347},
+            'HMK4':{WK53:7, WK1:10, WK2:8,  WK3:15, WK4:3,  WK5:14, WK6:2,  WK7:3,  WK8:13, WK9:7,  WK10:14, total:82},
+            'HMS2':{WK53:2, WK1:2,  WK2:6,  WK3:5,  WK4:11, WK5:9,  WK6:2,  WK7:1,  WK8:8,  WK9:1,  WK10:4,  total:41},
+            'HPD1':{WK53:0, WK1:0,  WK2:0,  WK3:0,  WK4:1,  WK5:0,  WK6:0,  WK7:0,  WK8:0,  WK9:0,  WK10:3,  total:4},
+            'HSL1':{WK53:0, WK1:1,  WK2:4,  WK3:5,  WK4:5,  WK5:5,  WK6:10, WK7:8,  WK8:9,  WK9:7,  WK10:4,  total:58},
+            'HTP2':{WK53:13,WK1:3,  WK2:20, WK3:8,  WK4:16, WK5:7,  WK6:22, WK7:10, WK8:17, WK9:10, WK10:58, total:171}
         };
 
-        var weekTotals = {WK53:77,WK1:58,WK2:140,WK3:140,WK4:159,WK5:153,WK9:153,WK10:326};
+        var weekTotals = {WK53:77,WK1:58,WK2:140,WK3:140,WK4:159,WK5:153,WK6:148,WK7:157,WK8:194,WK9:153,WK10:326};
 
         var wk10Leaked = {
             HLA2:14, HDT3:8, HPD1:6, HMS2:6, HCL2:5, HAU1:4,
@@ -479,8 +490,8 @@
             var t=document.getElementById('stationWeeklyTable'),h='';
             var stations=Object.keys(weeklyByStation).sort(function(a,b){return weeklyByStation[b].total-weeklyByStation[a].total});
             for(var i=0;i<stations.length;i++){var st=stations[i],w=weeklyByStation[st];
-            h+='<tr><td><span class="station-name">'+st+'</span></td><td>'+(w.WK53||'—')+'</td><td>'+(w.WK1||'—')+'</td><td>'+(w.WK2||'—')+'</td><td>'+(w.WK3||'—')+'</td><td>'+(w.WK4||'—')+'</td><td>'+(w.WK5||'—')+'</td><td>'+(w.WK10||'—')+'</td><td><strong>'+w.total+'</strong></td></tr>';}
-            h+='<tr style="background:var(--bg-card-hover)"><td><strong>TOTAL</strong></td><td><strong>'+weekTotals.WK53+'</strong></td><td><strong>'+weekTotals.WK1+'</strong></td><td><strong>'+weekTotals.WK2+'</strong></td><td><strong>'+weekTotals.WK3+'</strong></td><td><strong>'+weekTotals.WK4+'</strong></td><td><strong>'+weekTotals.WK5+'</strong></td><td><strong>'+weekTotals.WK10+'</strong></td><td><strong>1053</strong></td></tr>';
+            h+='<tr><td><span class="station-name">'+st+'</span></td><td>'+(w.WK6||'—')+'</td><td>'+(w.WK7||'—')+'</td><td>'+(w.WK8||'—')+'</td><td>'+(w.WK9||'—')+'</td><td>'+(w.WK10||'—')+'</td><td><strong>'+w.total+'</strong></td></tr>';}
+            h+='<tr style="background:var(--bg-card-hover)"><td><strong>TOTAL</strong></td><td><strong>'+weekTotals.WK6+'</strong></td><td><strong>'+weekTotals.WK7+'</strong></td><td><strong>'+weekTotals.WK8+'</strong></td><td><strong>'+weekTotals.WK9+'</strong></td><td><strong>'+weekTotals.WK10+'</strong></td><td><strong>1571</strong></td></tr>';
             t.innerHTML=h;
         }
 
@@ -495,25 +506,117 @@
             t.innerHTML=h;
         }
 
-        function populateActionCards(){
-            var c=document.getElementById('actionList'),h='';
-            var sorted=stationData.slice().filter(function(s){return s.leaked>0}).sort(function(a,b){return b.leaked-a.leaked}).slice(0,6);
-            for(var i=0;i<sorted.length;i++){var s=sorted[i];
-            var priority=s.adoption<20?'critical':s.adoption<50?'high':'medium';
-            h+='<div class="action-card '+priority+'"><div class="action-header"><span class="action-dsp">'+s.station+'</span><span class="action-station">'+(s.location||'—')+'</span></div><div class="action-stats"><div class="action-stat"><span class="action-stat-label">Adoption</span><span class="action-stat-value red">'+s.adoption.toFixed(1)+'%</span></div><div class="action-stat"><span class="action-stat-label">Leaked</span><span class="action-stat-value orange">'+s.leaked+'</span></div><div class="action-stat"><span class="action-stat-label">Kooner</span><span class="action-stat-value">'+s.kooner+'</span></div></div></div>';}
-            c.innerHTML=h;
+        function populateActionCards(){/* legacy - replaced by populateActionMatrix */}
+        function populateActionTable(){/* legacy - replaced by populateActionMatrix */}
+
+        function populateActionMatrix(){
+            // Sentiment lookup: station -> {avg, label, responses}
+            var sentMap={};
+            for(var i=0;i<sentimentData.length;i++){
+                var sd=sentimentData[i];
+                var st=sd.station;
+                if(!sentMap[st]){sentMap[st]={total:0,count:0,responses:0};}
+                sentMap[st].total+=sd.avgScore;
+                sentMap[st].count++;
+                sentMap[st].responses+=sd.responses;
+            }
+
+            // WK10 leaked lookup
+            var wk10Map=wk10Leaked||{};
+            var wk08Map=wk08Leaked||{};
+
+            // Top leaking DSP lookup from wk10TopDSP
+            var topDSP=wk10TopDSP||{};
+
+            // Build scored list
+            var totalLeaked=0;
+            for(var i=0;i<stationData.length;i++) totalLeaked+=stationData[i].leaked;
+
+            var scored=stationData.map(function(s){
+                var gap=Math.max(0,85-s.adoption);
+                var leakPct=s.leaked/totalLeaked*100;
+                var sentAvg=sentMap[s.station]?sentMap[s.station].total/sentMap[s.station].count:null;
+                var sentPenalty=sentAvg!=null?(5-sentAvg)*20:15;
+                var score=gap*0.4+leakPct*0.35+sentPenalty*0.25;
+                var wk10l=wk10Map[s.station]||0;
+                var wk8l=wk08Map[s.station]||0;
+                // Trend: compare wk10 to wk08
+                var trend=wk10l===0&&s.adoption>=79?'improving':wk10l>=wk8l&&wk10l>=5?'worsening':'stable';
+                var priority=s.adoption>=85?'on-track':score>=30?'critical':score>=20?'high':score>=8?'monitor':'on-track';
+                return {s:s, score:score, sentAvg:sentAvg, sentResponses:sentMap[s.station]?sentMap[s.station].responses:0, wk10l:wk10l, trend:trend, priority:priority, gap:gap, leakPct:leakPct};
+            }).sort(function(a,b){return b.score-a.score});
+
+            // Update KPI counts
+            var counts={critical:0,high:0,monitor:0,'on-track':0};
+            scored.forEach(function(x){counts[x.priority]=(counts[x.priority]||0)+1;});
+            document.getElementById('actionCountCritical').textContent=counts.critical||0;
+            document.getElementById('actionCountHigh').textContent=counts.high||0;
+            document.getElementById('actionCountMedium').textContent=counts.monitor||0;
+            document.getElementById('actionCountGood').textContent=counts['on-track']||0;
+
+            // Recommended actions per station
+            var actions={
+                HPD1:{text:'Escalate Portland technician coverage — JDTC routing 100% of WOs elsewhere. Emergency hiring or subcontract needed.',engage:'Direct call to JDTC'},
+                HLA2:{text:'Address ARMA parts backlog (back-door back-orders confirmed). Stock common parts on-site. BORN also consistent leaker.',engage:'Site visit + parts escalation to Kooner ops'},
+                HMS2:{text:'LDOG is sole leaking DSP — 6 in WK10, consistent pattern. Relationship-first outreach before any pitch.',engage:'1:1 call with LDOG manager'},
+                HDT3:{text:'SFRM flagging weekend coverage gap and on-site capability limits (no lift). Two SFRM-specific asks: shop facility + day-shift tech.',engage:'Address SFRM survey items directly'},
+                HIN3:{text:'JBXL is primary leaker. Low Kooner volume (19 total) — confirm technician coverage plan with ops.',engage:'Ops coverage review + JBXL outreach'},
+                HAU1:{text:'FICL and GMIL routing WOs externally. FICL has been top leaker most weeks. WK10 improved to 4 — reinforce.',engage:'Follow up on WK10 improvement'},
+                HCL2:{text:'D4DS is a 5/5 advocate — leverage as reference. DGWD is the leakage source. DGWD scheduling concerns flagged in roundtable.',engage:'Address DGWD scheduling; use D4DS as model'},
+                HHO3:{text:'Three small DSPs leaking (DASL, RRTL, NLZL). No survey data. Site visit recommended to gauge relationships.',engage:'Schedule site visit + informal feedback'},
+                HDY1:{text:'TWLD scoring 4.3/5 — WK10 was clean (0 leaked). TLGZ onboarding ongoing. Reinforce TWLD relationship.',engage:'Reinforce TWLD; check TLGZ onboarding'},
+                HTP2:{text:'Just crossed 85% target. ORMP (2.3/5) is the leakage risk — paperwork delays and WO visibility were main complaints.',engage:'Close loop on ORMP WO visibility issues'},
+                HCT2:{text:'89.6% adoption — strong. TGLO is the lone leaking DSP (2 WK10). Roundtable in Mar revealed tech quality concerns.',engage:'Monitor TGLO; follow up on Mar roundtable items'},
+                HSL1:{text:'90.6% adoption. PRLC scoring 4/5 — paperwork speed is their main friction point. Continue current approach.',engage:'Expedite PRLC paperwork process'},
+                HMK4:{text:'100% adoption. Zero leakage. Use as benchmark and success story for other stations.',engage:'Feature in newsletter / DSP comms'}
+            };
+
+            var priorityColors={critical:'var(--accent-red)',high:'var(--accent-orange)',monitor:'var(--accent-blue)','on-track':'var(--accent-green)'};
+            var priorityBg={critical:'rgba(255,71,87,0.12)',high:'rgba(255,165,2,0.08)',monitor:'rgba(55,66,250,0.08)','on-track':'rgba(0,255,136,0.06)'};
+            var trendIcon={improving:'<span style="color:var(--accent-green);font-size:0.85rem">↗ Improving</span>',worsening:'<span style="color:var(--accent-red);font-size:0.85rem">↘ Worsening</span>',stable:'<span style="color:var(--text-muted);font-size:0.85rem">→ Stable</span>'};
+
+            var h='';
+            scored.forEach(function(x){
+                var s=x.s;
+                var pc=priorityColors[x.priority];
+                var pb=priorityBg[x.priority];
+                var sentStr=x.sentAvg!=null?x.sentAvg.toFixed(1)+'/5 ('+x.sentResponses+' responses)':'No data';
+                var sentColor=x.sentAvg==null?'var(--text-muted)':x.sentAvg>=4?'var(--accent-green)':x.sentAvg>=3?'var(--accent-yellow)':x.sentAvg>=2?'var(--accent-orange)':'var(--accent-red)';
+                var wk10str=x.wk10l===0?'<span style="color:var(--accent-green)">0 ✓</span>':'<span style="color:var(--accent-red)">'+x.wk10l+'</span>';
+                var act=actions[s.station]||{text:'Continue monitoring.',engage:'Regular check-in'};
+                var topDSPstr=topDSP[s.station]&&topDSP[s.station]!=='—'?topDSP[s.station]:'None';
+
+                h+='<div style="background:'+pb+';border:1px solid var(--border-color);border-left:4px solid '+pc+';border-radius:12px;padding:20px;margin-bottom:14px">';
+                // Header row
+                h+='<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:10px">';
+                h+='<div style="display:flex;align-items:center;gap:14px">';
+                h+='<span style="font-size:1.6rem;font-weight:700;font-family:monospace">'+s.station+'</span>';
+                h+='<span style="font-size:0.75rem;color:var(--text-secondary);background:var(--bg-dark);padding:3px 8px;border-radius:6px">'+s.location+'</span>';
+                h+='<span style="font-size:0.7rem;font-weight:600;text-transform:uppercase;padding:4px 10px;border-radius:12px;background:'+pb+';color:'+pc+';border:1px solid '+pc+'">'+x.priority.replace('-',' ')+'</span>';
+                h+='</div>';
+                h+='<div style="display:flex;gap:8px;align-items:center">'+trendIcon[x.trend]+'<span style="font-family:monospace;font-size:0.75rem;color:var(--text-muted)">score: '+x.score.toFixed(0)+'</span></div>';
+                h+='</div>';
+                // Stats row
+                h+='<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:14px">';
+                h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">Adoption</div><div style="font-family:monospace;font-weight:700;font-size:1.1rem;color:'+(s.adoption>=85?'var(--accent-green)':'var(--accent-red)')+'">'+s.adoption.toFixed(1)+'%</div></div>';
+                h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">Total Leaked</div><div style="font-family:monospace;font-weight:700;font-size:1.1rem;color:var(--accent-red)">'+s.leaked+'</div></div>';
+                h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">WK10 Leaked</div><div style="font-family:monospace;font-weight:700;font-size:1.1rem">'+wk10str+'</div></div>';
+                h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">Sentiment</div><div style="font-family:monospace;font-weight:700;font-size:1rem;color:'+sentColor+'">'+sentStr+'</div></div>';
+                h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">WK10 Top Leaker</div><div style="font-size:0.85rem;color:var(--text-secondary)">'+topDSPstr+'</div></div>';
+                h+='</div>';
+                // Action row
+                h+='<div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start">';
+                h+='<div><div style="font-size:0.7rem;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:5px">Recommended Action</div>';
+                h+='<div style="font-size:0.88rem;color:var(--text-secondary);line-height:1.55">'+act.text+'</div></div>';
+                h+='<div style="min-width:180px;background:var(--bg-card);border-radius:8px;padding:10px;text-align:center"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:5px">Engagement Mode</div>';
+                h+='<div style="font-size:0.8rem;color:var(--accent-purple);font-weight:500">'+act.engage+'</div></div>';
+                h+='</div>';
+                h+='</div>';
+            });
+            document.getElementById('actionMatrixList').innerHTML=h;
         }
 
-        function populateActionTable(){
-            var t=document.getElementById('actionTable'),h='';
-            var sorted=stationData.slice().filter(function(s){return s.adoption<85}).sort(function(a,b){return a.adoption-b.adoption});
-            for(var i=0;i<sorted.length;i++){var s=sorted[i];
-            var priority=s.adoption<20?'critical':s.adoption<50?'high':s.adoption<70?'medium':'low';
-            var impact=(s.leaked/594*100).toFixed(1);
-            var action=s.adoption<20?'Emergency intervention':s.adoption<50?'Priority outreach':s.adoption<70?'Monitor & improve':'Push to target';
-            h+='<tr><td><span class="priority-pill priority-'+priority+'">'+priority+'</span></td><td><span class="station-name">'+s.station+'</span></td><td style="color:var(--accent-red)">'+s.adoption.toFixed(1)+'%</td><td>'+s.leaked+'</td><td>'+impact+'%</td><td>'+action+'</td></tr>';}
-            t.innerHTML=h;
-        }
+        
 
         function populateFeedbackList(){
             var c=document.getElementById('feedbackList'),h='';
@@ -531,7 +634,7 @@
             // Weekly bar chart
             new Chart(document.getElementById('weeklyBarChart'),{
                 type:'bar',
-                data:{labels:['WK53','WK1','WK2','WK3','WK4','WK5','WK10'],datasets:[{label:'Kooner WOs',data:[77,58,140,140,159,153,326],backgroundColor:'rgba(0,255,136,0.7)',borderRadius:4}]},
+                data:{labels:['WK6','WK7','WK8','WK9','WK10'],datasets:[{label:'Kooner WOs',data:[148,157,194,153,326],backgroundColor:'rgba(0,255,136,0.7)',borderRadius:4}]},
                 options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a'}}},scales:{y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},x:{grid:{display:false},ticks:{color:'#8b8b9a'}}}}
             });
 
@@ -544,11 +647,11 @@
             });
 
             // Station weekly stacked chart
-            var weekLabels=['WK53','WK1','WK2','WK3','WK4','WK5','WK10'];
+            var weekLabels=['WK6','WK7','WK8','WK9','WK10'];
             var topStations=['HDT3','HLA2','HHO3','HTP2','HMK4','HCL2','HDY1','HAU1'];
             var datasets=topStations.map(function(st,i){
                 var w=weeklyByStation[st];
-                return{label:st,data:[w.WK53||0,w.WK1||0,w.WK2||0,w.WK3||0,w.WK4||0,w.WK5||0,w.WK10||0],backgroundColor:colors[i],borderRadius:2};
+                return{label:st,data:[w.WK6||0,w.WK7||0,w.WK8||0,w.WK9||0,w.WK10||0],backgroundColor:colors[i],borderRadius:2};
             });
             new Chart(document.getElementById('stationWeeklyChart'),{
                 type:'bar',
@@ -801,8 +904,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
             populateStationFullTable();
             populateStationWeeklyTable();
             populateDSPTable('all');
-            populateActionCards();
-            populateActionTable();
+            populateActionMatrix();
             populateFeedbackList();
             createCharts();
             populateWk10LeakTable();
@@ -813,7 +915,19 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
         });
     </script>
 </body>
-</html>var wk09Leaked = {
+</html>var wk06Leaked = {
+            HLA2:25, HDT3:21, HCL2:11, HAU1:7, HMS2:6, HIN3:5,
+            HDY1:2, HSL1:2, HHO3:2, HPD1:2, HTP2:1, HCT2:1, HMK4:0
+        };
+        var wk07Leaked = {
+            HLA2:25, HCL2:9, HDT3:7, HAU1:7, HDY1:6, HPD1:6,
+            HMS2:5, HTP2:5, HIN3:3, HHO3:2, HCT2:2, HMK4:0, HSL1:0
+        };
+        var wk08Leaked = {
+            HLA2:47, HDT3:12, HCL2:7, HAU1:6, HMS2:4, HDY1:3,
+            HPD1:3, HTP2:3, HIN3:2, HHO3:2, HCT2:0, HMK4:0, HSL1:0
+        };
+        var wk09Leaked = {
             HLA2:25, HDT3:13, HCL2:10, HDY1:7, HHO3:6, HMS2:6,
             HTP2:5, HIN3:3, HPD1:2, HAU1:2, HSL1:1, HMK4:0, HCT2:0
         };
@@ -842,7 +956,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
         .header-left h1{font-size:2.5rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:8px;background:linear-gradient(135deg,#fff 0%,#8b8b9a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
         .header-left .subtitle{color:var(--text-secondary);font-size:1rem;display:flex;align-items:center;gap:12px}
         .target-badge{background:linear-gradient(135deg,var(--accent-green),#00cc6a);color:#000;padding:4px 12px;border-radius:20px;font-weight:600;font-size:0.85rem}
-        .header-right{text-align:right}.last-updated{color:var(--text-muted);font-size:0.85rem;font-family:'JetBrains Mono',monospace}.data-period{color:var(--text-secondary);font-size:0.9rem;margin-top:4px}
+        .header-right{text-align:right}.last-updated{color:var(--text-muted);font-size:0.85rem;font-family:monospace}.data-period{color:var(--text-secondary);font-size:0.9rem;margin-top:4px}
         .nav-tabs{display:flex;gap:8px;margin-bottom:24px;background:var(--bg-card);padding:8px;border-radius:12px;width:fit-content;flex-wrap:wrap}
         .nav-tab{padding:10px 20px;border-radius:8px;font-size:0.9rem;font-weight:500;cursor:pointer;transition:all 0.2s ease;background:transparent;border:none;color:var(--text-secondary)}
         .nav-tab:hover{background:var(--bg-card-hover);color:var(--text-primary)}.nav-tab.active{background:var(--accent-blue);color:white}
@@ -854,7 +968,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
         .kpi-card.warning::before{background:linear-gradient(90deg,var(--accent-orange),#ff6b00)}
         .kpi-card.danger::before{background:linear-gradient(90deg,var(--accent-red),#ff2f43)}
         .kpi-label{font-size:0.85rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px}
-        .kpi-value{font-size:2.2rem;font-weight:700;font-family:'JetBrains Mono',monospace;line-height:1}
+        .kpi-value{font-size:2.2rem;font-weight:700;font-family:monospace;line-height:1}
         .kpi-value.green{color:var(--accent-green)}.kpi-value.red{color:var(--accent-red)}.kpi-value.orange{color:var(--accent-orange)}.kpi-value.yellow{color:var(--accent-yellow)}
         .kpi-subtext{font-size:0.8rem;color:var(--text-muted);margin-top:8px}
         .kpi-trend{display:inline-flex;align-items:center;gap:4px;font-size:0.85rem;margin-top:8px;padding:2px 8px;border-radius:4px}
@@ -863,7 +977,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
         .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:16px;padding:24px}
         .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
         .card-title{font-size:1.1rem;font-weight:600}
-        .card-badge{font-size:0.75rem;padding:4px 10px;border-radius:12px;font-family:'JetBrains Mono',monospace}
+        .card-badge{font-size:0.75rem;padding:4px 10px;border-radius:12px;font-family:monospace}
         .badge-stations{background:rgba(55,66,250,0.2);color:var(--accent-blue)}
         .badge-dsps{background:rgba(168,85,247,0.2);color:var(--accent-purple)}
         .badge-trends{background:rgba(0,212,255,0.2);color:var(--accent-cyan)}
@@ -873,7 +987,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
         .data-table th{text-align:left;padding:12px 8px;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted);border-bottom:1px solid var(--border-color);background:var(--bg-card)}
         .data-table td{padding:14px 8px;font-size:0.9rem;border-bottom:1px solid var(--border-color)}
         .data-table tr:hover td{background:rgba(55,66,250,0.05)}
-        .station-name{font-weight:600;font-family:'JetBrains Mono',monospace}
+        .station-name{font-weight:600;font-family:monospace}
         .status-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-size:0.75rem;font-weight:500}
         .status-pill.on-target{background:rgba(0,255,136,0.15);color:var(--accent-green)}
         .status-pill.below-target{background:rgba(255,71,87,0.15);color:var(--accent-red)}
@@ -884,24 +998,24 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
         .priority-medium{background:rgba(55,66,250,0.2);color:var(--accent-blue)}
         .priority-low{background:rgba(139,139,154,0.2);color:var(--text-secondary)}
         .priority-on-target{background:rgba(0,255,136,0.2);color:var(--accent-green)}
-        .week-cell{font-family:'JetBrains Mono',monospace;font-size:0.8rem;text-align:center;min-width:55px;padding:6px 4px!important}
+        .week-cell{font-family:monospace;font-size:0.8rem;text-align:center;min-width:55px;padding:6px 4px!important}
         .week-cell.high{color:var(--accent-green);background:rgba(0,255,136,0.1)}
         .week-cell.medium{color:var(--accent-orange);background:rgba(255,165,2,0.1)}
         .week-cell.low{color:var(--accent-red);background:rgba(255,71,87,0.1)}
         .week-cell.none{color:var(--text-muted)}
-        .trend-arrow{display:inline-flex;align-items:center;gap:4px;font-size:0.85rem;font-family:'JetBrains Mono',monospace}
+        .trend-arrow{display:inline-flex;align-items:center;gap:4px;font-size:0.85rem;font-family:monospace}
         .trend-arrow.up{color:var(--accent-green)}.trend-arrow.down{color:var(--accent-red)}.trend-arrow.flat{color:var(--text-muted)}
         .full-width{grid-column:1/-1}
         .action-list{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
         .action-card{background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:12px;padding:20px}
         .action-card.critical{border-left:3px solid var(--accent-red)}.action-card.high{border-left:3px solid var(--accent-orange)}
         .action-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
-        .action-dsp{font-size:1.5rem;font-weight:700;font-family:'JetBrains Mono',monospace}
-        .action-station{background:var(--bg-dark);padding:4px 10px;border-radius:8px;font-size:0.8rem;font-family:'JetBrains Mono',monospace;color:var(--text-secondary)}
+        .action-dsp{font-size:1.5rem;font-weight:700;font-family:monospace}
+        .action-station{background:var(--bg-dark);padding:4px 10px;border-radius:8px;font-size:0.8rem;font-family:monospace;color:var(--text-secondary)}
         .action-stats{display:flex;gap:16px;margin-bottom:12px}
         .action-stat{display:flex;flex-direction:column}
         .action-stat-label{font-size:0.7rem;color:var(--text-muted);text-transform:uppercase}
-        .action-stat-value{font-size:1.1rem;font-weight:600;font-family:'JetBrains Mono',monospace}
+        .action-stat-value{font-size:1.1rem;font-weight:600;font-family:monospace}
         .action-stat-value.red{color:var(--accent-red)}.action-stat-value.orange{color:var(--accent-orange)}
         .action-location{font-size:0.85rem;color:var(--text-secondary);padding-top:12px;border-top:1px solid var(--border-color)}
         .chart-container{position:relative;height:300px;width:100%}.chart-container.tall{height:400px}
@@ -909,7 +1023,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
         .filter-btn{padding:6px 14px;border-radius:20px;font-size:0.8rem;font-weight:500;cursor:pointer;background:var(--bg-card-hover);border:1px solid var(--border-color);color:var(--text-secondary)}
         .filter-btn:hover,.filter-btn.active{background:var(--accent-blue);border-color:var(--accent-blue);color:white}
         .table-scroll{max-height:400px;overflow-y:auto}
-        .wow-change{font-family:'JetBrains Mono',monospace;font-size:0.8rem;padding:2px 6px;border-radius:4px}
+        .wow-change{font-family:monospace;font-size:0.8rem;padding:2px 6px;border-radius:4px}
         .wow-change.positive{color:var(--accent-green);background:rgba(0,255,136,0.1)}
         .wow-change.negative{color:var(--accent-red);background:rgba(255,71,87,0.1)}
         .wow-change.neutral{color:var(--text-muted)}
@@ -919,7 +1033,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
         .insight-card.warning{border-left-color:var(--accent-orange)}.insight-card.info{border-left-color:var(--accent-cyan)}
         .insight-icon{font-size:1.5rem;margin-bottom:10px}.insight-title{font-size:1rem;font-weight:600;margin-bottom:8px;color:var(--text-primary)}
         .insight-text{font-size:0.9rem;color:var(--text-secondary);line-height:1.5}
-        .insight-metric{display:inline-block;font-family:'JetBrains Mono',monospace;font-weight:600;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,0.1)}
+        .insight-metric{display:inline-block;font-family:monospace;font-weight:600;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,0.1)}
         .insight-metric.green{color:var(--accent-green)}.insight-metric.red{color:var(--accent-red)}.insight-metric.orange{color:var(--accent-orange)}
         .executive-summary{background:linear-gradient(135deg,rgba(55,66,250,0.1),rgba(168,85,247,0.1));border:1px solid var(--accent-blue);border-radius:12px;padding:24px;margin-bottom:24px}
         .executive-summary h3{font-size:1.2rem;margin-bottom:16px;color:var(--accent-cyan)}
@@ -929,7 +1043,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
         .next-steps{background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:12px;padding:20px}
         .next-steps h4{font-size:1rem;margin-bottom:12px;color:var(--accent-orange)}
         .next-steps ol{padding-left:20px;color:var(--text-secondary)}.next-steps li{padding:6px 0;font-size:0.9rem}
-        .sentiment-score{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem}
+        .sentiment-score{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;font-family:monospace;font-weight:700;font-size:1rem}
         .sentiment-score.score-5{background:rgba(0,255,136,0.2);color:var(--accent-green)}
         .sentiment-score.score-4{background:rgba(0,212,255,0.2);color:var(--accent-cyan)}
         .sentiment-score.score-3{background:rgba(255,217,61,0.2);color:var(--accent-yellow)}
@@ -941,7 +1055,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
         .feedback-scores{display:flex;gap:8px}
         .score-mini{display:flex;flex-direction:column;align-items:center;gap:2px}
         .score-mini-label{font-size:0.6rem;color:var(--text-muted);text-transform:uppercase}
-        .score-mini-value{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:0.9rem}
+        .score-mini-value{font-family:monospace;font-weight:600;font-size:0.9rem}
         .feedback-text{font-size:0.9rem;color:var(--text-secondary);line-height:1.6;font-style:italic}
         .feedback-text.issue{border-left:3px solid var(--accent-red);padding-left:12px;margin-bottom:12px}
         .feedback-text.suggestion{border-left:3px solid var(--accent-cyan);padding-left:12px}
@@ -949,11 +1063,11 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
         .correlation-card h4{color:var(--accent-yellow);margin-bottom:12px}
         .correlation-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-color);flex-wrap:wrap;gap:10px}
         .correlation-item:last-child{border-bottom:none}
-        .correlation-dsp{font-family:'JetBrains Mono',monospace;font-weight:600}
+        .correlation-dsp{font-family:monospace;font-weight:600}
         .correlation-metrics{display:flex;gap:20px}
         .correlation-metric{display:flex;flex-direction:column;align-items:center}
         .correlation-label{font-size:0.7rem;color:var(--text-muted)}
-        .correlation-value{font-family:'JetBrains Mono',monospace;font-weight:600}
+        .correlation-value{font-family:monospace;font-weight:600}
         @media(max-width:1200px){.kpi-row{grid-template-columns:repeat(3,1fr)}.action-list{grid-template-columns:repeat(2,1fr)}.insights-grid{grid-template-columns:1fr}}
         @media(max-width:900px){.main-grid{grid-template-columns:1fr}.kpi-row{grid-template-columns:repeat(2,1fr)}.action-list{grid-template-columns:1fr}}
         @media(max-width:600px){.header{flex-direction:column;gap:16px}.kpi-row{grid-template-columns:1fr}.nav-tabs{flex-wrap:wrap}}
@@ -966,14 +1080,14 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
         .calendar-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
         .calendar-nav-btn{background:var(--bg-card-hover);border:1px solid var(--border-color);color:var(--text-secondary);padding:8px 18px;border-radius:8px;cursor:pointer;font-size:0.85rem;font-family:'Space Grotesk',sans-serif;transition:all 0.15s ease}
         .calendar-nav-btn:hover{background:var(--accent-blue);color:white;border-color:var(--accent-blue)}
-        .calendar-month-title{font-size:1.3rem;font-weight:700;color:var(--text-primary);font-family:'JetBrains Mono',monospace}
+        .calendar-month-title{font-size:1.3rem;font-weight:700;color:var(--text-primary);font-family:monospace}
         .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
         .calendar-header,.cal-header-cell{padding:8px;text-align:center;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;font-weight:600;letter-spacing:0.05em}
         .calendar-day{min-height:90px;background:var(--bg-card-hover);border-radius:8px;padding:6px;border:1px solid transparent;transition:border-color 0.15s ease}
         .calendar-day:hover{border-color:var(--border-color)}
         .calendar-day.today,.calendar-day.cal-today{border-color:var(--accent-blue);background:rgba(55,66,250,0.1)}
         .calendar-day.other-month{opacity:0.25}
-        .calendar-date,.cal-date-num{font-size:0.8rem;font-weight:600;margin-bottom:4px;font-family:'JetBrains Mono',monospace}
+        .calendar-date,.cal-date-num{font-size:0.8rem;font-weight:600;margin-bottom:4px;font-family:monospace}
         .calendar-event{font-size:0.62rem;padding:2px 5px;border-radius:4px;margin-bottom:2px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity 0.1s ease}
         .calendar-event:hover{opacity:0.75}
         .calendar-event.roundtable{background:rgba(168,85,247,0.3);color:var(--accent-purple)}
@@ -991,10 +1105,10 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
         .event-note-card.type-deadline{border-left-color:var(--accent-red)}
         .event-note-card.type-newsletter{border-left-color:#00c896}
         .event-title{font-weight:600;font-size:0.9rem;margin-bottom:2px}
-        .event-date-meta{font-size:0.75rem;color:var(--text-muted);margin-bottom:6px;font-family:'JetBrains Mono',monospace}
+        .event-date-meta{font-size:0.75rem;color:var(--text-muted);margin-bottom:6px;font-family:monospace}
         .event-summary-text{font-size:0.8rem;color:var(--text-secondary);line-height:1.45}
         .section-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:10px;font-weight:600}
-        .action-count,.cal-action-count{display:inline-block;background:rgba(55,66,250,0.2);color:var(--accent-blue);font-size:0.65rem;padding:1px 6px;border-radius:8px;margin-left:6px;font-family:'JetBrains Mono',monospace;font-weight:600}
+        .action-count,.cal-action-count{display:inline-block;background:rgba(55,66,250,0.2);color:var(--accent-blue);font-size:0.65rem;padding:1px 6px;border-radius:8px;margin-left:6px;font-family:monospace;font-weight:600}
         .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:1000;justify-content:center;align-items:center;backdrop-filter:blur(4px)}
         .modal-overlay.active{display:flex}
         .modal-content{background:var(--bg-card);border:1px solid var(--border-color);border-radius:16px;padding:32px;max-width:580px;width:90%;max-height:80vh;overflow-y:auto;position:relative;animation:modalIn 0.2s ease}
@@ -1042,11 +1156,11 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
 
         <div id="overview" class="tab-content active">
             <div class="kpi-row">
-                <div class="kpi-card"><div class="kpi-label">Total Kooner WOs</div><div class="kpi-value green">1,205</div><div class="kpi-subtext">WK53 through WK10</div></div>
-                <div class="kpi-card warning"><div class="kpi-label">Total Leaked WOs</div><div class="kpi-value red">725</div><div class="kpi-subtext">Sent to other vendors</div></div>
-                <div class="kpi-card danger"><div class="kpi-label">Current Adoption</div><div class="kpi-value red">62.4%</div><div class="kpi-subtext">22.6% gap to target</div></div>
+                <div class="kpi-card"><div class="kpi-label">Total Kooner WOs</div><div class="kpi-value green">1,571</div><div class="kpi-subtext">WK1 through WK10 (all weeks)</div></div>
+                <div class="kpi-card warning"><div class="kpi-label">Total Leaked WOs</div><div class="kpi-value red">977</div><div class="kpi-subtext">Sent to other vendors</div></div>
+                <div class="kpi-card danger"><div class="kpi-label">Current Adoption</div><div class="kpi-value red">61.7%</div><div class="kpi-subtext">23.3% gap to target</div></div>
                 <div class="kpi-card success"><div class="kpi-label">On Target Stations</div><div class="kpi-value green">3</div><div class="kpi-subtext">of 13 stations ≥85%</div></div>
-                <div class="kpi-card"><div class="kpi-label">Total WOs</div><div class="kpi-value">1,930</div><div class="kpi-subtext">Across all 13 stations</div></div>
+                <div class="kpi-card"><div class="kpi-label">Total WOs</div><div class="kpi-value">2,548</div><div class="kpi-subtext">Across all 13 stations</div></div>
             </div>
             <div class="main-grid">
                 <div class="card"><div class="card-header"><div class="card-title">Weekly Kooner Volume</div><span class="card-badge badge-trends">6 WEEKS</span></div><div class="chart-container"><canvas id="weeklyBarChart"></canvas></div></div>
@@ -1063,7 +1177,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
                     <div class="executive-summary">
                         <h3>🎯 Key Takeaways</h3>
                         <ul>
-                            <li><strong>Overall adoption at 62.4%</strong> — 22.6% below the 85% target. 1,205 Kooner WOs vs 725 leaked (WK53–WK10).</li>
+                            <li><strong>Overall adoption at 62.4%</strong> — 22.6% below the 85% target. 1,205 Kooner WOs vs 977 leaked (WK1–WK10).</li>
                             <li><strong>4 stations on target:</strong> HMK4 (100%), HCT2 (92.5%), HSL1 (91.2%), HTP2 (86.0%)</li>
                             <li><strong>HLA2 is the largest leak source:</strong> 264 total leaked (36%), 14 in WK10 — ARMA accounts for 11.</li>
                             <li><strong>HDT3 improving:</strong> 141 leaked, 58.7% adoption. SFRM is the primary leaking DSP (8 WOs in WK10).</li>
@@ -1091,7 +1205,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
                         <tbody id="wk10LeakBody"></tbody>
                     </table>
                 </div>
-<div class="card full-width"><div class="card-header"><div class="card-title">Station Weekly Breakdown</div></div><div class="table-scroll"><table class="data-table"><thead><tr><th>Station</th><th>WK53</th><th>WK1</th><th>WK2</th><th>WK3</th><th>WK4</th><th>WK5</th><th>WK10</th><th>Total</th></tr></thead><tbody id="stationWeeklyTable"></tbody></table></div></div>
+<div class="card full-width"><div class="card-header"><div class="card-title">Station Weekly Breakdown</div></div><div class="table-scroll"><table class="data-table"><thead><tr><th>Station</th><th>WK6</th><th>WK7</th><th>WK8</th><th>WK9</th><th>WK10</th><th>Total</th></tr></thead><tbody id="stationWeeklyTable"></tbody></table></div></div>
             </div>
         </div>
 
@@ -1131,9 +1245,20 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
         </div>
 
         <div id="actions" class="tab-content">
+            <div class="kpi-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:24px">
+                <div class="kpi-card danger"><div class="kpi-label">Critical Priority</div><div class="kpi-value red" id="actionCountCritical">—</div><div class="kpi-subtext">Stations needing immediate action</div></div>
+                <div class="kpi-card warning"><div class="kpi-label">High Priority</div><div class="kpi-value orange" id="actionCountHigh">—</div><div class="kpi-subtext">Significant leakage + sentiment gap</div></div>
+                <div class="kpi-card"><div class="kpi-label">Monitor</div><div class="kpi-value" id="actionCountMedium">—</div><div class="kpi-subtext">Near target, watch closely</div></div>
+                <div class="kpi-card success"><div class="kpi-label">On Track</div><div class="kpi-value green" id="actionCountGood">—</div><div class="kpi-subtext">At or above 85% target</div></div>
+            </div>
             <div class="main-grid">
-                <div class="card full-width"><div class="card-header"><div class="card-title">🎯 Priority Actions by Leaked Volume</div></div><div class="action-list" id="actionList"></div></div>
-                <div class="card full-width"><div class="card-header"><div class="card-title">📋 Station Action Plan</div></div><table class="data-table"><thead><tr><th>Priority</th><th>Station</th><th>Adoption</th><th>Leaked</th><th>Impact</th><th>Action</th></tr></thead><tbody id="actionTable"></tbody></table></div>
+                <div class="card full-width">
+                    <div class="card-header">
+                        <div class="card-title">🎯 Station Priority Matrix</div>
+                        <span class="card-badge" style="background:rgba(168,85,247,0.2);color:var(--accent-purple)">COMPOSITE SCORE: ADOPTION + LEAKAGE + SENTIMENT</span>
+                    </div>
+                    <div id="actionMatrixList"></div>
+                </div>
             </div>
         </div>
 
@@ -1179,38 +1304,38 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
     <script>
         // UPDATED DATA from new Kooner report
         var stationData = [
-            {station:'HMK4', location:'Milwaukee, WI',      kooner:78,  leaked:0,   adoption:100.0},
-            {station:'HSL1', location:'Salt Lake City, UT', kooner:31,  leaked:3,   adoption:91.2},
-            {station:'HCT2', location:'Chattanooga, TN',    kooner:62,  leaked:5,   adoption:92.5},
-            {station:'HTP2', location:'Gibsonton, FL',      kooner:135, leaked:22,  adoption:86.0},
-            {station:'HDY1', location:'Clayton, OH',        kooner:87,  leaked:18,  adoption:82.9},
-            {station:'HHO3', location:'Porter, TX',         kooner:116, leaked:31,  adoption:78.9},
-            {station:'HCL2', location:'Charlotte, NC',      kooner:102, leaked:66,  adoption:60.7},
-            {station:'HDT3', location:'Romulus, MI',        kooner:200, leaked:141, adoption:58.7},
-            {station:'HAU1', location:'Austin, TX',         kooner:93,  leaked:77,  adoption:54.7},
-            {station:'HMS2', location:'Lakeville, MN',      kooner:40,  leaked:39,  adoption:50.6},
-            {station:'HIN3', location:'South Bend, IN',     kooner:13,  leaked:19,  adoption:40.6},
-            {station:'HLA2', location:'Santa Clarita, CA',  kooner:244, leaked:264, adoption:48.0},
-            {station:'HPD1', location:'Portland, OR',       kooner:4,   leaked:40,  adoption:9.1}
+            {station:'HMK4', location:'Milwaukee, WI',      kooner:82,  leaked:0,   adoption:100.0},
+            {station:'HCT2', location:'Chattanooga, TN',    kooner:69,  leaked:8,   adoption:89.6},
+            {station:'HSL1', location:'Salt Lake City, UT', kooner:58,  leaked:6,   adoption:90.6},
+            {station:'HTP2', location:'Gibsonton, FL',      kooner:171, leaked:31,  adoption:84.7},
+            {station:'HHO3', location:'Porter, TX',         kooner:140, leaked:37,  adoption:79.1},
+            {station:'HDY1', location:'Clayton, OH',        kooner:109, leaked:29,  adoption:79.0},
+            {station:'HCL2', location:'Charlotte, NC',      kooner:163, leaked:93,  adoption:63.7},
+            {station:'HDT3', location:'Romulus, MI',        kooner:244, leaked:181, adoption:57.4},
+            {station:'HAU1', location:'Austin, TX',         kooner:124, leaked:97,  adoption:56.1},
+            {station:'HMS2', location:'Lakeville, MN',      kooner:41,  leaked:54,  adoption:43.2},
+            {station:'HIN3', location:'South Bend, IN',     kooner:19,  leaked:29,  adoption:39.6},
+            {station:'HLA2', location:'Santa Clarita, CA',  kooner:347, leaked:361, adoption:49.0},
+            {station:'HPD1', location:'Portland, OR',       kooner:4,   leaked:51,  adoption:7.3}
         ];
 
         var weeklyByStation = {
-            'HAU1':{WK53:2, WK1:6,  WK2:12, WK3:10, WK4:14, WK5:3,  WK9:16, WK10:30, total:93},
-            'HCL2':{WK53:1, WK1:1,  WK2:5,  WK3:29, WK4:8,  WK5:10, WK9:20, WK10:28, total:102},
-            'HCT2':{WK53:3, WK1:0,  WK2:4,  WK3:5,  WK4:7,  WK5:2,  WK9:7,  WK10:35, total:62},
-            'HDT3':{WK53:18,WK1:9,  WK2:15, WK3:17, WK4:26, WK5:44, WK9:14, WK10:57, total:200},
-            'HDY1':{WK53:1, WK1:9,  WK2:20, WK3:10, WK4:6,  WK5:0,  WK9:13, WK10:25, total:87},
-            'HHO3':{WK53:9, WK1:6,  WK2:22, WK3:13, WK4:19, WK5:15, WK9:13, WK10:19, total:116},
-            'HIN3':{WK53:1, WK1:1,  WK2:5,  WK3:4,  WK4:2,  WK5:0,  WK9:2,  WK10:0,  total:13},
-            'HLA2':{WK53:17,WK1:9,  WK2:20, WK3:23, WK4:42, WK5:41, WK9:43, WK10:49, total:244},
-            'HMK4':{WK53:7, WK1:10, WK2:8,  WK3:15, WK4:3,  WK5:14, WK9:7,  WK10:14, total:78},
-            'HMS2':{WK53:2, WK1:2,  WK2:6,  WK3:5,  WK4:11, WK5:9,  WK9:1,  WK10:4,  total:40},
-            'HPD1':{WK53:0, WK1:0,  WK2:0,  WK3:0,  WK4:1,  WK5:0,  WK9:0,  WK10:3,  total:4},
-            'HSL1':{WK53:0, WK1:1,  WK2:4,  WK3:5,  WK4:5,  WK5:5,  WK9:7,  WK10:4,  total:31},
-            'HTP2':{WK53:13,WK1:3,  WK2:20, WK3:8,  WK4:16, WK5:7,  WK9:10, WK10:58, total:135}
+            'HAU1':{WK53:2, WK1:6,  WK2:12, WK3:10, WK4:14, WK5:3,  WK6:6,  WK7:25, WK8:12, WK9:16, WK10:30, total:124},
+            'HCL2':{WK53:1, WK1:1,  WK2:5,  WK3:29, WK4:8,  WK5:10, WK6:16, WK7:22, WK8:32, WK9:20, WK10:28, total:163},
+            'HCT2':{WK53:3, WK1:0,  WK2:4,  WK3:5,  WK4:7,  WK5:2,  WK6:4,  WK7:1,  WK8:4,  WK9:7,  WK10:35, total:69},
+            'HDT3':{WK53:18,WK1:9,  WK2:15, WK3:17, WK4:26, WK5:44, WK6:24, WK7:21, WK8:35, WK9:14, WK10:57, total:244},
+            'HDY1':{WK53:1, WK1:9,  WK2:20, WK3:10, WK4:6,  WK5:0,  WK6:5,  WK7:6,  WK8:9,  WK9:13, WK10:25, total:109},
+            'HHO3':{WK53:9, WK1:6,  WK2:22, WK3:13, WK4:19, WK5:15, WK6:14, WK7:18, WK8:13, WK9:13, WK10:19, total:140},
+            'HIN3':{WK53:1, WK1:1,  WK2:5,  WK3:4,  WK4:2,  WK5:0,  WK6:5,  WK7:0,  WK8:1,  WK9:2,  WK10:0,  total:19},
+            'HLA2':{WK53:17,WK1:9,  WK2:20, WK3:23, WK4:42, WK5:41, WK6:38, WK7:42, WK8:41, WK9:43, WK10:49, total:347},
+            'HMK4':{WK53:7, WK1:10, WK2:8,  WK3:15, WK4:3,  WK5:14, WK6:2,  WK7:3,  WK8:13, WK9:7,  WK10:14, total:82},
+            'HMS2':{WK53:2, WK1:2,  WK2:6,  WK3:5,  WK4:11, WK5:9,  WK6:2,  WK7:1,  WK8:8,  WK9:1,  WK10:4,  total:41},
+            'HPD1':{WK53:0, WK1:0,  WK2:0,  WK3:0,  WK4:1,  WK5:0,  WK6:0,  WK7:0,  WK8:0,  WK9:0,  WK10:3,  total:4},
+            'HSL1':{WK53:0, WK1:1,  WK2:4,  WK3:5,  WK4:5,  WK5:5,  WK6:10, WK7:8,  WK8:9,  WK9:7,  WK10:4,  total:58},
+            'HTP2':{WK53:13,WK1:3,  WK2:20, WK3:8,  WK4:16, WK5:7,  WK6:22, WK7:10, WK8:17, WK9:10, WK10:58, total:171}
         };
 
-        var weekTotals = {WK53:77,WK1:58,WK2:140,WK3:140,WK4:159,WK5:153,WK9:153,WK10:326};
+        var weekTotals = {WK53:77,WK1:58,WK2:140,WK3:140,WK4:159,WK5:153,WK6:148,WK7:157,WK8:194,WK9:153,WK10:326};
 
         var wk10Leaked = {
             HLA2:14, HDT3:8, HPD1:6, HMS2:6, HCL2:5, HAU1:4,
@@ -1306,8 +1431,8 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
             var t=document.getElementById('stationWeeklyTable'),h='';
             var stations=Object.keys(weeklyByStation).sort(function(a,b){return weeklyByStation[b].total-weeklyByStation[a].total});
             for(var i=0;i<stations.length;i++){var st=stations[i],w=weeklyByStation[st];
-            h+='<tr><td><span class="station-name">'+st+'</span></td><td>'+(w.WK53||'—')+'</td><td>'+(w.WK1||'—')+'</td><td>'+(w.WK2||'—')+'</td><td>'+(w.WK3||'—')+'</td><td>'+(w.WK4||'—')+'</td><td>'+(w.WK5||'—')+'</td><td>'+(w.WK10||'—')+'</td><td><strong>'+w.total+'</strong></td></tr>';}
-            h+='<tr style="background:var(--bg-card-hover)"><td><strong>TOTAL</strong></td><td><strong>'+weekTotals.WK53+'</strong></td><td><strong>'+weekTotals.WK1+'</strong></td><td><strong>'+weekTotals.WK2+'</strong></td><td><strong>'+weekTotals.WK3+'</strong></td><td><strong>'+weekTotals.WK4+'</strong></td><td><strong>'+weekTotals.WK5+'</strong></td><td><strong>'+weekTotals.WK10+'</strong></td><td><strong>1053</strong></td></tr>';
+            h+='<tr><td><span class="station-name">'+st+'</span></td><td>'+(w.WK6||'—')+'</td><td>'+(w.WK7||'—')+'</td><td>'+(w.WK8||'—')+'</td><td>'+(w.WK9||'—')+'</td><td>'+(w.WK10||'—')+'</td><td><strong>'+w.total+'</strong></td></tr>';}
+            h+='<tr style="background:var(--bg-card-hover)"><td><strong>TOTAL</strong></td><td><strong>'+weekTotals.WK6+'</strong></td><td><strong>'+weekTotals.WK7+'</strong></td><td><strong>'+weekTotals.WK8+'</strong></td><td><strong>'+weekTotals.WK9+'</strong></td><td><strong>'+weekTotals.WK10+'</strong></td><td><strong>1571</strong></td></tr>';
             t.innerHTML=h;
         }
 
@@ -1322,25 +1447,117 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
             t.innerHTML=h;
         }
 
-        function populateActionCards(){
-            var c=document.getElementById('actionList'),h='';
-            var sorted=stationData.slice().filter(function(s){return s.leaked>0}).sort(function(a,b){return b.leaked-a.leaked}).slice(0,6);
-            for(var i=0;i<sorted.length;i++){var s=sorted[i];
-            var priority=s.adoption<20?'critical':s.adoption<50?'high':'medium';
-            h+='<div class="action-card '+priority+'"><div class="action-header"><span class="action-dsp">'+s.station+'</span><span class="action-station">'+(s.location||'—')+'</span></div><div class="action-stats"><div class="action-stat"><span class="action-stat-label">Adoption</span><span class="action-stat-value red">'+s.adoption.toFixed(1)+'%</span></div><div class="action-stat"><span class="action-stat-label">Leaked</span><span class="action-stat-value orange">'+s.leaked+'</span></div><div class="action-stat"><span class="action-stat-label">Kooner</span><span class="action-stat-value">'+s.kooner+'</span></div></div></div>';}
-            c.innerHTML=h;
+        function populateActionCards(){/* legacy - replaced by populateActionMatrix */}
+        function populateActionTable(){/* legacy - replaced by populateActionMatrix */}
+
+        function populateActionMatrix(){
+            // Sentiment lookup: station -> {avg, label, responses}
+            var sentMap={};
+            for(var i=0;i<sentimentData.length;i++){
+                var sd=sentimentData[i];
+                var st=sd.station;
+                if(!sentMap[st]){sentMap[st]={total:0,count:0,responses:0};}
+                sentMap[st].total+=sd.avgScore;
+                sentMap[st].count++;
+                sentMap[st].responses+=sd.responses;
+            }
+
+            // WK10 leaked lookup
+            var wk10Map=wk10Leaked||{};
+            var wk08Map=wk08Leaked||{};
+
+            // Top leaking DSP lookup from wk10TopDSP
+            var topDSP=wk10TopDSP||{};
+
+            // Build scored list
+            var totalLeaked=0;
+            for(var i=0;i<stationData.length;i++) totalLeaked+=stationData[i].leaked;
+
+            var scored=stationData.map(function(s){
+                var gap=Math.max(0,85-s.adoption);
+                var leakPct=s.leaked/totalLeaked*100;
+                var sentAvg=sentMap[s.station]?sentMap[s.station].total/sentMap[s.station].count:null;
+                var sentPenalty=sentAvg!=null?(5-sentAvg)*20:15;
+                var score=gap*0.4+leakPct*0.35+sentPenalty*0.25;
+                var wk10l=wk10Map[s.station]||0;
+                var wk8l=wk08Map[s.station]||0;
+                // Trend: compare wk10 to wk08
+                var trend=wk10l===0&&s.adoption>=79?'improving':wk10l>=wk8l&&wk10l>=5?'worsening':'stable';
+                var priority=s.adoption>=85?'on-track':score>=30?'critical':score>=20?'high':score>=8?'monitor':'on-track';
+                return {s:s, score:score, sentAvg:sentAvg, sentResponses:sentMap[s.station]?sentMap[s.station].responses:0, wk10l:wk10l, trend:trend, priority:priority, gap:gap, leakPct:leakPct};
+            }).sort(function(a,b){return b.score-a.score});
+
+            // Update KPI counts
+            var counts={critical:0,high:0,monitor:0,'on-track':0};
+            scored.forEach(function(x){counts[x.priority]=(counts[x.priority]||0)+1;});
+            document.getElementById('actionCountCritical').textContent=counts.critical||0;
+            document.getElementById('actionCountHigh').textContent=counts.high||0;
+            document.getElementById('actionCountMedium').textContent=counts.monitor||0;
+            document.getElementById('actionCountGood').textContent=counts['on-track']||0;
+
+            // Recommended actions per station
+            var actions={
+                HPD1:{text:'Escalate Portland technician coverage — JDTC routing 100% of WOs elsewhere. Emergency hiring or subcontract needed.',engage:'Direct call to JDTC'},
+                HLA2:{text:'Address ARMA parts backlog (back-door back-orders confirmed). Stock common parts on-site. BORN also consistent leaker.',engage:'Site visit + parts escalation to Kooner ops'},
+                HMS2:{text:'LDOG is sole leaking DSP — 6 in WK10, consistent pattern. Relationship-first outreach before any pitch.',engage:'1:1 call with LDOG manager'},
+                HDT3:{text:'SFRM flagging weekend coverage gap and on-site capability limits (no lift). Two SFRM-specific asks: shop facility + day-shift tech.',engage:'Address SFRM survey items directly'},
+                HIN3:{text:'JBXL is primary leaker. Low Kooner volume (19 total) — confirm technician coverage plan with ops.',engage:'Ops coverage review + JBXL outreach'},
+                HAU1:{text:'FICL and GMIL routing WOs externally. FICL has been top leaker most weeks. WK10 improved to 4 — reinforce.',engage:'Follow up on WK10 improvement'},
+                HCL2:{text:'D4DS is a 5/5 advocate — leverage as reference. DGWD is the leakage source. DGWD scheduling concerns flagged in roundtable.',engage:'Address DGWD scheduling; use D4DS as model'},
+                HHO3:{text:'Three small DSPs leaking (DASL, RRTL, NLZL). No survey data. Site visit recommended to gauge relationships.',engage:'Schedule site visit + informal feedback'},
+                HDY1:{text:'TWLD scoring 4.3/5 — WK10 was clean (0 leaked). TLGZ onboarding ongoing. Reinforce TWLD relationship.',engage:'Reinforce TWLD; check TLGZ onboarding'},
+                HTP2:{text:'Just crossed 85% target. ORMP (2.3/5) is the leakage risk — paperwork delays and WO visibility were main complaints.',engage:'Close loop on ORMP WO visibility issues'},
+                HCT2:{text:'89.6% adoption — strong. TGLO is the lone leaking DSP (2 WK10). Roundtable in Mar revealed tech quality concerns.',engage:'Monitor TGLO; follow up on Mar roundtable items'},
+                HSL1:{text:'90.6% adoption. PRLC scoring 4/5 — paperwork speed is their main friction point. Continue current approach.',engage:'Expedite PRLC paperwork process'},
+                HMK4:{text:'100% adoption. Zero leakage. Use as benchmark and success story for other stations.',engage:'Feature in newsletter / DSP comms'}
+            };
+
+            var priorityColors={critical:'var(--accent-red)',high:'var(--accent-orange)',monitor:'var(--accent-blue)','on-track':'var(--accent-green)'};
+            var priorityBg={critical:'rgba(255,71,87,0.12)',high:'rgba(255,165,2,0.08)',monitor:'rgba(55,66,250,0.08)','on-track':'rgba(0,255,136,0.06)'};
+            var trendIcon={improving:'<span style="color:var(--accent-green);font-size:0.85rem">↗ Improving</span>',worsening:'<span style="color:var(--accent-red);font-size:0.85rem">↘ Worsening</span>',stable:'<span style="color:var(--text-muted);font-size:0.85rem">→ Stable</span>'};
+
+            var h='';
+            scored.forEach(function(x){
+                var s=x.s;
+                var pc=priorityColors[x.priority];
+                var pb=priorityBg[x.priority];
+                var sentStr=x.sentAvg!=null?x.sentAvg.toFixed(1)+'/5 ('+x.sentResponses+' responses)':'No data';
+                var sentColor=x.sentAvg==null?'var(--text-muted)':x.sentAvg>=4?'var(--accent-green)':x.sentAvg>=3?'var(--accent-yellow)':x.sentAvg>=2?'var(--accent-orange)':'var(--accent-red)';
+                var wk10str=x.wk10l===0?'<span style="color:var(--accent-green)">0 ✓</span>':'<span style="color:var(--accent-red)">'+x.wk10l+'</span>';
+                var act=actions[s.station]||{text:'Continue monitoring.',engage:'Regular check-in'};
+                var topDSPstr=topDSP[s.station]&&topDSP[s.station]!=='—'?topDSP[s.station]:'None';
+
+                h+='<div style="background:'+pb+';border:1px solid var(--border-color);border-left:4px solid '+pc+';border-radius:12px;padding:20px;margin-bottom:14px">';
+                // Header row
+                h+='<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:10px">';
+                h+='<div style="display:flex;align-items:center;gap:14px">';
+                h+='<span style="font-size:1.6rem;font-weight:700;font-family:monospace">'+s.station+'</span>';
+                h+='<span style="font-size:0.75rem;color:var(--text-secondary);background:var(--bg-dark);padding:3px 8px;border-radius:6px">'+s.location+'</span>';
+                h+='<span style="font-size:0.7rem;font-weight:600;text-transform:uppercase;padding:4px 10px;border-radius:12px;background:'+pb+';color:'+pc+';border:1px solid '+pc+'">'+x.priority.replace('-',' ')+'</span>';
+                h+='</div>';
+                h+='<div style="display:flex;gap:8px;align-items:center">'+trendIcon[x.trend]+'<span style="font-family:monospace;font-size:0.75rem;color:var(--text-muted)">score: '+x.score.toFixed(0)+'</span></div>';
+                h+='</div>';
+                // Stats row
+                h+='<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:14px">';
+                h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">Adoption</div><div style="font-family:monospace;font-weight:700;font-size:1.1rem;color:'+(s.adoption>=85?'var(--accent-green)':'var(--accent-red)')+'">'+s.adoption.toFixed(1)+'%</div></div>';
+                h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">Total Leaked</div><div style="font-family:monospace;font-weight:700;font-size:1.1rem;color:var(--accent-red)">'+s.leaked+'</div></div>';
+                h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">WK10 Leaked</div><div style="font-family:monospace;font-weight:700;font-size:1.1rem">'+wk10str+'</div></div>';
+                h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">Sentiment</div><div style="font-family:monospace;font-weight:700;font-size:1rem;color:'+sentColor+'">'+sentStr+'</div></div>';
+                h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">WK10 Top Leaker</div><div style="font-size:0.85rem;color:var(--text-secondary)">'+topDSPstr+'</div></div>';
+                h+='</div>';
+                // Action row
+                h+='<div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start">';
+                h+='<div><div style="font-size:0.7rem;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:5px">Recommended Action</div>';
+                h+='<div style="font-size:0.88rem;color:var(--text-secondary);line-height:1.55">'+act.text+'</div></div>';
+                h+='<div style="min-width:180px;background:var(--bg-card);border-radius:8px;padding:10px;text-align:center"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:5px">Engagement Mode</div>';
+                h+='<div style="font-size:0.8rem;color:var(--accent-purple);font-weight:500">'+act.engage+'</div></div>';
+                h+='</div>';
+                h+='</div>';
+            });
+            document.getElementById('actionMatrixList').innerHTML=h;
         }
 
-        function populateActionTable(){
-            var t=document.getElementById('actionTable'),h='';
-            var sorted=stationData.slice().filter(function(s){return s.adoption<85}).sort(function(a,b){return a.adoption-b.adoption});
-            for(var i=0;i<sorted.length;i++){var s=sorted[i];
-            var priority=s.adoption<20?'critical':s.adoption<50?'high':s.adoption<70?'medium':'low';
-            var impact=(s.leaked/594*100).toFixed(1);
-            var action=s.adoption<20?'Emergency intervention':s.adoption<50?'Priority outreach':s.adoption<70?'Monitor & improve':'Push to target';
-            h+='<tr><td><span class="priority-pill priority-'+priority+'">'+priority+'</span></td><td><span class="station-name">'+s.station+'</span></td><td style="color:var(--accent-red)">'+s.adoption.toFixed(1)+'%</td><td>'+s.leaked+'</td><td>'+impact+'%</td><td>'+action+'</td></tr>';}
-            t.innerHTML=h;
-        }
+        
 
         function populateFeedbackList(){
             var c=document.getElementById('feedbackList'),h='';
@@ -1358,7 +1575,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
             // Weekly bar chart
             new Chart(document.getElementById('weeklyBarChart'),{
                 type:'bar',
-                data:{labels:['WK53','WK1','WK2','WK3','WK4','WK5','WK10'],datasets:[{label:'Kooner WOs',data:[77,58,140,140,159,153,326],backgroundColor:'rgba(0,255,136,0.7)',borderRadius:4}]},
+                data:{labels:['WK6','WK7','WK8','WK9','WK10'],datasets:[{label:'Kooner WOs',data:[148,157,194,153,326],backgroundColor:'rgba(0,255,136,0.7)',borderRadius:4}]},
                 options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a'}}},scales:{y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},x:{grid:{display:false},ticks:{color:'#8b8b9a'}}}}
             });
 
@@ -1371,11 +1588,11 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
             });
 
             // Station weekly stacked chart
-            var weekLabels=['WK53','WK1','WK2','WK3','WK4','WK5','WK10'];
+            var weekLabels=['WK6','WK7','WK8','WK9','WK10'];
             var topStations=['HDT3','HLA2','HHO3','HTP2','HMK4','HCL2','HDY1','HAU1'];
             var datasets=topStations.map(function(st,i){
                 var w=weeklyByStation[st];
-                return{label:st,data:[w.WK53||0,w.WK1||0,w.WK2||0,w.WK3||0,w.WK4||0,w.WK5||0,w.WK10||0],backgroundColor:colors[i],borderRadius:2};
+                return{label:st,data:[w.WK6||0,w.WK7||0,w.WK8||0,w.WK9||0,w.WK10||0],backgroundColor:colors[i],borderRadius:2};
             });
             new Chart(document.getElementById('stationWeeklyChart'),{
                 type:'bar',
@@ -1600,8 +1817,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
             populateStationFullTable();
             populateStationWeeklyTable();
             populateDSPTable('all');
-            populateActionCards();
-            populateActionTable();
+            populateActionMatrix();
             populateFeedbackList();
             createCharts();
             populateWk10LeakTable();
