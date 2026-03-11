@@ -189,7 +189,45 @@
         .modal-section li::marker{color:var(--accent-blue)}
         .empty-state{color:var(--text-muted);font-size:0.85rem;font-style:italic;padding:8px 0}
         @media(max-width:900px){.cal-layout{grid-template-columns:1fr}}
-    </style>
+    
+        /* ── Admin Mode ─────────────────────────────────────────────── */
+        .admin-fab{position:fixed;bottom:28px;right:28px;z-index:500;background:var(--accent-purple);color:#fff;border:none;border-radius:50px;padding:12px 20px;font-size:0.85rem;font-weight:600;font-family:'Space Grotesk',sans-serif;cursor:pointer;box-shadow:0 4px 20px rgba(168,85,247,0.4);transition:all 0.2s ease;display:flex;align-items:center;gap:8px}
+        .admin-fab:hover{background:#9333ea;transform:translateY(-2px)}
+        .admin-fab.active-mode{background:var(--accent-green);color:#000;box-shadow:0 4px 20px rgba(0,255,136,0.4)}
+        .admin-edit-btn{position:absolute;top:4px;right:4px;background:rgba(168,85,247,0.85);color:#fff;border:none;border-radius:4px;padding:2px 6px;font-size:0.6rem;cursor:pointer;display:none;font-family:'Space Grotesk',sans-serif;z-index:10}
+        .admin-mode-on .calendar-day:hover .admin-edit-btn{display:block}
+        .admin-mode-on .calendar-day{position:relative;cursor:pointer}
+        .admin-mode-on .calendar-event{pointer-events:none}
+        .admin-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:2000;justify-content:center;align-items:center;backdrop-filter:blur(6px)}
+        .admin-overlay.active{display:flex}
+        .admin-modal{background:var(--bg-card);border:1px solid var(--border-color);border-radius:16px;padding:32px;width:90%;max-width:560px;max-height:85vh;overflow-y:auto;position:relative}
+        .admin-modal h3{font-size:1.2rem;font-weight:700;margin-bottom:20px;color:var(--text-primary)}
+        .admin-field{margin-bottom:16px}
+        .admin-field label{display:block;font-size:0.78rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px}
+        .admin-field input,.admin-field select,.admin-field textarea{width:100%;background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:8px;padding:10px 12px;color:var(--text-primary);font-family:'Space Grotesk',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.15s}
+        .admin-field input:focus,.admin-field select,.admin-field textarea:focus{border-color:var(--accent-blue)}
+        .admin-field select option{background:var(--bg-card)}
+        .admin-field textarea{resize:vertical;min-height:80px}
+        .admin-actions-list{margin-bottom:8px}
+        .admin-action-item{display:flex;gap:8px;margin-bottom:6px}
+        .admin-action-item input{flex:1}
+        .admin-action-item button{background:rgba(255,71,87,0.2);color:var(--accent-red);border:none;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:0.8rem}
+        .admin-btn-row{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+        .admin-btn{padding:10px 20px;border-radius:8px;border:none;font-family:'Space Grotesk',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;transition:all 0.15s}
+        .admin-btn.save{background:var(--accent-green);color:#000}
+        .admin-btn.save:hover{background:#00cc6a}
+        .admin-btn.delete{background:rgba(255,71,87,0.2);color:var(--accent-red);border:1px solid var(--accent-red)}
+        .admin-btn.cancel{background:var(--bg-card-hover);color:var(--text-secondary);border:1px solid var(--border-color)}
+        .admin-btn.add-action{background:rgba(55,66,250,0.2);color:var(--accent-blue);border:1px solid var(--accent-blue);font-size:0.82rem;padding:7px 14px}
+        .admin-pin-modal{max-width:340px;text-align:center}
+        .admin-pin-modal input{text-align:center;font-size:1.4rem;letter-spacing:0.3em;font-family:'JetBrains Mono',monospace}
+        .admin-pin-error{color:var(--accent-red);font-size:0.82rem;margin-top:8px;min-height:20px}
+        .admin-banner{display:none;background:rgba(168,85,247,0.15);border-bottom:1px solid var(--accent-purple);padding:8px 24px;font-size:0.82rem;color:var(--accent-purple);text-align:center;position:sticky;top:0;z-index:400}
+        .admin-banner.visible{display:block}
+        .cal-day-add{display:none;position:absolute;bottom:4px;right:4px;background:rgba(55,66,250,0.7);color:#fff;border:none;border-radius:4px;padding:1px 5px;font-size:0.65rem;cursor:pointer;font-family:'Space Grotesk',sans-serif}
+        .admin-mode-on .cal-day-add{display:block}
+
+        </style>
 </head>
 <body>
     <div class="bg-grid"></div>
@@ -348,6 +386,93 @@
                         <div class="section-label">Past Events with Notes</div>
                         <div id="pastEvents"></div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Admin Mode FAB -->
+        <button class="admin-fab" id="adminFab" onclick="adminFabClick()">&#9998; Edit Calendar</button>
+        <div class="admin-banner" id="adminBanner">&#128274; Admin Mode Active &mdash; click any day to add an event, or click an event to edit it &nbsp;&nbsp;<button onclick="exitAdminMode()" style="background:rgba(168,85,247,0.3);border:1px solid var(--accent-purple);color:var(--accent-purple);border-radius:6px;padding:3px 10px;cursor:pointer;font-size:0.78rem;font-family:'Space Grotesk',sans-serif">Exit</button></div>
+
+        <!-- PIN Gate -->
+        <div class="admin-overlay" id="adminPinOverlay">
+            <div class="admin-modal admin-pin-modal">
+                <h3>&#128274; Admin Access</h3>
+                <div class="admin-field">
+                    <label>Enter PIN</label>
+                    <input type="password" id="adminPinInput" maxlength="6" placeholder="••••" onkeydown="if(event.key==='Enter')checkAdminPin()">
+                </div>
+                <div class="admin-pin-error" id="adminPinError"></div>
+                <div class="admin-btn-row" style="justify-content:center">
+                    <button class="admin-btn save" onclick="checkAdminPin()">Unlock</button>
+                    <button class="admin-btn cancel" onclick="closeAdminPin()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event Edit/Add Modal -->
+        <div class="admin-overlay" id="adminEventOverlay">
+            <div class="admin-modal">
+                <h3 id="adminModalTitle">Add Event</h3>
+                <input type="hidden" id="adminEditIndex">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                    <div class="admin-field">
+                        <label>Date</label>
+                        <input type="date" id="adminDate">
+                    </div>
+                    <div class="admin-field">
+                        <label>Time</label>
+                        <input type="text" id="adminTime" placeholder="e.g. 10:00 AM CT">
+                    </div>
+                    <div class="admin-field" style="grid-column:1/-1">
+                        <label>Event Title</label>
+                        <input type="text" id="adminTitle" placeholder="e.g. HLA2 Roundtable">
+                    </div>
+                    <div class="admin-field">
+                        <label>Type</label>
+                        <select id="adminType">
+                            <option value="roundtable">DSP Roundtable</option>
+                            <option value="site-visit">Site Visit</option>
+                            <option value="training">Training</option>
+                            <option value="review">Review</option>
+                            <option value="newsletter">Newsletter</option>
+                            <option value="deadline">Deadline</option>
+                        </select>
+                    </div>
+                    <div class="admin-field">
+                        <label>Station</label>
+                        <select id="adminStation">
+                            <option value="All">All</option>
+                            <option value="HAU1">HAU1</option>
+                            <option value="HCL2">HCL2</option>
+                            <option value="HCT2">HCT2</option>
+                            <option value="HDT3">HDT3</option>
+                            <option value="HDY1">HDY1</option>
+                            <option value="HHO3">HHO3</option>
+                            <option value="HIN3">HIN3</option>
+                            <option value="HLA2">HLA2</option>
+                            <option value="HMK4">HMK4</option>
+                            <option value="HMS2">HMS2</option>
+                            <option value="HPD1">HPD1</option>
+                            <option value="HSL1">HSL1</option>
+                            <option value="HTP2">HTP2</option>
+                        </select>
+                    </div>
+                    <div class="admin-field" style="grid-column:1/-1">
+                        <label>Notes / Summary</label>
+                        <textarea id="adminNotes" placeholder="What happened, key discussion points..."></textarea>
+                    </div>
+                </div>
+                <div class="admin-field">
+                    <label>Action Items</label>
+                    <div class="admin-actions-list" id="adminActionsList"></div>
+                    <button class="admin-btn add-action" onclick="adminAddActionItem('')">+ Add Action Item</button>
+                </div>
+                <div class="admin-btn-row">
+                    <button class="admin-btn save" onclick="adminSaveEvent()">&#10003; Save Event</button>
+                    <button class="admin-btn delete" id="adminDeleteBtn" onclick="adminDeleteEvent()" style="display:none">&#128465; Delete</button>
+                    <button class="admin-btn cancel" onclick="closeAdminEventModal()">Cancel</button>
                 </div>
             </div>
         </div>
@@ -801,7 +926,14 @@
 }
 
 function calClick(el){
-    openEventModal(el.getAttribute('data-date'), parseInt(el.getAttribute('data-idx')));
+    var date = el.getAttribute('data-date');
+    var idx  = parseInt(el.getAttribute('data-idx'));
+    if(adminMode){
+        event.stopPropagation();
+        adminOpenEditModal(date, idx);
+        return;
+    }
+    openEventModal(date, idx);
 }
 
 function openEventModal(date, idx){
@@ -908,6 +1040,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
             populateFeedbackList();
             createCharts();
             populateWk10LeakTable();
+            loadAdminEvents();
             renderCalendar();
             renderUpcomingEvents();
             renderPastEvents();
@@ -1725,11 +1858,11 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
         var ds = calendarYear + '-' + mm + '-' + dd;
         var isTod = (today.getFullYear() === calendarYear && today.getMonth() === calendarMonth && today.getDate() === d);
         var evts  = calendarEvents.filter(function(e){ return e.date === ds; });
-        h += '<div class="calendar-day' + (isTod ? ' cal-today' : '') + '">';
+        h += '<div class="calendar-day' + (isTod ? ' cal-today' : '') + '" onclick="if(adminMode)adminOpenAddModal(\''+ds+'\')">';
         h += '<div class="cal-date-num">' + d + '</div>';
         evts.forEach(function(ev, ei){
             var ac = ev.actions && ev.actions.length ? '<span class="cal-action-count">' + ev.actions.length + '</span>' : '';
-            h += '<div class="calendar-event ' + ev.type + '" data-date="' + ds + '" data-idx="' + ei + '" onclick="calClick(this)">' + ev.title + ac + '</div>';
+            h += '<div class="calendar-event ' + ev.type + '" data-date="' + ds + '" data-idx="' + ei + '" onclick="event.stopPropagation();calClick(this)">' + ev.title + ac + '</div>';
         });
         h += '</div>';
     }
@@ -1821,11 +1954,232 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMo
             populateFeedbackList();
             createCharts();
             populateWk10LeakTable();
+            loadAdminEvents();
             renderCalendar();
             renderUpcomingEvents();
             renderPastEvents();
             document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
         });
-    </script>
+    
+
+        // ── Admin Mode ────────────────────────────────────────────────────
+        var ADMIN_PIN = '1234';  // Change this PIN
+        var adminUnlocked = false;
+        var adminMode = false;
+
+        // Merge localStorage edits into calendarEvents on load
+        function loadAdminEvents(){
+            try {
+                var stored = localStorage.getItem('kooner_cal_edits');
+                if(stored){
+                    var edits = JSON.parse(stored);
+                    // Remove any events marked deleted
+                    calendarEvents = calendarEvents.filter(function(e){
+                        return !edits.deleted || edits.deleted.indexOf(e.date+'||'+e.title) === -1;
+                    });
+                    // Apply edits to existing events
+                    if(edits.modified){
+                        edits.modified.forEach(function(m){
+                            var idx = calendarEvents.findIndex(function(e){ return e.date+'||'+e.title === m._key; });
+                            if(idx>=0) calendarEvents[idx] = m;
+                        });
+                    }
+                    // Add new events
+                    if(edits.added){
+                        edits.added.forEach(function(a){ calendarEvents.push(a); });
+                    }
+                }
+            } catch(e){}
+        }
+
+        function saveAdminEdits(type, payload){
+            var stored = {};
+            try { stored = JSON.parse(localStorage.getItem('kooner_cal_edits')||'{}'); } catch(e){}
+            if(!stored.deleted) stored.deleted = [];
+            if(!stored.modified) stored.modified = [];
+            if(!stored.added) stored.added = [];
+            if(type === 'delete'){
+                stored.deleted.push(payload);
+                // Remove from modified too
+                stored.modified = stored.modified.filter(function(m){ return m._key !== payload; });
+            } else if(type === 'modify'){
+                var idx = stored.modified.findIndex(function(m){ return m._key === payload._key; });
+                if(idx>=0) stored.modified[idx] = payload;
+                else stored.modified.push(payload);
+            } else if(type === 'add'){
+                stored.added.push(payload);
+            }
+            localStorage.setItem('kooner_cal_edits', JSON.stringify(stored));
+        }
+
+        function adminFabClick(){
+            if(adminMode){ exitAdminMode(); return; }
+            if(adminUnlocked){ enterAdminMode(); return; }
+            document.getElementById('adminPinOverlay').classList.add('active');
+            setTimeout(function(){ document.getElementById('adminPinInput').focus(); }, 100);
+        }
+
+        function checkAdminPin(){
+            var pin = document.getElementById('adminPinInput').value;
+            if(pin === ADMIN_PIN){
+                adminUnlocked = true;
+                document.getElementById('adminPinInput').value = '';
+                document.getElementById('adminPinError').textContent = '';
+                document.getElementById('adminPinOverlay').classList.remove('active');
+                enterAdminMode();
+            } else {
+                document.getElementById('adminPinError').textContent = 'Incorrect PIN. Try again.';
+                document.getElementById('adminPinInput').value = '';
+                document.getElementById('adminPinInput').focus();
+            }
+        }
+
+        function closeAdminPin(){
+            document.getElementById('adminPinOverlay').classList.remove('active');
+            document.getElementById('adminPinInput').value = '';
+            document.getElementById('adminPinError').textContent = '';
+        }
+
+        function enterAdminMode(){
+            adminMode = true;
+            document.getElementById('adminFab').classList.add('active-mode');
+            document.getElementById('adminFab').innerHTML = '&#10005; Exit Admin';
+            document.getElementById('adminBanner').classList.add('visible');
+            document.querySelector('.container').classList.add('admin-mode-on');
+            renderCalendar();
+        }
+
+        function exitAdminMode(){
+            adminMode = false;
+            document.getElementById('adminFab').classList.remove('active-mode');
+            document.getElementById('adminFab').innerHTML = '&#9998; Edit Calendar';
+            document.getElementById('adminBanner').classList.remove('visible');
+            document.querySelector('.container').classList.remove('admin-mode-on');
+            renderCalendar();
+        }
+
+        // Override calClick to handle admin mode
+        var _origCalClick = typeof calClick !== 'undefined' ? calClick : null;
+        function calClick(date, idx){
+            if(adminMode){
+                if(idx !== undefined && idx !== null){
+                    adminOpenEditModal(date, idx);
+                } else {
+                    adminOpenAddModal(date);
+                }
+                return;
+            }
+            openEventModal(date, idx);
+        }
+
+        function adminOpenAddModal(date){
+            document.getElementById('adminModalTitle').textContent = 'Add Event';
+            document.getElementById('adminDate').value = date || '';
+            document.getElementById('adminTime').value = '';
+            document.getElementById('adminTitle').value = '';
+            document.getElementById('adminType').value = 'roundtable';
+            document.getElementById('adminStation').value = 'All';
+            document.getElementById('adminNotes').value = '';
+            document.getElementById('adminEditIndex').value = '';
+            document.getElementById('adminDeleteBtn').style.display = 'none';
+            document.getElementById('adminActionsList').innerHTML = '';
+            adminAddActionItem('');
+            document.getElementById('adminEventOverlay').classList.add('active');
+            setTimeout(function(){ document.getElementById('adminTitle').focus(); }, 100);
+        }
+
+        function adminOpenEditModal(date, idx){
+            var evts = calendarEvents.filter(function(e){ return e.date === date; });
+            if(!evts[idx]) return;
+            var ev = evts[idx];
+            document.getElementById('adminModalTitle').textContent = 'Edit Event';
+            document.getElementById('adminDate').value = ev.date;
+            document.getElementById('adminTime').value = ev.time || '';
+            document.getElementById('adminTitle').value = ev.title;
+            document.getElementById('adminType').value = ev.type;
+            document.getElementById('adminStation').value = ev.station || 'All';
+            document.getElementById('adminNotes').value = ev.notes || '';
+            document.getElementById('adminEditIndex').value = date + '||' + ev.title;
+            document.getElementById('adminDeleteBtn').style.display = 'inline-block';
+            // Populate actions
+            var al = document.getElementById('adminActionsList');
+            al.innerHTML = '';
+            if(ev.actions && ev.actions.length){
+                ev.actions.forEach(function(a){ adminAddActionItem(a); });
+            } else {
+                adminAddActionItem('');
+            }
+            document.getElementById('adminEventOverlay').classList.add('active');
+        }
+
+        function adminAddActionItem(val){
+            var list = document.getElementById('adminActionsList');
+            var div = document.createElement('div');
+            div.className = 'admin-action-item';
+            div.innerHTML = '<input type="text" placeholder="Action item — Owner: Name" value="'+escHtml(val||'')+'"><button onclick="this.parentElement.remove()" title="Remove">&#10005;</button>';
+            list.appendChild(div);
+        }
+
+        function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+        function adminSaveEvent(){
+            var date = document.getElementById('adminDate').value;
+            var title = document.getElementById('adminTitle').value.trim();
+            var time = document.getElementById('adminTime').value.trim();
+            var type = document.getElementById('adminType').value;
+            var station = document.getElementById('adminStation').value;
+            var notes = document.getElementById('adminNotes').value.trim();
+            var editKey = document.getElementById('adminEditIndex').value;
+
+            if(!date || !title){ alert('Date and Title are required.'); return; }
+
+            var actions = [];
+            document.querySelectorAll('#adminActionsList .admin-action-item input').forEach(function(inp){
+                if(inp.value.trim()) actions.push(inp.value.trim());
+            });
+
+            var newEvent = { date:date, title:title, time:time||'TBD', type:type, station:station, notes:notes, actions:actions };
+
+            if(editKey){
+                // Edit existing
+                newEvent._key = editKey;
+                var origIdx = calendarEvents.findIndex(function(e){ return e.date+'||'+e.title === editKey; });
+                if(origIdx >= 0) calendarEvents[origIdx] = newEvent;
+                saveAdminEdits('modify', newEvent);
+            } else {
+                // New event
+                calendarEvents.push(newEvent);
+                saveAdminEdits('add', newEvent);
+            }
+
+            closeAdminEventModal();
+            loadAdminEvents();
+            renderCalendar();
+            renderUpcomingEvents();
+            renderPastEvents();
+        }
+
+        function adminDeleteEvent(){
+            var key = document.getElementById('adminEditIndex').value;
+            if(!key) return;
+            if(!confirm('Delete this event? This cannot be undone.')) return;
+            calendarEvents = calendarEvents.filter(function(e){ return e.date+'||'+e.title !== key; });
+            saveAdminEdits('delete', key);
+            closeAdminEventModal();
+            loadAdminEvents();
+            renderCalendar();
+            renderUpcomingEvents();
+            renderPastEvents();
+        }
+
+        function closeAdminEventModal(){
+            document.getElementById('adminEventOverlay').classList.remove('active');
+        }
+
+        // Close admin modals on overlay click or Escape
+        document.getElementById('adminPinOverlay').addEventListener('click', function(e){ if(e.target===this) closeAdminPin(); });
+        document.getElementById('adminEventOverlay').addEventListener('click', function(e){ if(e.target===this) closeAdminEventModal(); });
+
+        </script>
 </body>
 </html>
