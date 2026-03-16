@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Last Mile Adoption & Engagement</title>
+    <title>Last Mile Adoption & Engagement — WK11</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
     <style>
@@ -15,7 +15,13 @@
         .header-left h1{font-size:2.5rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:8px;background:linear-gradient(135deg,#fff 0%,#8b8b9a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
         .header-left .subtitle{color:var(--text-secondary);font-size:1rem;display:flex;align-items:center;gap:12px}
         .target-badge{background:linear-gradient(135deg,var(--accent-green),#00cc6a);color:#000;padding:4px 12px;border-radius:20px;font-weight:600;font-size:0.85rem}
+        .wk-badge{background:rgba(168,85,247,0.2);color:var(--accent-purple);padding:4px 12px;border-radius:20px;font-weight:700;font-size:0.85rem;font-family:monospace;border:1px solid rgba(168,85,247,0.4)}
+        .pending-badge{background:rgba(255,165,2,0.15);color:var(--accent-orange);padding:4px 12px;border-radius:20px;font-weight:600;font-size:0.75rem;border:1px solid rgba(255,165,2,0.3)}
         .header-right{text-align:right}.last-updated{color:var(--text-muted);font-size:0.85rem;font-family:monospace}.data-period{color:var(--text-secondary);font-size:0.9rem;margin-top:4px}
+        .pending-banner{background:linear-gradient(135deg,rgba(255,165,2,0.08),rgba(255,217,61,0.05));border:1px solid rgba(255,165,2,0.3);border-radius:12px;padding:14px 20px;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+        .pending-banner-icon{font-size:1.4rem}
+        .pending-banner-title{font-weight:700;font-size:0.95rem;color:var(--accent-orange);margin-bottom:3px}
+        .pending-banner-text{font-size:0.85rem;color:var(--text-secondary)}
         .nav-tabs{display:flex;gap:8px;margin-bottom:24px;background:var(--bg-card);padding:8px;border-radius:12px;width:fit-content;flex-wrap:wrap}
         .nav-tab{padding:10px 20px;border-radius:8px;font-size:0.9rem;font-weight:500;cursor:pointer;transition:all 0.2s ease;background:transparent;border:none;color:var(--text-secondary)}
         .nav-tab:hover{background:var(--bg-card-hover);color:var(--text-primary)}.nav-tab.active{background:var(--accent-blue);color:white}
@@ -28,10 +34,11 @@
         .kpi-card.danger::before{background:linear-gradient(90deg,var(--accent-red),#ff2f43)}
         .kpi-label{font-size:0.85rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px}
         .kpi-value{font-size:2.2rem;font-weight:700;font-family:monospace;line-height:1}
-        .kpi-value.green{color:var(--accent-green)}.kpi-value.red{color:var(--accent-red)}.kpi-value.orange{color:var(--accent-orange)}.kpi-value.yellow{color:var(--accent-yellow)}
+        .kpi-value.green{color:var(--accent-green)}.kpi-value.red{color:var(--accent-red)}.kpi-value.orange{color:var(--accent-orange)}.kpi-value.yellow{color:var(--accent-yellow)}.kpi-value.purple{color:var(--accent-purple)}
         .kpi-subtext{font-size:0.8rem;color:var(--text-muted);margin-top:8px}
         .kpi-trend{display:inline-flex;align-items:center;gap:4px;font-size:0.85rem;margin-top:8px;padding:2px 8px;border-radius:4px}
         .kpi-trend.up{color:var(--accent-green);background:rgba(0,255,136,0.1)}
+        .kpi-trend.down{color:var(--accent-red);background:rgba(255,71,87,0.1)}
         .main-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
         .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:16px;padding:24px}
         .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
@@ -42,6 +49,7 @@
         .badge-trends{background:rgba(0,212,255,0.2);color:var(--accent-cyan)}
         .badge-insights{background:rgba(0,255,136,0.2);color:var(--accent-green)}
         .badge-sentiment{background:rgba(255,217,61,0.2);color:var(--accent-yellow)}
+        .badge-pending{background:rgba(255,165,2,0.2);color:var(--accent-orange)}
         .data-table{width:100%;border-collapse:collapse}
         .data-table th{text-align:left;padding:12px 8px;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted);border-bottom:1px solid var(--border-color);background:var(--bg-card)}
         .data-table td{padding:14px 8px;font-size:0.9rem;border-bottom:1px solid var(--border-color)}
@@ -57,26 +65,6 @@
         .priority-medium{background:rgba(55,66,250,0.2);color:var(--accent-blue)}
         .priority-low{background:rgba(139,139,154,0.2);color:var(--text-secondary)}
         .priority-on-target{background:rgba(0,255,136,0.2);color:var(--accent-green)}
-        .week-cell{font-family:monospace;font-size:0.8rem;text-align:center;min-width:55px;padding:6px 4px!important}
-        .week-cell.high{color:var(--accent-green);background:rgba(0,255,136,0.1)}
-        .week-cell.medium{color:var(--accent-orange);background:rgba(255,165,2,0.1)}
-        .week-cell.low{color:var(--accent-red);background:rgba(255,71,87,0.1)}
-        .week-cell.none{color:var(--text-muted)}
-        .trend-arrow{display:inline-flex;align-items:center;gap:4px;font-size:0.85rem;font-family:monospace}
-        .trend-arrow.up{color:var(--accent-green)}.trend-arrow.down{color:var(--accent-red)}.trend-arrow.flat{color:var(--text-muted)}
-        .full-width{grid-column:1/-1}
-        .action-list{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-        .action-card{background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:12px;padding:20px}
-        .action-card.critical{border-left:3px solid var(--accent-red)}.action-card.high{border-left:3px solid var(--accent-orange)}
-        .action-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
-        .action-dsp{font-size:1.5rem;font-weight:700;font-family:monospace}
-        .action-station{background:var(--bg-dark);padding:4px 10px;border-radius:8px;font-size:0.8rem;font-family:monospace;color:var(--text-secondary)}
-        .action-stats{display:flex;gap:16px;margin-bottom:12px}
-        .action-stat{display:flex;flex-direction:column}
-        .action-stat-label{font-size:0.7rem;color:var(--text-muted);text-transform:uppercase}
-        .action-stat-value{font-size:1.1rem;font-weight:600;font-family:monospace}
-        .action-stat-value.red{color:var(--accent-red)}.action-stat-value.orange{color:var(--accent-orange)}
-        .action-location{font-size:0.85rem;color:var(--text-secondary);padding-top:12px;border-top:1px solid var(--border-color)}
         .chart-container{position:relative;height:300px;width:100%}.chart-container.tall{height:400px}
         .filter-row{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
         .filter-btn{padding:6px 14px;border-radius:20px;font-size:0.8rem;font-weight:500;cursor:pointer;background:var(--bg-card-hover);border:1px solid var(--border-color);color:var(--text-secondary)}
@@ -108,6 +96,7 @@
         .sentiment-score.score-3{background:rgba(255,217,61,0.2);color:var(--accent-yellow)}
         .sentiment-score.score-2{background:rgba(255,165,2,0.2);color:var(--accent-orange)}
         .sentiment-score.score-1{background:rgba(255,71,87,0.2);color:var(--accent-red)}
+        .new-badge{display:inline-block;background:rgba(0,212,255,0.2);color:var(--accent-cyan);font-size:0.65rem;font-weight:700;padding:1px 6px;border-radius:8px;margin-left:6px;font-family:monospace;vertical-align:middle;border:1px solid rgba(0,212,255,0.3)}
         .feedback-card{background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:12px;padding:20px;margin-bottom:16px}
         .feedback-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border-color);flex-wrap:wrap;gap:10px}
         .feedback-meta{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.feedback-date{font-size:0.8rem;color:var(--text-muted)}
@@ -118,20 +107,8 @@
         .feedback-text{font-size:0.9rem;color:var(--text-secondary);line-height:1.6;font-style:italic}
         .feedback-text.issue{border-left:3px solid var(--accent-red);padding-left:12px;margin-bottom:12px}
         .feedback-text.suggestion{border-left:3px solid var(--accent-cyan);padding-left:12px}
-        .correlation-card{background:linear-gradient(135deg,rgba(255,217,61,0.1),rgba(255,165,2,0.1));border:1px solid var(--accent-yellow);border-radius:12px;padding:20px}
-        .correlation-card h4{color:var(--accent-yellow);margin-bottom:12px}
-        .correlation-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-color);flex-wrap:wrap;gap:10px}
-        .correlation-item:last-child{border-bottom:none}
-        .correlation-dsp{font-family:monospace;font-weight:600}
-        .correlation-metrics{display:flex;gap:20px}
-        .correlation-metric{display:flex;flex-direction:column;align-items:center}
-        .correlation-label{font-size:0.7rem;color:var(--text-muted)}
-        .correlation-value{font-family:monospace;font-weight:600}
-        @media(max-width:1200px){.kpi-row{grid-template-columns:repeat(3,1fr)}.action-list{grid-template-columns:repeat(2,1fr)}.insights-grid{grid-template-columns:1fr}}
-        @media(max-width:900px){.main-grid{grid-template-columns:1fr}.kpi-row{grid-template-columns:repeat(2,1fr)}.action-list{grid-template-columns:1fr}}
-        @media(max-width:600px){.header{flex-direction:column;gap:16px}.kpi-row{grid-template-columns:1fr}.nav-tabs{flex-wrap:wrap}}
-    
-        /* ── Calendar Tab Styles ── */
+        .full-width{grid-column:1/-1}
+        /* Calendar */
         .cal-legend{display:flex;gap:14px;margin-bottom:20px;flex-wrap:wrap}
         .cal-legend-item{display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--text-secondary)}
         .cal-legend-dot{width:10px;height:10px;border-radius:50%}
@@ -141,12 +118,12 @@
         .calendar-nav-btn:hover{background:var(--accent-blue);color:white;border-color:var(--accent-blue)}
         .calendar-month-title{font-size:1.3rem;font-weight:700;color:var(--text-primary);font-family:monospace}
         .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-        .calendar-header,.cal-header-cell{padding:8px;text-align:center;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;font-weight:600;letter-spacing:0.05em}
+        .cal-header-cell{padding:8px;text-align:center;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;font-weight:600;letter-spacing:0.05em}
         .calendar-day{min-height:90px;background:var(--bg-card-hover);border-radius:8px;padding:6px;border:1px solid transparent;transition:border-color 0.15s ease}
         .calendar-day:hover{border-color:var(--border-color)}
-        .calendar-day.today,.calendar-day.cal-today{border-color:var(--accent-blue);background:rgba(55,66,250,0.1)}
+        .calendar-day.cal-today{border-color:var(--accent-blue);background:rgba(55,66,250,0.1)}
         .calendar-day.other-month{opacity:0.25}
-        .calendar-date,.cal-date-num{font-size:0.8rem;font-weight:600;margin-bottom:4px;font-family:monospace}
+        .cal-date-num{font-size:0.8rem;font-weight:600;margin-bottom:4px;font-family:monospace}
         .calendar-event{font-size:0.62rem;padding:2px 5px;border-radius:4px;margin-bottom:2px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity 0.1s ease}
         .calendar-event:hover{opacity:0.75}
         .calendar-event.roundtable{background:rgba(168,85,247,0.3);color:var(--accent-purple)}
@@ -155,6 +132,7 @@
         .calendar-event.deadline{background:rgba(255,71,87,0.3);color:var(--accent-red)}
         .calendar-event.review{background:rgba(255,165,2,0.3);color:var(--accent-orange)}
         .calendar-event.newsletter{background:rgba(0,200,150,0.3);color:#00c896}
+        .calendar-event.office-hours{background:rgba(55,66,250,0.2);color:var(--accent-blue)}
         .cal-sidebar{display:flex;flex-direction:column;gap:20px}
         .event-note-card{background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:10px;padding:14px;margin-bottom:10px;border-left:3px solid var(--accent-purple);cursor:pointer;transition:border-color 0.15s ease}
         .event-note-card:hover{border-color:var(--accent-blue)}
@@ -163,24 +141,21 @@
         .event-note-card.type-training{border-left-color:var(--accent-cyan)}
         .event-note-card.type-deadline{border-left-color:var(--accent-red)}
         .event-note-card.type-newsletter{border-left-color:#00c896}
+        .event-note-card.type-office-hours{border-left-color:var(--accent-blue)}
         .event-title{font-weight:600;font-size:0.9rem;margin-bottom:2px}
         .event-date-meta{font-size:0.75rem;color:var(--text-muted);margin-bottom:6px;font-family:monospace}
         .event-summary-text{font-size:0.8rem;color:var(--text-secondary);line-height:1.45}
         .section-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:10px;font-weight:600}
-        .action-count,.cal-action-count{display:inline-block;background:rgba(55,66,250,0.2);color:var(--accent-blue);font-size:0.65rem;padding:1px 6px;border-radius:8px;margin-left:6px;font-family:monospace;font-weight:600}
+        .cal-action-count{display:inline-block;background:rgba(55,66,250,0.2);color:var(--accent-blue);font-size:0.65rem;padding:1px 6px;border-radius:8px;margin-left:6px;font-family:monospace;font-weight:600}
         .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:1000;justify-content:center;align-items:center;backdrop-filter:blur(4px)}
         .modal-overlay.active{display:flex}
         .modal-content{background:var(--bg-card);border:1px solid var(--border-color);border-radius:16px;padding:32px;max-width:580px;width:90%;max-height:80vh;overflow-y:auto;position:relative;animation:modalIn 0.2s ease}
         @keyframes modalIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-        .modal-close,.modal-close-btn{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text-muted);font-size:1.5rem;cursor:pointer;transition:color 0.15s}
-        .modal-close:hover,.modal-close-btn:hover{color:var(--text-primary)}
-        .modal-event-title,.modal-title{font-size:1.2rem;font-weight:700;margin-bottom:8px}
-        .modal-meta-row,.modal-meta{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-        .modal-meta-row span,.modal-meta span{font-size:0.8rem;color:var(--text-secondary);background:var(--bg-card-hover);padding:3px 8px;border-radius:6px}
-        .modal-empty{color:var(--text-muted);font-size:0.85rem;font-style:italic}
-        .modal-title{font-size:1.25rem;font-weight:700;margin-bottom:6px}
-        .modal-meta{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
-        .modal-meta span{font-size:0.82rem;color:var(--text-secondary);background:var(--bg-card-hover);padding:3px 8px;border-radius:6px}
+        .modal-close-btn{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text-muted);font-size:1.5rem;cursor:pointer;transition:color 0.15s}
+        .modal-close-btn:hover{color:var(--text-primary)}
+        .modal-event-title{font-size:1.2rem;font-weight:700;margin-bottom:8px}
+        .modal-meta-row{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+        .modal-meta-row span{font-size:0.8rem;color:var(--text-secondary);background:var(--bg-card-hover);padding:3px 8px;border-radius:6px}
         .modal-section{margin-bottom:16px}
         .modal-section h4{font-size:0.85rem;color:var(--accent-cyan);margin-bottom:8px;font-weight:600}
         .modal-section p{font-size:0.88rem;color:var(--text-secondary);line-height:1.6}
@@ -188,1041 +163,1026 @@
         .modal-section li{font-size:0.85rem;color:var(--text-secondary);padding:4px 0;line-height:1.5}
         .modal-section li::marker{color:var(--accent-blue)}
         .empty-state{color:var(--text-muted);font-size:0.85rem;font-style:italic;padding:8px 0}
-        @media(max-width:900px){.cal-layout{grid-template-columns:1fr}}
-    
-    #adminPinOverlay.active, #adminEventOverlay.active { display: flex !important; }
+        @media(max-width:1200px){.kpi-row{grid-template-columns:repeat(3,1fr)}}
+        @media(max-width:900px){.main-grid{grid-template-columns:1fr}.kpi-row{grid-template-columns:repeat(2,1fr)}.cal-layout{grid-template-columns:1fr}.insights-grid{grid-template-columns:1fr}}
+        @media(max-width:600px){.header{flex-direction:column;gap:16px}.kpi-row{grid-template-columns:1fr}.nav-tabs{flex-wrap:wrap}}
+
+        /* ── WoW Sentiment Styles ── */
+        .wow-sentiment-grid{display:flex;flex-direction:column;gap:16px}
+        .dsp-wow-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;overflow:hidden}
+        .dsp-wow-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border-color);flex-wrap:wrap;gap:10px}
+        .dsp-wow-identity{display:flex;align-items:center;gap:12px}
+        .dsp-wow-code{font-family:monospace;font-size:1.5rem;font-weight:700}
+        .dsp-wow-station{background:var(--bg-dark);padding:3px 10px;border-radius:6px;font-size:0.8rem;font-family:monospace;color:var(--text-secondary)}
+        .dsp-wow-meta{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+        .dsp-wow-meta-item{display:flex;flex-direction:column;align-items:center;gap:1px}
+        .dsp-wow-meta-label{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted)}
+        .dsp-wow-meta-value{font-family:monospace;font-size:1rem;font-weight:700}
+        .dsp-wow-trend-pill{display:flex;align-items:center;gap:5px;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:700;font-family:monospace}
+        .dsp-wow-trend-pill.improving{background:rgba(0,255,136,0.12);color:var(--accent-green);border:1px solid rgba(0,255,136,0.3)}
+        .dsp-wow-trend-pill.declining{background:rgba(255,71,87,0.12);color:var(--accent-red);border:1px solid rgba(255,71,87,0.3)}
+        .dsp-wow-trend-pill.flat{background:rgba(139,139,154,0.12);color:var(--text-secondary);border:1px solid var(--border-color)}
+        .dsp-wow-trend-pill.new{background:rgba(0,212,255,0.12);color:var(--accent-cyan);border:1px solid rgba(0,212,255,0.3)}
+        .dsp-wow-timeline{padding:16px 18px;overflow-x:auto}
+        .dsp-wow-weeks{display:flex;gap:8px;min-width:max-content}
+        .wow-week-cell{min-width:110px;background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:10px;padding:10px 12px;position:relative;transition:border-color 0.15s}
+        .wow-week-cell:hover{border-color:var(--accent-blue)}
+        .wow-week-cell.latest{border-color:rgba(168,85,247,0.5);background:rgba(168,85,247,0.06)}
+        .wow-week-label{font-family:monospace;font-size:0.65rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px}
+        .wow-week-date{font-size:0.6rem;color:var(--text-muted);margin-bottom:8px}
+        .wow-score-row{display:flex;gap:5px;margin-bottom:6px}
+        .wow-score-dot{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1}
+        .wow-score-dot-label{font-size:0.55rem;text-transform:uppercase;color:var(--text-muted);letter-spacing:0.04em}
+        .wow-score-dot-value{font-family:monospace;font-size:0.85rem;font-weight:700;line-height:1}
+        .wow-score-bar-track{height:4px;background:var(--bg-dark);border-radius:2px;margin:1px 0 3px;overflow:hidden}
+        .wow-score-bar-fill{height:100%;border-radius:2px;transition:width 0.4s ease}
+        .wow-avg-value{font-family:monospace;font-size:1.3rem;font-weight:700;line-height:1;text-align:center}
+        .wow-avg-label{font-size:0.6rem;text-transform:uppercase;color:var(--text-muted);text-align:center;margin-top:2px}
+        .wow-delta{font-family:monospace;font-size:0.65rem;font-weight:700;text-align:center;margin-top:4px}
+        .wow-delta.up{color:var(--accent-green)}
+        .wow-delta.dn{color:var(--accent-red)}
+        .wow-delta.nt{color:var(--text-muted)}
+        .wow-issue-flag{margin-top:6px;font-size:0.6rem;color:var(--accent-red);font-style:italic;line-height:1.3;border-top:1px solid rgba(255,71,87,0.2);padding-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+        .wow-spacer{min-width:40px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:1.2rem;flex-shrink:0}
+        .wow-no-data{min-width:90px;background:rgba(90,100,128,0.08);border:1px dashed var(--border-color);border-radius:10px;display:flex;align-items:center;justify-content:center;padding:10px;color:var(--text-muted);font-size:0.7rem;font-style:italic}
+        .sent-filter-row{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+        .sent-filter-btn{padding:5px 14px;border-radius:20px;font-size:0.78rem;font-weight:600;cursor:pointer;background:var(--bg-card-hover);border:1px solid var(--border-color);color:var(--text-secondary);transition:all 0.15s;font-family:'Space Grotesk',sans-serif}
+        .sent-filter-btn:hover,.sent-filter-btn.active{background:var(--accent-blue);border-color:var(--accent-blue);color:white}
+        .dsp-wow-card.hidden{display:none}
+        .silent-alert{background:rgba(255,165,2,0.08);border:1px solid rgba(255,165,2,0.3);border-radius:10px;padding:10px 14px;font-size:0.82rem;color:var(--accent-orange);display:flex;align-items:center;gap:8px;margin-bottom:10px}
     </style>
 </head>
 <body>
-    <div class="bg-grid"></div>
-    <div class="container">
-        <header class="header">
-            <div class="header-left">
-                <h1>Last Mile Adoption & Engagement</h1>
-                <div class="subtitle"><span>Vendor Adoption Tracking</span><span class="target-badge">TARGET: 85%</span></div>
-            </div>
-            <div class="header-right">
-                <div class="last-updated">Last Updated: 2026-03-11</div>
-                <div class="data-period">Data Period: WK53 - WK10 (Dec 21 - Mar 14)</div>
-            </div>
-        </header>
-        <div class="nav-tabs">
-            <button class="nav-tab active" onclick="showTab('overview',this)">📊 Overview</button>
-            <button class="nav-tab" onclick="showTab('trends',this)">📈 Week-over-Week</button>
-            <button class="nav-tab" onclick="showTab('stations',this)">🏢 Stations & DSPs</button>
-            <button class="nav-tab" onclick="showTab('sentiment',this)">💬 DSP Sentiment</button>
-            <button class="nav-tab" onclick="showTab('actions',this)">🎯 Actions</button>
-            <button class="nav-tab" onclick="showTab('calendar',this)">📅 Calendar</button>
-        </div>
-
-        <div id="overview" class="tab-content active">
-            <div class="kpi-row">
-                <div class="kpi-card"><div class="kpi-label">Total Kooner WOs</div><div class="kpi-value green">1,571</div><div class="kpi-subtext">WK1 through WK10 (all weeks)</div></div>
-                <div class="kpi-card warning"><div class="kpi-label">Total Leaked WOs</div><div class="kpi-value red">977</div><div class="kpi-subtext">Sent to other vendors</div></div>
-                <div class="kpi-card danger"><div class="kpi-label">Current Adoption</div><div class="kpi-value red">61.7%</div><div class="kpi-subtext">23.3% gap to target</div></div>
-                <div class="kpi-card success"><div class="kpi-label">On Target Stations</div><div class="kpi-value green">3</div><div class="kpi-subtext">of 13 stations ≥85%</div></div>
-                <div class="kpi-card"><div class="kpi-label">Total WOs</div><div class="kpi-value">2,548</div><div class="kpi-subtext">Across all 13 stations</div></div>
-            </div>
-            <div class="main-grid">
-                <div class="card"><div class="card-header"><div class="card-title">Weekly Kooner Volume</div><span class="card-badge badge-trends">6 WEEKS</span></div><div class="chart-container"><canvas id="weeklyBarChart"></canvas></div></div>
-                <div class="card"><div class="card-header"><div class="card-title">Station Adoption Distribution</div></div><div class="chart-container"><canvas id="stationBarChart"></canvas></div></div>
-                <div class="card"><div class="card-header"><div class="card-title">Station Status</div><span class="card-badge badge-stations">13 STATIONS</span></div><div class="table-scroll" style="max-height:300px"><table class="data-table"><thead><tr><th>Station</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>Status</th></tr></thead><tbody id="stationQuickTable"></tbody></table></div></div>
-                <div class="card"><div class="card-header"><div class="card-title">Top Opportunities</div><span class="card-badge badge-dsps">BY LEAKED WOs</span></div><div class="table-scroll" style="max-height:300px"><table class="data-table"><thead><tr><th>Station</th><th>Leaked</th><th>Adoption</th><th>Potential</th></tr></thead><tbody id="opportunityTable"></tbody></table></div></div>
+<div class="bg-grid"></div>
+<div class="container">
+    <header class="header">
+        <div class="header-left">
+            <h1>Last Mile Adoption & Engagement</h1>
+            <div class="subtitle">
+                <span>Vendor Adoption Tracking</span>
+                <span class="target-badge">TARGET: 85%</span>
+                <span class="wk-badge">WK11</span>
+                <span class="pending-badge" style="background:rgba(0,255,136,0.12);color:var(--accent-green);border-color:rgba(0,255,136,0.3)">✅ Leakage Confirmed</span>
             </div>
         </div>
-
-        <div id="trends" class="tab-content">
-            <div class="main-grid">
-                <div class="card full-width">
-                    <div class="card-header"><div class="card-title">📋 WBR Executive Summary</div><span class="card-badge badge-insights">UPDATED DATA</span></div>
-                    <div class="executive-summary">
-                        <h3>🎯 Key Takeaways</h3>
-                        <ul>
-                            <li><strong>Overall adoption at 62.4%</strong> — 22.6% below the 85% target. 1,205 Kooner WOs vs 977 leaked (WK1–WK10).</li>
-                            <li><strong>4 stations on target:</strong> HMK4 (100%), HCT2 (92.5%), HSL1 (91.2%), HTP2 (86.0%)</li>
-                            <li><strong>HLA2 is the largest leak source:</strong> 264 total leaked (36%), 14 in WK10 — ARMA accounts for 11.</li>
-                            <li><strong>HDT3 improving:</strong> 141 leaked, 58.7% adoption. SFRM is the primary leaking DSP (8 WOs in WK10).</li>
-                            <li><strong>HPD1 critical:</strong> Only 9.1% adoption — 4 Kooner WOs vs 40 leaked. JDTC responsible for all 6 WK10 leaks.</li>
-                            <li><strong>WK10 leakage = 51 WOs</strong> — lowest single-week total yet. HTP2, HDY1, HMK4 had zero leaks.</li>
-                        </ul>
-                    </div>
-                    <div class="insights-grid">
-                        <div class="insight-card positive"><div class="insight-icon">✅</div><div class="insight-title">On Target Stations</div><div class="insight-text"><span class="insight-metric green">HMK4 (100%), HCT2 (92.5%), HSL1 (91.2%), HTP2 (86.0%)</span> — 4 stations at or above target.</div></div>
-                        <div class="insight-card negative"><div class="insight-icon">🔴</div><div class="insight-title">Critical: HPD1</div><div class="insight-text"><span class="insight-metric red">9.1% adoption</span> — 4 Kooner WOs vs 40 leaked. JDTC drove all 6 WK10 leaks.</div></div>
-                        <div class="insight-card warning"><div class="insight-icon">🎯</div><div class="insight-title">Biggest Opportunity: HLA2</div><div class="insight-text"><span class="insight-metric orange">225 leaked WOs</span> — Improving HLA2 would add +17% to total Kooner WOs.</div></div>
-                        <div class="insight-card info"><div class="insight-icon">📊</div><div class="insight-title">Near Target</div><div class="insight-text"><span class="insight-metric">HDY1 (81.7%), HTP2 (79.8%), HHO3 (79.2%)</span> — Close to 85% target.</div></div>
-                    </div>
-                    <div class="next-steps"><h4>🚀 Recommended Actions</h4><ol><li><strong>HPD1:</strong> Emergency intervention — identify blockers for 3% adoption</li><li><strong>HLA2:</strong> Focus on DSPs with highest leakage (ARMA, MDAS, BORN)</li><li><strong>HAU1:</strong> Dropped to 39.8% — investigate recent decline</li><li><strong>Push near-target stations:</strong> HDY1, HTP2, HHO3 need small improvements</li></ol></div>
-                </div>
-                <div class="card full-width"><div class="card-header"><div class="card-title">📈 Weekly Kooner Volume by Station</div></div><div class="chart-container tall"><canvas id="stationWeeklyChart"></canvas></div></div>
-                
-                <div class="card full-width">
-                    <div class="card-header">
-                        <div class="card-title">📊 WK10 Station Leakage Detail</div>
-                        <span class="card-badge" style="background:rgba(255,71,87,0.2);color:var(--accent-red)">FROM WK10 LEAKAGE REPORT — 51 TOTAL</span>
-                    </div>
-                    <table class="data-table">
-                        <thead><tr><th>Station</th><th>WK10 Leaked</th><th>Top Leaking DSP</th><th>Cumulative Leaked</th><th>Kooner WOs</th><th>Adoption</th><th>Signal</th></tr></thead>
-                        <tbody id="wk10LeakBody"></tbody>
-                    </table>
-                </div>
-<div class="card full-width"><div class="card-header"><div class="card-title">Station Weekly Breakdown</div></div><div class="table-scroll"><table class="data-table"><thead><tr><th>Station</th><th>WK6</th><th>WK7</th><th>WK8</th><th>WK9</th><th>WK10</th><th>Total</th></tr></thead><tbody id="stationWeeklyTable"></tbody></table></div></div>
-            </div>
+        <div class="header-right">
+            <div class="last-updated">Last Updated: 2026-03-16 · Leakage ✅ Final</div>
+            <div class="data-period">Data Period: WK53 – WK11 (Dec 21 – Mar 14)</div>
         </div>
+    </header>
 
-        <div id="stations" class="tab-content">
-            <div class="main-grid">
-                <div class="card full-width"><div class="card-header"><div class="card-title">Station Adoption Details</div><span class="card-badge badge-stations">13 STATIONS</span></div><table class="data-table"><thead><tr><th>Station</th><th>Location</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>Total</th><th>Gap to 85%</th><th>Status</th></tr></thead><tbody id="stationFullTable"></tbody></table></div>
-                <div class="card"><div class="card-header"><div class="card-title">Station Rankings</div></div><div class="chart-container tall"><canvas id="stationRankChart"></canvas></div></div>
-                <div class="card"><div class="card-header"><div class="card-title">Leakage Distribution</div></div><div class="chart-container tall"><canvas id="leakageChart"></canvas></div></div>
-                <div class="card full-width">
-                    <div class="card-header"><div class="card-title">🚛 DSP Priority List</div><span class="card-badge badge-dsps">BY STATION</span></div>
-                    <div class="filter-row">
-                        <button class="filter-btn active" onclick="filterStations('all',this)">All Stations</button>
-                        <button class="filter-btn" onclick="filterStations('HLA2',this)">HLA2</button>
-                        <button class="filter-btn" onclick="filterStations('HDT3',this)">HDT3</button>
-                        <button class="filter-btn" onclick="filterStations('HAU1',this)">HAU1</button>
-                        <button class="filter-btn" onclick="filterStations('HCL2',this)">HCL2</button>
-                        <button class="filter-btn" onclick="filterStations('HPD1',this)">HPD1</button>
-                    </div>
-                    <div class="table-scroll" style="max-height:500px"><table class="data-table"><thead><tr><th>Station</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>Opportunity</th><th>Priority</th></tr></thead><tbody id="dspTable"></tbody></table></div>
+    <div class="pending-banner" style="background:linear-gradient(135deg,rgba(0,255,136,0.06),rgba(52,211,153,0.04));border-color:rgba(0,255,136,0.3)">
+        <div class="pending-banner-icon">✅</div>
+        <div>
+            <div class="pending-banner-title" style="color:var(--accent-green)">WK11 Leakage Report Confirmed — 58 Leaked WOs · Network Adoption 64.3% (+2.6pp WoW)</div>
+            <div class="pending-banner-text">WK11 leakage: HLA2 (11), HDT3 (9), HMS2 (8), HIN3 (7), HPD1 (7), HAU1 (6), HCL2 (5), HDY1 (3), HTP2 (2). HHO3, HMK4, HCT2, HSL1 all clean (0 leaked). All adoption values finalized.</div>
+        </div>
+    </div>
+
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showTab('overview',this)">📊 Overview</button>
+        <button class="nav-tab" onclick="showTab('trends',this)">📈 Week-over-Week</button>
+        <button class="nav-tab" onclick="showTab('stations',this)">🏢 Stations & DSPs</button>
+        <button class="nav-tab" onclick="showTab('sentiment',this)">💬 DSP Sentiment</button>
+        <button class="nav-tab" onclick="showTab('actions',this)">🎯 Actions</button>
+        <button class="nav-tab" onclick="showTab('calendar',this)">📅 Calendar</button>
+    </div>
+
+    <!-- OVERVIEW TAB -->
+    <div id="overview" class="tab-content active">
+        <div class="kpi-row">
+            <div class="kpi-card success"><div class="kpi-label">Total Kooner WOs</div><div class="kpi-value green">1,863</div><div class="kpi-subtext">WK1–WK11 (+292 WK11)</div></div>
+            <div class="kpi-card warning"><div class="kpi-label">Total Leaked WOs</div><div class="kpi-value red">1,035</div><div class="kpi-subtext">+58 WK11 leaked confirmed</div></div>
+            <div class="kpi-card warning"><div class="kpi-label">Current Adoption</div><div class="kpi-value orange">64.3%</div><div class="kpi-subtext">+2.6pp WoW (WK11 final)</div></div>
+            <div class="kpi-card success"><div class="kpi-label">On Target Stations</div><div class="kpi-value green">4</div><div class="kpi-subtext">HMK4, HSL1, HCT2, HTP2 ≥85%</div></div>
+            <div class="kpi-card"><div class="kpi-label">WK11 New WOs</div><div class="kpi-value purple">292</div><div class="kpi-subtext">Fleet IQ · 11 active stations</div></div>
+        </div>
+        <div class="main-grid">
+            <div class="card">
+                <div class="card-header"><div class="card-title">Weekly Kooner Volume</div><span class="card-badge badge-trends">WK6–WK11</span></div>
+                <div class="chart-container"><canvas id="weeklyBarChart"></canvas></div>
+            </div>
+            <div class="card">
+                <div class="card-header"><div class="card-title">Station Adoption Distribution</div></div>
+                <div class="chart-container"><canvas id="stationBarChart"></canvas></div>
+            </div>
+            <div class="card">
+                <div class="card-header"><div class="card-title">Station Status</div><span class="card-badge badge-stations">13 STATIONS</span></div>
+                <div class="table-scroll" style="max-height:300px">
+                    <table class="data-table"><thead><tr><th>Station</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>WoW</th><th>Status</th></tr></thead>
+                    <tbody id="stationQuickTable"></tbody></table>
                 </div>
             </div>
-        </div>
-
-        <div id="sentiment" class="tab-content">
-            <div class="kpi-row" style="grid-template-columns:repeat(4,1fr)">
-                <div class="kpi-card"><div class="kpi-label">Survey Responses</div><div class="kpi-value">20</div><div class="kpi-subtext">From 8 DSPs</div></div>
-                <div class="kpi-card warning"><div class="kpi-label">Avg Satisfaction</div><div class="kpi-value yellow">3.0</div><div class="kpi-subtext">out of 5.0</div></div>
-                <div class="kpi-card warning"><div class="kpi-label">Avg Timeliness</div><div class="kpi-value orange">3.0</div><div class="kpi-subtext">out of 5.0</div></div>
-                <div class="kpi-card warning"><div class="kpi-label">Avg Quality</div><div class="kpi-value yellow">3.2</div><div class="kpi-subtext">out of 5.0</div></div>
-            </div>
-            <div class="main-grid">
-                <div class="card"><div class="card-header"><div class="card-title">Sentiment by DSP</div></div><div class="chart-container"><canvas id="sentimentChart"></canvas></div></div>
-                <div class="card"><div class="card-header"><div class="card-title">Sentiment vs Adoption</div></div><div class="chart-container"><canvas id="correlationChart"></canvas></div></div>
-                <div class="card full-width"><div class="card-header"><div class="card-title">🎯 Key Themes</div></div><div class="insights-grid"><div class="insight-card negative"><div class="insight-icon">⏱️</div><div class="insight-title">Timeliness</div><div class="insight-text">PM completion 4+ days</div></div><div class="insight-card negative"><div class="insight-icon">🔄</div><div class="insight-title">Paperwork</div><div class="insight-text">Documentation delays</div></div><div class="insight-card warning"><div class="insight-icon">💬</div><div class="insight-title">Communication</div><div class="insight-text">Need proactive updates</div></div><div class="insight-card positive"><div class="insight-icon">⭐</div><div class="insight-title">D4DS (5/5)</div><div class="insight-text">Very impressed with supervisor</div></div></div></div>
-                <div class="card full-width"><div class="card-header"><div class="card-title">💬 Recent Feedback</div></div><div id="feedbackList"></div></div>
-            </div>
-        </div>
-
-        <div id="actions" class="tab-content">
-            <div class="kpi-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:24px">
-                <div class="kpi-card danger"><div class="kpi-label">Critical Priority</div><div class="kpi-value red" id="actionCountCritical">—</div><div class="kpi-subtext">Stations needing immediate action</div></div>
-                <div class="kpi-card warning"><div class="kpi-label">High Priority</div><div class="kpi-value orange" id="actionCountHigh">—</div><div class="kpi-subtext">Significant leakage + sentiment gap</div></div>
-                <div class="kpi-card"><div class="kpi-label">Monitor</div><div class="kpi-value" id="actionCountMedium">—</div><div class="kpi-subtext">Near target, watch closely</div></div>
-                <div class="kpi-card success"><div class="kpi-label">On Track</div><div class="kpi-value green" id="actionCountGood">—</div><div class="kpi-subtext">At or above 85% target</div></div>
-            </div>
-            <div class="main-grid">
-                <div class="card full-width">
-                    <div class="card-header">
-                        <div class="card-title">🎯 Station Priority Matrix</div>
-                        <span class="card-badge" style="background:rgba(168,85,247,0.2);color:var(--accent-purple)">COMPOSITE SCORE: ADOPTION + LEAKAGE + SENTIMENT</span>
-                    </div>
-                    <div id="actionMatrixList"></div>
+            <div class="card">
+                <div class="card-header"><div class="card-title">Top Opportunities</div><span class="card-badge badge-dsps">BY LEAKED WOs</span></div>
+                <div class="table-scroll" style="max-height:300px">
+                    <table class="data-table"><thead><tr><th>Station</th><th>Leaked</th><th>Adoption</th><th>Potential</th></tr></thead>
+                    <tbody id="opportunityTable"></tbody></table>
                 </div>
-            </div>
-        </div>
-
-        <div id="calendar" class="tab-content">
-            <div class="cal-legend">
-                <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(168,85,247,0.7)"></div>DSP Roundtable</div>
-                <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(0,255,136,0.7)"></div>Site Visit</div>
-                <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(0,212,255,0.7)"></div>Training</div>
-                <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(255,71,87,0.7)"></div>Deadline</div>
-                <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(255,165,2,0.7)"></div>Review</div>
-                <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(0,200,150,0.7)"></div>Newsletter</div>
-            </div>
-            <div class="cal-layout">
-                <div class="card">
-                    <div class="calendar-nav">
-                        <button class="calendar-nav-btn" onclick="changeMonth(-1)">&larr; Previous</button>
-                        <span class="calendar-month-title" id="calendarMonthTitle"></span>
-                        <button class="calendar-nav-btn" onclick="changeMonth(1)">Next &rarr;</button>
-                    </div>
-                    <div class="calendar-grid" id="calendarGrid"></div>
-                </div>
-                <div class="cal-sidebar">
-                    <div class="card">
-                        <div class="section-label">Upcoming</div>
-                        <div id="upcomingEvents"></div>
-                    </div>
-                    <div class="card">
-                        <div class="section-label">Past Events with Notes</div>
-                        <div id="pastEvents"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal-overlay" id="eventModal" onclick="if(event.target===this)closeModal()">
-            <div class="modal-content">
-                <button class="modal-close-btn" onclick="closeModal()">&times;</button>
-                <div id="modalBody"></div>
             </div>
         </div>
     </div>
 
-    <script>
-        // UPDATED DATA from new Kooner report
-        var stationData = [
-            {station:'HMK4', location:'Milwaukee, WI',      kooner:82,  leaked:0,   adoption:100.0},
-            {station:'HCT2', location:'Chattanooga, TN',    kooner:69,  leaked:8,   adoption:89.6},
-            {station:'HSL1', location:'Salt Lake City, UT', kooner:58,  leaked:6,   adoption:90.6},
-            {station:'HTP2', location:'Gibsonton, FL',      kooner:171, leaked:31,  adoption:84.7},
-            {station:'HHO3', location:'Porter, TX',         kooner:140, leaked:37,  adoption:79.1},
-            {station:'HDY1', location:'Clayton, OH',        kooner:109, leaked:29,  adoption:79.0},
-            {station:'HCL2', location:'Charlotte, NC',      kooner:163, leaked:93,  adoption:63.7},
-            {station:'HDT3', location:'Romulus, MI',        kooner:244, leaked:181, adoption:57.4},
-            {station:'HAU1', location:'Austin, TX',         kooner:124, leaked:97,  adoption:56.1},
-            {station:'HMS2', location:'Lakeville, MN',      kooner:41,  leaked:54,  adoption:43.2},
-            {station:'HIN3', location:'South Bend, IN',     kooner:19,  leaked:29,  adoption:39.6},
-            {station:'HLA2', location:'Santa Clarita, CA',  kooner:347, leaked:361, adoption:49.0},
-            {station:'HPD1', location:'Portland, OR',       kooner:4,   leaked:51,  adoption:7.3}
-        ];
+    <!-- WoW TAB -->
+    <div id="trends" class="tab-content">
+        <div class="main-grid">
+            <div class="card full-width">
+                <div class="card-header"><div class="card-title">📋 WBR Executive Summary — WK11</div><span class="card-badge badge-insights">FLEET IQ DATA</span></div>
+                <div class="executive-summary">
+                    <h3>🎯 Key Takeaways</h3>
+                    <ul>
+                        <li><strong>Overall adoption at 64.3%</strong> — based on Kooner volume update (+292 WK11 WOs). WK11 leakage confirmed: 58 WOs. When received, adoption will be recalculated with WK11 leaked WOs factored in.</li>
+                        <li><strong>4 stations on target:</strong> HMK4 (100%), HSL1 (93.1%), HCT2 (91.0%), HTP2 (86.2%)</li>
+                        <li><strong>HSL1 breakout week:</strong> +19 WOs WoW (4→23 Kooner WOs). Marcos Tun solo, med TAT 0.45d. Adoption moved to 93.1% — from watch to confirmed on-target.</li>
+                        <li><strong>HHO3 volume surge:</strong> +23 WoW (19→42 WOs). Adoption improving — 79.1% → 83.1% on Kooner volume alone. Approaching 85% target.</li>
+                        <li><strong>HAU1 improving:</strong> +39 WK11 WOs, adoption 56.1% → 62.7%. Consistent positive trajectory but still significant leakage gap (97 cumulative).</li>
+                        <li><strong>HTP2 volume cliff:</strong> -35 WoW (58→23 WOs). Still above 85% adoption threshold. Volume decline needs monitoring in WK12.</li>
+                        <li><strong>HIN3 + HPD1 no movement</strong> — HIN3 zero WOs (no coverage), HPD1 zero WOs. Both unchanged until coverage/tech issues resolved.</li>
+                        <li><strong>WK11 sentiment:</strong> 3 new JotForm responses — SFRM (3.7), TWLD (4.3), ARMA (3.7). No DSP below 3.0 average this week. TWLD and ARMA trending positive.</li>
+                    </ul>
+                </div>
+                <div class="insights-grid">
+                    <div class="insight-card positive"><div class="insight-icon">✅</div><div class="insight-title">On Target Stations (4)</div><div class="insight-text"><span class="insight-metric green">HMK4 (100%), HSL1 (93.1%), HCT2 (91.0%), HTP2 (86.2%)</span> — 4 stations at or above 85% target. HSL1 breakout this week confirms Marcos Tun's consistency.</div></div>
+                    <div class="insight-card warning"><div class="insight-icon">📈</div><div class="insight-title">Near Target — HHO3 at 83.1%</div><div class="insight-text"><span class="insight-metric orange">HHO3 83.1%, HDY1 81.9%</span> — Both stations within 3pp of 85% target. HHO3 had a surge week (+23 WoW). If WK11 leakage is low, both could cross 85%.</div></div>
+                    <div class="insight-card negative"><div class="insight-icon">🔴</div><div class="insight-title">Critical: HPD1</div><div class="insight-text"><span class="insight-metric red">7.3% adoption</span> — No WK11 Kooner WOs. JDTC routing 100% externally. Emergency intervention needed — tech coverage is the root blocker.</div></div>
+                    <div class="insight-card info"><div class="insight-icon">💬</div><div class="insight-title">WK11 Sentiment — 3 New Responses</div><div class="insight-text"><span class="insight-metric">SFRM 3.7 · TWLD 4.3 · ARMA 3.7</span> — TWLD (HDY1) positive about 12AM–8AM schedule shift. SFRM raising weekend coverage and lift facility needs. Network avg improving.</div></div>
+                </div>
+                <div class="next-steps">
+                    <h4>🚀 WK11 Recommended Actions</h4>
+                    <ol>
+                        <li><strong>HPD1:</strong> Emergency intervention — tech coverage is the adoption blocker. No Kooner WOs WK11.</li>
+                        <li><strong>HIN3:</strong> Dedicated tech ~2 weeks out. Zero WOs again. Confirm paperwork timeline.</li>
+                        <li><strong>HLA2:</strong> 54 Kooner WOs WK11 (best ever). But 361 cumulative leaked — ARMA still driving leakage. Address ARMA parts backorder (back-door back-orders raised in WK11 survey).</li>
+                        <li><strong>SFRM / HDT3:</strong> Weekend coverage gap and lift facility are two concrete asks. Address directly — SFRM is the top leaking DSP at HDT3 (8 WOs in WK10).</li>
+                        <li><strong>HTP2 volume watch:</strong> Dropped 58→23 WoW. Still above 85% target but ORMP (2.3/5 sentiment) is leakage risk if engagement drops.</li>
+                    </ol>
+                </div>
+            </div>
 
-        var weeklyByStation = {
-            'HAU1':{WK53:2, WK1:6,  WK2:12, WK3:10, WK4:14, WK5:3,  WK6:6,  WK7:25, WK8:12, WK9:16, WK10:30, total:124},
-            'HCL2':{WK53:1, WK1:1,  WK2:5,  WK3:29, WK4:8,  WK5:10, WK6:16, WK7:22, WK8:32, WK9:20, WK10:28, total:163},
-            'HCT2':{WK53:3, WK1:0,  WK2:4,  WK3:5,  WK4:7,  WK5:2,  WK6:4,  WK7:1,  WK8:4,  WK9:7,  WK10:35, total:69},
-            'HDT3':{WK53:18,WK1:9,  WK2:15, WK3:17, WK4:26, WK5:44, WK6:24, WK7:21, WK8:35, WK9:14, WK10:57, total:244},
-            'HDY1':{WK53:1, WK1:9,  WK2:20, WK3:10, WK4:6,  WK5:0,  WK6:5,  WK7:6,  WK8:9,  WK9:13, WK10:25, total:109},
-            'HHO3':{WK53:9, WK1:6,  WK2:22, WK3:13, WK4:19, WK5:15, WK6:14, WK7:18, WK8:13, WK9:13, WK10:19, total:140},
-            'HIN3':{WK53:1, WK1:1,  WK2:5,  WK3:4,  WK4:2,  WK5:0,  WK6:5,  WK7:0,  WK8:1,  WK9:2,  WK10:0,  total:19},
-            'HLA2':{WK53:17,WK1:9,  WK2:20, WK3:23, WK4:42, WK5:41, WK6:38, WK7:42, WK8:41, WK9:43, WK10:49, total:347},
-            'HMK4':{WK53:7, WK1:10, WK2:8,  WK3:15, WK4:3,  WK5:14, WK6:2,  WK7:3,  WK8:13, WK9:7,  WK10:14, total:82},
-            'HMS2':{WK53:2, WK1:2,  WK2:6,  WK3:5,  WK4:11, WK5:9,  WK6:2,  WK7:1,  WK8:8,  WK9:1,  WK10:4,  total:41},
-            'HPD1':{WK53:0, WK1:0,  WK2:0,  WK3:0,  WK4:1,  WK5:0,  WK6:0,  WK7:0,  WK8:0,  WK9:0,  WK10:3,  total:4},
-            'HSL1':{WK53:0, WK1:1,  WK2:4,  WK3:5,  WK4:5,  WK5:5,  WK6:10, WK7:8,  WK8:9,  WK9:7,  WK10:4,  total:58},
-            'HTP2':{WK53:13,WK1:3,  WK2:20, WK3:8,  WK4:16, WK5:7,  WK6:22, WK7:10, WK8:17, WK9:10, WK10:58, total:171}
-        };
+            <div class="card full-width">
+                <div class="card-header"><div class="card-title">📈 Weekly Kooner Volume by Station</div></div>
+                <div class="chart-container tall"><canvas id="stationWeeklyChart"></canvas></div>
+            </div>
 
-        var weekTotals = {WK53:77,WK1:58,WK2:140,WK3:140,WK4:159,WK5:153,WK6:148,WK7:157,WK8:194,WK9:153,WK10:326};
+            <div class="card full-width">
+                <div class="card-header">
+                    <div class="card-title">📊 WK11 Station Volume — WoW Detail</div>
+                    <span class="card-badge badge-pending">WK11 FINAL · 58 LEAKED CONFIRMED</span>
+                </div>
+                <table class="data-table">
+                    <thead><tr><th>Station</th><th>WK10 Kooner</th><th>WK11 Kooner</th><th>WoW</th><th>Cumulative Adoption</th><th>WoW Adoption</th><th>Signal</th></tr></thead>
+                    <tbody id="wk11VolumeBody"></tbody>
+                </table>
+            </div>
 
-        var wk06Leaked = {
-            HLA2:25, HDT3:21, HCL2:11, HAU1:7, HMS2:6, HIN3:5,
-            HDY1:2, HSL1:2, HHO3:2, HPD1:2, HTP2:1, HCT2:1, HMK4:0
-        };
-        var wk07Leaked = {
-            HLA2:25, HCL2:9, HDT3:7, HAU1:7, HDY1:6, HPD1:6,
-            HMS2:5, HTP2:5, HIN3:3, HHO3:2, HCT2:2, HMK4:0, HSL1:0
-        };
-        var wk08Leaked = {
-            HLA2:47, HDT3:12, HCL2:7, HAU1:6, HMS2:4, HDY1:3,
-            HPD1:3, HTP2:3, HIN3:2, HHO3:2, HCT2:0, HMK4:0, HSL1:0
-        };
-        var wk09Leaked = {
-            HLA2:25, HDT3:20, HAU1:12, HCL2:10, HHO3:8, HMS2:6,
-            HPD1:5, HDY1:4, HIN3:3, HTP2:2, HCT2:1, HMK4:0, HSL1:0
-        };
-                var wk10Leaked = {
-            HLA2:14, HDT3:8, HPD1:6, HMS2:6, HCL2:5, HAU1:4,
-            HHO3:3, HCT2:2, HSL1:2, HIN3:1, HDY1:0, HMK4:0, HTP2:0
-        };
-        var wk10TopDSP = {
-            HLA2:'ARMA (11)', HDT3:'SFRM (8)', HPD1:'JDTC (6)', HMS2:'LDOG (6)',
-            HCL2:'D4DS (3)', HAU1:'FICL (4)', HHO3:'DASL (3)', HCT2:'TGLO (2)',
-            HSL1:'PRLC (2)', HIN3:'CMIL (1)', HDY1:'—', HMK4:'—', HTP2:'—'
-        };
+            <div class="card full-width">
+                <div class="card-header"><div class="card-title">Station Weekly Breakdown</div></div>
+                <div class="table-scroll">
+                    <table class="data-table"><thead><tr><th>Station</th><th>WK7</th><th>WK8</th><th>WK9</th><th>WK10</th><th>WK11</th><th>Total</th></tr></thead>
+                    <tbody id="stationWeeklyTable"></tbody></table>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        var sentimentData = [
-            {dsp:'ALAB', station:'HDT3', responses:2, satisfaction:3.0, timeliness:2.5, quality:3.0, avgScore:2.8, adoption:58.7},
-            {dsp:'ARMA', station:'HLA2', responses:7, satisfaction:2.9, timeliness:2.9, quality:2.9, avgScore:2.9, adoption:48.0},
-            {dsp:'ORMP', station:'HTP2', responses:2, satisfaction:2.0, timeliness:2.0, quality:3.0, avgScore:2.3, adoption:86.0},
-            {dsp:'MAEP', station:'HIN3', responses:1, satisfaction:2.0, timeliness:2.0, quality:3.0, avgScore:2.3, adoption:40.6},
-            {dsp:'SFRM', station:'HDT3', responses:5, satisfaction:3.2, timeliness:3.0, quality:3.4, avgScore:3.2, adoption:58.7},
-            {dsp:'TWLD', station:'HDY1', responses:1, satisfaction:4.0, timeliness:4.0, quality:5.0, avgScore:4.3, adoption:82.9},
-            {dsp:'PRLC', station:'HSL1', responses:1, satisfaction:4.0, timeliness:5.0, quality:3.0, avgScore:4.0, adoption:91.2},
-            {dsp:'D4DS', station:'HCL2', responses:1, satisfaction:5.0, timeliness:5.0, quality:5.0, avgScore:5.0, adoption:60.7}
-        ];
+    <!-- STATIONS TAB -->
+    <div id="stations" class="tab-content">
+        <div class="main-grid">
+            <div class="card full-width">
+                <div class="card-header"><div class="card-title">Station Adoption Details</div><span class="card-badge badge-stations">13 STATIONS · WK11 KOONER UPDATED</span></div>
+                <table class="data-table">
+                    <thead><tr><th>Station</th><th>Location</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>Total</th><th>Gap to 85%</th><th>WoW</th><th>Status</th></tr></thead>
+                    <tbody id="stationFullTable"></tbody>
+                </table>
+            </div>
+            <div class="card"><div class="card-header"><div class="card-title">Station Rankings</div></div><div class="chart-container tall"><canvas id="stationRankChart"></canvas></div></div>
+            <div class="card"><div class="card-header"><div class="card-title">Leakage Distribution</div></div><div class="chart-container tall"><canvas id="leakageChart"></canvas></div></div>
+            <div class="card full-width">
+                <div class="card-header"><div class="card-title">🚛 DSP Priority List</div><span class="card-badge badge-dsps">BY STATION</span></div>
+                <div class="filter-row">
+                    <button class="filter-btn active" onclick="filterStations('all',this)">All Stations</button>
+                    <button class="filter-btn" onclick="filterStations('HLA2',this)">HLA2</button>
+                    <button class="filter-btn" onclick="filterStations('HDT3',this)">HDT3</button>
+                    <button class="filter-btn" onclick="filterStations('HAU1',this)">HAU1</button>
+                    <button class="filter-btn" onclick="filterStations('HCL2',this)">HCL2</button>
+                    <button class="filter-btn" onclick="filterStations('HPD1',this)">HPD1</button>
+                </div>
+                <div class="table-scroll" style="max-height:500px">
+                    <table class="data-table"><thead><tr><th>Station</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>Opportunity</th><th>Priority</th></tr></thead>
+                    <tbody id="dspTable"></tbody></table>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        var feedbackData = [
-            {date:'Mar 11',dsp:'SFRM',station:'HDT3',satisfaction:3,timeliness:4,quality:4,
-             issue:'Units sit 48 hrs before diagnosis begins on weekends.',
-             suggestion:'Better training on Amazon PM requirements. Rent a building with heavy-duty lift — several units sent to dealership due to onsite limitations.'},
-            {date:'Mar 10',dsp:'TWLD',station:'HDY1',satisfaction:4,timeliness:4,quality:5,
-             issue:'',
-             suggestion:'Moving service hours to 12am–8am has been a great help smoothing over PMs.'},
-            {date:'Mar 9',dsp:'ARMA',station:'HLA2',satisfaction:4,timeliness:4,quality:3,
-             issue:'',
-             suggestion:'No complaints.'},
-            {date:'Mar 2',dsp:'ALAB',station:'HDT3',satisfaction:5,timeliness:4,quality:5,
-             issue:'Vehicles grounded Fri–Sun cannot get serviced until Monday.',
-             suggestion:'Weekend support needed.'},
-            {date:'Feb 23',dsp:'ARMA',station:'HLA2',satisfaction:3,timeliness:3,quality:4,
-             issue:'Back-door back-orders grounding trucks. Hands tied due to lack of parts.',
-             suggestion:'Stock common parts on site. Service rep response time at HLA2 is great — hands tied by parts availability.'},
-            {date:'Feb 9',dsp:'ARMA',station:'HLA2',satisfaction:5,timeliness:5,quality:5,
-             issue:'',
-             suggestion:'Jose Madrigal is GREAT — very professional and attentive. Thank you for keeping Jose at HLA2.'},
-            {date:'Feb 9',dsp:'ORMP',station:'HTP2',satisfaction:2,timeliness:2,quality:4,
-             issue:'Multiple WOs unworked since 2/4. No ETA or visibility. Key Kooner contact was laid off.',
-             suggestion:''},
-            {date:'Jan 12',dsp:'D4DS',station:'HCL2',satisfaction:5,timeliness:5,quality:5,
-             issue:'',
-             suggestion:'Supervisor got more vehicles running in one evening than any mechanic in 5 years.'}
-        ];
+    <!-- SENTIMENT TAB -->
+    <div id="sentiment" class="tab-content">
 
-        function showTab(tabId, btn){
-            document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
-            document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active')});
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
-            if(tabId === 'calendar'){ renderCalendar(); renderUpcomingEvents(); renderPastEvents(); }
-        }
+        <!-- KPI Row -->
+        <div class="kpi-row" style="grid-template-columns:repeat(5,1fr)">
+            <div class="kpi-card"><div class="kpi-label">Survey Responses</div><div class="kpi-value">23</div><div class="kpi-subtext">From 8 DSPs · All time</div></div>
+            <div class="kpi-card warning"><div class="kpi-label">Network Avg Sat</div><div class="kpi-value yellow">3.2</div><div class="kpi-subtext">↑ +0.2 WoW</div></div>
+            <div class="kpi-card warning"><div class="kpi-label">Network Avg Time</div><div class="kpi-value orange">3.1</div><div class="kpi-subtext">↑ +0.1 WoW</div></div>
+            <div class="kpi-card warning"><div class="kpi-label">Network Avg Qual</div><div class="kpi-value yellow">3.4</div><div class="kpi-subtext">↑ +0.2 WoW</div></div>
+            <div class="kpi-card success"><div class="kpi-label">WK11 Responses</div><div class="kpi-value green">3</div><div class="kpi-subtext">SFRM · TWLD · ARMA</div></div>
+        </div>
 
-        function filterStations(filter,btn){
-            document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
-            btn.classList.add('active');
-            populateDSPTable(filter);
-        }
+        <!-- Main WoW Sentiment Section -->
+        <div class="card" style="margin-bottom:24px">
+            <div class="card-header">
+                <div class="card-title">📈 DSP Sentiment — Week-over-Week</div>
+                <span class="card-badge badge-sentiment">ALL JOTFORM RESPONSES · OLDEST → NEWEST</span>
+            </div>
 
-        function getScoreColor(s){if(s>=4)return'var(--accent-green)';if(s>=3)return'var(--accent-yellow)';if(s>=2)return'var(--accent-orange)';return'var(--accent-red)'}
-        function getScoreClass(s){if(s>=4)return'score-'+Math.round(s);if(s>=3)return'score-3';if(s>=2)return'score-2';return'score-1'}
+            <!-- Filters -->
+            <div class="sent-filter-row">
+                <button class="sent-filter-btn active" onclick="filterSentiment('all',this)">All DSPs (8)</button>
+                <button class="sent-filter-btn" onclick="filterSentiment('improving',this)">↑ Improving</button>
+                <button class="sent-filter-btn" onclick="filterSentiment('declining',this)">↓ Declining</button>
+                <button class="sent-filter-btn" onclick="filterSentiment('watch',this)">⚠ Watch (≤2.5 avg)</button>
+                <button class="sent-filter-btn" onclick="filterSentiment('multi',this)">Multi-week responders</button>
+            </div>
 
-        function populateStationQuickTable(){
-            var t=document.getElementById('stationQuickTable'),h='';
-            var sorted=stationData.slice().sort(function(a,b){return b.adoption-a.adoption});
-            for(var i=0;i<sorted.length;i++){var s=sorted[i],ot=s.adoption>=85;
-            h+='<tr><td><span class="station-name">'+s.station+'</span></td><td style="color:'+(ot?'var(--accent-green)':'var(--accent-red)')+'">'+s.adoption.toFixed(1)+'%</td><td>'+s.kooner+'</td><td>'+s.leaked+'</td><td><span class="status-pill '+(ot?'on-target':'below-target')+'"><span class="status-dot"></span>'+(ot?'On Target':'Below')+'</span></td></tr>';}
-            t.innerHTML=h;
-        }
+            <!-- Alerts -->
+            <div class="silent-alert">⚠️ <strong>ORMP (HTP2)</strong> — Last response Feb 9. Silent 5+ weeks. Final avg 2.3/5. Proactive outreach needed before WK12 WBR.</div>
 
-        function populateOpportunityTable(){
-            var t=document.getElementById('opportunityTable'),h='';
-            var sorted=stationData.slice().filter(function(s){return s.leaked>0}).sort(function(a,b){return b.leaked-a.leaked});
-            for(var i=0;i<Math.min(sorted.length,8);i++){var s=sorted[i];
-            var potential=((s.kooner+s.leaked)/(727+594)*100).toFixed(1);
-            h+='<tr><td><span class="station-name">'+s.station+'</span></td><td style="color:var(--accent-red)">'+s.leaked+'</td><td>'+s.adoption.toFixed(1)+'%</td><td>'+potential+'% of total</td></tr>';}
-            t.innerHTML=h;
-        }
+            <div class="wow-sentiment-grid" id="wowSentimentGrid"></div>
+        </div>
 
-        function populateStationFullTable(){
-            var t=document.getElementById('stationFullTable'),h='';
-            var sorted=stationData.slice().sort(function(a,b){return b.adoption-a.adoption});
-            for(var i=0;i<sorted.length;i++){var s=sorted[i],ot=s.adoption>=85,gap=85-s.adoption,total=s.kooner+s.leaked;
-            h+='<tr><td><span class="station-name">'+s.station+'</span></td><td>'+(s.location||'—')+'</td><td style="color:'+(ot?'var(--accent-green)':'var(--accent-red)')+'">'+s.adoption.toFixed(1)+'%</td><td>'+s.kooner+'</td><td>'+s.leaked+'</td><td>'+total+'</td><td style="color:'+(gap>0?'var(--accent-red)':'var(--accent-green)')+'">'+(gap>0?'+':'')+gap.toFixed(1)+'%</td><td><span class="status-pill '+(ot?'on-target':'below-target')+'"><span class="status-dot"></span>'+(ot?'On Target':'Below')+'</span></td></tr>';}
-            t.innerHTML=h;
-        }
+        <!-- Themes + Scatter stacked -->
+        <div style="display:flex;flex-direction:column;gap:24px;margin-bottom:32px">
+            <div class="card">
+                <div class="card-header"><div class="card-title">🎯 WK11 Sentiment Themes</div></div>
+                <div style="display:flex;flex-direction:column;gap:10px">
+                    <div class="insight-card warning"><div class="insight-icon">🏗️</div><div class="insight-title">SFRM — Facility & Coverage (HDT3)</div><div class="insight-text">Weekend lag (48hr units sit), day/night WO gap, no heavy-duty lift. WK12 response continues same themes. Consistent pattern across 6 responses — no improvement in core issues.</div></div>
+                    <div class="insight-card positive"><div class="insight-icon">✅</div><div class="insight-title">TWLD — Schedule Shift Working (HDY1)</div><div class="insight-text">12AM–8AM service hours confirmed as "a great help." Single response so far but strong signal — 4.3/5 avg.</div></div>
+                    <div class="insight-card info"><div class="insight-icon">📈</div><div class="insight-title">ARMA — Recovery Trend (HLA2)</div><div class="insight-text">Started at 1.0/5 in WK01–WK02. Recovered to 5.0/5 (WK06 — Jose Madrigal praise), then stabilized 3.3–3.7. Parts availability is the remaining drag.</div></div>
+                    <div class="insight-card negative"><div class="insight-icon">🔇</div><div class="insight-title">ORMP Silent (HTP2)</div><div class="insight-text">Lowest-scoring active DSP at 2.3/5 avg. Last response Feb 9. Is the primary HTP2 leakage risk. No engagement for 5+ weeks.</div></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"><div class="card-title">Sentiment vs Adoption</div><span class="card-badge badge-sentiment">AVG SCORE vs ADOPTION %</span></div>
+                <div class="chart-container"><canvas id="correlationChart"></canvas></div>
+            </div>
+        </div>
 
-        function populateStationWeeklyTable(){
-            var t=document.getElementById('stationWeeklyTable'),h='';
-            var stations=Object.keys(weeklyByStation).sort(function(a,b){return weeklyByStation[b].total-weeklyByStation[a].total});
-            for(var i=0;i<stations.length;i++){var st=stations[i],w=weeklyByStation[st];
-            h+='<tr><td><span class="station-name">'+st+'</span></td><td>'+(w.WK6||'—')+'</td><td>'+(w.WK7||'—')+'</td><td>'+(w.WK8||'—')+'</td><td>'+(w.WK9||'—')+'</td><td>'+(w.WK10||'—')+'</td><td><strong>'+w.total+'</strong></td></tr>';}
-            h+='<tr style="background:var(--bg-card-hover)"><td><strong>TOTAL</strong></td><td><strong>'+weekTotals.WK6+'</strong></td><td><strong>'+weekTotals.WK7+'</strong></td><td><strong>'+weekTotals.WK8+'</strong></td><td><strong>'+weekTotals.WK9+'</strong></td><td><strong>'+weekTotals.WK10+'</strong></td><td><strong>1571</strong></td></tr>';
-            t.innerHTML=h;
-        }
+    </div>
 
-        function populateDSPTable(filter){
-            filter=filter||'all';var t=document.getElementById('dspTable'),h='';
-            var filtered=filter==='all'?stationData:stationData.filter(function(s){return s.station===filter});
-            filtered=filtered.slice().sort(function(a,b){return b.leaked-a.leaked});
-            for(var i=0;i<filtered.length;i++){var s=filtered[i];if(s.leaked===0)continue;
-            var priority=s.adoption<20?'critical':s.adoption<50?'high':s.adoption<70?'medium':'low';
-            var opp=(s.leaked/594*100).toFixed(1);
-            h+='<tr><td><span class="station-name">'+s.station+'</span></td><td style="color:'+(s.adoption>=85?'var(--accent-green)':'var(--accent-red)')+'">'+s.adoption.toFixed(1)+'%</td><td>'+s.kooner+'</td><td>'+s.leaked+'</td><td>'+opp+'% of leakage</td><td><span class="priority-pill priority-'+priority+'">'+priority+'</span></td></tr>';}
-            t.innerHTML=h;
-        }
+    <!-- ACTIONS TAB -->
+    <div id="actions" class="tab-content">
+        <div class="kpi-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:24px">
+            <div class="kpi-card danger"><div class="kpi-label">Critical Priority</div><div class="kpi-value red" id="actionCountCritical">—</div><div class="kpi-subtext">Immediate intervention needed</div></div>
+            <div class="kpi-card warning"><div class="kpi-label">High Priority</div><div class="kpi-value orange" id="actionCountHigh">—</div><div class="kpi-subtext">Significant leakage + sentiment gap</div></div>
+            <div class="kpi-card"><div class="kpi-label">Monitor</div><div class="kpi-value" id="actionCountMedium">—</div><div class="kpi-subtext">Near target, watch closely</div></div>
+            <div class="kpi-card success"><div class="kpi-label">On Track</div><div class="kpi-value green" id="actionCountGood">—</div><div class="kpi-subtext">At or above 85% target</div></div>
+        </div>
+        <div class="main-grid">
+            <div class="card full-width">
+                <div class="card-header">
+                    <div class="card-title">🎯 Station Priority Matrix</div>
+                    <span class="card-badge" style="background:rgba(168,85,247,0.2);color:var(--accent-purple)">COMPOSITE SCORE: ADOPTION + LEAKAGE + SENTIMENT</span>
+                </div>
+                <div id="actionMatrixList"></div>
+            </div>
+        </div>
+    </div>
 
-        function populateActionCards(){/* legacy - replaced by populateActionMatrix */}
-        function populateActionTable(){/* legacy - replaced by populateActionMatrix */}
+    <!-- CALENDAR TAB -->
+    <div id="calendar" class="tab-content">
+        <div class="cal-legend">
+            <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(168,85,247,0.7)"></div>DSP Roundtable</div>
+            <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(0,255,136,0.7)"></div>Site Visit</div>
+            <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(0,212,255,0.7)"></div>Training</div>
+            <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(255,71,87,0.7)"></div>Deadline</div>
+            <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(255,165,2,0.7)"></div>Review</div>
+            <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(0,200,150,0.7)"></div>Newsletter</div>
+            <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(55,66,250,0.5)"></div>Office Hours</div>
+        </div>
+        <div class="cal-layout">
+            <div class="card">
+                <div class="calendar-nav">
+                    <button class="calendar-nav-btn" onclick="changeMonth(-1)">&larr; Previous</button>
+                    <span class="calendar-month-title" id="calendarMonthTitle"></span>
+                    <button class="calendar-nav-btn" onclick="changeMonth(1)">Next &rarr;</button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+            </div>
+            <div class="cal-sidebar">
+                <div class="card"><div class="section-label">Upcoming</div><div id="upcomingEvents"></div></div>
+                <div class="card"><div class="section-label">Past Events with Notes</div><div id="pastEvents"></div></div>
+            </div>
+        </div>
+    </div>
 
-        function populateActionMatrix(){
-            // Sentiment lookup: station -> {avg, label, responses}
-            var sentMap={};
-            for(var i=0;i<sentimentData.length;i++){
-                var sd=sentimentData[i];
-                var st=sd.station;
-                if(!sentMap[st]){sentMap[st]={total:0,count:0,responses:0};}
-                sentMap[st].total+=sd.avgScore;
-                sentMap[st].count++;
-                sentMap[st].responses+=sd.responses;
-            }
+    <div class="modal-overlay" id="eventModal" onclick="if(event.target===this)closeModal()">
+        <div class="modal-content">
+            <button class="modal-close-btn" onclick="closeModal()">&times;</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+</div>
 
-            // WK10 leaked lookup
-            var wk10Map=wk10Leaked||{};
-            var wk08Map=wk08Leaked||{};
-
-            // Top leaking DSP lookup from wk10TopDSP
-            var topDSP=wk10TopDSP||{};
-
-            // Build scored list
-            var totalLeaked=0;
-            for(var i=0;i<stationData.length;i++) totalLeaked+=stationData[i].leaked;
-
-            var scored=stationData.map(function(s){
-                var gap=Math.max(0,85-s.adoption);
-                var leakPct=s.leaked/totalLeaked*100;
-                var sentAvg=sentMap[s.station]?sentMap[s.station].total/sentMap[s.station].count:null;
-                var sentPenalty=sentAvg!=null?(5-sentAvg)*20:15;
-                var score=gap*0.4+leakPct*0.35+sentPenalty*0.25;
-                var wk10l=wk10Map[s.station]||0;
-                var wk8l=wk08Map[s.station]||0;
-                // Trend: compare wk10 to wk08
-                var trend=wk10l===0&&s.adoption>=79?'improving':wk10l>=wk8l&&wk10l>=5?'worsening':'stable';
-                var priority=s.adoption>=85?'on-track':score>=30?'critical':score>=20?'high':score>=8?'monitor':'on-track';
-                return {s:s, score:score, sentAvg:sentAvg, sentResponses:sentMap[s.station]?sentMap[s.station].responses:0, wk10l:wk10l, trend:trend, priority:priority, gap:gap, leakPct:leakPct};
-            }).sort(function(a,b){return b.score-a.score});
-
-            // Update KPI counts
-            var counts={critical:0,high:0,monitor:0,'on-track':0};
-            scored.forEach(function(x){counts[x.priority]=(counts[x.priority]||0)+1;});
-            document.getElementById('actionCountCritical').textContent=counts.critical||0;
-            document.getElementById('actionCountHigh').textContent=counts.high||0;
-            document.getElementById('actionCountMedium').textContent=counts.monitor||0;
-            document.getElementById('actionCountGood').textContent=counts['on-track']||0;
-
-            // Recommended actions per station
-            var actions={
-                HPD1:{text:'Escalate Portland technician coverage — JDTC routing 100% of WOs elsewhere. Emergency hiring or subcontract needed.',engage:'Direct call to JDTC'},
-                HLA2:{text:'Address ARMA parts backlog (back-door back-orders confirmed). Stock common parts on-site. BORN also consistent leaker.',engage:'Site visit + parts escalation to Kooner ops'},
-                HMS2:{text:'LDOG is sole leaking DSP — 6 in WK10, consistent pattern. Relationship-first outreach before any pitch.',engage:'1:1 call with LDOG manager'},
-                HDT3:{text:'SFRM flagging weekend coverage gap and on-site capability limits (no lift). Two SFRM-specific asks: shop facility + day-shift tech.',engage:'Address SFRM survey items directly'},
-                HIN3:{text:'JBXL is primary leaker. Low Kooner volume (19 total) — confirm technician coverage plan with ops.',engage:'Ops coverage review + JBXL outreach'},
-                HAU1:{text:'FICL and GMIL routing WOs externally. FICL has been top leaker most weeks. WK10 improved to 4 — reinforce.',engage:'Follow up on WK10 improvement'},
-                HCL2:{text:'D4DS is a 5/5 advocate — leverage as reference. DGWD is the leakage source. DGWD scheduling concerns flagged in roundtable.',engage:'Address DGWD scheduling; use D4DS as model'},
-                HHO3:{text:'Three small DSPs leaking (DASL, RRTL, NLZL). No survey data. Site visit recommended to gauge relationships.',engage:'Schedule site visit + informal feedback'},
-                HDY1:{text:'TWLD scoring 4.3/5 — WK10 was clean (0 leaked). TLGZ onboarding ongoing. Reinforce TWLD relationship.',engage:'Reinforce TWLD; check TLGZ onboarding'},
-                HTP2:{text:'Just crossed 85% target. ORMP (2.3/5) is the leakage risk — paperwork delays and WO visibility were main complaints.',engage:'Close loop on ORMP WO visibility issues'},
-                HCT2:{text:'89.6% adoption — strong. TGLO is the lone leaking DSP (2 WK10). Roundtable in Mar revealed tech quality concerns.',engage:'Monitor TGLO; follow up on Mar roundtable items'},
-                HSL1:{text:'90.6% adoption. PRLC scoring 4/5 — paperwork speed is their main friction point. Continue current approach.',engage:'Expedite PRLC paperwork process'},
-                HMK4:{text:'100% adoption. Zero leakage. Use as benchmark and success story for other stations.',engage:'Feature in newsletter / DSP comms'}
-            };
-
-            var priorityColors={critical:'var(--accent-red)',high:'var(--accent-orange)',monitor:'var(--accent-blue)','on-track':'var(--accent-green)'};
-            var priorityBg={critical:'rgba(255,71,87,0.12)',high:'rgba(255,165,2,0.08)',monitor:'rgba(55,66,250,0.08)','on-track':'rgba(0,255,136,0.06)'};
-            var trendIcon={improving:'<span style="color:var(--accent-green);font-size:0.85rem">↗ Improving</span>',worsening:'<span style="color:var(--accent-red);font-size:0.85rem">↘ Worsening</span>',stable:'<span style="color:var(--text-muted);font-size:0.85rem">→ Stable</span>'};
-
-            var h='';
-            scored.forEach(function(x){
-                var s=x.s;
-                var pc=priorityColors[x.priority];
-                var pb=priorityBg[x.priority];
-                var sentStr=x.sentAvg!=null?x.sentAvg.toFixed(1)+'/5 ('+x.sentResponses+' responses)':'No data';
-                var sentColor=x.sentAvg==null?'var(--text-muted)':x.sentAvg>=4?'var(--accent-green)':x.sentAvg>=3?'var(--accent-yellow)':x.sentAvg>=2?'var(--accent-orange)':'var(--accent-red)';
-                var wk10str=x.wk10l===0?'<span style="color:var(--accent-green)">0 ✓</span>':'<span style="color:var(--accent-red)">'+x.wk10l+'</span>';
-                var act=actions[s.station]||{text:'Continue monitoring.',engage:'Regular check-in'};
-                var topDSPstr=topDSP[s.station]&&topDSP[s.station]!=='—'?topDSP[s.station]:'None';
-
-                h+='<div style="background:'+pb+';border:1px solid var(--border-color);border-left:4px solid '+pc+';border-radius:12px;padding:20px;margin-bottom:14px">';
-                // Header row
-                h+='<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:10px">';
-                h+='<div style="display:flex;align-items:center;gap:14px">';
-                h+='<span style="font-size:1.6rem;font-weight:700;font-family:monospace">'+s.station+'</span>';
-                h+='<span style="font-size:0.75rem;color:var(--text-secondary);background:var(--bg-dark);padding:3px 8px;border-radius:6px">'+s.location+'</span>';
-                h+='<span style="font-size:0.7rem;font-weight:600;text-transform:uppercase;padding:4px 10px;border-radius:12px;background:'+pb+';color:'+pc+';border:1px solid '+pc+'">'+x.priority.replace('-',' ')+'</span>';
-                h+='</div>';
-                h+='<div style="display:flex;gap:8px;align-items:center">'+trendIcon[x.trend]+'<span style="font-family:monospace;font-size:0.75rem;color:var(--text-muted)">score: '+x.score.toFixed(0)+'</span></div>';
-                h+='</div>';
-                // Stats row
-                h+='<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:14px">';
-                h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">Adoption</div><div style="font-family:monospace;font-weight:700;font-size:1.1rem;color:'+(s.adoption>=85?'var(--accent-green)':'var(--accent-red)')+'">'+s.adoption.toFixed(1)+'%</div></div>';
-                h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">Total Leaked</div><div style="font-family:monospace;font-weight:700;font-size:1.1rem;color:var(--accent-red)">'+s.leaked+'</div></div>';
-                h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">WK10 Leaked</div><div style="font-family:monospace;font-weight:700;font-size:1.1rem">'+wk10str+'</div></div>';
-                h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">Sentiment</div><div style="font-family:monospace;font-weight:700;font-size:1rem;color:'+sentColor+'">'+sentStr+'</div></div>';
-                h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">WK10 Top Leaker</div><div style="font-size:0.85rem;color:var(--text-secondary)">'+topDSPstr+'</div></div>';
-                h+='</div>';
-                // Action row
-                h+='<div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start">';
-                h+='<div><div style="font-size:0.7rem;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:5px">Recommended Action</div>';
-                h+='<div style="font-size:0.88rem;color:var(--text-secondary);line-height:1.55">'+act.text+'</div></div>';
-                h+='<div style="min-width:180px;background:var(--bg-card);border-radius:8px;padding:10px;text-align:center"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:5px">Engagement Mode</div>';
-                h+='<div style="font-size:0.8rem;color:var(--accent-purple);font-weight:500">'+act.engage+'</div></div>';
-                h+='</div>';
-                h+='</div>';
-            });
-            document.getElementById('actionMatrixList').innerHTML=h;
-        }
-
-        
-
-        function populateFeedbackList(){
-            var c=document.getElementById('feedbackList'),h='';
-            for(var i=0;i<feedbackData.length;i++){var f=feedbackData[i];
-            h+='<div class="feedback-card"><div class="feedback-header"><div class="feedback-meta"><span class="station-name">'+f.dsp+'</span><span class="action-station">'+f.station+'</span><span class="feedback-date">'+f.date+'</span></div><div class="feedback-scores"><div class="score-mini"><span class="score-mini-label">Sat</span><span class="score-mini-value" style="color:'+getScoreColor(f.satisfaction)+'">'+f.satisfaction+'</span></div><div class="score-mini"><span class="score-mini-label">Time</span><span class="score-mini-value" style="color:'+getScoreColor(f.timeliness)+'">'+f.timeliness+'</span></div><div class="score-mini"><span class="score-mini-label">Qual</span><span class="score-mini-value" style="color:'+getScoreColor(f.quality)+'">'+f.quality+'</span></div></div></div>';
-            if(f.issue)h+='<div class="feedback-text issue"><strong>Issue:</strong> '+f.issue+'</div>';
-            if(f.suggestion)h+='<div class="feedback-text suggestion"><strong>Feedback:</strong> '+f.suggestion+'</div>';
-            h+='</div>';}
-            c.innerHTML=h;
-        }
-
-        function createCharts(){
-            var colors=['#00ff88','#00d4ff','#3742fa','#a855f7','#ff4757','#ffa502','#ff6b81','#2ed573','#1e90ff','#ff9ff3','#54a0ff','#ffd93d','#c8d6e5','#576574'];
-            function safeChart(id,config){var el=document.getElementById(id);if(!el)return null;try{return new Chart(el,config);}catch(e){console.warn('Chart error '+id,e);return null;}}
-
-            // Weekly bar chart
-            safeChart('weeklyBarChart',{
-                type:'bar',
-                data:{labels:['WK6','WK7','WK8','WK9','WK10'],datasets:[{label:'Kooner WOs',data:[148,157,194,153,326],backgroundColor:'rgba(0,255,136,0.7)',borderRadius:4}]},
-                options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a'}}},scales:{y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},x:{grid:{display:false},ticks:{color:'#8b8b9a'}}}}
-            });
-
-            // Station adoption bar chart
-            var sortedStations=stationData.slice().sort(function(a,b){return b.adoption-a.adoption});
-            safeChart('stationBarChart',{
-                type:'bar',
-                data:{labels:sortedStations.map(function(s){return s.station}),datasets:[{data:sortedStations.map(function(s){return s.adoption}),backgroundColor:sortedStations.map(function(s){return s.adoption>=85?'rgba(0,255,136,0.7)':'rgba(255,71,87,0.7)'}),borderRadius:4}]},
-                options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,max:100,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a',callback:function(v){return v+'%'}}},y:{grid:{display:false},ticks:{color:'#8b8b9a'}}}}
-            });
-
-            // Station weekly stacked chart
-            var weekLabels=['WK6','WK7','WK8','WK9','WK10'];
-            var topStations=['HDT3','HLA2','HHO3','HTP2','HMK4','HCL2','HDY1','HAU1'];
-            var datasets=topStations.map(function(st,i){
-                var w=weeklyByStation[st];
-                return{label:st,data:[w.WK6||0,w.WK7||0,w.WK8||0,w.WK9||0,w.WK10||0],backgroundColor:colors[i],borderRadius:2};
-            });
-            safeChart('stationWeeklyChart',{
-                type:'bar',
-                data:{labels:weekLabels,datasets:datasets},
-                options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a'},position:'right'}},scales:{y:{stacked:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},x:{stacked:true,grid:{display:false},ticks:{color:'#8b8b9a'}}}}
-            });
-
-            // Station rank chart
-            safeChart('stationRankChart',{
-                type:'bar',
-                data:{labels:sortedStations.map(function(s){return s.station}),datasets:[{label:'Kooner',data:sortedStations.map(function(s){return s.kooner}),backgroundColor:'rgba(0,255,136,0.7)',borderRadius:2},{label:'Leaked',data:sortedStations.map(function(s){return s.leaked}),backgroundColor:'rgba(255,71,87,0.7)',borderRadius:2}]},
-                options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{labels:{color:'#8b8b9a'}}},scales:{x:{stacked:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},y:{stacked:true,grid:{display:false},ticks:{color:'#8b8b9a'}}}}
-            });
-
-            // Leakage pie chart
-            var leakStations=stationData.filter(function(s){return s.leaked>0}).sort(function(a,b){return b.leaked-a.leaked});
-            safeChart('leakageChart',{
-                type:'doughnut',
-                data:{labels:leakStations.map(function(s){return s.station}),datasets:[{data:leakStations.map(function(s){return s.leaked}),backgroundColor:colors,borderWidth:0}]},
-                options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#8b8b9a',padding:8}}},cutout:'60%'}
-            });
-
-            // Sentiment chart
-            safeChart('sentimentChart',{
-                type:'bar',
-                data:{labels:sentimentData.map(function(d){return d.dsp}),datasets:[{label:'Satisfaction',data:sentimentData.map(function(d){return d.satisfaction}),backgroundColor:'rgba(168,85,247,0.7)',borderRadius:4},{label:'Timeliness',data:sentimentData.map(function(d){return d.timeliness}),backgroundColor:'rgba(0,212,255,0.7)',borderRadius:4},{label:'Quality',data:sentimentData.map(function(d){return d.quality}),backgroundColor:'rgba(255,217,61,0.7)',borderRadius:4}]},
-                options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a'}}},scales:{y:{beginAtZero:true,max:5,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},x:{grid:{display:false},ticks:{color:'#8b8b9a'}}}}
-            });
-
-            // Correlation scatter
-            safeChart('correlationChart',{
-                type:'scatter',
-                data:{datasets:[{label:'DSPs',data:sentimentData.map(function(d){return{x:d.avgScore,y:d.adoption,label:d.dsp}}),backgroundColor:function(ctx){var v=ctx.raw;if(!v)return'#8b8b9a';if(v.y>=85)return'rgba(0,255,136,0.8)';if(v.y>=50)return'rgba(255,165,2,0.8)';return'rgba(255,71,87,0.8)'},pointRadius:12,pointHoverRadius:15}]},
-                options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){var p=ctx.raw;return p.label+': '+p.x.toFixed(1)+' sent, '+p.y.toFixed(1)+'% adopt'}}}},scales:{y:{beginAtZero:true,max:100,title:{display:true,text:'Adoption %',color:'#8b8b9a'},grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a',callback:function(v){return v+'%'}}},x:{beginAtZero:true,max:5,title:{display:true,text:'Sentiment',color:'#8b8b9a'},grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}}}}
-            });
-        }
-
-        
-        // ── Calendar ──
-        var calendarMonth = 2;
-        var calendarYear  = 2026;
-
-        var calendarEvents = [
-    {date:'2026-02-09',title:'HMS2 Roundtable',type:'roundtable',station:'HMS2',time:'2:00 PM CT',
-        notes:'Discussed Kooner adoption challenges at Lakeville station. LDOG raised concerns about parts availability and scheduling conflicts.',
-        actions:['Follow up with Kooner on parts lead times - Owner: Brooke','Schedule follow-up with LDOG manager - Owner: Brooke','Review WK6-WK7 leakage patterns for HMS2 - Owner: Brooke']},
-    {date:'2026-02-10',title:'HCL2 Roundtable',type:'roundtable',station:'HCL2',time:'1:00 PM ET',
-        notes:'Met with D4DS and DGWD representatives. D4DS gave 5/5 satisfaction rating. DGWD expressed concerns about scheduling. Discussed strategies to reduce leakage from both DSPs.',
-        actions:['Address DGWD scheduling concerns with Kooner ops team - Owner: Brooke','Leverage D4DS success story for other DSPs - Owner: Brooke','Track HCL2 WK7+ adoption weekly - Owner: Brooke']},
-    {date:'2026-02-11',title:'HPD1 Roundtable',type:'roundtable',station:'HPD1',time:'11:00 AM PT',
-        notes:'Emergency roundtable for HPD1 (2.4% adoption). JDTC is the sole DSP leaking all WOs. Identified that Kooner has limited technician coverage in Portland area. Need to establish local presence.',
-        actions:['Kooner to evaluate Portland technician hiring - Owner: Kooner Ops','Establish direct JDTC contact for WO routing - Owner: Brooke','Weekly HPD1 check-in until adoption improves - Owner: Brooke']},
-    {date:'2026-02-16',title:'HDY1 Roundtable',type:'roundtable',station:'HDY1',time:'10:00 AM ET',
-        notes:'Roundtable with TWLD (5 leaked in WK7) and new DSP TLGZ. Discussed recent adoption decline from 80.6% to 74.0%. TWLD cited turnaround time concerns. TLGZ is new and unfamiliar with Kooner process.',
-        actions:['Provide TLGZ with Kooner onboarding materials - Owner: Brooke','Address TWLD turnaround time complaints with Kooner - Owner: Brooke','Set bi-weekly check-in for HDY1 recovery - Owner: Brooke']},
-    {date:'2026-02-24',title:'HLA2 Site Visit',type:'site-visit',station:'HLA2',time:'9:00 AM PT',notes:'',actions:[]},
-    {date:'2026-02-25',title:'HCT2 & HCL2 — RFM/DSP Call',type:'roundtable',station:'HCT2/HCL2',time:'Wed, 25 Feb 26',
-        notes:'CURRENT SATISFACTION: Regional fleet manager Kathy expressed appreciation for Kooner maintenance provision but identified significant operational challenges. Both stations experiencing vehicle downtime issues causing DSPs to rent replacement vehicles. Communication gaps between Kooner and Amazon teams creating confusion about repair processes and timelines. Positive feedback on recent improvements, particularly daily snapshots and technician contact info.\n\nHCT2 (Chattanooga): Four vehicles previously in backlog, now reduced to three pending repairs. One corner cap replacement delayed due to wrong part size, overnight replacement ordered. Fuel tank repair scheduled for parts arrival Feb 27. PM completion process improved with daily paperwork uploads to Box.\n\nHCL2 (North Carolina): Significant backlog accumulated after January technician disconnection. Outsourcing work that should have stayed in-house due to emergency situation. Justin assigned as new dedicated technician, currently handling ~5 WOs nightly. David Knight provided additional support last week. System access issues with Box platform preventing some DSP personnel from accessing completed paperwork.\n\nCHALLENGES: HCT2 operates under closed-loop pilot with MCS team management; HCL2 handled completely by Kooner WO management system. Vehicles sitting with Kooner for days without repair determination. PM completions requiring multiple uploads (one vehicle bounced back four times). Lack of visibility into technician schedules. Diagnostic equipment finally being sent to HCT2 site. Badge access issues for technicians at off-site locations. Migration challenges from Chime to Slack.\n\nMeeting transcript: https://notes.granola.ai/t/4b063e2c-1b2e-48af-8282-efd3ffe962c9-00demib2',
-        actions:[
-            'Kathy to provide Box access list for personnel needing platform access - Owner: Kathy',
-            'Ash to deliver HCL2 burn-down plan via email - Owner: Ash',
-            'Ash to send HCL2 technician schedule and contact info (similar to HCT2 format) - Owner: Ash',
-            'Implement weekly VIN-level review meetings for both stations until processes stabilize - Owner: Brooke',
-            'Establish clear SLA expectations for outsourced repairs requiring external vendors - Owner: Brooke',
-            'Schedule follow-up once Kooner team discusses internal capacity for weekly reviews - Owner: Brooke'
-        ]},
-    {date:'2026-02-28',title:'HDT3 Roundtable',type:'roundtable',station:'HDT3',time:'1:00 PM ET',notes:'',actions:[]},
-    {date:'2026-03-02',title:'DSP Newsletter #1',type:'newsletter',station:'All',time:'9:00 AM ET',
-        notes:'MARCH 2026 NEWSLETTER SENT TO ALL DSP PARTNERS\n\nFOCUS: Q1 2026 — stay connected, keep improving, ensure transparency.\n\nNEW: NOW SCHEDULING ON-SITE VISITS\nBook a visit with your Kooner team: https://lastmilemm.github.io/dsp_site_visits/\n\nYOUR VOICE KEEPS US ROLLING:\n• YOU SAID: "We can\'t see what\'s happening" → WE\'RE ON IT: Every site now receives a daily open WO status update delivered directly to the designated chatroom.\n• YOU SAID: "Getting answers takes too long" → WE\'RE ON IT: Weekly Office Hours are underway every Tuesday 3–4 PM CST. For chatroom requests, tag @Present Members for visibility and faster support.\n\nCHANGES IN MOTION:\n• Week-Over-Week Growth: Volume climbing — partnering for continued growth.\n• Stations Hitting Target: Multiple sites at or above 85% adoption goal.\n• Clear Action Plan: Actively increasing site-level dedicated support to lower leaked WOs & MTTR.\n\nWEEKLY OFFICE HOURS:\nEvery Tuesday, 3–4 PM CST via Zoom — direct access to the Kooner team for questions, concerns, and feedback.\n\nWEEKLY DSP FEEDBACK SURVEY:\nBrief survey sent every Monday to capture what\'s working and what isn\'t. Responses directly influence priorities and service improvements.\nSubmit feedback: https://form.jotform.com/253505343834153\n\nDAILY OPEN WO SNAPSHOT:\nEach site receives a daily open WO status update in their designated chatroom.\n\nCONTACT & RESOURCES:\n• David Ross, Field Manager: davidr2@koonerfms.com\n• Ash Campas, Dispatch & Field Performance Manager: ashleyc@koonerfms.com\n• Alberto Mancilla, Divisional Field Operations & Performance Manager: albertom@koonerfms.com\n• Dispatch (General Inbox): dispatch@koonerfms.com\n• Kooner Last Mile (General Inbox): kooner_lastmile@koonerfms.com\n• Schedule a Site Visit: https://lastmilemm.github.io/dsp_site_visits/\n• Request a Roundtable: mailto:kooner_lastmile@koonerfms.com?subject=Roundtable%20Request',
-        actions:[]},
-    {date:'2026-03-03',title:'HCT2 Roundtable',type:'roundtable',station:'HCT2',time:'Mon, 02 Mar 26',
-        notes:'OPERATIONAL ISSUES: Recent quality problems with overnight technician Alex. Unit 8-2232: Transmission service botched Thursday night — over-tightened transmission pan bolts causing leaks, damaged fuel filter wires during repair, truck returned to service leaking fluid with hanging wires. Oil change PM on box truck: filter not properly secured, driver left trail of oil immediately after leaving site, required emergency oil addition at fuel station. Pattern: Multiple repairs failing on first use after overnight shift completion. Lift gate repair marked complete but failed VSA inspection upon use.\n\nCOMMUNICATION & RESPONSE TIME FAILURES: Work order information gaps causing payment/grounding issues — missing VINs and mileage data preventing PMS clearance; mileage critical for auto-integrate billing system. Excessive repair timelines far exceeding 72-hour standard. Units 82250 & 82230: 3+ weeks of diagnostic delays — told various parts being ordered (knock sensor, DEF line), later revealed no proper code reader available, should have gone to dealer immediately. Additional 3 days waiting for transport arrangements. Slack room response delays: questions posted 4:30 PM getting no response until next day.\n\nCONTRACT & PROCESS CLARIFICATION NEEDED: Closed loop vs open loop station designation unclear — HCT2 believed to be closed loop (Kooner single point of contact), current pilot contract lacks closed/open loop language, affects DSP billing responsibility through auto-integrate. Vehicle transport policy: Kooner confirmed they do not transport vehicles (scorecard protection), DSPs responsible for moving units to vendors. Outsourced repair management undefined — who tracks vendor repairs and provides status updates, current process leaves DSPs without visibility on dealer repairs.\n\nMeeting transcript: https://notes.granola.ai/t/5483703c-d070-4544-b878-d72db7cd309a-00demib2',
-        actions:[
-            'Brooke to get closed loop clarification from Nahal/Hunter by EOD 3/4 - Owner: Brooke',
-            'Schedule separate call: Brooke, Kylie, Nahal, Hunter, Tom to align on contract terms - Owner: Brooke',
-            'David to implement immediate technician training and evaluation program (site-by-site visits) - Owner: David',
-            'David monitoring Slack 2-3x daily with over-communication approach - Owner: David',
-            'New overnight technician started (Eugene training) — monitor quality - Owner: David'
-        ]},
-    {date:'2026-03-03',title:'Office Hours',type:'office-hours',station:'All',time:'TBD',notes:'Zoom: https://us06web.zoom.us/j/83532653614?pwd=JDmkj8hbJbjQ7RDCqJvmglUO6ObmLy.1&from=addon',actions:[]},
-    {date:'2026-03-05',title:'HHO3 Roundtable',type:'roundtable',station:'HHO3',time:'TBD',notes:'',actions:[]},
-    {date:'2026-03-10',title:'Office Hours',type:'office-hours',station:'All',time:'TBD',notes:'Zoom: https://us06web.zoom.us/j/83532653614?pwd=JDmkj8hbJbjQ7RDCqJvmglUO6ObmLy.1&from=addon',actions:[]},
-    {date:'2026-03-11',title:'HLA2 Roundtable',type:'roundtable',station:'HLA2',time:'9:00 AM PT',notes:'',actions:[]},
-    {date:'2026-03-12',title:'HDT3 / SFRM Check-in',type:'roundtable',station:'HDT3',time:'1:00 PM ET',notes:'',actions:[]},
-    {date:'2026-03-17',title:'Office Hours',type:'office-hours',station:'All',time:'TBD',notes:'Zoom: https://us06web.zoom.us/j/83532653614?pwd=JDmkj8hbJbjQ7RDCqJvmglUO6ObmLy.1&from=addon',actions:[]},
-    {date:'2026-03-19',title:'HIN3 Site Visit',type:'site-visit',station:'HIN3',time:'10:00 AM ET',notes:'',actions:[]},
-    {date:'2026-03-19',title:'HHO3 Roundtable',type:'roundtable',station:'HHO3',time:'TBD',notes:'',actions:[]},
-    {date:'2026-03-24',title:'Office Hours',type:'office-hours',station:'All',time:'TBD',notes:'Zoom: https://us06web.zoom.us/j/83532653614?pwd=JDmkj8hbJbjQ7RDCqJvmglUO6ObmLy.1&from=addon',actions:[]},
-    {date:'2026-03-25',title:'HMS2 / LDOG Follow-up',type:'roundtable',station:'HMS2',time:'2:00 PM CT',notes:'',actions:[]},
-    {date:'2026-03-31',title:'Office Hours',type:'office-hours',station:'All',time:'TBD',notes:'Zoom: https://us06web.zoom.us/j/83532653614?pwd=JDmkj8hbJbjQ7RDCqJvmglUO6ObmLy.1&from=addon',actions:[]},
-    {date:'2026-04-01',title:'DSP Newsletter #2',type:'newsletter',station:'All',time:'9:00 AM ET',notes:'',actions:[]},
-    {date:'2026-04-02',title:'HHO3 Roundtable',type:'roundtable',station:'HHO3',time:'TBD',notes:'',actions:[]},
-    {date:'2026-04-07',title:'Office Hours',type:'office-hours',station:'All',time:'TBD',notes:'Zoom: https://us06web.zoom.us/j/83532653614?pwd=JDmkj8hbJbjQ7RDCqJvmglUO6ObmLy.1&from=addon',actions:[]},
-    {date:'2026-04-09',title:'HCL2 Site Visit',type:'site-visit',station:'HCL2',time:'10:00 AM ET',notes:'',actions:[]},
-    {date:'2026-04-14',title:'Office Hours',type:'office-hours',station:'All',time:'TBD',notes:'Zoom: https://us06web.zoom.us/j/83532653614?pwd=JDmkj8hbJbjQ7RDCqJvmglUO6ObmLy.1&from=addon',actions:[]},
-    {date:'2026-04-14',title:'HDY1 / TLGZ Onboarding Check',type:'roundtable',station:'HDY1',time:'10:00 AM ET',notes:'',actions:[]},
-    {date:'2026-04-16',title:'HHO3 Roundtable',type:'roundtable',station:'HHO3',time:'TBD',notes:'',actions:[]},
-    {date:'2026-04-21',title:'Office Hours',type:'office-hours',station:'All',time:'TBD',notes:'Zoom: https://us06web.zoom.us/j/83532653614?pwd=JDmkj8hbJbjQ7RDCqJvmglUO6ObmLy.1&from=addon',actions:[]},
-    {date:'2026-04-28',title:'Office Hours',type:'office-hours',station:'All',time:'TBD',notes:'Zoom: https://us06web.zoom.us/j/83532653614?pwd=JDmkj8hbJbjQ7RDCqJvmglUO6ObmLy.1&from=addon',actions:[]},
-    {date:'2026-04-30',title:'HHO3 Roundtable',type:'roundtable',station:'HHO3',time:'TBD',notes:'',actions:[]}
+<script>
+// ── WK11 UPDATED DATA ─────────────────────────────────────────────────────────
+var stationData = [
+    {station:'HMK4', location:'Milwaukee, WI',      kooner:95,  leaked:0,   adoption:100.0, wk10_adoption:100.0},
+    {station:'HSL1', location:'Salt Lake City, UT', kooner:81,  leaked:6,   adoption:93.1,  wk10_adoption:90.6},
+    {station:'HCT2', location:'Chattanooga, TN',    kooner:81,  leaked:8,   adoption:91.0,  wk10_adoption:89.6},
+    {station:'HTP2', location:'Gibsonton, FL',      kooner:194, leaked:33,  adoption:85.5,  wk10_adoption:84.7},
+    {station:'HHO3', location:'Porter, TX',         kooner:182, leaked:37,  adoption:83.1,  wk10_adoption:79.1},
+    {station:'HDY1', location:'Clayton, OH',        kooner:131, leaked:32,  adoption:80.4,  wk10_adoption:79.0},
+    {station:'HCL2', location:'Charlotte, NC',      kooner:193, leaked:98,  adoption:66.3,  wk10_adoption:63.7},
+    {station:'HAU1', location:'Austin, TX',         kooner:163, leaked:103, adoption:61.3,  wk10_adoption:56.1},
+    {station:'HDT3', location:'Romulus, MI',        kooner:275, leaked:190, adoption:59.1,  wk10_adoption:57.4},
+    {station:'HLA2', location:'Santa Clarita, CA',  kooner:401, leaked:372, adoption:51.9,  wk10_adoption:49.0},
+    {station:'HMS2', location:'Lakeville, MN',      kooner:44,  leaked:62,  adoption:41.5,  wk10_adoption:43.2},
+    {station:'HIN3', location:'South Bend, IN',     kooner:19,  leaked:36,  adoption:34.5,  wk10_adoption:39.6},
+    {station:'HPD1', location:'Portland, OR',       kooner:4,   leaked:58,  adoption:6.5,   wk10_adoption:7.3},
 ];
 
-        var calMonthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+var weeklyByStation = {
+    'HAU1': {WK7:25,WK8:12,WK9:16,WK10:30,WK11:39,total:163},
+    'HCL2': {WK7:22,WK8:32,WK9:20,WK10:28,WK11:30,total:193},
+    'HCT2': {WK7:1, WK8:4, WK9:7, WK10:35,WK11:12,total:81},
+    'HDT3': {WK7:21,WK8:35,WK9:14,WK10:57,WK11:31,total:275},
+    'HDY1': {WK7:6, WK8:9, WK9:13,WK10:25,WK11:22,total:131},
+    'HHO3': {WK7:18,WK8:13,WK9:13,WK10:19,WK11:42,total:182},
+    'HIN3': {WK7:0, WK8:1, WK9:2, WK10:0, WK11:0, total:19},
+    'HLA2': {WK7:42,WK8:41,WK9:43,WK10:49,WK11:54,total:401},
+    'HMK4': {WK7:3, WK8:13,WK9:7, WK10:14,WK11:13,total:95},
+    'HMS2': {WK7:1, WK8:8, WK9:1, WK10:4, WK11:3, total:44},
+    'HPD1': {WK7:0, WK8:0, WK9:0, WK10:3, WK11:0, total:4},
+    'HSL1': {WK7:8, WK8:9, WK9:7, WK10:4, WK11:23,total:81},
+    'HTP2': {WK7:10,WK8:17,WK9:10,WK10:58,WK11:23,total:194},
+};
 
-        function changeMonth(d){
-            calendarMonth += d;
-            if(calendarMonth > 11){calendarMonth = 0; calendarYear++;}
-            if(calendarMonth < 0){calendarMonth = 11; calendarYear--;}
-            renderCalendar();
+var weekTotals = {WK7:157,WK8:194,WK9:153,WK10:326,WK11:292};
+
+var wk11Kooner = {HAU1:39,HCL2:30,HCT2:12,HDT3:31,HDY1:22,HHO3:42,HIN3:0,HLA2:54,HMK4:13,HMS2:3,HPD1:0,HSL1:23,HTP2:23};
+var wk10Kooner = {HAU1:30,HCL2:28,HCT2:35,HDT3:57,HDY1:25,HHO3:19,HIN3:0,HLA2:49,HMK4:14,HMS2:4,HPD1:3,HSL1:4,HTP2:58};
+
+var wk10TopDSP = {
+    HLA2:'ARMA (11)', HDT3:'SFRM (8)', HPD1:'JDTC (6)', HMS2:'LDOG (6)',
+    HCL2:'D4DS (3)', HAU1:'FICL (4)', HHO3:'DASL (3)', HCT2:'TGLO (2)',
+    HSL1:'PRLC (2)', HIN3:'CMIL (1)', HDY1:'—', HMK4:'—', HTP2:'—'
+}; // WK10
+var wk11TopDSP = {
+    HLA2:'ARMA (9)', HDT3:'SFRM (9)', HMS2:'LDOG (8)', HIN3:'JBXL (6)',
+    HPD1:'JDTC (7)', HAU1:'GMIL (4)', HCL2:'D4DS (3)', HDY1:'TLGZ (2)',
+    HTP2:'ORMP (1)', HHO3:'—', HMK4:'—', HCT2:'—', HSL1:'—'
+};
+
+// WK11 leakage pending — using WK10 cumulative leaked
+var wk10Leaked = {HLA2:14,HDT3:8,HPD1:6,HMS2:6,HCL2:5,HAU1:4,HHO3:3,HCT2:2,HSL1:2,HIN3:1,HDY1:0,HMK4:0,HTP2:0}; // WK10
+var wk11Leaked = {HLA2:11,HDT3:9,HMS2:8,HIN3:7,HPD1:7,HAU1:6,HCL2:5,HDY1:3,HTP2:2,HHO3:0,HMK4:0,HCT2:0,HSL1:0};
+
+// UPDATED SENTIMENT — WK11 responses incorporated
+var sentimentData = [
+    {dsp:'ALAB', station:'HDT3', responses:2, satisfaction:3.0, timeliness:2.5, quality:3.0, avgScore:2.8, adoption:60.3},
+    {dsp:'ARMA', station:'HLA2', responses:8, satisfaction:3.1, timeliness:3.0, quality:3.0, avgScore:3.0, adoption:52.6, isNew:true},
+    {dsp:'ORMP', station:'HTP2', responses:2, satisfaction:2.0, timeliness:2.0, quality:3.0, avgScore:2.3, adoption:86.2},
+    {dsp:'MAEP', station:'HIN3', responses:1, satisfaction:2.0, timeliness:2.0, quality:3.0, avgScore:2.3, adoption:39.6},
+    {dsp:'SFRM', station:'HDT3', responses:6, satisfaction:3.2, timeliness:3.2, quality:3.5, avgScore:3.3, adoption:60.3, isNew:true},
+    {dsp:'TWLD', station:'HDY1', responses:2, satisfaction:4.0, timeliness:4.0, quality:5.0, avgScore:4.3, adoption:81.9, isNew:true},
+    {dsp:'PRLC', station:'HSL1', responses:1, satisfaction:4.0, timeliness:5.0, quality:3.0, avgScore:4.0, adoption:93.1},
+    {dsp:'D4DS', station:'HCL2', responses:1, satisfaction:5.0, timeliness:5.0, quality:5.0, avgScore:5.0, adoption:67.5},
+];
+
+// WK11 feedback — newest first
+var feedbackData = [
+    {date:'Mar 11',dsp:'SFRM',station:'HDT3',satisfaction:3,timeliness:4,quality:4,isNew:true,
+     issue:'Units sit 48hrs before diagnosis begins on weekends. Day/night shift WO communication gap causes delays and increased turnaround time.',
+     suggestion:'Better Amazon PM training for mobile techs. Rent building with heavy-duty lift — several units forced to dealership due to onsite limitations. Component-level diagnostics vs whole-assembly replacement.'},
+    {date:'Mar 10',dsp:'TWLD',station:'HDY1',satisfaction:4,timeliness:4,quality:5,isNew:true,
+     issue:'',
+     suggestion:'Moving service hours to 12AM–8AM has been a great help smoothing over PMs for our DSP.'},
+    {date:'Mar 9',dsp:'ARMA',station:'HLA2',satisfaction:4,timeliness:4,quality:3,isNew:true,
+     issue:'',
+     suggestion:'No complaints.'},
+    {date:'Mar 2',dsp:'ALAB',station:'HDT3',satisfaction:5,timeliness:4,quality:5,
+     issue:'Vehicles grounded Fri–Sun cannot get serviced until Monday.',
+     suggestion:'Weekend support needed.'},
+    {date:'Feb 23',dsp:'ARMA',station:'HLA2',satisfaction:3,timeliness:3,quality:4,
+     issue:'Back-door back-orders grounding trucks. Hands tied due to lack of parts.',
+     suggestion:'Stock common parts on site. Service rep at HLA2 is great — hands tied by parts availability.'},
+    {date:'Feb 9',dsp:'ARMA',station:'HLA2',satisfaction:5,timeliness:5,quality:5,
+     issue:'',
+     suggestion:'Jose Madrigal is GREAT — very professional and attentive.'},
+    {date:'Feb 9',dsp:'ORMP',station:'HTP2',satisfaction:2,timeliness:2,quality:4,
+     issue:'Multiple WOs unworked since 2/4. No ETA or visibility. Key Kooner contact was laid off.',
+     suggestion:''},
+    {date:'Jan 12',dsp:'D4DS',station:'HCL2',satisfaction:5,timeliness:5,quality:5,
+     issue:'',
+     suggestion:'Supervisor got more vehicles running in one evening than any mechanic in 5 years.'},
+];
+
+// ── CALENDAR EVENTS ──────────────────────────────────────────────────────────
+var calendarEvents = [
+    {date:'2026-02-09',title:'HMS2 Roundtable',type:'roundtable',station:'HMS2',time:'2:00 PM CT',notes:'Discussed Kooner adoption challenges at Lakeville station. LDOG raised concerns about parts availability and scheduling conflicts.',actions:['Follow up with Kooner on parts lead times - Owner: Brooke','Schedule follow-up with LDOG manager - Owner: Brooke']},
+    {date:'2026-02-10',title:'HCL2 Roundtable',type:'roundtable',station:'HCL2',time:'1:00 PM ET',notes:'Met with D4DS and DGWD representatives. D4DS gave 5/5 satisfaction rating. DGWD expressed concerns about scheduling.',actions:['Address DGWD scheduling concerns with Kooner ops team - Owner: Brooke','Leverage D4DS success story for other DSPs - Owner: Brooke']},
+    {date:'2026-02-11',title:'HPD1 Roundtable',type:'roundtable',station:'HPD1',time:'11:00 AM PT',notes:'Emergency roundtable for HPD1. JDTC is the sole DSP leaking all WOs. Kooner has limited tech coverage in Portland.',actions:['Kooner to evaluate Portland technician hiring - Owner: Kooner Ops','Establish direct JDTC contact for WO routing - Owner: Brooke']},
+    {date:'2026-02-16',title:'HDY1 Roundtable',type:'roundtable',station:'HDY1',time:'10:00 AM ET',notes:'Roundtable with TWLD and new DSP TLGZ. TWLD cited turnaround time concerns. TLGZ new and unfamiliar with Kooner process.',actions:['Provide TLGZ with Kooner onboarding materials - Owner: Brooke','Address TWLD TAT complaints - Owner: Brooke']},
+    {date:'2026-02-24',title:'HLA2 Site Visit',type:'site-visit',station:'HLA2',time:'9:00 AM PT',notes:'',actions:[]},
+    {date:'2026-02-25',title:'HCT2 & HCL2 — RFM/DSP Call',type:'roundtable',station:'HCT2/HCL2',time:'Wed, 25 Feb 26',notes:'CURRENT SATISFACTION: Regional fleet manager Kathy expressed appreciation for Kooner maintenance but identified challenges. Both stations experiencing vehicle downtime causing DSPs to rent replacements. HCL2 backlog accumulated after January tech disconnection.',actions:['Kathy to provide Box access list - Owner: Kathy','Ash to deliver HCL2 burn-down plan - Owner: Ash','Implement weekly VIN-level review meetings - Owner: Brooke']},
+    {date:'2026-02-28',title:'HDT3 Roundtable',type:'roundtable',station:'HDT3',time:'1:00 PM ET',notes:'',actions:[]},
+    {date:'2026-03-02',title:'DSP Newsletter #1',type:'newsletter',station:'All',time:'9:00 AM ET',notes:'MARCH 2026 NEWSLETTER SENT TO ALL DSP PARTNERS. FOCUS: Q1 2026 — transparency and improvement. NEW: scheduling on-site visits at https://lastmilemm.github.io/dsp_site_visits/. Weekly Office Hours Tues 3–4 PM CST. Feedback survey: https://form.jotform.com/253505343834153',actions:[]},
+    {date:'2026-03-03',title:'HCT2 Roundtable',type:'roundtable',station:'HCT2',time:'Mon, 02 Mar 26',notes:'OPERATIONAL ISSUES: Recent quality problems with overnight tech. Multiple repairs failing on first use. Communication gaps and WO visibility issues. Contract and closed-loop clarification needed.',actions:['Brooke to get closed loop clarification from Nahal/Hunter by EOD 3/4 - Owner: Brooke','David to implement immediate tech training and evaluation - Owner: David','New overnight tech started (Eugene training) — monitor quality - Owner: David']},
+    {date:'2026-03-03',title:'Office Hours',type:'office-hours',station:'All',time:'3:00 PM CT',notes:'Zoom: https://us06web.zoom.us/j/83532653614',actions:[]},
+    {date:'2026-03-05',title:'HHO3 Roundtable',type:'roundtable',station:'HHO3',time:'TBD',notes:'',actions:[]},
+    {date:'2026-03-10',title:'Office Hours',type:'office-hours',station:'All',time:'3:00 PM CT',notes:'Zoom: https://us06web.zoom.us/j/83532653614',actions:[]},
+    {date:'2026-03-11',title:'HLA2 Roundtable',type:'roundtable',station:'HLA2',time:'9:00 AM PT',notes:'',actions:[]},
+    {date:'2026-03-12',title:'HDT3 / SFRM Check-in',type:'roundtable',station:'HDT3',time:'1:00 PM ET',notes:'',actions:[]},
+    {date:'2026-03-17',title:'Office Hours',type:'office-hours',station:'All',time:'3:00 PM CT',notes:'Zoom: https://us06web.zoom.us/j/83532653614',actions:[]},
+    {date:'2026-03-18',title:'WBR — WK11',type:'review',station:'All',time:'3:30 PM CST',notes:'Weekly Business Review for WK11 (Mar 8–14). Kooner WK11 scorecard expected from Amazon today.',actions:[]},
+    {date:'2026-03-19',title:'HIN3 Site Visit',type:'site-visit',station:'HIN3',time:'10:00 AM ET',notes:'',actions:[]},
+    {date:'2026-03-19',title:'HHO3 Roundtable',type:'roundtable',station:'HHO3',time:'TBD',notes:'',actions:[]},
+    {date:'2026-03-24',title:'Office Hours',type:'office-hours',station:'All',time:'3:00 PM CT',notes:'Zoom: https://us06web.zoom.us/j/83532653614',actions:[]},
+    {date:'2026-03-25',title:'HMS2 / LDOG Follow-up',type:'roundtable',station:'HMS2',time:'2:00 PM CT',notes:'',actions:[]},
+    {date:'2026-03-31',title:'Office Hours',type:'office-hours',station:'All',time:'3:00 PM CT',notes:'Zoom: https://us06web.zoom.us/j/83532653614',actions:[]},
+    {date:'2026-04-01',title:'DSP Newsletter #2',type:'newsletter',station:'All',time:'9:00 AM ET',notes:'',actions:[]},
+    {date:'2026-04-02',title:'HHO3 Roundtable',type:'roundtable',station:'HHO3',time:'TBD',notes:'',actions:[]},
+    {date:'2026-04-07',title:'Office Hours',type:'office-hours',station:'All',time:'3:00 PM CT',notes:'Zoom: https://us06web.zoom.us/j/83532653614',actions:[]},
+    {date:'2026-04-09',title:'HCL2 Site Visit',type:'site-visit',station:'HCL2',time:'10:00 AM ET',notes:'',actions:[]},
+    {date:'2026-04-14',title:'Office Hours',type:'office-hours',station:'All',time:'3:00 PM CT',notes:'Zoom: https://us06web.zoom.us/j/83532653614',actions:[]},
+    {date:'2026-04-14',title:'HDY1 / TLGZ Onboarding Check',type:'roundtable',station:'HDY1',time:'10:00 AM ET',notes:'',actions:[]},
+    {date:'2026-04-16',title:'HHO3 Roundtable',type:'roundtable',station:'HHO3',time:'TBD',notes:'',actions:[]},
+    {date:'2026-04-21',title:'Office Hours',type:'office-hours',station:'All',time:'3:00 PM CT',notes:'Zoom: https://us06web.zoom.us/j/83532653614',actions:[]},
+    {date:'2026-04-28',title:'Office Hours',type:'office-hours',station:'All',time:'3:00 PM CT',notes:'Zoom: https://us06web.zoom.us/j/83532653614',actions:[]},
+    {date:'2026-04-30',title:'HHO3 Roundtable',type:'roundtable',station:'HHO3',time:'TBD',notes:'',actions:[]},
+];
+
+var calendarMonth=2, calendarYear=2026;
+var calMonthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+// ── HELPER FUNCTIONS ─────────────────────────────────────────────────────────
+function showTab(tabId,btn){
+    document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+    document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active')});
+    document.getElementById(tabId).classList.add('active');
+    btn.classList.add('active');
+    if(tabId==='calendar'){renderCalendar();renderUpcomingEvents();renderPastEvents();}
+    // Resize all Chart.js instances so hidden-tab canvases render correctly
+    setTimeout(function(){
+        if(typeof _charts !== 'undefined'){
+            _charts.forEach(function(c){ try{c.resize();}catch(e){} });
         }
+    }, 50);
+}
+function filterStations(filter,btn){
+    document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
+    btn.classList.add('active');
+    populateDSPTable(filter);
+}
+function getScoreColor(s){if(s>=4)return'var(--accent-green)';if(s>=3)return'var(--accent-yellow)';if(s>=2)return'var(--accent-orange)';return'var(--accent-red)'}
 
-           function renderCalendar(){
-    var grid = document.getElementById('calendarGrid');
-    if(!grid) return;
-    document.getElementById('calendarMonthTitle').textContent = calMonthNames[calendarMonth] + ' ' + calendarYear;
-    var h = '';
-    ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(function(day){
-        h += '<div class="cal-header-cell">' + day + '</div>';
+// ── TABLE POPULATION ─────────────────────────────────────────────────────────
+function populateStationQuickTable(){
+    var t=document.getElementById('stationQuickTable'),h='';
+    var sorted=stationData.slice().sort(function(a,b){return b.adoption-a.adoption});
+    for(var i=0;i<sorted.length;i++){
+        var s=sorted[i],ot=s.adoption>=85;
+        var wow=s.adoption-s.wk10_adoption;
+        var wowHtml=wow===0?'<span class="wow-change neutral">—</span>':wow>0?'<span class="wow-change positive">+'+wow.toFixed(1)+'pp</span>':'<span class="wow-change negative">'+wow.toFixed(1)+'pp</span>';
+        h+='<tr><td><span class="station-name">'+s.station+'</span></td>';
+        h+='<td style="color:'+(ot?'var(--accent-green)':'var(--accent-red)')+'">'+s.adoption.toFixed(1)+'%</td>';
+        h+='<td>'+s.kooner+'</td><td>'+s.leaked+'</td>';
+        h+='<td>'+wowHtml+'</td>';
+        h+='<td><span class="status-pill '+(ot?'on-target':'below-target')+'"><span class="status-dot"></span>'+(ot?'On Target':'Below')+'</span></td></tr>';
+    }
+    t.innerHTML=h;
+}
+
+function populateOpportunityTable(){
+    var t=document.getElementById('opportunityTable'),h='';
+    var sorted=stationData.slice().filter(function(s){return s.leaked>0}).sort(function(a,b){return b.leaked-a.leaked});
+    for(var i=0;i<Math.min(sorted.length,8);i++){
+        var s=sorted[i];
+        var potential=(s.leaked/977*100).toFixed(1);
+        h+='<tr><td><span class="station-name">'+s.station+'</span></td>';
+        h+='<td style="color:var(--accent-red)">'+s.leaked+'</td>';
+        h+='<td>'+s.adoption.toFixed(1)+'%</td>';
+        h+='<td>'+potential+'% of leakage</td></tr>';
+    }
+    t.innerHTML=h;
+}
+
+function populateStationFullTable(){
+    var t=document.getElementById('stationFullTable'),h='';
+    var sorted=stationData.slice().sort(function(a,b){return b.adoption-a.adoption});
+    for(var i=0;i<sorted.length;i++){
+        var s=sorted[i],ot=s.adoption>=85,gap=85-s.adoption,total=s.kooner+s.leaked;
+        var wow=s.adoption-s.wk10_adoption;
+        var wowHtml=wow===0?'—':wow>0?'<span style="color:var(--accent-green)">+'+wow.toFixed(1)+'pp</span>':'<span style="color:var(--accent-red)">'+wow.toFixed(1)+'pp</span>';
+        h+='<tr><td><span class="station-name">'+s.station+'</span></td>';
+        h+='<td>'+(s.location||'—')+'</td>';
+        h+='<td style="color:'+(ot?'var(--accent-green)':'var(--accent-red)')+'">'+s.adoption.toFixed(1)+'%</td>';
+        h+='<td>'+s.kooner+'</td><td>'+s.leaked+'</td><td>'+total+'</td>';
+        h+='<td style="color:'+(gap>0?'var(--accent-red)':'var(--accent-green)')+'">'+(gap>0?'+':'')+gap.toFixed(1)+'%</td>';
+        h+='<td>'+wowHtml+'</td>';
+        h+='<td><span class="status-pill '+(ot?'on-target':'below-target')+'"><span class="status-dot"></span>'+(ot?'On Target':'Below')+'</span></td></tr>';
+    }
+    t.innerHTML=h;
+}
+
+function populateStationWeeklyTable(){
+    var t=document.getElementById('stationWeeklyTable'),h='';
+    var stations=Object.keys(weeklyByStation).sort(function(a,b){return weeklyByStation[b].total-weeklyByStation[a].total});
+    for(var i=0;i<stations.length;i++){
+        var st=stations[i],w=weeklyByStation[st];
+        var wk11Color=w.WK11>w.WK10?'color:var(--accent-green)':w.WK11<w.WK10?'color:var(--accent-red)':'';
+        h+='<tr><td><span class="station-name">'+st+'</span></td>';
+        h+='<td>'+(w.WK7||'—')+'</td><td>'+(w.WK8||'—')+'</td><td>'+(w.WK9||'—')+'</td><td>'+(w.WK10||'—')+'</td>';
+        h+='<td style="font-weight:700;'+wk11Color+'">'+(w.WK11||'—')+'</td>';
+        h+='<td><strong>'+w.total+'</strong></td></tr>';
+    }
+    h+='<tr style="background:var(--bg-card-hover)"><td><strong>TOTAL</strong></td><td><strong>'+weekTotals.WK7+'</strong></td><td><strong>'+weekTotals.WK8+'</strong></td><td><strong>'+weekTotals.WK9+'</strong></td><td><strong>'+weekTotals.WK10+'</strong></td><td style="font-weight:700;color:var(--accent-purple)"><strong>'+weekTotals.WK11+'</strong></td><td><strong>1,863</strong></td></tr>';
+    t.innerHTML=h;
+}
+
+function populateWk11VolumeTable(){
+    var t=document.getElementById('wk11VolumeBody');
+    if(!t)return;
+    var sorted=stationData.slice().sort(function(a,b){
+        var ww11a=wk11Kooner[a.station]||0, ww11b=wk11Kooner[b.station]||0;
+        return ww11b-ww11a;
     });
-    var firstDay  = new Date(calendarYear, calendarMonth, 1).getDay();
-    var daysInMon = new Date(calendarYear, calendarMonth + 1, 0).getDate();
-    var prevDays  = new Date(calendarYear, calendarMonth, 0).getDate();
-    var today     = new Date();
-    for(var i = firstDay - 1; i >= 0; i--){
-        h += '<div class="calendar-day other-month"><div class="cal-date-num">' + (prevDays - i) + '</div></div>';
+    var h='';
+    for(var i=0;i<sorted.length;i++){
+        var s=sorted[i];
+        var w10=wk10Kooner[s.station]||0, w11=wk11Kooner[s.station]||0;
+        var wow=w11-w10;
+        var wowColor=wow>5?'var(--accent-green)':wow<-5?'var(--accent-red)':'var(--text-muted)';
+        var adoptWow=s.adoption-s.wk10_adoption;
+        var signal=s.adoption>=85?'<span class="status-pill on-target"><span class="status-dot"></span>On Target</span>':w11===0?'<span style="color:var(--accent-red);font-size:0.8rem">⚠ No coverage</span>':wow>10?'<span style="color:var(--accent-green);font-size:0.8rem">↑↑ Surge</span>':wow>0?'<span style="color:var(--accent-green);font-size:0.8rem">↑ Growing</span>':wow<-10?'<span style="color:var(--accent-red);font-size:0.8rem">↓↓ Dropped</span>':wow<0?'<span style="color:var(--accent-orange);font-size:0.8rem">↓ Slipped</span>':'<span style="color:var(--text-muted);font-size:0.8rem">→ Stable</span>';
+        h+='<tr>';
+        h+='<td><span class="station-name">'+s.station+'</span></td>';
+        h+='<td style="text-align:right;font-family:monospace">'+w10+'</td>';
+        h+='<td style="text-align:right;font-family:monospace;font-weight:700">'+w11+'</td>';
+        h+='<td style="text-align:right;font-family:monospace;font-weight:700;color:'+wowColor+'">'+(wow>=0?'+':'')+wow+'</td>';
+        h+='<td style="color:'+(s.adoption>=85?'var(--accent-green)':'var(--accent-red)')+';font-family:monospace">'+s.adoption.toFixed(1)+'%</td>';
+        h+='<td style="font-family:monospace;color:'+(adoptWow>0?'var(--accent-green)':adoptWow<0?'var(--accent-red)':'var(--text-muted)')+'">'+(adoptWow>0?'+':'')+adoptWow.toFixed(1)+'pp</td>';
+        h+='<td>'+signal+'</td>';
+        h+='</tr>';
     }
-    for(var d = 1; d <= daysInMon; d++){
-        var mm = (calendarMonth + 1 < 10 ? '0' : '') + (calendarMonth + 1);
-        var dd = (d < 10 ? '0' : '') + d;
-        var ds = calendarYear + '-' + mm + '-' + dd;
-        var isTod = (today.getFullYear() === calendarYear && today.getMonth() === calendarMonth && today.getDate() === d);
-        var evts  = calendarEvents.filter(function(e){ return e.date === ds; });
-        h += '<div class="calendar-day' + (isTod ? ' cal-today' : '') + '" onclick="if(adminMode)adminOpenAddModal(\''+ds+'\')">';
-        h += '<div class="cal-date-num">' + d + '</div>';
-        evts.forEach(function(ev, ei){
-            var ac = ev.actions && ev.actions.length ? '<span class="cal-action-count">' + ev.actions.length + '</span>' : '';
-            h += '<div class="calendar-event ' + ev.type + '" data-date="' + ds + '" data-idx="' + ei + '" onclick="event.stopPropagation();calClick(this)">' + ev.title + ac + '</div>';
+    t.innerHTML=h;
+}
+
+function populateDSPTable(filter){
+    filter=filter||'all';
+    var t=document.getElementById('dspTable'),h='';
+    var filtered=filter==='all'?stationData:stationData.filter(function(s){return s.station===filter});
+    filtered=filtered.slice().sort(function(a,b){return b.leaked-a.leaked});
+    for(var i=0;i<filtered.length;i++){
+        var s=filtered[i];if(s.leaked===0)continue;
+        var priority=s.adoption<20?'critical':s.adoption<50?'high':s.adoption<70?'medium':'low';
+        var opp=(s.leaked/977*100).toFixed(1);
+        h+='<tr><td><span class="station-name">'+s.station+'</span></td>';
+        h+='<td style="color:'+(s.adoption>=85?'var(--accent-green)':'var(--accent-red)')+'">'+s.adoption.toFixed(1)+'%</td>';
+        h+='<td>'+s.kooner+'</td><td>'+s.leaked+'</td>';
+        h+='<td>'+opp+'% of leakage</td>';
+        h+='<td><span class="priority-pill priority-'+priority+'">'+priority+'</span></td></tr>';
+    }
+    t.innerHTML=h;
+}
+
+function populateFeedbackList(){
+    var c=document.getElementById('feedbackList'),h='';
+    for(var i=0;i<feedbackData.length;i++){
+        var f=feedbackData[i];
+        var newTag=f.isNew?'<span class="new-badge">WK11</span>':'';
+        h+='<div class="feedback-card"><div class="feedback-header"><div class="feedback-meta">';
+        h+='<span class="station-name">'+f.dsp+newTag+'</span>';
+        h+='<span class="action-station" style="background:var(--bg-dark);padding:4px 10px;border-radius:8px;font-size:0.8rem;font-family:monospace;color:var(--text-secondary)">'+f.station+'</span>';
+        h+='<span class="feedback-date">'+f.date+'</span></div>';
+        h+='<div class="feedback-scores"><div class="score-mini"><span class="score-mini-label">Sat</span><span class="score-mini-value" style="color:'+getScoreColor(f.satisfaction)+'">'+f.satisfaction+'</span></div><div class="score-mini"><span class="score-mini-label">Time</span><span class="score-mini-value" style="color:'+getScoreColor(f.timeliness)+'">'+f.timeliness+'</span></div><div class="score-mini"><span class="score-mini-label">Qual</span><span class="score-mini-value" style="color:'+getScoreColor(f.quality)+'">'+f.quality+'</span></div></div></div>';
+        if(f.issue)h+='<div class="feedback-text issue"><strong>Issue:</strong> '+f.issue+'</div>';
+        if(f.suggestion)h+='<div class="feedback-text suggestion"><strong>Feedback:</strong> '+f.suggestion+'</div>';
+        h+='</div>';
+    }
+    c.innerHTML=h;
+}
+
+function populateActionMatrix(){
+    var sentMap={};
+    for(var i=0;i<sentimentData.length;i++){
+        var sd=sentimentData[i],st=sd.station;
+        if(!sentMap[st]){sentMap[st]={total:0,count:0,responses:0};}
+        sentMap[st].total+=sd.avgScore;sentMap[st].count++;sentMap[st].responses+=sd.responses;
+    }
+    var totalLeaked=stationData.reduce(function(a,s){return a+s.leaked},0);
+    var scored=stationData.map(function(s){
+        var gap=Math.max(0,85-s.adoption);
+        var leakPct=s.leaked/totalLeaked*100;
+        var sentAvg=sentMap[s.station]?sentMap[s.station].total/sentMap[s.station].count:null;
+        var sentPenalty=sentAvg!=null?(5-sentAvg)*20:15;
+        var score=gap*0.4+leakPct*0.35+sentPenalty*0.25;
+        var w11=wk11Kooner[s.station]||0,w10=wk10Kooner[s.station]||0;
+        var trend=s.adoption>=85?'stable':w11>w10*1.2?'improving':w11<w10*0.8?'worsening':'stable';
+        var priority=s.adoption>=85?'on-track':score>=30?'critical':score>=20?'high':score>=8?'monitor':'on-track';
+        return{s:s,score:score,sentAvg:sentAvg,sentResponses:sentMap[s.station]?sentMap[s.station].responses:0,wk11l:wk10Leaked[s.station]||0,trend:trend,priority:priority,gap:gap,leakPct:leakPct};
+    }).sort(function(a,b){return b.score-a.score});
+
+    var counts={critical:0,high:0,monitor:0,'on-track':0};
+    scored.forEach(function(x){counts[x.priority]=(counts[x.priority]||0)+1;});
+    document.getElementById('actionCountCritical').textContent=counts.critical||0;
+    document.getElementById('actionCountHigh').textContent=counts.high||0;
+    document.getElementById('actionCountMedium').textContent=counts.monitor||0;
+    document.getElementById('actionCountGood').textContent=counts['on-track']||0;
+
+    var actions={
+        HPD1:{text:'Emergency: JDTC routing 100% externally, 0 Kooner WOs WK11. Tech coverage in Portland is the root blocker — hiring or subcontract needed urgently.',engage:'Direct call to JDTC + Kooner ops escalation'},
+        HLA2:{text:'54 WK11 Kooner WOs — highest ever single week. ARMA parts backorder (back-door back-orders) confirmed in WK11 survey. Stock common parts on-site to protect this volume.',engage:'Parts escalation + ARMA survey follow-up'},
+        HMS2:{text:'LDOG is sole leaking DSP — 6 in WK10, consistent pattern. New 3rd tech started 3/16 — volume expected to increase WK12. Relationship outreach before pitch.',engage:'1:1 call with LDOG manager'},
+        HDT3:{text:'SFRM raised weekend coverage gap and lift facility need in WK11 survey. Address both concretely: weekend tech coverage option + shop facility access. SFRM is top leaker (8 WOs WK10).',engage:'Direct response to SFRM WK11 survey items'},
+        HIN3:{text:'Zero WOs again WK11. CMIL is leaking DSP. Tech ~2 weeks pending paperwork. Confirm timeline and outreach to CMIL to hold WOs until coverage active.',engage:'Ops coverage update + CMIL outreach'},
+        HAU1:{text:'Strong WK11 (+39 WOs, adoption 62.7%). FICL improving in WK10. Reinforce trajectory — confirm FICL engagement and address any remaining GMIL leakage.',engage:'WK11 volume recognition + FICL reinforcement'},
+        HCL2:{text:'D4DS is a 5/5 advocate. DGWD and other DSPs are leakage source. 2nd tech offer out (~3/25) — communicate ETA to DSPs. Use D4DS as reference.',engage:'DGWD scheduling follow-up + 2nd tech ETA comms'},
+        HHO3:{text:'Volume surge +23 WoW — 83.1% adoption, approaching target. Dasl, RRTL, NLZL are leaking DSPs. No survey data from any. Site visit planned 3/19.',engage:'3/19 site visit + informal DSP check-ins'},
+        HDY1:{text:'TWLD scoring 4.3/5, confirmed schedule shift is working. WK11 clean (0 leaked). TLGZ onboarding ongoing. Open req active for 2nd tech — adoption near 85% ceiling with solo tech.',engage:'Reinforce TWLD; confirm TLGZ WO routing process'},
+        HTP2:{text:'Volume cliff -35 WoW (58→23). Still above 85% (86.2%). ORMP (2.3/5) is silent since Feb 9 — proactive outreach needed before WK12.',engage:'ORMP proactive outreach; WK12 volume watch'},
+        HCT2:{text:'91.0% adoption after WK11 update. Harvey solo this week (Eugene at HCL2). TGLO is the lone leaking DSP (2 WK10). Monitor quality concerns from Mar 3 roundtable.',engage:'Monitor TGLO; Eugene returns when HCL2 2nd tech onboards'},
+        HSL1:{text:'93.1% adoption — breakout week (+19 WoW). Tun solo, med TAT 0.45d. PRLC scoring 4/5 — paperwork speed is their only friction. Current approach working.',engage:'Expedite PRLC paperwork; feature HSL1 as success story'},
+        HMK4:{text:'100% adoption. Zero leakage. 13 WoW WOs stable. Use as benchmark and success story in DSP comms.',engage:'Feature in newsletter / DSP comms'}
+    };
+
+    var priorityColors={critical:'var(--accent-red)',high:'var(--accent-orange)',monitor:'var(--accent-blue)','on-track':'var(--accent-green)'};
+    var priorityBg={critical:'rgba(255,71,87,0.08)',high:'rgba(255,165,2,0.06)',monitor:'rgba(55,66,250,0.06)','on-track':'rgba(0,255,136,0.04)'};
+    var trendIcon={improving:'<span style="color:var(--accent-green);font-size:0.85rem">↗ Improving</span>',worsening:'<span style="color:var(--accent-red);font-size:0.85rem">↘ Worsening</span>',stable:'<span style="color:var(--text-muted);font-size:0.85rem">→ Stable</span>'};
+
+    var h='';
+    scored.forEach(function(x){
+        var s=x.s,pc=priorityColors[x.priority],pb=priorityBg[x.priority];
+        var sentStr=x.sentAvg!=null?x.sentAvg.toFixed(1)+'/5 ('+x.sentResponses+' responses)':'No data';
+        var sentColor=x.sentAvg==null?'var(--text-muted)':x.sentAvg>=4?'var(--accent-green)':x.sentAvg>=3?'var(--accent-yellow)':x.sentAvg>=2?'var(--accent-orange)':'var(--accent-red)';
+        var wk11k=wk11Kooner[s.station]||0;
+        var wk11str=wk11k===0?'<span style="color:var(--accent-red)">0 ⚠</span>':wk11k>=30?'<span style="color:var(--accent-green)">'+wk11k+' ↑</span>':'<span style="color:var(--text-primary)">'+wk11k+'</span>';
+        var act=actions[s.station]||{text:'Continue monitoring.',engage:'Regular check-in'};
+
+        h+='<div style="background:'+pb+';border:1px solid var(--border-color);border-left:4px solid '+pc+';border-radius:12px;padding:20px;margin-bottom:14px">';
+        h+='<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:10px">';
+        h+='<div style="display:flex;align-items:center;gap:14px"><span style="font-size:1.6rem;font-weight:700;font-family:monospace">'+s.station+'</span>';
+        h+='<span style="font-size:0.75rem;color:var(--text-secondary);background:var(--bg-dark);padding:3px 8px;border-radius:6px">'+s.location+'</span>';
+        h+='<span style="font-size:0.7rem;font-weight:600;text-transform:uppercase;padding:4px 10px;border-radius:12px;background:'+pb+';color:'+pc+';border:1px solid '+pc+'">'+x.priority.replace('-',' ')+'</span></div>';
+        h+='<div style="display:flex;gap:8px;align-items:center">'+trendIcon[x.trend]+'<span style="font-family:monospace;font-size:0.75rem;color:var(--text-muted)">score: '+x.score.toFixed(0)+'</span></div></div>';
+        h+='<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:14px">';
+        h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">Adoption</div><div style="font-family:monospace;font-weight:700;font-size:1.1rem;color:'+(s.adoption>=85?'var(--accent-green)':'var(--accent-red)')+'">'+s.adoption.toFixed(1)+'%</div></div>';
+        h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">Total Leaked</div><div style="font-family:monospace;font-weight:700;font-size:1.1rem;color:var(--accent-red)">'+s.leaked+'</div></div>';
+        h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">WK11 Kooner</div><div style="font-family:monospace;font-weight:700;font-size:1.1rem">'+wk11str+'</div></div>';
+        h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">Sentiment</div><div style="font-family:monospace;font-weight:700;font-size:1rem;color:'+sentColor+'">'+sentStr+'</div></div>';
+        h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">WK10 Top Leaker</div><div style="font-size:0.85rem;color:var(--text-secondary)">'+(wk10TopDSP[s.station]&&wk10TopDSP[s.station]!=='—'?wk10TopDSP[s.station]:'None')+'</div></div>';
+        h+='</div>';
+        h+='<div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start">';
+        h+='<div><div style="font-size:0.7rem;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:5px">Recommended Action</div>';
+        h+='<div style="font-size:0.88rem;color:var(--text-secondary);line-height:1.55">'+act.text+'</div></div>';
+        h+='<div style="min-width:180px;background:var(--bg-card);border-radius:8px;padding:10px;text-align:center"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:5px">Engagement Mode</div>';
+        h+='<div style="font-size:0.8rem;color:var(--accent-purple);font-weight:500">'+act.engage+'</div></div></div></div>';
+    });
+    document.getElementById('actionMatrixList').innerHTML=h;
+}
+
+var _charts = [];
+// ── CHARTS ───────────────────────────────────────────────────────────────────
+function createCharts(){
+    var colors=['#00ff88','#00d4ff','#3742fa','#a855f7','#ff4757','#ffa502','#ff6b81','#2ed573','#1e90ff','#ff9ff3','#54a0ff','#ffd93d','#c8d6e5'];
+    function safeChart(id,config){
+        var el=document.getElementById(id);
+        if(!el)return null;
+        try{
+            var c=new Chart(el,config);
+            _charts.push(c);
+            return c;
+        }catch(e){console.warn('Chart error',id,e);return null;}
+    }
+
+    // Weekly bar chart WK6-WK11
+    safeChart('weeklyBarChart',{
+        type:'bar',
+        data:{labels:['WK7','WK8','WK9','WK10','WK11'],datasets:[{label:'Kooner WOs',data:[157,194,153,326,292],backgroundColor:['rgba(0,255,136,0.5)','rgba(0,255,136,0.5)','rgba(0,255,136,0.5)','rgba(0,255,136,0.8)','rgba(168,85,247,0.7)'],borderRadius:4}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a'}}},scales:{y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},x:{grid:{display:false},ticks:{color:'#8b8b9a'}}}}
+    });
+
+    // Station adoption bar chart
+    var sortedStations=stationData.slice().sort(function(a,b){return b.adoption-a.adoption});
+    safeChart('stationBarChart',{
+        type:'bar',
+        data:{labels:sortedStations.map(function(s){return s.station}),datasets:[{data:sortedStations.map(function(s){return s.adoption}),backgroundColor:sortedStations.map(function(s){return s.adoption>=85?'rgba(0,255,136,0.7)':'rgba(255,71,87,0.7)'}),borderRadius:4}]},
+        options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,max:100,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a',callback:function(v){return v+'%'}}},y:{grid:{display:false},ticks:{color:'#8b8b9a'}}}}
+    });
+
+    // Station weekly stacked
+    var weekLabels=['WK7','WK8','WK9','WK10','WK11'];
+    var topStations=['HLA2','HDT3','HTP2','HHO3','HCL2','HAU1','HDY1','HSL1'];
+    safeChart('stationWeeklyChart',{
+        type:'bar',
+        data:{labels:weekLabels,datasets:topStations.map(function(st,i){var w=weeklyByStation[st];return{label:st,data:[w.WK7||0,w.WK8||0,w.WK9||0,w.WK10||0,w.WK11||0],backgroundColor:colors[i],borderRadius:2};})},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a'},position:'right'}},scales:{y:{stacked:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},x:{stacked:true,grid:{display:false},ticks:{color:'#8b8b9a'}}}}
+    });
+
+    // Station rank chart
+    safeChart('stationRankChart',{
+        type:'bar',
+        data:{labels:sortedStations.map(function(s){return s.station}),datasets:[{label:'Kooner',data:sortedStations.map(function(s){return s.kooner}),backgroundColor:'rgba(0,255,136,0.7)',borderRadius:2},{label:'Leaked',data:sortedStations.map(function(s){return s.leaked}),backgroundColor:'rgba(255,71,87,0.7)',borderRadius:2}]},
+        options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{labels:{color:'#8b8b9a'}}},scales:{x:{stacked:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},y:{stacked:true,grid:{display:false},ticks:{color:'#8b8b9a'}}}}
+    });
+
+    // Leakage doughnut
+    var leakStations=stationData.filter(function(s){return s.leaked>0}).sort(function(a,b){return b.leaked-a.leaked});
+    safeChart('leakageChart',{
+        type:'doughnut',
+        data:{labels:leakStations.map(function(s){return s.station}),datasets:[{data:leakStations.map(function(s){return s.leaked}),backgroundColor:colors,borderWidth:0}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#8b8b9a',padding:8}}},cutout:'60%'}
+    });
+
+    // Sentiment chart
+    safeChart('sentimentChart',{
+        type:'bar',
+        data:{labels:sentimentData.map(function(d){return d.dsp+(d.isNew?' ★':'')}),datasets:[{label:'Satisfaction',data:sentimentData.map(function(d){return d.satisfaction}),backgroundColor:'rgba(168,85,247,0.7)',borderRadius:4},{label:'Timeliness',data:sentimentData.map(function(d){return d.timeliness}),backgroundColor:'rgba(0,212,255,0.7)',borderRadius:4},{label:'Quality',data:sentimentData.map(function(d){return d.quality}),backgroundColor:'rgba(255,217,61,0.7)',borderRadius:4}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a'}}},scales:{y:{beginAtZero:true,max:5,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},x:{grid:{display:false},ticks:{color:'#8b8b9a'}}}}
+    });
+
+    // Correlation scatter
+    safeChart('correlationChart',{
+        type:'scatter',
+        data:{datasets:[{label:'DSPs',data:sentimentData.map(function(d){return{x:d.avgScore,y:d.adoption,label:d.dsp}}),backgroundColor:function(ctx){var v=ctx.raw;if(!v)return'#8b8b9a';if(v.y>=85)return'rgba(0,255,136,0.8)';if(v.y>=50)return'rgba(255,165,2,0.8)';return'rgba(255,71,87,0.8)'},pointRadius:12,pointHoverRadius:15}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){var p=ctx.raw;return p.label+': '+p.x.toFixed(1)+' sent, '+p.y.toFixed(1)+'% adopt'}}}},scales:{y:{beginAtZero:true,max:100,title:{display:true,text:'Adoption %',color:'#8b8b9a'},grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a',callback:function(v){return v+'%'}}},x:{beginAtZero:true,max:5,title:{display:true,text:'Sentiment Score',color:'#8b8b9a'},grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}}}}
+    });
+}
+
+// ── CALENDAR ─────────────────────────────────────────────────────────────────
+function changeMonth(d){
+    calendarMonth+=d;
+    if(calendarMonth>11){calendarMonth=0;calendarYear++;}
+    if(calendarMonth<0){calendarMonth=11;calendarYear--;}
+    renderCalendar();
+}
+
+function renderCalendar(){
+    var grid=document.getElementById('calendarGrid');if(!grid)return;
+    document.getElementById('calendarMonthTitle').textContent=calMonthNames[calendarMonth]+' '+calendarYear;
+    var h='';
+    ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(function(day){h+='<div class="cal-header-cell">'+day+'</div>';});
+    var firstDay=new Date(calendarYear,calendarMonth,1).getDay();
+    var daysInMon=new Date(calendarYear,calendarMonth+1,0).getDate();
+    var prevDays=new Date(calendarYear,calendarMonth,0).getDate();
+    var today=new Date();
+    for(var i=firstDay-1;i>=0;i--){h+='<div class="calendar-day other-month"><div class="cal-date-num">'+(prevDays-i)+'</div></div>';}
+    for(var d=1;d<=daysInMon;d++){
+        var mm=(calendarMonth+1<10?'0':'')+(calendarMonth+1);
+        var dd=(d<10?'0':'')+d;
+        var ds=calendarYear+'-'+mm+'-'+dd;
+        var isTod=(today.getFullYear()===calendarYear&&today.getMonth()===calendarMonth&&today.getDate()===d);
+        var evts=calendarEvents.filter(function(e){return e.date===ds;});
+        h+='<div class="calendar-day'+(isTod?' cal-today':'')+'"><div class="cal-date-num">'+d+'</div>';
+        evts.forEach(function(ev,ei){
+            var ac=ev.actions&&ev.actions.length?'<span class="cal-action-count">'+ev.actions.length+'</span>':'';
+            h+='<div class="calendar-event '+ev.type+'" data-date="'+ds+'" data-idx="'+ei+'" onclick="openEventModal(\''+ds+'\','+ei+')">'+ev.title+ac+'</div>';
         });
-        h += '</div>';
+        h+='</div>';
     }
-    var total = firstDay + daysInMon;
-    var rem   = total % 7 === 0 ? 0 : 7 - (total % 7);
-    for(var i = 1; i <= rem; i++){
-        h += '<div class="calendar-day other-month"><div class="cal-date-num">' + i + '</div></div>';
-    }
-    grid.innerHTML = h;
+    var total=firstDay+daysInMon,rem=total%7===0?0:7-(total%7);
+    for(var i=1;i<=rem;i++){h+='<div class="calendar-day other-month"><div class="cal-date-num">'+i+'</div></div>';}
+    grid.innerHTML=h;
 }
 
-function calClick(el){
-    var date = el.getAttribute('data-date');
-    var idx  = parseInt(el.getAttribute('data-idx'));
-    if(adminMode){
-        event.stopPropagation();
-        adminOpenEditModal(date, idx);
-        return;
-    }
-    openEventModal(date, idx);
-}
-
-function openEventModal(date, idx){
-    var evts = calendarEvents.filter(function(e){ return e.date === date; });
-    if(!evts[idx]) return;
-    var ev = evts[idx];
-    var h  = '<div class="modal-event-title">' + ev.title + '</div>';
-    h += '<div class="modal-meta-row">';
-    h += '<span>&#x1F4C5; ' + ev.date + '</span>';
-    h += '<span>&#x1F552; ' + ev.time + '</span>';
-    h += '<span>&#x1F3E2; ' + ev.station + '</span>';
-    h += '<span class="calendar-event ' + ev.type + '" style="cursor:default;display:inline-block">' + ev.type.replace(/-/g, ' ') + '</span>';
-    h += '</div>';
-    if(ev.notes){
-        var notesHtml = ev.notes.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" style="color:var(--accent-cyan);word-break:break-all;">$1</a>');
-        h += '<div class="modal-section"><h4>&#x1F4DD; Notes</h4><p>' + notesHtml + '</p></div>';
-    }
-    if(ev.actions && ev.actions.length){
-        h += '<div class="modal-section"><h4>&#x2705; Action Items (' + ev.actions.length + ')</h4><ul>';
-        ev.actions.forEach(function(a){ h += '<li>' + a + '</li>'; });
-        h += '</ul></div>';
-    }
-    if(!ev.notes && (!ev.actions || !ev.actions.length)){
-        h += '<div class="modal-section"><p class="modal-empty">Details will be added after the event.</p></div>';
-    }
-    document.getElementById('modalBody').innerHTML = h;
+function openEventModal(date,idx){
+    var evts=calendarEvents.filter(function(e){return e.date===date;});
+    if(!evts[idx])return;
+    var ev=evts[idx];
+    var h='<div class="modal-event-title">'+ev.title+'</div>';
+    h+='<div class="modal-meta-row"><span>📅 '+ev.date+'</span><span>🕐 '+ev.time+'</span><span>🏢 '+ev.station+'</span><span class="calendar-event '+ev.type+'" style="cursor:default;display:inline-block">'+ev.type.replace(/-/g,' ')+'</span></div>';
+    if(ev.notes){var notesHtml=ev.notes.replace(/(https?:\/\/[^\s]+)/g,'<a href="$1" target="_blank" style="color:var(--accent-cyan);word-break:break-all;">$1</a>');h+='<div class="modal-section"><h4>📝 Notes</h4><p>'+notesHtml+'</p></div>';}
+    if(ev.actions&&ev.actions.length){h+='<div class="modal-section"><h4>✅ Action Items ('+ev.actions.length+')</h4><ul>';ev.actions.forEach(function(a){h+='<li>'+a+'</li>';});h+='</ul></div>';}
+    if(!ev.notes&&(!ev.actions||!ev.actions.length)){h+='<div class="modal-section"><p class="empty-state">Details will be added after the event.</p></div>';}
+    document.getElementById('modalBody').innerHTML=h;
     document.getElementById('eventModal').classList.add('active');
 }
 
-function closeModal(){
-    document.getElementById('eventModal').classList.remove('active');
-}
+function closeModal(){document.getElementById('eventModal').classList.remove('active');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
 
-document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
-
-        function renderUpcomingEvents(){
-
-    var c     = document.getElementById('upcomingEvents');
-    if(!c) return;
-    var today = new Date().toISOString().slice(0, 10);
-    var list  = calendarEvents.filter(function(e){ return e.date >= today; }).sort(function(a, b){ return a.date.localeCompare(b.date); });
-    var h = '';
-    list.slice(0, 8).forEach(function(ev){
-        h += '<div class="event-note-card type-' + ev.type + '" data-date="' + ev.date + '" data-idx="0" onclick="calClick(this)">';
-        h += '<div class="event-title">' + ev.title + '</div>';
-        h += '<div class="event-date-meta">' + ev.date + ' &middot; ' + ev.time + ' &middot; ' + ev.station + '</div>';
-        h += '</div>';
+function renderUpcomingEvents(){
+    var c=document.getElementById('upcomingEvents');if(!c)return;
+    var today=new Date().toISOString().slice(0,10);
+    var list=calendarEvents.filter(function(e){return e.date>=today;}).sort(function(a,b){return a.date.localeCompare(b.date);});
+    var h='';
+    list.slice(0,8).forEach(function(ev){
+        h+='<div class="event-note-card type-'+ev.type+'" onclick="openEventModal(\''+ev.date+'\',0)">';
+        h+='<div class="event-title">'+ev.title+'</div>';
+        h+='<div class="event-date-meta">'+ev.date+' · '+ev.time+' · '+ev.station+'</div>';
+        h+='</div>';
     });
-    c.innerHTML = h || '<p class="modal-empty">No upcoming events</p>';
+    c.innerHTML=h||'<p class="empty-state">No upcoming events</p>';
 }
 
-        function renderPastEvents(){
-    var c     = document.getElementById('pastEvents');
-    if(!c) return;
-    var today = new Date().toISOString().slice(0, 10);
-    var list  = calendarEvents.filter(function(e){ return e.date < today && e.notes; }).sort(function(a, b){ return b.date.localeCompare(a.date); });
-    var h = '';
+function renderPastEvents(){
+    var c=document.getElementById('pastEvents');if(!c)return;
+    var today=new Date().toISOString().slice(0,10);
+    var list=calendarEvents.filter(function(e){return e.date<today&&e.notes;}).sort(function(a,b){return b.date.localeCompare(a.date);});
+    var h='';
     list.forEach(function(ev){
-        var ac = ev.actions && ev.actions.length ? '<span class="cal-action-count">' + ev.actions.length + ' actions</span>' : '';
-        h += '<div class="event-note-card type-' + ev.type + '" data-date="' + ev.date + '" data-idx="0" onclick="calClick(this)">';
-        h += '<div class="event-title">' + ev.title + ' ' + ac + '</div>';
-        h += '<div class="event-date-meta">' + ev.date + ' &middot; ' + ev.station + '</div>';
-        h += '<div class="event-summary-text">' + ev.notes.substring(0, 100) + (ev.notes.length > 100 ? '...' : '') + '</div>';
-        h += '</div>';
+        var ac=ev.actions&&ev.actions.length?'<span class="cal-action-count">'+ev.actions.length+' actions</span>':'';
+        h+='<div class="event-note-card type-'+ev.type+'" onclick="openEventModal(\''+ev.date+'\',0)">';
+        h+='<div class="event-title">'+ev.title+' '+ac+'</div>';
+        h+='<div class="event-date-meta">'+ev.date+' · '+ev.station+'</div>';
+        h+='<div class="event-summary-text">'+ev.notes.substring(0,100)+(ev.notes.length>100?'...':'')+'</div>';
+        h+='</div>';
     });
-    c.innerHTML = h || '<p class="modal-empty">No past events with notes yet</p>';
+    c.innerHTML=h||'<p class="empty-state">No past events with notes yet</p>';
 }
 
+// ── WoW SENTIMENT DATA — All JotForm submissions ─────────────────────────────
+var dspWoWData = {
+    SFRM: { station:'HDT3', entries:[
+        {week:'WK01',date:'Jan 5',  sat:3,time:2,qual:2,avg:2.3, issue:'Field supervision concern — who validates quality?'},
+        {week:'WK05',date:'Feb 2',  sat:3,time:3,qual:3,avg:3.0, issue:'Needs 2 day techs. Day/night tech communication gap.'},
+        {week:'WK06',date:'Feb 10', sat:4,time:4,qual:4,avg:4.0, issue:'Unit 2974 pending diagnostics a few days.'},
+        {week:'WK07',date:'Feb 16', sat:3,time:2,qual:4,avg:3.0, issue:'14 grounded — 8 sent to dealers. Units 0160 & 5768 undiagnosed.'},
+        {week:'WK11',date:'Mar 11', sat:3,time:4,qual:4,avg:3.7, issue:'48hr weekend diagnosis lag. Day/night WO comms gap.'},
+        {week:'WK12',date:'Mar 16', sat:3,time:3,qual:3,avg:3.0, issue:'Unit 4812 still waiting for leaf spring fix.'},
+    ]},
+    ARMA: { station:'HLA2', entries:[
+        {week:'WK01',date:'Jan 5',  sat:1,time:1,qual:1,avg:1.0, issue:'No work orders submitted for vehicles.'},
+        {week:'WK02',date:'Jan 12', sat:1,time:1,qual:1,avg:1.0, issue:'No work orders submitted.'},
+        {week:'WK03',date:'Jan 19', sat:3,time:3,qual:3,avg:3.0, issue:''},
+        {week:'WK06',date:'Feb 9',  sat:5,time:5,qual:5,avg:5.0, issue:''},
+        {week:'WK08',date:'Feb 23', sat:3,time:3,qual:4,avg:3.3, issue:'Back-door back-orders. Grounded trucks.'},
+        {week:'WK11',date:'Mar 9',  sat:4,time:4,qual:3,avg:3.7, issue:''},
+    ]},
+    ORMP: { station:'HTP2', entries:[
+        {week:'WK01',date:'Jan 6',  sat:2,time:2,qual:2,avg:2.0, issue:'Wires/brake WO unresolved 17+ days. Serpentine belt PM overdue.'},
+        {week:'WK06',date:'Feb 9',  sat:2,time:2,qual:4,avg:2.7, issue:'WOs not worked since 2/4. No ETA. Key contact laid off.'},
+    ]},
+    ALAB: { station:'HDT3', entries:[
+        {week:'WK04',date:'Jan 26', sat:1,time:1,qual:1,avg:1.0, issue:'Lack of timely repairs. Same issue after ungrounding.'},
+        {week:'WK09',date:'Mar 2',  sat:5,time:4,qual:5,avg:4.7, issue:'Vehicles grounded Fri–Sun can\'t be serviced until Monday.'},
+    ]},
+    TWLD: { station:'HDY1', entries:[
+        {week:'WK11',date:'Mar 10', sat:4,time:4,qual:5,avg:4.3, issue:''},
+    ]},
+    D4DS: { station:'HCL2', entries:[
+        {week:'WK02',date:'Jan 12', sat:5,time:5,qual:5,avg:5.0, issue:''},
+    ]},
+    PRLC: { station:'HSL1', entries:[
+        {week:'WK01',date:'Jan 6',  sat:4,time:5,qual:3,avg:4.0, issue:'Paperwork process needs to speed up.'},
+    ]},
+    MAEP: { station:'HIN3', entries:[
+        {week:'WK53',date:'Dec 30', sat:2,time:2,qual:3,avg:2.3, issue:'Brake repair wrong part, towed to dealer. DOT paperwork 2.5 days.'},
+    ]},
+};
 
-        function populateWk10LeakTable(){
-            var t = document.getElementById('wk10LeakBody');
-            if(!t) return;
-            var sorted = stationData.slice().sort(function(a,b){ return (wk10Leaked[b.station]||0) - (wk10Leaked[a.station]||0); });
-            var h = '';
-            for(var i = 0; i < sorted.length; i++){
-                var s = sorted[i];
-                var wk10 = wk10Leaked[s.station] || 0;
-                var topDSP = wk10TopDSP[s.station] || '—';
-                var signal = s.adoption >= 85 ? '<span class="status-pill on-target"><span class="status-dot"></span>On Target</span>'
-                           : wk10 === 0 ? '<span style="color:var(--accent-green);font-size:0.8rem">✓ No leakage</span>'
-                           : wk10 <= 3 ? '<span style="color:var(--accent-yellow);font-size:0.8rem">↔ Stable</span>'
-                           : '<span style="color:var(--accent-red);font-size:0.8rem">↑ Leaking</span>';
-                h += '<tr>';
-                h += '<td><span class="station-name">' + s.station + '</span></td>';
-                h += '<td style="color:' + (wk10 > 0 ? 'var(--accent-red)' : 'var(--accent-green)') + '">' + wk10 + '</td>';
-                h += '<td style="color:var(--text-secondary);font-size:0.85rem">' + topDSP + '</td>';
-                h += '<td>' + s.leaked + '</td>';
-                h += '<td>' + s.kooner + '</td>';
-                h += '<td style="color:' + (s.adoption >= 85 ? 'var(--accent-green)' : 'var(--accent-red)') + '">' + s.adoption.toFixed(1) + '%</td>';
-                h += '<td>' + signal + '</td>';
-                h += '</tr>';
+// ── WoW SENTIMENT RENDERER ────────────────────────────────────────────────────
+function scoreColor(v){ return v>=4?'var(--accent-green)':v>=3?'var(--accent-yellow)':v>=2?'var(--accent-orange)':'var(--accent-red)'; }
+function scoreBg(v){    return v>=4?'#059669':v>=3?'#b45309':v>=2?'#c2410c':'#dc2626'; }
+
+function getTrend(entries){
+    if(entries.length < 2) return 'new';
+    var last = entries[entries.length-1].avg;
+    var prev = entries[entries.length-2].avg;
+    if(last > prev + 0.2) return 'improving';
+    if(last < prev - 0.2) return 'declining';
+    return 'flat';
+}
+
+function renderWoWSentiment(filter){
+    var grid = document.getElementById('wowSentimentGrid');
+    if(!grid) return;
+
+    var dsps = Object.keys(dspWoWData);
+    var html = '';
+
+    dsps.forEach(function(dsp){
+        var d = dspWoWData[dsp];
+        var entries = d.entries;
+        var trend = getTrend(entries);
+        var latestAvg = entries[entries.length-1].avg;
+        var firstAvg  = entries[0].avg;
+        var totalChange = Math.round((latestAvg - firstAvg)*10)/10;
+        var currentWeekWow = entries.length>1 ? Math.round((entries[entries.length-1].avg - entries[entries.length-2].avg)*10)/10 : null;
+        var isSilent = (dsp === 'ORMP');
+
+        // Filter logic
+        var show = true;
+        if(filter==='improving' && trend !== 'improving') show=false;
+        if(filter==='declining' && trend !== 'declining') show=false;
+        if(filter==='watch' && latestAvg > 2.5) show=false;
+        if(filter==='multi' && entries.length < 2) show=false;
+
+        var trendLabel = trend==='improving'?'↑ Improving':trend==='declining'?'↓ Declining':trend==='new'?'First response':'→ Flat';
+        var avgColor = scoreColor(latestAvg);
+        var totalChangeColor = totalChange > 0 ? 'var(--accent-green)' : totalChange < 0 ? 'var(--accent-red)' : 'var(--text-muted)';
+        var totalChangeStr = totalChange===0 ? '—' : (totalChange>0?'+':'')+totalChange.toFixed(1);
+
+        html += '<div class="dsp-wow-card'+(show?'':' hidden')+'" data-dsp="'+dsp+'" data-trend="'+trend+'" data-avg="'+latestAvg+'" data-responses="'+entries.length+'">';
+
+        // Header
+        html += '<div class="dsp-wow-header">';
+        html += '<div class="dsp-wow-identity">';
+        html +=   '<span class="dsp-wow-code" style="color:'+avgColor+'">'+dsp+'</span>';
+        html +=   '<span class="dsp-wow-station">'+d.station+'</span>';
+        if(isSilent) html += '<span style="background:rgba(255,165,2,0.15);color:var(--accent-orange);font-size:0.65rem;font-weight:700;padding:2px 8px;border-radius:12px;font-family:monospace;border:1px solid rgba(255,165,2,0.3)">⚠ SILENT 5WK</span>';
+        html += '</div>';
+        html += '<div class="dsp-wow-meta">';
+        html +=   '<div class="dsp-wow-meta-item"><div class="dsp-wow-meta-label">Current</div><div class="dsp-wow-meta-value" style="color:'+avgColor+'">'+latestAvg.toFixed(1)+'</div></div>';
+        html +=   '<div class="dsp-wow-meta-item"><div class="dsp-wow-meta-label">Season Δ</div><div class="dsp-wow-meta-value" style="color:'+totalChangeColor+'">'+(totalChange===0?'—':(totalChange>0?'+':'')+totalChange.toFixed(1))+'</div></div>';
+        html +=   '<div class="dsp-wow-meta-item"><div class="dsp-wow-meta-label">Responses</div><div class="dsp-wow-meta-value" style="color:var(--text-secondary)">'+entries.length+'</div></div>';
+        html +=   '<span class="dsp-wow-trend-pill '+trend+'">'+trendLabel+'</span>';
+        html += '</div>';
+        html += '</div>';
+
+        // Timeline of weeks
+        html += '<div class="dsp-wow-timeline"><div class="dsp-wow-weeks">';
+
+        entries.forEach(function(e, i){
+            var isLatest = (i === entries.length-1);
+            var prevAvg  = i > 0 ? entries[i-1].avg : null;
+            var delta    = prevAvg !== null ? Math.round((e.avg - prevAvg)*10)/10 : null;
+            var deltaStr = delta===null ? '' : delta===0 ? '→ 0' : (delta>0?'↑ +':' ↓ ')+Math.abs(delta).toFixed(1);
+            var deltaColor = delta===null?'':delta>0?'var(--accent-green)':delta<0?'var(--accent-red)':'var(--text-muted)';
+            var avgC = scoreColor(e.avg);
+            var satW  = (e.sat/5*100).toFixed(0);
+            var timeW = (e.time/5*100).toFixed(0);
+            var qualW = (e.qual/5*100).toFixed(0);
+
+            // Connector arrow between cells
+            if(i > 0){
+                var prevA = entries[i-1].avg, currA = e.avg;
+                var arrowColor = currA > prevA ? 'var(--accent-green)' : currA < prevA ? 'var(--accent-red)' : 'var(--text-muted)';
+                html += '<div class="wow-spacer" style="color:'+arrowColor+'">→</div>';
             }
-            t.innerHTML = h;
-        }
 
-        document.addEventListener('DOMContentLoaded',function(){
-            populateStationQuickTable();
-            populateOpportunityTable();
-            populateStationFullTable();
-            populateStationWeeklyTable();
-            populateDSPTable('all');
-            populateActionMatrix();
-            populateFeedbackList();
-            createCharts();
-            populateWk10LeakTable();
-            loadAdminEvents();
-            renderCalendar();
-            renderUpcomingEvents();
-            renderPastEvents();
-            document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
-        });
-    
+            html += '<div class="wow-week-cell'+(isLatest?' latest':'')+'">';
+            html +=   '<div class="wow-week-label">'+e.week+'</div>';
+            html +=   '<div class="wow-week-date">'+e.date+'</div>';
 
-        // ── Admin Mode ────────────────────────────────────────────────────
-        var ADMIN_PIN = '1234';  // Change this PIN
-        var adminUnlocked = false;
-        var adminMode = false;
+            // Avg score (big)
+            html +=   '<div class="wow-avg-value" style="color:'+avgC+'">'+e.avg.toFixed(1)+'</div>';
+            html +=   '<div class="wow-avg-label">avg / 5</div>';
 
-        // Merge localStorage edits into calendarEvents on load
-        function loadAdminEvents(){
-            try {
-                var stored = localStorage.getItem('kooner_cal_edits');
-                if(stored){
-                    var edits = JSON.parse(stored);
-                    // Remove any events marked deleted
-                    calendarEvents = calendarEvents.filter(function(e){
-                        return !edits.deleted || edits.deleted.indexOf(e.date+'||'+e.title) === -1;
-                    });
-                    // Apply edits to existing events
-                    if(edits.modified){
-                        edits.modified.forEach(function(m){
-                            var idx = calendarEvents.findIndex(function(e){ return e.date+'||'+e.title === m._key; });
-                            if(idx>=0) calendarEvents[idx] = m;
-                        });
-                    }
-                    // Add new events — deduplicate stored entries first (clean up any old duplicates)
-                    if(edits.added){
-                        var seen = {};
-                        edits.added = edits.added.filter(function(a){
-                            var key = a.date + '||' + a.title;
-                            if(seen[key]) return false;
-                            seen[key] = true;
-                            return true;
-                        });
-                        // Persist cleaned list back
-                        localStorage.setItem('kooner_cal_edits', JSON.stringify(edits));
-                        edits.added.forEach(function(a){ calendarEvents.push(a); });
-                    }
-                }
-            } catch(e){}
-        }
-
-        function saveAdminEdits(type, payload){
-            var stored = {};
-            try { stored = JSON.parse(localStorage.getItem('kooner_cal_edits')||'{}'); } catch(e){}
-            if(!stored.deleted) stored.deleted = [];
-            if(!stored.modified) stored.modified = [];
-            if(!stored.added) stored.added = [];
-            if(type === 'delete'){
-                stored.deleted.push(payload);
-                // Remove from modified too
-                stored.modified = stored.modified.filter(function(m){ return m._key !== payload; });
-            } else if(type === 'modify'){
-                var idx = stored.modified.findIndex(function(m){ return m._key === payload._key; });
-                if(idx>=0) stored.modified[idx] = payload;
-                else stored.modified.push(payload);
-            } else if(type === 'add'){
-                // Prevent duplicate adds (same date+title)
-                var dupIdx = stored.added.findIndex(function(a){ return a.date===payload.date && a.title===payload.title; });
-                if(dupIdx >= 0) stored.added[dupIdx] = payload;
-                else stored.added.push(payload);
+            // Delta vs prev
+            if(delta !== null){
+                html += '<div class="wow-delta '+(delta>0?'up':delta<0?'dn':'nt')+'">'+(delta>0?'↑ +':delta<0?'↓ ':'')+Math.abs(delta).toFixed(1)+'</div>';
             }
-            localStorage.setItem('kooner_cal_edits', JSON.stringify(stored));
-        }
 
-        function adminFabClick(){
-            if(adminMode){ exitAdminMode(); return; }
-            if(adminUnlocked){ enterAdminMode(); return; }
-            document.getElementById('adminPinOverlay').classList.add('active');
-            setTimeout(function(){ document.getElementById('adminPinInput').focus(); }, 100);
-        }
-
-        function checkAdminPin(){
-            var pin = document.getElementById('adminPinInput').value;
-            if(pin === ADMIN_PIN){
-                adminUnlocked = true;
-                document.getElementById('adminPinInput').value = '';
-                document.getElementById('adminPinError').textContent = '';
-                document.getElementById('adminPinOverlay').classList.remove('active');
-                enterAdminMode();
-            } else {
-                document.getElementById('adminPinError').textContent = 'Incorrect PIN. Try again.';
-                document.getElementById('adminPinInput').value = '';
-                document.getElementById('adminPinInput').focus();
-            }
-        }
-
-        function closeAdminPin(){
-            document.getElementById('adminPinOverlay').classList.remove('active');
-            document.getElementById('adminPinInput').value = '';
-            document.getElementById('adminPinError').textContent = '';
-        }
-
-        function enterAdminMode(){
-            adminMode = true;
-            document.getElementById('adminFab').classList.add('active-mode');
-            document.getElementById('adminFab').innerHTML = '&#10005; Exit Admin';
-            document.getElementById('adminBanner').classList.add('visible');
-            document.querySelector('.container').classList.add('admin-mode-on');
-            renderCalendar();
-        }
-
-        function exitAdminMode(){
-            adminMode = false;
-            document.getElementById('adminFab').classList.remove('active-mode');
-            document.getElementById('adminFab').innerHTML = '&#9998; Edit Calendar';
-            document.getElementById('adminBanner').classList.remove('visible');
-            document.querySelector('.container').classList.remove('admin-mode-on');
-            renderCalendar();
-        }
-
-        // Override calClick to handle admin mode
-        
-
-        function adminOpenAddModal(date){
-            document.getElementById('adminModalTitle').textContent = 'Add Event';
-            document.getElementById('adminDate').value = date || '';
-            document.getElementById('adminTime').value = '';
-            document.getElementById('adminTitle').value = '';
-            document.getElementById('adminType').value = 'roundtable';
-            document.getElementById('adminStation').value = 'All';
-            document.getElementById('adminNotes').value = '';
-            document.getElementById('adminEditIndex').value = '';
-            document.getElementById('adminDeleteBtn').style.display = 'none';
-            document.getElementById('adminActionsList').innerHTML = '';
-            adminAddActionItem('');
-            document.getElementById('adminEventOverlay').classList.add('active');
-            setTimeout(function(){ document.getElementById('adminTitle').focus(); }, 100);
-        }
-
-        function adminOpenEditModal(date, idx){
-            var evts = calendarEvents.filter(function(e){ return e.date === date; });
-            if(!evts[idx]) return;
-            var ev = evts[idx];
-            document.getElementById('adminModalTitle').textContent = 'Edit Event';
-            document.getElementById('adminDate').value = ev.date;
-            document.getElementById('adminTime').value = ev.time || '';
-            document.getElementById('adminTitle').value = ev.title;
-            document.getElementById('adminType').value = ev.type;
-            document.getElementById('adminStation').value = ev.station || 'All';
-            document.getElementById('adminNotes').value = ev.notes || '';
-            document.getElementById('adminEditIndex').value = date + '||' + ev.title;
-            document.getElementById('adminDeleteBtn').style.display = 'inline-block';
-            // Populate actions
-            var al = document.getElementById('adminActionsList');
-            al.innerHTML = '';
-            if(ev.actions && ev.actions.length){
-                ev.actions.forEach(function(a){ adminAddActionItem(a); });
-            } else {
-                adminAddActionItem('');
-            }
-            document.getElementById('adminEventOverlay').classList.add('active');
-        }
-
-        function adminAddActionItem(val){
-            var list = document.getElementById('adminActionsList');
-            var div = document.createElement('div');
-            div.className = 'admin-action-item';
-            div.innerHTML = '<input type="text" placeholder="Action item — Owner: Name" value="'+escHtml(val||'')+'"><button onclick="this.parentElement.remove()" title="Remove">&#10005;</button>';
-            list.appendChild(div);
-        }
-
-        function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
-        function adminSaveEvent(){
-            var date = document.getElementById('adminDate').value;
-            var title = document.getElementById('adminTitle').value.trim();
-            var time = document.getElementById('adminTime').value.trim();
-            var type = document.getElementById('adminType').value;
-            var station = document.getElementById('adminStation').value;
-            var notes = document.getElementById('adminNotes').value.trim();
-            var editKey = document.getElementById('adminEditIndex').value;
-
-            if(!date || !title){ alert('Date and Title are required.'); return; }
-
-            var actions = [];
-            document.querySelectorAll('#adminActionsList .admin-action-item input').forEach(function(inp){
-                if(inp.value.trim()) actions.push(inp.value.trim());
+            // Sat/Time/Qual bars
+            html += '<div class="wow-score-row" style="margin-top:8px">';
+            [{label:'S',val:e.sat},{label:'T',val:e.time},{label:'Q',val:e.qual}].forEach(function(m){
+                var mc = scoreColor(m.val);
+                html += '<div class="wow-score-dot">';
+                html +=   '<div class="wow-score-dot-label">'+m.label+'</div>';
+                html +=   '<div class="wow-score-bar-track"><div class="wow-score-bar-fill" style="width:'+(m.val/5*100)+'%;background:'+mc+'"></div></div>';
+                html +=   '<div class="wow-score-dot-value" style="color:'+mc+'">'+m.val+'</div>';
+                html += '</div>';
             });
+            html += '</div>';
 
-            var newEvent = { date:date, title:title, time:time||'TBD', type:type, station:station, notes:notes, actions:actions };
-
-            if(editKey){
-                // Edit existing
-                newEvent._key = editKey;
-                var origIdx = calendarEvents.findIndex(function(e){ return e.date+'||'+e.title === editKey; });
-                if(origIdx >= 0) calendarEvents[origIdx] = newEvent;
-                saveAdminEdits('modify', newEvent);
-            } else {
-                // New event
-                calendarEvents.push(newEvent);
-                saveAdminEdits('add', newEvent);
+            // Issue flag
+            if(e.issue && e.issue.length > 1 && e.issue !== 'No'){
+                html += '<div class="wow-issue-flag" title="'+e.issue.replace(/"/g,"'")+'">⚠ '+e.issue+'</div>';
             }
 
-            closeAdminEventModal();
-            loadAdminEvents();
-            renderCalendar();
-            renderUpcomingEvents();
-            renderPastEvents();
-        }
+            html += '</div>'; // .wow-week-cell
+        });
 
-        function adminDeleteEvent(){
-            var key = document.getElementById('adminEditIndex').value;
-            if(!key) return;
-            if(!confirm('Delete this event? This cannot be undone.')) return;
-            calendarEvents = calendarEvents.filter(function(e){ return e.date+'||'+e.title !== key; });
-            saveAdminEdits('delete', key);
-            closeAdminEventModal();
-            loadAdminEvents();
-            renderCalendar();
-            renderUpcomingEvents();
-            renderPastEvents();
-        }
+        html += '</div></div>'; // .dsp-wow-weeks, .dsp-wow-timeline
+        html += '</div>'; // .dsp-wow-card
+    });
 
-        function closeAdminEventModal(){
-            document.getElementById('adminEventOverlay').classList.remove('active');
-        }
+    grid.innerHTML = html;
+}
 
-        // Close admin modals on overlay click or Escape
-        document.getElementById('adminPinOverlay').addEventListener('click', function(e){ if(e.target===this) closeAdminPin(); });
-        document.getElementById('adminEventOverlay').addEventListener('click', function(e){ if(e.target===this) closeAdminEventModal(); });
+function filterSentiment(filter, btn){
+    document.querySelectorAll('.sent-filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.querySelectorAll('.dsp-wow-card').forEach(function(card){
+        var trend    = card.dataset.trend;
+        var avg      = parseFloat(card.dataset.avg);
+        var responses= parseInt(card.dataset.responses);
+        var show = true;
+        if(filter==='improving' && trend !== 'improving') show = false;
+        if(filter==='declining' && trend !== 'declining') show = false;
+        if(filter==='watch' && avg > 2.5) show = false;
+        if(filter==='multi' && responses < 2) show = false;
+        card.classList.toggle('hidden', !show);
+    });
+}
 
-        </script>
-
-    <!-- Admin PIN overlay -->
-    <div id="adminPinOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:2000;justify-content:center;align-items:center;backdrop-filter:blur(4px)">
-        <div style="background:#12121a;border:1px solid #2a2a3a;border-radius:16px;padding:32px;width:320px;text-align:center">
-            <div style="font-size:1.2rem;font-weight:700;margin-bottom:8px">Admin Access</div>
-            <div style="font-size:0.85rem;color:#8b8b9a;margin-bottom:20px">Enter PIN to edit calendar</div>
-            <input id="adminPinInput" type="password" maxlength="10" placeholder="Enter PIN"
-                style="width:100%;padding:10px;background:#0a0a0f;border:1px solid #2a2a3a;border-radius:8px;color:#fff;font-size:1rem;text-align:center;margin-bottom:12px;outline:none"
-                onkeydown="if(event.key==='Enter')checkAdminPin()">
-            <div id="adminPinError" style="color:#ff4757;font-size:0.8rem;height:18px;margin-bottom:10px"></div>
-            <button onclick="checkAdminPin()" style="width:100%;padding:10px;background:#3742fa;border:none;border-radius:8px;color:#fff;font-weight:600;cursor:pointer;font-size:0.95rem">Unlock</button>
-            <button onclick="closeAdminPin()" style="width:100%;padding:8px;margin-top:8px;background:transparent;border:1px solid #2a2a3a;border-radius:8px;color:#8b8b9a;cursor:pointer;font-size:0.85rem">Cancel</button>
-        </div>
-    </div>
-
-    <!-- Admin event edit overlay -->
-    <div id="adminEventOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:2000;justify-content:center;align-items:center;backdrop-filter:blur(4px);overflow-y:auto">
-        <div style="background:#12121a;border:1px solid #2a2a3a;border-radius:16px;padding:32px;width:520px;max-width:95%;margin:auto;position:relative">
-            <button onclick="closeAdminEventModal()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:#8b8b9a;font-size:1.5rem;cursor:pointer">&times;</button>
-            <div id="adminEventModalTitle" style="font-size:1.1rem;font-weight:700;margin-bottom:20px">Add Event</div>
-            <input type="hidden" id="adminEditIndex">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
-                <div><label style="font-size:0.75rem;color:#8b8b9a;display:block;margin-bottom:4px">Date</label>
-                    <input id="adminEvtDate" type="date" style="width:100%;padding:8px;background:#0a0a0f;border:1px solid #2a2a3a;border-radius:6px;color:#fff;font-size:0.9rem"></div>
-                <div><label style="font-size:0.75rem;color:#8b8b9a;display:block;margin-bottom:4px">Time</label>
-                    <input id="adminEvtTime" type="text" placeholder="e.g. 2:00 PM CT" style="width:100%;padding:8px;background:#0a0a0f;border:1px solid #2a2a3a;border-radius:6px;color:#fff;font-size:0.9rem"></div>
-            </div>
-            <div style="margin-bottom:12px"><label style="font-size:0.75rem;color:#8b8b9a;display:block;margin-bottom:4px">Title</label>
-                <input id="adminEvtTitle" type="text" placeholder="Event title" style="width:100%;padding:8px;background:#0a0a0f;border:1px solid #2a2a3a;border-radius:6px;color:#fff;font-size:0.9rem"></div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
-                <div><label style="font-size:0.75rem;color:#8b8b9a;display:block;margin-bottom:4px">Type</label>
-                    <select id="adminEvtType" style="width:100%;padding:8px;background:#0a0a0f;border:1px solid #2a2a3a;border-radius:6px;color:#fff;font-size:0.9rem">
-                        <option value="roundtable">Roundtable</option>
-                        <option value="site-visit">Site Visit</option>
-                        <option value="office-hours">Office Hours</option>
-                        <option value="newsletter">Newsletter</option>
-                        <option value="review">Review</option>
-                        <option value="training">Training</option>
-                        <option value="deadline">Deadline</option>
-                    </select></div>
-                <div><label style="font-size:0.75rem;color:#8b8b9a;display:block;margin-bottom:4px">Station</label>
-                    <select id="adminEvtStation" style="width:100%;padding:8px;background:#0a0a0f;border:1px solid #2a2a3a;border-radius:6px;color:#fff;font-size:0.9rem">
-                        <option value="All">All</option>
-                        <option value="HAU1">HAU1</option><option value="HCL2">HCL2</option>
-                        <option value="HCT2">HCT2</option><option value="HDT3">HDT3</option>
-                        <option value="HDY1">HDY1</option><option value="HHO3">HHO3</option>
-                        <option value="HIN3">HIN3</option><option value="HLA2">HLA2</option>
-                        <option value="HMK4">HMK4</option><option value="HMS2">HMS2</option>
-                        <option value="HPD1">HPD1</option><option value="HSL1">HSL1</option>
-                        <option value="HTP2">HTP2</option>
-                    </select></div>
-            </div>
-            <div style="margin-bottom:12px"><label style="font-size:0.75rem;color:#8b8b9a;display:block;margin-bottom:4px">Notes</label>
-                <textarea id="adminEvtNotes" rows="4" placeholder="Meeting notes, summary..." style="width:100%;padding:8px;background:#0a0a0f;border:1px solid #2a2a3a;border-radius:6px;color:#fff;font-size:0.9rem;resize:vertical"></textarea></div>
-            <div style="margin-bottom:16px"><label style="font-size:0.75rem;color:#8b8b9a;display:block;margin-bottom:6px">Action Items</label>
-                <div id="adminActionsList"></div>
-                <button onclick="addAdminActionItem()" style="padding:6px 12px;background:transparent;border:1px dashed #2a2a3a;border-radius:6px;color:#8b8b9a;cursor:pointer;font-size:0.8rem;margin-top:6px">+ Add Action</button></div>
-            <div style="display:flex;gap:10px">
-                <button onclick="saveAdminEvent()" style="flex:1;padding:10px;background:#3742fa;border:none;border-radius:8px;color:#fff;font-weight:600;cursor:pointer">Save Event</button>
-                <button id="adminDeleteBtn" onclick="adminDeleteEvent()" style="padding:10px 16px;background:rgba(255,71,87,0.15);border:1px solid #ff4757;border-radius:8px;color:#ff4757;cursor:pointer;display:none">Delete</button>
-            </div>
-        </div>
-    </div>
+// ── INIT ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded',function(){
+    populateStationQuickTable();
+    populateOpportunityTable();
+    populateStationFullTable();
+    populateStationWeeklyTable();
+    populateWk11VolumeTable();
+    populateDSPTable('all');
+    populateActionMatrix();
+    populateFeedbackList();
+    renderWoWSentiment('all');
+    // Defer charts to after first layout pass so canvas dimensions are computed
+    requestAnimationFrame(function(){ createCharts(); });
+    renderCalendar();
+    renderUpcomingEvents();
+    renderPastEvents();
+});
+</script>
 </body>
 </html>
