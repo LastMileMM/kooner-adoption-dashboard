@@ -108,7 +108,6 @@
         .feedback-text.issue{border-left:3px solid var(--accent-red);padding-left:12px;margin-bottom:12px}
         .feedback-text.suggestion{border-left:3px solid var(--accent-cyan);padding-left:12px}
         .full-width{grid-column:1/-1}
-        /* Calendar */
         .cal-legend{display:flex;gap:14px;margin-bottom:20px;flex-wrap:wrap}
         .cal-legend-item{display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--text-secondary)}
         .cal-legend-dot{width:10px;height:10px;border-radius:50%}
@@ -166,8 +165,6 @@
         @media(max-width:1200px){.kpi-row{grid-template-columns:repeat(3,1fr)}}
         @media(max-width:900px){.main-grid{grid-template-columns:1fr}.kpi-row{grid-template-columns:repeat(2,1fr)}.cal-layout{grid-template-columns:1fr}.insights-grid{grid-template-columns:1fr}}
         @media(max-width:600px){.header{flex-direction:column;gap:16px}.kpi-row{grid-template-columns:1fr}.nav-tabs{flex-wrap:wrap}}
-
-        /* ── WoW Sentiment Styles ── */
         .wow-sentiment-grid{display:flex;flex-direction:column;gap:16px}
         .dsp-wow-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;overflow:hidden}
         .dsp-wow-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border-color);flex-wrap:wrap;gap:10px}
@@ -227,17 +224,10 @@
         </div>
         <div class="header-right">
             <div class="last-updated">Last Updated: 2026-03-16 · Leakage ✅ Final</div>
-            <div class="data-period">Data Period: WK53 – WK11 (Dec 21 – Mar 14)</div>
+            <div class="data-period">Data Period: YTD — WK1 – WK11 (Jan 4 – Mar 14, 2026)</div>
         </div>
     </header>
 
-    <div class="pending-banner" style="background:linear-gradient(135deg,rgba(0,255,136,0.06),rgba(52,211,153,0.04));border-color:rgba(0,255,136,0.3)">
-        <div class="pending-banner-icon">✅</div>
-        <div>
-            <div class="pending-banner-title" style="color:var(--accent-green)">WK11 Leakage Report Confirmed — 58 Leaked WOs · Network Adoption 64.3% (+2.6pp WoW)</div>
-            <div class="pending-banner-text">WK11 leakage: HLA2 (11), HDT3 (9), HMS2 (8), HIN3 (7), HPD1 (7), HAU1 (6), HCL2 (5), HDY1 (3), HTP2 (2). HHO3, HMK4, HCT2, HSL1 all clean (0 leaked). All adoption values finalized.</div>
-        </div>
-    </div>
 
     <div class="nav-tabs">
         <button class="nav-tab active" onclick="showTab('overview',this)">📊 Overview</button>
@@ -251,15 +241,15 @@
     <!-- OVERVIEW TAB -->
     <div id="overview" class="tab-content active">
         <div class="kpi-row">
-            <div class="kpi-card success"><div class="kpi-label">Total Kooner WOs</div><div class="kpi-value green">1,863</div><div class="kpi-subtext">WK1–WK11 (+292 WK11)</div></div>
-            <div class="kpi-card warning"><div class="kpi-label">Total Leaked WOs</div><div class="kpi-value red">1,035</div><div class="kpi-subtext">+58 WK11 leaked confirmed</div></div>
-            <div class="kpi-card warning"><div class="kpi-label">Current Adoption</div><div class="kpi-value orange">64.3%</div><div class="kpi-subtext">+2.6pp WoW (WK11 final)</div></div>
+            <div class="kpi-card success"><div class="kpi-label">Total Kooner WOs</div><div class="kpi-value green">1,863</div><div class="kpi-subtext">YTD WK1–WK11 (+286 WK11)</div></div>
+            <div class="kpi-card warning"><div class="kpi-label">Total Leaked WOs</div><div class="kpi-value red">1,038</div><div class="kpi-subtext">+58 WK11 leaked confirmed</div></div>
+            <div class="kpi-card warning"><div class="kpi-label">Current Adoption</div><div class="kpi-value orange">64.2%</div><div class="kpi-subtext">+2.4pp WoW (WK11 final)</div></div>
             <div class="kpi-card success"><div class="kpi-label">On Target Stations</div><div class="kpi-value green">4</div><div class="kpi-subtext">HMK4, HSL1, HCT2, HTP2 ≥85%</div></div>
-            <div class="kpi-card"><div class="kpi-label">WK11 New WOs</div><div class="kpi-value purple">292</div><div class="kpi-subtext">Fleet IQ · 11 active stations</div></div>
+            <div class="kpi-card"><div class="kpi-label">WK11 New WOs</div><div class="kpi-value purple">286</div><div class="kpi-subtext">Fleet IQ · 11 active stations</div></div>
         </div>
         <div class="main-grid">
             <div class="card">
-                <div class="card-header"><div class="card-title">Weekly Kooner Volume</div><span class="card-badge badge-trends">WK6–WK11</span></div>
+                <div class="card-header"><div class="card-title">Weekly Kooner Volume</div><span class="card-badge badge-trends">WK7–WK11</span></div>
                 <div class="chart-container"><canvas id="weeklyBarChart"></canvas></div>
             </div>
             <div class="card">
@@ -286,44 +276,103 @@
     <!-- WoW TAB -->
     <div id="trends" class="tab-content">
         <div class="main-grid">
+
+            <!-- VISUAL SUMMARY — charts first -->
             <div class="card full-width">
-                <div class="card-header"><div class="card-title">📋 WBR Executive Summary — WK11</div><span class="card-badge badge-insights">FLEET IQ DATA</span></div>
+                <div class="card-header"><div class="card-title">📊 WK11 At a Glance</div><span class="card-badge badge-trends">VISUAL SUMMARY</span></div>
+
+                <!-- Stat tiles -->
+                <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:20px">
+                    <div style="background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:10px;padding:14px;border-top:3px solid var(--accent-orange);text-align:center">
+                        <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:4px">Network Adoption</div>
+                        <div style="font-family:monospace;font-size:1.6rem;font-weight:700;color:var(--accent-orange)">64.3%</div>
+                        <div style="font-size:0.7rem;color:var(--accent-green);margin-top:2px">↑ +2.6pp WoW</div>
+                    </div>
+                    <div style="background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:10px;padding:14px;border-top:3px solid var(--accent-green);text-align:center">
+                        <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:4px">On Target</div>
+                        <div style="font-family:monospace;font-size:1.6rem;font-weight:700;color:var(--accent-green)">4</div>
+                        <div style="font-size:0.7rem;color:var(--text-muted);margin-top:2px">HMK4 · HSL1 · HCT2 · HTP2</div>
+                    </div>
+                    <div style="background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:10px;padding:14px;border-top:3px solid var(--accent-cyan);text-align:center">
+                        <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:4px">WK11 Kooner WOs</div>
+                        <div style="font-family:monospace;font-size:1.6rem;font-weight:700;color:var(--accent-cyan)">286</div>
+                        <div style="font-size:0.7rem;color:var(--accent-red);margin-top:2px">↓ −40 WoW</div>
+                    </div>
+                    <div style="background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:10px;padding:14px;border-top:3px solid var(--accent-red);text-align:center">
+                        <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:4px">WK11 Leaked</div>
+                        <div style="font-family:monospace;font-size:1.6rem;font-weight:700;color:var(--accent-red)">58</div>
+                        <div style="font-size:0.7rem;color:var(--accent-green);margin-top:2px">↓ −14 WoW</div>
+                    </div>
+                    <div style="background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:10px;padding:14px;border-top:3px solid var(--accent-green);text-align:center">
+                        <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:4px">Breakout Station</div>
+                        <div style="font-family:monospace;font-size:1.6rem;font-weight:700;color:var(--accent-green)">HLA2</div>
+                        <div style="font-size:0.7rem;color:var(--text-muted);margin-top:2px">54 WOs — season best</div>
+                    </div>
+                    <div style="background:var(--bg-card-hover);border:1px solid var(--border-color);border-radius:10px;padding:14px;border-top:3px solid var(--accent-red);text-align:center">
+                        <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:4px">No Coverage</div>
+                        <div style="font-family:monospace;font-size:1.6rem;font-weight:700;color:var(--accent-red)">2</div>
+                        <div style="font-size:0.7rem;color:var(--text-muted);margin-top:2px">HIN3 · HPD1</div>
+                    </div>
+                </div>
+
+                <!-- Three charts side by side -->
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+                    <div>
+                        <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:8px;font-weight:600">WK10 vs WK11 Volume</div>
+                        <div style="position:relative;height:220px"><canvas id="wowVolumeChart"></canvas></div>
+                    </div>
+                    <div>
+                        <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:8px;font-weight:600">Adoption Change WoW (+/− pp)</div>
+                        <div style="position:relative;height:220px"><canvas id="adoptionDeltaChart"></canvas></div>
+                    </div>
+                    <div>
+                        <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:8px;font-weight:600">WK11 Leakage vs WK10</div>
+                        <div style="position:relative;height:220px"><canvas id="leakageWowChart"></canvas></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXECUTIVE SUMMARY — original text below charts -->
+            <div class="card full-width">
+                <div class="card-header"><div class="card-title">📋 WBR Executive Summary — WK11</div><span class="card-badge badge-insights">FLEET IQ + LEAKAGE DATA</span></div>
                 <div class="executive-summary">
                     <h3>🎯 Key Takeaways</h3>
                     <ul>
-                        <li><strong>Overall adoption at 64.3%</strong> — based on Kooner volume update (+292 WK11 WOs). WK11 leakage confirmed: 58 WOs. When received, adoption will be recalculated with WK11 leaked WOs factored in.</li>
-                        <li><strong>4 stations on target:</strong> HMK4 (100%), HSL1 (93.1%), HCT2 (91.0%), HTP2 (86.2%)</li>
-                        <li><strong>HSL1 breakout week:</strong> +19 WOs WoW (4→23 Kooner WOs). Marcos Tun solo, med TAT 0.45d. Adoption moved to 93.1% — from watch to confirmed on-target.</li>
-                        <li><strong>HHO3 volume surge:</strong> +23 WoW (19→42 WOs). Adoption improving — 79.1% → 83.1% on Kooner volume alone. Approaching 85% target.</li>
-                        <li><strong>HAU1 improving:</strong> +39 WK11 WOs, adoption 56.1% → 62.7%. Consistent positive trajectory but still significant leakage gap (97 cumulative).</li>
-                        <li><strong>HTP2 volume cliff:</strong> -35 WoW (58→23 WOs). Still above 85% adoption threshold. Volume decline needs monitoring in WK12.</li>
-                        <li><strong>HIN3 + HPD1 no movement</strong> — HIN3 zero WOs (no coverage), HPD1 zero WOs. Both unchanged until coverage/tech issues resolved.</li>
-                        <li><strong>WK11 sentiment:</strong> 3 new JotForm responses — SFRM (3.7), TWLD (4.3), ARMA (3.7). No DSP below 3.0 average this week. TWLD and ARMA trending positive.</li>
+                        <li><strong>Overall adoption at 64.3%</strong> — +2.6pp WoW. WK11 confirmed: 286 Kooner WOs, 58 leaked.</li>
+                        <li><strong>4 stations on target:</strong> HMK4 (100%), HSL1 (93.1%), HCT2 (91.0%), HTP2 (85.5%)</li>
+                        <li><strong>HSL1 breakout week:</strong> +19 WOs WoW (4→23). Marcos Tun solo, med TAT 0.45d. Zero leakage. Adoption 90.6% → 93.1%.</li>
+                        <li><strong>HHO3 volume surge:</strong> +22 WoW (19→41 WOs) with zero leakage. Adoption 79.1% → 83.1% — approaching target.</li>
+                        <li><strong>HAU1 improving:</strong> +39 WK11 WOs, adoption 56.1% → 61.3%. GMIL top leaking DSP (4 WOs).</li>
+                        <li><strong>HTP2 volume cliff:</strong> −35 WoW (58→23 WOs). Still above 85% at 85.5%. Monitor WK12.</li>
+                        <li><strong>HIN3 + HPD1 no movement</strong> — HIN3 zero WOs (+7 leaked to JBXL), HPD1 zero WOs (+7 leaked all to JDTC).</li>
+                        <li><strong>WK11 sentiment:</strong> 3 new responses — SFRM (3.7), TWLD (4.3), ARMA (3.7). No DSP below 3.0 this week.</li>
                     </ul>
                 </div>
                 <div class="insights-grid">
-                    <div class="insight-card positive"><div class="insight-icon">✅</div><div class="insight-title">On Target Stations (4)</div><div class="insight-text"><span class="insight-metric green">HMK4 (100%), HSL1 (93.1%), HCT2 (91.0%), HTP2 (86.2%)</span> — 4 stations at or above 85% target. HSL1 breakout this week confirms Marcos Tun's consistency.</div></div>
-                    <div class="insight-card warning"><div class="insight-icon">📈</div><div class="insight-title">Near Target — HHO3 at 83.1%</div><div class="insight-text"><span class="insight-metric orange">HHO3 83.1%, HDY1 81.9%</span> — Both stations within 3pp of 85% target. HHO3 had a surge week (+23 WoW). If WK11 leakage is low, both could cross 85%.</div></div>
-                    <div class="insight-card negative"><div class="insight-icon">🔴</div><div class="insight-title">Critical: HPD1</div><div class="insight-text"><span class="insight-metric red">7.3% adoption</span> — No WK11 Kooner WOs. JDTC routing 100% externally. Emergency intervention needed — tech coverage is the root blocker.</div></div>
-                    <div class="insight-card info"><div class="insight-icon">💬</div><div class="insight-title">WK11 Sentiment — 3 New Responses</div><div class="insight-text"><span class="insight-metric">SFRM 3.7 · TWLD 4.3 · ARMA 3.7</span> — TWLD (HDY1) positive about 12AM–8AM schedule shift. SFRM raising weekend coverage and lift facility needs. Network avg improving.</div></div>
+                    <div class="insight-card positive"><div class="insight-icon">✅</div><div class="insight-title">On Target Stations (4)</div><div class="insight-text"><span class="insight-metric green">HMK4 (100%), HSL1 (93.1%), HCT2 (91.0%), HTP2 (85.5%)</span> — 4 stations at or above 85% target. HSL1 breakout this week confirms Marcos Tun's consistency.</div></div>
+                    <div class="insight-card warning"><div class="insight-icon">📈</div><div class="insight-title">Near Target — HHO3 at 83.1%</div><div class="insight-text"><span class="insight-metric orange">HHO3 83.1%, HDY1 80.4%</span> — Both stations within 5pp of 85% target. HHO3 zero leaked WK11 — if WK12 holds, could cross target.</div></div>
+                    <div class="insight-card negative"><div class="insight-icon">🔴</div><div class="insight-title">Critical: HPD1</div><div class="insight-text"><span class="insight-metric red">6.5% adoption</span> — No WK11 Kooner WOs. JDTC routing 100% externally (7 WOs). Emergency intervention needed — tech coverage is the root blocker.</div></div>
+                    <div class="insight-card info"><div class="insight-icon">💬</div><div class="insight-title">WK11 Sentiment — 3 New Responses</div><div class="insight-text"><span class="insight-metric">SFRM 3.7 · TWLD 4.3 · ARMA 3.7</span> — TWLD (HDY1) positive about 12AM–8AM schedule shift. SFRM raising weekend coverage and lift facility needs.</div></div>
                 </div>
                 <div class="next-steps">
                     <h4>🚀 WK11 Recommended Actions</h4>
                     <ol>
-                        <li><strong>HPD1:</strong> Emergency intervention — tech coverage is the adoption blocker. No Kooner WOs WK11.</li>
-                        <li><strong>HIN3:</strong> Dedicated tech ~2 weeks out. Zero WOs again. Confirm paperwork timeline.</li>
-                        <li><strong>HLA2:</strong> 54 Kooner WOs WK11 (best ever). But 361 cumulative leaked — ARMA still driving leakage. Address ARMA parts backorder (back-door back-orders raised in WK11 survey).</li>
-                        <li><strong>SFRM / HDT3:</strong> Weekend coverage gap and lift facility are two concrete asks. Address directly — SFRM is the top leaking DSP at HDT3 (8 WOs in WK10).</li>
-                        <li><strong>HTP2 volume watch:</strong> Dropped 58→23 WoW. Still above 85% target but ORMP (2.3/5 sentiment) is leakage risk if engagement drops.</li>
+                        <li><strong>HPD1:</strong> Emergency intervention — tech coverage is the adoption blocker. No Kooner WOs WK11, JDTC responsible for all 7 leaked.</li>
+                        <li><strong>HIN3:</strong> Dedicated tech ~2 weeks out. Zero WOs again. 7 leaked to JBXL. Confirm paperwork timeline.</li>
+                        <li><strong>HMS2:</strong> 8 leaked WOs all to LDOG. New 2nd tech started 3/16 — outreach to LDOG before WK12 to recapture volume.</li>
+                        <li><strong>HLA2:</strong> 54 Kooner WOs WK11 (best ever single week). But 11 still leaked — ARMA parts backorder raised in WK11 survey. Stock common parts on-site.</li>
+                        <li><strong>SFRM / HDT3:</strong> Weekend coverage gap and lift facility are two concrete asks from WK11 survey. Address directly before HDT3 leakage grows.</li>
                     </ol>
                 </div>
             </div>
 
+            <!-- Volume trend over time -->
             <div class="card full-width">
                 <div class="card-header"><div class="card-title">📈 Weekly Kooner Volume by Station</div></div>
                 <div class="chart-container tall"><canvas id="stationWeeklyChart"></canvas></div>
             </div>
 
+            <!-- WoW volume table -->
             <div class="card full-width">
                 <div class="card-header">
                     <div class="card-title">📊 WK11 Station Volume — WoW Detail</div>
@@ -335,6 +384,7 @@
                 </table>
             </div>
 
+            <!-- Weekly breakdown table -->
             <div class="card full-width">
                 <div class="card-header"><div class="card-title">Station Weekly Breakdown</div></div>
                 <div class="table-scroll">
@@ -349,7 +399,7 @@
     <div id="stations" class="tab-content">
         <div class="main-grid">
             <div class="card full-width">
-                <div class="card-header"><div class="card-title">Station Adoption Details</div><span class="card-badge badge-stations">13 STATIONS · WK11 KOONER UPDATED</span></div>
+                <div class="card-header"><div class="card-title">Station Adoption Details</div><span class="card-badge badge-stations">13 STATIONS · WK11 FINAL</span></div>
                 <table class="data-table">
                     <thead><tr><th>Station</th><th>Location</th><th>Adoption</th><th>Kooner</th><th>Leaked</th><th>Total</th><th>Gap to 85%</th><th>WoW</th><th>Status</th></tr></thead>
                     <tbody id="stationFullTable"></tbody>
@@ -377,8 +427,18 @@
 
     <!-- SENTIMENT TAB -->
     <div id="sentiment" class="tab-content">
+        <!-- Themes first -->
+        <div class="card" style="margin-bottom:24px">
+            <div class="card-header"><div class="card-title">🎯 WK11 Sentiment Themes</div><span class="card-badge badge-sentiment">WK11 KEY SIGNALS</span></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                <div class="insight-card warning"><div class="insight-icon">🏗️</div><div class="insight-title">SFRM — Facility & Coverage (HDT3)</div><div class="insight-text">Weekend lag (48hr units sit), day/night WO gap, no heavy-duty lift. WK11 and WK12 responses continue same themes. Consistent pattern across 6 responses — no improvement in core issues.</div></div>
+                <div class="insight-card positive"><div class="insight-icon">✅</div><div class="insight-title">TWLD — Schedule Shift Working (HDY1)</div><div class="insight-text">12AM–8AM service hours confirmed as "a great help." First response — strong signal at 4.3/5 avg.</div></div>
+                <div class="insight-card info"><div class="insight-icon">📈</div><div class="insight-title">ARMA — Stabilizing (HLA2)</div><div class="insight-text">Started at 1.0/5 in WK01–WK02. Recovered to 5.0/5 (WK06), stabilized 3.3–3.7. WK11 at 3.7. Parts availability is the remaining drag per survey.</div></div>
+                <div class="insight-card negative"><div class="insight-icon">🔇</div><div class="insight-title">ORMP Silent (HTP2)</div><div class="insight-text">Lowest-scoring active DSP at 2.3/5 avg. Last response Feb 9. Primary HTP2 leakage risk. No engagement for 5+ weeks — proactive outreach needed.</div></div>
+            </div>
+        </div>
 
-        <!-- KPI Row -->
+        <!-- KPI tiles -->
         <div class="kpi-row" style="grid-template-columns:repeat(5,1fr)">
             <div class="kpi-card"><div class="kpi-label">Survey Responses</div><div class="kpi-value">23</div><div class="kpi-subtext">From 8 DSPs · All time</div></div>
             <div class="kpi-card warning"><div class="kpi-label">Network Avg Sat</div><div class="kpi-value yellow">3.2</div><div class="kpi-subtext">↑ +0.2 WoW</div></div>
@@ -387,14 +447,12 @@
             <div class="kpi-card success"><div class="kpi-label">WK11 Responses</div><div class="kpi-value green">3</div><div class="kpi-subtext">SFRM · TWLD · ARMA</div></div>
         </div>
 
-        <!-- Main WoW Sentiment Section -->
+        <!-- WoW detail -->
         <div class="card" style="margin-bottom:24px">
             <div class="card-header">
                 <div class="card-title">📈 DSP Sentiment — Week-over-Week</div>
                 <span class="card-badge badge-sentiment">ALL JOTFORM RESPONSES · OLDEST → NEWEST</span>
             </div>
-
-            <!-- Filters -->
             <div class="sent-filter-row">
                 <button class="sent-filter-btn active" onclick="filterSentiment('all',this)">All DSPs (8)</button>
                 <button class="sent-filter-btn" onclick="filterSentiment('improving',this)">↑ Improving</button>
@@ -402,30 +460,15 @@
                 <button class="sent-filter-btn" onclick="filterSentiment('watch',this)">⚠ Watch (≤2.5 avg)</button>
                 <button class="sent-filter-btn" onclick="filterSentiment('multi',this)">Multi-week responders</button>
             </div>
-
-            <!-- Alerts -->
             <div class="silent-alert">⚠️ <strong>ORMP (HTP2)</strong> — Last response Feb 9. Silent 5+ weeks. Final avg 2.3/5. Proactive outreach needed before WK12 WBR.</div>
-
             <div class="wow-sentiment-grid" id="wowSentimentGrid"></div>
         </div>
 
-        <!-- Themes + Scatter stacked -->
-        <div style="display:flex;flex-direction:column;gap:24px;margin-bottom:32px">
-            <div class="card">
-                <div class="card-header"><div class="card-title">🎯 WK11 Sentiment Themes</div></div>
-                <div style="display:flex;flex-direction:column;gap:10px">
-                    <div class="insight-card warning"><div class="insight-icon">🏗️</div><div class="insight-title">SFRM — Facility & Coverage (HDT3)</div><div class="insight-text">Weekend lag (48hr units sit), day/night WO gap, no heavy-duty lift. WK12 response continues same themes. Consistent pattern across 6 responses — no improvement in core issues.</div></div>
-                    <div class="insight-card positive"><div class="insight-icon">✅</div><div class="insight-title">TWLD — Schedule Shift Working (HDY1)</div><div class="insight-text">12AM–8AM service hours confirmed as "a great help." Single response so far but strong signal — 4.3/5 avg.</div></div>
-                    <div class="insight-card info"><div class="insight-icon">📈</div><div class="insight-title">ARMA — Recovery Trend (HLA2)</div><div class="insight-text">Started at 1.0/5 in WK01–WK02. Recovered to 5.0/5 (WK06 — Jose Madrigal praise), then stabilized 3.3–3.7. Parts availability is the remaining drag.</div></div>
-                    <div class="insight-card negative"><div class="insight-icon">🔇</div><div class="insight-title">ORMP Silent (HTP2)</div><div class="insight-text">Lowest-scoring active DSP at 2.3/5 avg. Last response Feb 9. Is the primary HTP2 leakage risk. No engagement for 5+ weeks.</div></div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header"><div class="card-title">Sentiment vs Adoption</div><span class="card-badge badge-sentiment">AVG SCORE vs ADOPTION %</span></div>
-                <div class="chart-container"><canvas id="correlationChart"></canvas></div>
-            </div>
+        <!-- Scatter chart -->
+        <div class="card" style="margin-bottom:32px">
+            <div class="card-header"><div class="card-title">Sentiment vs Adoption</div><span class="card-badge badge-sentiment">AVG SCORE vs ADOPTION %</span></div>
+            <div class="chart-container"><canvas id="correlationChart"></canvas></div>
         </div>
-
     </div>
 
     <!-- ACTIONS TAB -->
@@ -483,14 +526,13 @@
 </div>
 
 <script>
-// ── WK11 UPDATED DATA ─────────────────────────────────────────────────────────
 var stationData = [
     {station:'HMK4', location:'Milwaukee, WI',      kooner:95,  leaked:0,   adoption:100.0, wk10_adoption:100.0},
     {station:'HSL1', location:'Salt Lake City, UT', kooner:81,  leaked:6,   adoption:93.1,  wk10_adoption:90.6},
-    {station:'HCT2', location:'Chattanooga, TN',    kooner:81,  leaked:8,   adoption:91.0,  wk10_adoption:89.6},
+    {station:'HCT2', location:'Chattanooga, TN',    kooner:81,  leaked:8,   adoption:91.0,  wk10_adoption:90.2},
     {station:'HTP2', location:'Gibsonton, FL',      kooner:194, leaked:33,  adoption:85.5,  wk10_adoption:84.7},
     {station:'HHO3', location:'Porter, TX',         kooner:182, leaked:37,  adoption:83.1,  wk10_adoption:79.1},
-    {station:'HDY1', location:'Clayton, OH',        kooner:131, leaked:32,  adoption:80.4,  wk10_adoption:79.0},
+    {station:'HDY1', location:'Clayton, OH',        kooner:131, leaked:35,  adoption:78.9,  wk10_adoption:77.3},
     {station:'HCL2', location:'Charlotte, NC',      kooner:193, leaked:98,  adoption:66.3,  wk10_adoption:63.7},
     {station:'HAU1', location:'Austin, TX',         kooner:163, leaked:103, adoption:61.3,  wk10_adoption:56.1},
     {station:'HDT3', location:'Romulus, MI',        kooner:275, leaked:190, adoption:59.1,  wk10_adoption:57.4},
@@ -503,10 +545,10 @@ var stationData = [
 var weeklyByStation = {
     'HAU1': {WK7:25,WK8:12,WK9:16,WK10:30,WK11:39,total:163},
     'HCL2': {WK7:22,WK8:32,WK9:20,WK10:28,WK11:30,total:193},
-    'HCT2': {WK7:1, WK8:4, WK9:7, WK10:35,WK11:12,total:81},
+    'HCT2': {WK7:1, WK8:4, WK9:7, WK10:35,WK11:7, total:81},
     'HDT3': {WK7:21,WK8:35,WK9:14,WK10:57,WK11:31,total:275},
     'HDY1': {WK7:6, WK8:9, WK9:13,WK10:25,WK11:22,total:131},
-    'HHO3': {WK7:18,WK8:13,WK9:13,WK10:19,WK11:42,total:182},
+    'HHO3': {WK7:18,WK8:13,WK9:13,WK10:19,WK11:41,total:182},
     'HIN3': {WK7:0, WK8:1, WK9:2, WK10:0, WK11:0, total:19},
     'HLA2': {WK7:42,WK8:41,WK9:43,WK10:49,WK11:54,total:401},
     'HMK4': {WK7:3, WK8:13,WK9:7, WK10:14,WK11:13,total:95},
@@ -516,27 +558,25 @@ var weeklyByStation = {
     'HTP2': {WK7:10,WK8:17,WK9:10,WK10:58,WK11:23,total:194},
 };
 
-var weekTotals = {WK7:157,WK8:194,WK9:153,WK10:326,WK11:292};
+var weekTotals = {WK7:157,WK8:194,WK9:153,WK10:326,WK11:286};
 
-var wk11Kooner = {HAU1:39,HCL2:30,HCT2:12,HDT3:31,HDY1:22,HHO3:42,HIN3:0,HLA2:54,HMK4:13,HMS2:3,HPD1:0,HSL1:23,HTP2:23};
+var wk11Kooner = {HAU1:39,HCL2:30,HCT2:7,HDT3:31,HDY1:22,HHO3:41,HIN3:0,HLA2:54,HMK4:13,HMS2:3,HPD1:0,HSL1:23,HTP2:23};
 var wk10Kooner = {HAU1:30,HCL2:28,HCT2:35,HDT3:57,HDY1:25,HHO3:19,HIN3:0,HLA2:49,HMK4:14,HMS2:4,HPD1:3,HSL1:4,HTP2:58};
 
-var wk10TopDSP = {
-    HLA2:'ARMA (11)', HDT3:'SFRM (8)', HPD1:'JDTC (6)', HMS2:'LDOG (6)',
-    HCL2:'D4DS (3)', HAU1:'FICL (4)', HHO3:'DASL (3)', HCT2:'TGLO (2)',
-    HSL1:'PRLC (2)', HIN3:'CMIL (1)', HDY1:'—', HMK4:'—', HTP2:'—'
-}; // WK10
 var wk11TopDSP = {
     HLA2:'ARMA (9)', HDT3:'SFRM (9)', HMS2:'LDOG (8)', HIN3:'JBXL (6)',
     HPD1:'JDTC (7)', HAU1:'GMIL (4)', HCL2:'D4DS (3)', HDY1:'TLGZ (2)',
     HTP2:'ORMP (1)', HHO3:'—', HMK4:'—', HCT2:'—', HSL1:'—'
 };
+var wk10TopDSP = {
+    HLA2:'ARMA (11)', HDT3:'SFRM (8)', HPD1:'JDTC (6)', HMS2:'LDOG (6)',
+    HCL2:'D4DS (3)', HAU1:'FICL (4)', HHO3:'DASL (3)', HCT2:'TGLO (2)',
+    HSL1:'PRLC (2)', HIN3:'CMIL (1)', HDY1:'—', HMK4:'—', HTP2:'—'
+};
 
-// WK11 leakage pending — using WK10 cumulative leaked
-var wk10Leaked = {HLA2:14,HDT3:8,HPD1:6,HMS2:6,HCL2:5,HAU1:4,HHO3:3,HCT2:2,HSL1:2,HIN3:1,HDY1:0,HMK4:0,HTP2:0}; // WK10
 var wk11Leaked = {HLA2:11,HDT3:9,HMS2:8,HIN3:7,HPD1:7,HAU1:6,HCL2:5,HDY1:3,HTP2:2,HHO3:0,HMK4:0,HCT2:0,HSL1:0};
+var wk10Leaked = {HLA2:14,HDT3:8,HPD1:6,HMS2:6,HCL2:5,HAU1:4,HHO3:3,HCT2:2,HSL1:2,HIN3:1,HDY1:0,HMK4:0,HTP2:0};
 
-// UPDATED SENTIMENT — WK11 responses incorporated
 var sentimentData = [
     {dsp:'ALAB', station:'HDT3', responses:2, satisfaction:3.0, timeliness:2.5, quality:3.0, avgScore:2.8, adoption:60.3},
     {dsp:'ARMA', station:'HLA2', responses:8, satisfaction:3.1, timeliness:3.0, quality:3.0, avgScore:3.0, adoption:52.6, isNew:true},
@@ -548,7 +588,6 @@ var sentimentData = [
     {dsp:'D4DS', station:'HCL2', responses:1, satisfaction:5.0, timeliness:5.0, quality:5.0, avgScore:5.0, adoption:67.5},
 ];
 
-// WK11 feedback — newest first
 var feedbackData = [
     {date:'Mar 11',dsp:'SFRM',station:'HDT3',satisfaction:3,timeliness:4,quality:4,isNew:true,
      issue:'Units sit 48hrs before diagnosis begins on weekends. Day/night shift WO communication gap causes delays and increased turnaround time.',
@@ -576,7 +615,6 @@ var feedbackData = [
      suggestion:'Supervisor got more vehicles running in one evening than any mechanic in 5 years.'},
 ];
 
-// ── CALENDAR EVENTS ──────────────────────────────────────────────────────────
 var calendarEvents = [
     {date:'2026-02-09',title:'HMS2 Roundtable',type:'roundtable',station:'HMS2',time:'2:00 PM CT',notes:'Discussed Kooner adoption challenges at Lakeville station. LDOG raised concerns about parts availability and scheduling conflicts.',actions:['Follow up with Kooner on parts lead times - Owner: Brooke','Schedule follow-up with LDOG manager - Owner: Brooke']},
     {date:'2026-02-10',title:'HCL2 Roundtable',type:'roundtable',station:'HCL2',time:'1:00 PM ET',notes:'Met with D4DS and DGWD representatives. D4DS gave 5/5 satisfaction rating. DGWD expressed concerns about scheduling.',actions:['Address DGWD scheduling concerns with Kooner ops team - Owner: Brooke','Leverage D4DS success story for other DSPs - Owner: Brooke']},
@@ -614,14 +652,12 @@ var calendarEvents = [
 var calendarMonth=2, calendarYear=2026;
 var calMonthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-// ── HELPER FUNCTIONS ─────────────────────────────────────────────────────────
 function showTab(tabId,btn){
     document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
     document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active')});
     document.getElementById(tabId).classList.add('active');
     btn.classList.add('active');
     if(tabId==='calendar'){renderCalendar();renderUpcomingEvents();renderPastEvents();}
-    // Resize all Chart.js instances so hidden-tab canvases render correctly
     setTimeout(function(){
         if(typeof _charts !== 'undefined'){
             _charts.forEach(function(c){ try{c.resize();}catch(e){} });
@@ -635,7 +671,6 @@ function filterStations(filter,btn){
 }
 function getScoreColor(s){if(s>=4)return'var(--accent-green)';if(s>=3)return'var(--accent-yellow)';if(s>=2)return'var(--accent-orange)';return'var(--accent-red)'}
 
-// ── TABLE POPULATION ─────────────────────────────────────────────────────────
 function populateStationQuickTable(){
     var t=document.getElementById('stationQuickTable'),h='';
     var sorted=stationData.slice().sort(function(a,b){return b.adoption-a.adoption});
@@ -654,10 +689,11 @@ function populateStationQuickTable(){
 
 function populateOpportunityTable(){
     var t=document.getElementById('opportunityTable'),h='';
+    var totalLeaked=stationData.reduce(function(a,s){return a+s.leaked},0);
     var sorted=stationData.slice().filter(function(s){return s.leaked>0}).sort(function(a,b){return b.leaked-a.leaked});
     for(var i=0;i<Math.min(sorted.length,8);i++){
         var s=sorted[i];
-        var potential=(s.leaked/977*100).toFixed(1);
+        var potential=(s.leaked/totalLeaked*100).toFixed(1);
         h+='<tr><td><span class="station-name">'+s.station+'</span></td>';
         h+='<td style="color:var(--accent-red)">'+s.leaked+'</td>';
         h+='<td>'+s.adoption.toFixed(1)+'%</td>';
@@ -695,7 +731,8 @@ function populateStationWeeklyTable(){
         h+='<td style="font-weight:700;'+wk11Color+'">'+(w.WK11||'—')+'</td>';
         h+='<td><strong>'+w.total+'</strong></td></tr>';
     }
-    h+='<tr style="background:var(--bg-card-hover)"><td><strong>TOTAL</strong></td><td><strong>'+weekTotals.WK7+'</strong></td><td><strong>'+weekTotals.WK8+'</strong></td><td><strong>'+weekTotals.WK9+'</strong></td><td><strong>'+weekTotals.WK10+'</strong></td><td style="font-weight:700;color:var(--accent-purple)"><strong>'+weekTotals.WK11+'</strong></td><td><strong>1,863</strong></td></tr>';
+    var totalAll=stationData.reduce(function(a,s){return a+s.kooner},0);
+    h+='<tr style="background:var(--bg-card-hover)"><td><strong>TOTAL</strong></td><td><strong>'+weekTotals.WK7+'</strong></td><td><strong>'+weekTotals.WK8+'</strong></td><td><strong>'+weekTotals.WK9+'</strong></td><td><strong>'+weekTotals.WK10+'</strong></td><td style="font-weight:700;color:var(--accent-purple)"><strong>'+weekTotals.WK11+'</strong></td><td><strong>'+totalAll+'</strong></td></tr>';
     t.innerHTML=h;
 }
 
@@ -730,12 +767,13 @@ function populateWk11VolumeTable(){
 function populateDSPTable(filter){
     filter=filter||'all';
     var t=document.getElementById('dspTable'),h='';
+    var totalLeaked=stationData.reduce(function(a,s){return a+s.leaked},0);
     var filtered=filter==='all'?stationData:stationData.filter(function(s){return s.station===filter});
     filtered=filtered.slice().sort(function(a,b){return b.leaked-a.leaked});
     for(var i=0;i<filtered.length;i++){
         var s=filtered[i];if(s.leaked===0)continue;
         var priority=s.adoption<20?'critical':s.adoption<50?'high':s.adoption<70?'medium':'low';
-        var opp=(s.leaked/977*100).toFixed(1);
+        var opp=(s.leaked/totalLeaked*100).toFixed(1);
         h+='<tr><td><span class="station-name">'+s.station+'</span></td>';
         h+='<td style="color:'+(s.adoption>=85?'var(--accent-green)':'var(--accent-red)')+'">'+s.adoption.toFixed(1)+'%</td>';
         h+='<td>'+s.kooner+'</td><td>'+s.leaked+'</td>';
@@ -746,13 +784,15 @@ function populateDSPTable(filter){
 }
 
 function populateFeedbackList(){
-    var c=document.getElementById('feedbackList'),h='';
+    var c=document.getElementById('feedbackList');
+    if(!c)return;
+    var h='';
     for(var i=0;i<feedbackData.length;i++){
         var f=feedbackData[i];
         var newTag=f.isNew?'<span class="new-badge">WK11</span>':'';
         h+='<div class="feedback-card"><div class="feedback-header"><div class="feedback-meta">';
         h+='<span class="station-name">'+f.dsp+newTag+'</span>';
-        h+='<span class="action-station" style="background:var(--bg-dark);padding:4px 10px;border-radius:8px;font-size:0.8rem;font-family:monospace;color:var(--text-secondary)">'+f.station+'</span>';
+        h+='<span style="background:var(--bg-dark);padding:4px 10px;border-radius:8px;font-size:0.8rem;font-family:monospace;color:var(--text-secondary)">'+f.station+'</span>';
         h+='<span class="feedback-date">'+f.date+'</span></div>';
         h+='<div class="feedback-scores"><div class="score-mini"><span class="score-mini-label">Sat</span><span class="score-mini-value" style="color:'+getScoreColor(f.satisfaction)+'">'+f.satisfaction+'</span></div><div class="score-mini"><span class="score-mini-label">Time</span><span class="score-mini-value" style="color:'+getScoreColor(f.timeliness)+'">'+f.timeliness+'</span></div><div class="score-mini"><span class="score-mini-label">Qual</span><span class="score-mini-value" style="color:'+getScoreColor(f.quality)+'">'+f.quality+'</span></div></div></div>';
         if(f.issue)h+='<div class="feedback-text issue"><strong>Issue:</strong> '+f.issue+'</div>';
@@ -779,7 +819,7 @@ function populateActionMatrix(){
         var w11=wk11Kooner[s.station]||0,w10=wk10Kooner[s.station]||0;
         var trend=s.adoption>=85?'stable':w11>w10*1.2?'improving':w11<w10*0.8?'worsening':'stable';
         var priority=s.adoption>=85?'on-track':score>=30?'critical':score>=20?'high':score>=8?'monitor':'on-track';
-        return{s:s,score:score,sentAvg:sentAvg,sentResponses:sentMap[s.station]?sentMap[s.station].responses:0,wk11l:wk10Leaked[s.station]||0,trend:trend,priority:priority,gap:gap,leakPct:leakPct};
+        return{s:s,score:score,sentAvg:sentAvg,sentResponses:sentMap[s.station]?sentMap[s.station].responses:0,wk11l:wk11Leaked[s.station]||0,trend:trend,priority:priority,gap:gap,leakPct:leakPct};
     }).sort(function(a,b){return b.score-a.score});
 
     var counts={critical:0,high:0,monitor:0,'on-track':0};
@@ -790,19 +830,19 @@ function populateActionMatrix(){
     document.getElementById('actionCountGood').textContent=counts['on-track']||0;
 
     var actions={
-        HPD1:{text:'Emergency: JDTC routing 100% externally, 0 Kooner WOs WK11. Tech coverage in Portland is the root blocker — hiring or subcontract needed urgently.',engage:'Direct call to JDTC + Kooner ops escalation'},
-        HLA2:{text:'54 WK11 Kooner WOs — highest ever single week. ARMA parts backorder (back-door back-orders) confirmed in WK11 survey. Stock common parts on-site to protect this volume.',engage:'Parts escalation + ARMA survey follow-up'},
-        HMS2:{text:'LDOG is sole leaking DSP — 6 in WK10, consistent pattern. New 3rd tech started 3/16 — volume expected to increase WK12. Relationship outreach before pitch.',engage:'1:1 call with LDOG manager'},
-        HDT3:{text:'SFRM raised weekend coverage gap and lift facility need in WK11 survey. Address both concretely: weekend tech coverage option + shop facility access. SFRM is top leaker (8 WOs WK10).',engage:'Direct response to SFRM WK11 survey items'},
-        HIN3:{text:'Zero WOs again WK11. CMIL is leaking DSP. Tech ~2 weeks pending paperwork. Confirm timeline and outreach to CMIL to hold WOs until coverage active.',engage:'Ops coverage update + CMIL outreach'},
-        HAU1:{text:'Strong WK11 (+39 WOs, adoption 62.7%). FICL improving in WK10. Reinforce trajectory — confirm FICL engagement and address any remaining GMIL leakage.',engage:'WK11 volume recognition + FICL reinforcement'},
-        HCL2:{text:'D4DS is a 5/5 advocate. DGWD and other DSPs are leakage source. 2nd tech offer out (~3/25) — communicate ETA to DSPs. Use D4DS as reference.',engage:'DGWD scheduling follow-up + 2nd tech ETA comms'},
-        HHO3:{text:'Volume surge +23 WoW — 83.1% adoption, approaching target. Dasl, RRTL, NLZL are leaking DSPs. No survey data from any. Site visit planned 3/19.',engage:'3/19 site visit + informal DSP check-ins'},
-        HDY1:{text:'TWLD scoring 4.3/5, confirmed schedule shift is working. WK11 clean (0 leaked). TLGZ onboarding ongoing. Open req active for 2nd tech — adoption near 85% ceiling with solo tech.',engage:'Reinforce TWLD; confirm TLGZ WO routing process'},
-        HTP2:{text:'Volume cliff -35 WoW (58→23). Still above 85% (86.2%). ORMP (2.3/5) is silent since Feb 9 — proactive outreach needed before WK12.',engage:'ORMP proactive outreach; WK12 volume watch'},
-        HCT2:{text:'91.0% adoption after WK11 update. Harvey solo this week (Eugene at HCL2). TGLO is the lone leaking DSP (2 WK10). Monitor quality concerns from Mar 3 roundtable.',engage:'Monitor TGLO; Eugene returns when HCL2 2nd tech onboards'},
-        HSL1:{text:'93.1% adoption — breakout week (+19 WoW). Tun solo, med TAT 0.45d. PRLC scoring 4/5 — paperwork speed is their only friction. Current approach working.',engage:'Expedite PRLC paperwork; feature HSL1 as success story'},
-        HMK4:{text:'100% adoption. Zero leakage. 13 WoW WOs stable. Use as benchmark and success story in DSP comms.',engage:'Feature in newsletter / DSP comms'}
+        HPD1:{text:'Emergency: JDTC routing 100% externally. 0 Kooner WOs WK11, 7 leaked all to JDTC. Tech coverage in Portland is the root blocker — hiring or subcontract needed urgently.',engage:'Direct call to JDTC + Kooner ops escalation'},
+        HLA2:{text:'54 WK11 Kooner WOs — highest ever single week. 11 leaked — ARMA parts backorder confirmed in WK11 survey. Stock common parts on-site to protect this volume.',engage:'Parts escalation + ARMA survey follow-up'},
+        HMS2:{text:'LDOG is sole leaking DSP — 8 leaked WK11, all to LDOG. New 2nd tech started 3/16 — volume expected to increase WK12. Relationship outreach to LDOG before pitch.',engage:'1:1 call with LDOG manager'},
+        HDT3:{text:'SFRM raised weekend coverage gap and lift facility need in WK11 survey. 9 leaked this week (all SFRM). Address both concretely: weekend tech coverage + shop facility access.',engage:'Direct response to SFRM WK11 survey items'},
+        HIN3:{text:'Zero WOs again WK11. 7 leaked to JBXL. Tech ~2 weeks pending paperwork. Confirm timeline and outreach to JBXL to hold WOs until coverage active.',engage:'Ops coverage update + JBXL outreach'},
+        HAU1:{text:'Strong WK11 (+39 WOs, adoption 61.3%). GMIL is top leaking DSP (4 WOs). Reinforce trajectory — confirm GMIL engagement.',engage:'GMIL outreach + volume recognition'},
+        HCL2:{text:'D4DS is a 5/5 advocate. 2nd tech offer out (~3/25) — communicate ETA to DSPs. Use D4DS as reference for other DSPs.',engage:'DGWD scheduling follow-up + 2nd tech ETA comms'},
+        HHO3:{text:'Volume surge +22 WoW — 83.1% adoption, zero leakage WK11. Approaching 85% target. Site visit planned 3/19.',engage:'3/19 site visit + informal DSP check-ins'},
+        HDY1:{text:'TWLD scoring 4.3/5, confirmed schedule shift is working. WK11 clean (3 leaked, TLGZ top). Open req active for 2nd tech.',engage:'Reinforce TWLD; confirm TLGZ WO routing process'},
+        HTP2:{text:'Volume cliff -35 WoW (58→23). Still above 85% (85.5%). ORMP (2.3/5) silent since Feb 9 — proactive outreach needed before WK12.',engage:'ORMP proactive outreach; WK12 volume watch'},
+        HCT2:{text:'91.0% adoption. Eugene primarily at HCL2 this week (7 HCT2 WOs). TGLO is the lone leaking DSP. Monitor quality concerns from Mar 3 roundtable.',engage:'Monitor TGLO; Eugene returns when HCL2 2nd tech onboards'},
+        HSL1:{text:'93.1% adoption — breakout week (+19 WoW). Tun solo, med TAT 0.45d. Zero leakage. PRLC scoring 4/5.',engage:'Expedite PRLC paperwork; feature HSL1 as success story'},
+        HMK4:{text:'100% adoption. Zero leakage. 13 WK11 WOs stable. Use as benchmark and success story in DSP comms.',engage:'Feature in newsletter / DSP comms'}
     };
 
     var priorityColors={critical:'var(--accent-red)',high:'var(--accent-orange)',monitor:'var(--accent-blue)','on-track':'var(--accent-green)'};
@@ -817,6 +857,7 @@ function populateActionMatrix(){
         var wk11k=wk11Kooner[s.station]||0;
         var wk11str=wk11k===0?'<span style="color:var(--accent-red)">0 ⚠</span>':wk11k>=30?'<span style="color:var(--accent-green)">'+wk11k+' ↑</span>':'<span style="color:var(--text-primary)">'+wk11k+'</span>';
         var act=actions[s.station]||{text:'Continue monitoring.',engage:'Regular check-in'};
+        var wk11topLeak = wk11TopDSP[s.station]||'—';
 
         h+='<div style="background:'+pb+';border:1px solid var(--border-color);border-left:4px solid '+pc+';border-radius:12px;padding:20px;margin-bottom:14px">';
         h+='<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:10px">';
@@ -829,7 +870,7 @@ function populateActionMatrix(){
         h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">Total Leaked</div><div style="font-family:monospace;font-weight:700;font-size:1.1rem;color:var(--accent-red)">'+s.leaked+'</div></div>';
         h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">WK11 Kooner</div><div style="font-family:monospace;font-weight:700;font-size:1.1rem">'+wk11str+'</div></div>';
         h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">Sentiment</div><div style="font-family:monospace;font-weight:700;font-size:1rem;color:'+sentColor+'">'+sentStr+'</div></div>';
-        h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">WK10 Top Leaker</div><div style="font-size:0.85rem;color:var(--text-secondary)">'+(wk10TopDSP[s.station]&&wk10TopDSP[s.station]!=='—'?wk10TopDSP[s.station]:'None')+'</div></div>';
+        h+='<div style="background:var(--bg-card);border-radius:8px;padding:10px"><div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px">WK11 Top Leaker</div><div style="font-size:0.85rem;color:var(--text-secondary)">'+(wk11topLeak!=='—'?wk11topLeak:'None')+'</div></div>';
         h+='</div>';
         h+='<div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start">';
         h+='<div><div style="font-size:0.7rem;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:5px">Recommended Action</div>';
@@ -841,27 +882,85 @@ function populateActionMatrix(){
 }
 
 var _charts = [];
-// ── CHARTS ───────────────────────────────────────────────────────────────────
 function createCharts(){
     var colors=['#00ff88','#00d4ff','#3742fa','#a855f7','#ff4757','#ffa502','#ff6b81','#2ed573','#1e90ff','#ff9ff3','#54a0ff','#ffd93d','#c8d6e5'];
     function safeChart(id,config){
         var el=document.getElementById(id);
         if(!el)return null;
-        try{
-            var c=new Chart(el,config);
-            _charts.push(c);
-            return c;
-        }catch(e){console.warn('Chart error',id,e);return null;}
+        try{var c=new Chart(el,config);_charts.push(c);return c;}
+        catch(e){console.warn('Chart error',id,e);return null;}
     }
 
-    // Weekly bar chart WK6-WK11
+    // WoW Volume chart — WK10 vs WK11 per station
+    var stationOrder = Object.keys(wk10Kooner).filter(function(s){ return (wk10Kooner[s]||0)+(wk11Kooner[s]||0) > 0; }).sort(function(a,b){ return (wk11Kooner[b]||0)-(wk11Kooner[a]||0); });
+    safeChart('wowVolumeChart',{
+        type:'bar',
+        data:{
+            labels: stationOrder,
+            datasets:[
+                {label:'WK10',data:stationOrder.map(function(s){return wk10Kooner[s]||0}),backgroundColor:'rgba(55,66,250,0.45)',borderRadius:3},
+                {label:'WK11',data:stationOrder.map(function(s){return wk11Kooner[s]||0}),backgroundColor:stationOrder.map(function(s){
+                    var w=(wk11Kooner[s]||0),p=(wk10Kooner[s]||0);
+                    return w>p?'rgba(0,255,136,0.75)':w<p?'rgba(255,71,87,0.75)':'rgba(168,85,247,0.6)';
+                }),borderRadius:3}
+            ]
+        },
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a',font:{size:11}}}},scales:{x:{grid:{display:false},ticks:{color:'#8b8b9a',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}}}}
+    });
+
+    // Adoption delta chart — WoW change per station
+    var adoptSorted = stationData.slice().sort(function(a,b){ return (b.adoption-b.wk10_adoption)-(a.adoption-a.wk10_adoption); });
+    safeChart('adoptionDeltaChart',{
+        type:'bar',
+        data:{
+            labels: adoptSorted.map(function(s){return s.station}),
+            datasets:[{
+                label:'Adoption Δ (pp)',
+                data: adoptSorted.map(function(s){return +(s.adoption-s.wk10_adoption).toFixed(1)}),
+                backgroundColor: adoptSorted.map(function(s){
+                    var d=s.adoption-s.wk10_adoption;
+                    return d>0?'rgba(0,255,136,0.75)':d<0?'rgba(255,71,87,0.75)':'rgba(139,139,154,0.4)';
+                }),
+                borderRadius:3
+            }]
+        },
+        options:{
+            responsive:true,maintainAspectRatio:false,
+            plugins:{legend:{display:false}},
+            scales:{
+                x:{grid:{display:false},ticks:{color:'#8b8b9a',font:{size:10}}},
+                y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a',callback:function(v){return (v>0?'+':'')+v+'pp'}}}
+            }
+        }
+    });
+
+    // WK11 leaked by station
+    var leakStationsWow = Object.keys(wk11Leaked).filter(function(s){return wk11Leaked[s]>0;}).sort(function(a,b){return wk11Leaked[b]-wk11Leaked[a];});
+    safeChart('leakageWowChart',{
+        type:'bar',
+        data:{
+            labels: leakStationsWow,
+            datasets:[{
+                label:'WK11 Leaked',
+                data: leakStationsWow.map(function(s){return wk11Leaked[s];}),
+                backgroundColor:'rgba(255,71,87,0.7)',
+                borderRadius:3
+            },{
+                label:'WK10 Leaked',
+                data: leakStationsWow.map(function(s){return wk10Leaked[s]||0;}),
+                backgroundColor:'rgba(255,71,87,0.25)',
+                borderRadius:3
+            }]
+        },
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a',font:{size:11}}}},scales:{x:{grid:{display:false},ticks:{color:'#8b8b9a',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}}}}
+    });
+
     safeChart('weeklyBarChart',{
         type:'bar',
-        data:{labels:['WK7','WK8','WK9','WK10','WK11'],datasets:[{label:'Kooner WOs',data:[157,194,153,326,292],backgroundColor:['rgba(0,255,136,0.5)','rgba(0,255,136,0.5)','rgba(0,255,136,0.5)','rgba(0,255,136,0.8)','rgba(168,85,247,0.7)'],borderRadius:4}]},
+        data:{labels:['WK7','WK8','WK9','WK10','WK11'],datasets:[{label:'Kooner WOs',data:[157,194,153,326,286],backgroundColor:['rgba(0,255,136,0.5)','rgba(0,255,136,0.5)','rgba(0,255,136,0.5)','rgba(0,255,136,0.8)','rgba(168,85,247,0.7)'],borderRadius:4}]},
         options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a'}}},scales:{y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},x:{grid:{display:false},ticks:{color:'#8b8b9a'}}}}
     });
 
-    // Station adoption bar chart
     var sortedStations=stationData.slice().sort(function(a,b){return b.adoption-a.adoption});
     safeChart('stationBarChart',{
         type:'bar',
@@ -869,7 +968,6 @@ function createCharts(){
         options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,max:100,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a',callback:function(v){return v+'%'}}},y:{grid:{display:false},ticks:{color:'#8b8b9a'}}}}
     });
 
-    // Station weekly stacked
     var weekLabels=['WK7','WK8','WK9','WK10','WK11'];
     var topStations=['HLA2','HDT3','HTP2','HHO3','HCL2','HAU1','HDY1','HSL1'];
     safeChart('stationWeeklyChart',{
@@ -878,14 +976,12 @@ function createCharts(){
         options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a'},position:'right'}},scales:{y:{stacked:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},x:{stacked:true,grid:{display:false},ticks:{color:'#8b8b9a'}}}}
     });
 
-    // Station rank chart
     safeChart('stationRankChart',{
         type:'bar',
         data:{labels:sortedStations.map(function(s){return s.station}),datasets:[{label:'Kooner',data:sortedStations.map(function(s){return s.kooner}),backgroundColor:'rgba(0,255,136,0.7)',borderRadius:2},{label:'Leaked',data:sortedStations.map(function(s){return s.leaked}),backgroundColor:'rgba(255,71,87,0.7)',borderRadius:2}]},
         options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{labels:{color:'#8b8b9a'}}},scales:{x:{stacked:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},y:{stacked:true,grid:{display:false},ticks:{color:'#8b8b9a'}}}}
     });
 
-    // Leakage doughnut
     var leakStations=stationData.filter(function(s){return s.leaked>0}).sort(function(a,b){return b.leaked-a.leaked});
     safeChart('leakageChart',{
         type:'doughnut',
@@ -893,14 +989,6 @@ function createCharts(){
         options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#8b8b9a',padding:8}}},cutout:'60%'}
     });
 
-    // Sentiment chart
-    safeChart('sentimentChart',{
-        type:'bar',
-        data:{labels:sentimentData.map(function(d){return d.dsp+(d.isNew?' ★':'')}),datasets:[{label:'Satisfaction',data:sentimentData.map(function(d){return d.satisfaction}),backgroundColor:'rgba(168,85,247,0.7)',borderRadius:4},{label:'Timeliness',data:sentimentData.map(function(d){return d.timeliness}),backgroundColor:'rgba(0,212,255,0.7)',borderRadius:4},{label:'Quality',data:sentimentData.map(function(d){return d.quality}),backgroundColor:'rgba(255,217,61,0.7)',borderRadius:4}]},
-        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b8b9a'}}},scales:{y:{beginAtZero:true,max:5,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#8b8b9a'}},x:{grid:{display:false},ticks:{color:'#8b8b9a'}}}}
-    });
-
-    // Correlation scatter
     safeChart('correlationChart',{
         type:'scatter',
         data:{datasets:[{label:'DSPs',data:sentimentData.map(function(d){return{x:d.avgScore,y:d.adoption,label:d.dsp}}),backgroundColor:function(ctx){var v=ctx.raw;if(!v)return'#8b8b9a';if(v.y>=85)return'rgba(0,255,136,0.8)';if(v.y>=50)return'rgba(255,165,2,0.8)';return'rgba(255,71,87,0.8)'},pointRadius:12,pointHoverRadius:15}]},
@@ -908,7 +996,6 @@ function createCharts(){
     });
 }
 
-// ── CALENDAR ─────────────────────────────────────────────────────────────────
 function changeMonth(d){
     calendarMonth+=d;
     if(calendarMonth>11){calendarMonth=0;calendarYear++;}
@@ -935,7 +1022,7 @@ function renderCalendar(){
         h+='<div class="calendar-day'+(isTod?' cal-today':'')+'"><div class="cal-date-num">'+d+'</div>';
         evts.forEach(function(ev,ei){
             var ac=ev.actions&&ev.actions.length?'<span class="cal-action-count">'+ev.actions.length+'</span>':'';
-            h+='<div class="calendar-event '+ev.type+'" data-date="'+ds+'" data-idx="'+ei+'" onclick="openEventModal(\''+ds+'\','+ei+')">'+ev.title+ac+'</div>';
+            h+='<div class="calendar-event '+ev.type+'" onclick="openEventModal(\''+ds+'\','+ei+')">'+ev.title+ac+'</div>';
         });
         h+='</div>';
     }
@@ -990,7 +1077,6 @@ function renderPastEvents(){
     c.innerHTML=h||'<p class="empty-state">No past events with notes yet</p>';
 }
 
-// ── WoW SENTIMENT DATA — All JotForm submissions ─────────────────────────────
 var dspWoWData = {
     SFRM: { station:'HDT3', entries:[
         {week:'WK01',date:'Jan 5',  sat:3,time:2,qual:2,avg:2.3, issue:'Field supervision concern — who validates quality?'},
@@ -1030,9 +1116,7 @@ var dspWoWData = {
     ]},
 };
 
-// ── WoW SENTIMENT RENDERER ────────────────────────────────────────────────────
 function scoreColor(v){ return v>=4?'var(--accent-green)':v>=3?'var(--accent-yellow)':v>=2?'var(--accent-orange)':'var(--accent-red)'; }
-function scoreBg(v){    return v>=4?'#059669':v>=3?'#b45309':v>=2?'#c2410c':'#dc2626'; }
 
 function getTrend(entries){
     if(entries.length < 2) return 'new';
@@ -1046,10 +1130,8 @@ function getTrend(entries){
 function renderWoWSentiment(filter){
     var grid = document.getElementById('wowSentimentGrid');
     if(!grid) return;
-
     var dsps = Object.keys(dspWoWData);
     var html = '';
-
     dsps.forEach(function(dsp){
         var d = dspWoWData[dsp];
         var entries = d.entries;
@@ -1057,24 +1139,16 @@ function renderWoWSentiment(filter){
         var latestAvg = entries[entries.length-1].avg;
         var firstAvg  = entries[0].avg;
         var totalChange = Math.round((latestAvg - firstAvg)*10)/10;
-        var currentWeekWow = entries.length>1 ? Math.round((entries[entries.length-1].avg - entries[entries.length-2].avg)*10)/10 : null;
         var isSilent = (dsp === 'ORMP');
-
-        // Filter logic
         var show = true;
         if(filter==='improving' && trend !== 'improving') show=false;
         if(filter==='declining' && trend !== 'declining') show=false;
         if(filter==='watch' && latestAvg > 2.5) show=false;
         if(filter==='multi' && entries.length < 2) show=false;
-
         var trendLabel = trend==='improving'?'↑ Improving':trend==='declining'?'↓ Declining':trend==='new'?'First response':'→ Flat';
         var avgColor = scoreColor(latestAvg);
         var totalChangeColor = totalChange > 0 ? 'var(--accent-green)' : totalChange < 0 ? 'var(--accent-red)' : 'var(--text-muted)';
-        var totalChangeStr = totalChange===0 ? '—' : (totalChange>0?'+':'')+totalChange.toFixed(1);
-
         html += '<div class="dsp-wow-card'+(show?'':' hidden')+'" data-dsp="'+dsp+'" data-trend="'+trend+'" data-avg="'+latestAvg+'" data-responses="'+entries.length+'">';
-
-        // Header
         html += '<div class="dsp-wow-header">';
         html += '<div class="dsp-wow-identity">';
         html +=   '<span class="dsp-wow-code" style="color:'+avgColor+'">'+dsp+'</span>';
@@ -1086,44 +1160,26 @@ function renderWoWSentiment(filter){
         html +=   '<div class="dsp-wow-meta-item"><div class="dsp-wow-meta-label">Season Δ</div><div class="dsp-wow-meta-value" style="color:'+totalChangeColor+'">'+(totalChange===0?'—':(totalChange>0?'+':'')+totalChange.toFixed(1))+'</div></div>';
         html +=   '<div class="dsp-wow-meta-item"><div class="dsp-wow-meta-label">Responses</div><div class="dsp-wow-meta-value" style="color:var(--text-secondary)">'+entries.length+'</div></div>';
         html +=   '<span class="dsp-wow-trend-pill '+trend+'">'+trendLabel+'</span>';
-        html += '</div>';
-        html += '</div>';
-
-        // Timeline of weeks
+        html += '</div></div>';
         html += '<div class="dsp-wow-timeline"><div class="dsp-wow-weeks">';
-
         entries.forEach(function(e, i){
             var isLatest = (i === entries.length-1);
             var prevAvg  = i > 0 ? entries[i-1].avg : null;
             var delta    = prevAvg !== null ? Math.round((e.avg - prevAvg)*10)/10 : null;
-            var deltaStr = delta===null ? '' : delta===0 ? '→ 0' : (delta>0?'↑ +':' ↓ ')+Math.abs(delta).toFixed(1);
-            var deltaColor = delta===null?'':delta>0?'var(--accent-green)':delta<0?'var(--accent-red)':'var(--text-muted)';
             var avgC = scoreColor(e.avg);
-            var satW  = (e.sat/5*100).toFixed(0);
-            var timeW = (e.time/5*100).toFixed(0);
-            var qualW = (e.qual/5*100).toFixed(0);
-
-            // Connector arrow between cells
             if(i > 0){
                 var prevA = entries[i-1].avg, currA = e.avg;
                 var arrowColor = currA > prevA ? 'var(--accent-green)' : currA < prevA ? 'var(--accent-red)' : 'var(--text-muted)';
                 html += '<div class="wow-spacer" style="color:'+arrowColor+'">→</div>';
             }
-
             html += '<div class="wow-week-cell'+(isLatest?' latest':'')+'">';
             html +=   '<div class="wow-week-label">'+e.week+'</div>';
             html +=   '<div class="wow-week-date">'+e.date+'</div>';
-
-            // Avg score (big)
             html +=   '<div class="wow-avg-value" style="color:'+avgC+'">'+e.avg.toFixed(1)+'</div>';
             html +=   '<div class="wow-avg-label">avg / 5</div>';
-
-            // Delta vs prev
             if(delta !== null){
                 html += '<div class="wow-delta '+(delta>0?'up':delta<0?'dn':'nt')+'">'+(delta>0?'↑ +':delta<0?'↓ ':'')+Math.abs(delta).toFixed(1)+'</div>';
             }
-
-            // Sat/Time/Qual bars
             html += '<div class="wow-score-row" style="margin-top:8px">';
             [{label:'S',val:e.sat},{label:'T',val:e.time},{label:'Q',val:e.qual}].forEach(function(m){
                 var mc = scoreColor(m.val);
@@ -1134,19 +1190,13 @@ function renderWoWSentiment(filter){
                 html += '</div>';
             });
             html += '</div>';
-
-            // Issue flag
-            if(e.issue && e.issue.length > 1 && e.issue !== 'No'){
+            if(e.issue && e.issue.length > 1){
                 html += '<div class="wow-issue-flag" title="'+e.issue.replace(/"/g,"'")+'">⚠ '+e.issue+'</div>';
             }
-
-            html += '</div>'; // .wow-week-cell
+            html += '</div>';
         });
-
-        html += '</div></div>'; // .dsp-wow-weeks, .dsp-wow-timeline
-        html += '</div>'; // .dsp-wow-card
+        html += '</div></div></div>';
     });
-
     grid.innerHTML = html;
 }
 
@@ -1166,7 +1216,59 @@ function filterSentiment(filter, btn){
     });
 }
 
-// ── INIT ─────────────────────────────────────────────────────────────────────
+function renderStationPulse(){
+    var grid = document.getElementById('stationPulseGrid');
+    if(!grid) return;
+    var order = stationData.slice().sort(function(a,b){return b.adoption-a.adoption});
+    var h = '';
+    order.forEach(function(s){
+        var w11 = wk11Kooner[s.station]||0;
+        var w10 = wk10Kooner[s.station]||0;
+        var wowVol = w11-w10;
+        var wowAdopt = +(s.adoption-s.wk10_adoption).toFixed(1);
+        var adoptColor = s.adoption>=85?'var(--accent-green)':s.adoption>=70?'var(--accent-yellow)':s.adoption>=50?'var(--accent-orange)':'var(--accent-red)';
+        var volColor = wowVol>0?'var(--accent-green)':wowVol<0?'var(--accent-red)':'var(--text-muted)';
+        var adoptDeltaColor = wowAdopt>0?'var(--accent-green)':wowAdopt<0?'var(--accent-red)':'var(--text-muted)';
+        var leaked = wk11Leaked[s.station]||0;
+        h += '<div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:14px;border-left:3px solid '+adoptColor+'">';
+        h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">';
+        h += '<span style="font-family:monospace;font-size:1rem;font-weight:700;color:'+adoptColor+'">'+s.station+'</span>';
+        h += '<span style="font-family:monospace;font-size:1.1rem;font-weight:700;color:'+adoptColor+'">'+s.adoption.toFixed(0)+'%</span>';
+        h += '</div>';
+        h += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;text-align:center">';
+        h += '<div><div style="font-size:0.55rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:2px">WK11</div><div style="font-family:monospace;font-size:0.85rem;font-weight:700">'+w11+'</div></div>';
+        h += '<div><div style="font-size:0.55rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:2px">Vol WoW</div><div style="font-family:monospace;font-size:0.85rem;font-weight:700;color:'+volColor+'">'+(wowVol>=0?'+':'')+wowVol+'</div></div>';
+        h += '<div><div style="font-size:0.55rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:2px">Leaked</div><div style="font-family:monospace;font-size:0.85rem;font-weight:700;color:'+(leaked>0?'var(--accent-red)':'var(--accent-green)')+'">'+leaked+'</div></div>';
+        h += '</div>';
+        if(wowAdopt!==0){
+            h += '<div style="margin-top:8px;font-size:0.7rem;color:'+adoptDeltaColor+';font-family:monospace;text-align:center">'+(wowAdopt>0?'↑ +':' ↓ ')+Math.abs(wowAdopt)+'pp adoption</div>';
+        }
+        h += '</div>';
+    });
+    grid.innerHTML = h;
+}
+
+function renderWowActions(){
+    var c = document.getElementById('wowActionsList');
+    if(!c) return;
+    var actions = [
+        {station:'HPD1', priority:'critical', color:'var(--accent-red)',   text:'Emergency intervention — JDTC responsible for all 7 WK11 leaked. 0 Kooner WOs. Tech coverage in Portland is the root blocker.'},
+        {station:'HIN3', priority:'critical', color:'var(--accent-red)',   text:'Dedicated tech ~2 weeks out. Zero WOs again. 7 leaked to JBXL. Confirm paperwork timeline.'},
+        {station:'HMS2', priority:'high',     color:'var(--accent-orange)',text:'8 leaked all to LDOG. New 2nd tech started 3/16 — outreach to LDOG before WK12 to recapture volume.'},
+        {station:'HLA2', priority:'high',     color:'var(--accent-orange)',text:'54 WOs WK11 — season best. 11 still leaked. ARMA parts backorder confirmed in survey. Stock common parts on-site.'},
+        {station:'HDT3', priority:'high',     color:'var(--accent-orange)',text:'SFRM survey: weekend coverage gap + no heavy-duty lift. Both concrete asks — address directly. SFRM is top leaker (9 WK11).'},
+    ];
+    var h = '';
+    actions.forEach(function(a){
+        h += '<div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg-card-hover);border-radius:8px;border-left:3px solid '+a.color+'">';
+        h += '<span style="font-family:monospace;font-size:0.85rem;font-weight:700;color:'+a.color+';min-width:44px">'+a.station+'</span>';
+        h += '<span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;padding:2px 7px;border-radius:10px;background:'+(a.priority==='critical'?'rgba(255,71,87,0.15)':'rgba(255,165,2,0.15)')+';color:'+a.color+';min-width:56px;text-align:center">'+a.priority+'</span>';
+        h += '<span style="font-size:0.85rem;color:var(--text-secondary)">'+a.text+'</span>';
+        h += '</div>';
+    });
+    c.innerHTML = h;
+}
+
 document.addEventListener('DOMContentLoaded',function(){
     populateStationQuickTable();
     populateOpportunityTable();
@@ -1177,7 +1279,6 @@ document.addEventListener('DOMContentLoaded',function(){
     populateActionMatrix();
     populateFeedbackList();
     renderWoWSentiment('all');
-    // Defer charts to after first layout pass so canvas dimensions are computed
     requestAnimationFrame(function(){ createCharts(); });
     renderCalendar();
     renderUpcomingEvents();
